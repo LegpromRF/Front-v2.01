@@ -11,6 +11,7 @@ import {store} from "@store/store.js"
 import HomeProfile from "@/pages/profile/home.jsx";
 import Error404 from "@/pages/404.jsx";
 import NoLayout from "@/pages/nolayout.jsx";
+import TokenPage from "@/pages/tokenpage.jsx";
 // import App from "@/App.jsx";
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
     {
         path: "profile/home",
         element: <HomeProfile />
+    },
+    {
+        path: "/tokenpage",
+        element: <TokenPage />
     }
 ]);
 
