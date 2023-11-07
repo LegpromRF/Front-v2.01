@@ -1,0 +1,31 @@
+/*========== MAIN COLOR ==========*/
+
+$colorText: #242424;
+$background: #F5F5F5;
+$blue: #0036FF;
+$blueHover: #1c41ca;
+$orange: #FF8A00;
+$gray: #D4D4D4;
+$red: #FF0A00;
+
+/*========== PAGE ==========*/
+
+$containerWidth: 1682px;
+$containerPadding: 30px;
+
+$fontFamily: 'Roboto', sans-serif;
+$fontSize: 14px;
+
+/*========== BUTTON GRADIENT ==========*/
+
+@mixin buttonGradient () {
+  background: linear-gradient(135deg, #FF8A00 0%, #D47300 100%, #D47300 100%), #EDEDED;
+}
+
+@mixin colorGradient () {
+  color: linear-gradient(135deg, #FF8A00 0%, #D47300 100%, #D47300 100%), #EDEDED;
+}
+
+
+
+

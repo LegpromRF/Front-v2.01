@@ -1,0 +1,121 @@
+.block {
+  margin-bottom: 48px;
+}
+.block__title {
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.block__cards {
+  margin-top: 10px;
+  display: flex;
+  margin: 0 -15px;
+}
+@media (max-width: 1450px) {
+  .block__cards {
+    flex-wrap: wrap;
+  }
+}
+.block__card {
+  max-width: 355px;
+  display: flex;
+  flex: 1 1 25%;
+  flex-wrap: wrap;
+  padding: 0 15px;
+}
+@media (max-width: 1450px) {
+  .block__card {
+    flex: 1 1 33%;
+    margin-bottom: 20px;
+  }
+}
+.block__body {
+  width: 100%;
+  height: 100%;
+  padding: 26px;
+  border-radius: 10px;
+  background: #FAFAFA;
+  box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+}
+.block__cardTitle {
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 116%;
+  width: 200px;
+  margin-bottom: 10px;
+}
+@media (max-width: 1300px) {
+  .block__cardTitle {
+    font-size: 22px;
+    width: 300px;
+  }
+}
+.block__cardSubTitle {
+  font-size: 12px;
+  font-weight: 300;
+  line-height: 150%;
+  margin-bottom: 12px;
+  flex: 1 1 100%;
+}
+@media (max-width: 1300px) {
+  .block__cardSubTitle {
+    font-size: 14px;
+  }
+}
+.block__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+@media (max-width: 1610px) {
+  .block__footer {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media (max-width: 1610px) {
+  .block__btn {
+    width: 100%;
+  }
+}
+.block__btn a {
+  font-size: 14px;
+  border-radius: 5px;
+  background: #0036FF;
+  padding: 8px 18px;
+  color: #FFF;
+}
+@media (max-width: 1610px) {
+  .block__btn a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 100%;
+    padding: 10px 22px;
+  }
+}
+.block__btn a:hover {
+  background: #486ef7;
+}
+.block__questio {
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: inherit;
+}
+@media (max-width: 1610px) {
+  .block__questio {
+    margin-top: 10px;
+    font-size: 13px;
+  }
+}
+.block__questio p {
+  margin-right: 5px;
+}
+
+/*# sourceMappingURL=HomeScreen.module.css.map */

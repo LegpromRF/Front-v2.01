@@ -1,0 +1,149 @@
+.home {
+
+
+
+
+  //&__title {
+  //  font-size: 40px;
+  //  font-weight: 600;
+  //  z-index: 12;
+  //}
+}
+
+
+
+.block {
+  margin-bottom: 48px;
+  
+
+  &__title {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  } 
+
+  &__cards {
+    margin-top: 10px;
+    display: flex;
+    margin: 0 -15px;
+    @media (max-width: 1450px) {
+      flex-wrap: wrap;
+    }
+
+  }
+
+  &__card {
+    max-width: 355px;
+    display: flex;
+    flex: 1 1 25%;
+    flex-wrap: wrap;
+    padding: 0 15px;
+
+    @media (max-width: 1450px) {
+      flex: 1 1 33%;
+      margin-bottom:20px;
+    }
+  }
+
+  &__body {
+    //max-width: 272px;
+    width: 100%;
+    height: 100%;
+    padding: 26px;
+    border-radius: 10px;
+    background: #FAFAFA;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__cardTitle {
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 116%; 
+    width: 200px;
+    margin-bottom: 10px;
+
+    @media (max-width:1300px) {
+      font-size: 22px;
+      width: 300px;
+    }
+  }
+
+  &__cardSubTitle {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 150%; 
+    margin-bottom: 12px;
+    flex: 1 1 100%;
+
+    @media (max-width:1300px) {
+      font-size: 14px;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    
+
+    @media (max-width: 1610px) {
+      display: flex;
+      flex-direction: column;
+   
+    }
+  }
+
+  &__btn {
+   
+
+    @media (max-width: 1610px) {
+      width: 100%;
+    }
+   
+    a {
+      font-size: 14px;
+      border-radius: 5px;
+      background: #0036FF;
+      padding: 8px 18px;
+      color: #FFF;
+
+      @media (max-width: 1610px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1 1 100%;
+        padding: 10px 22px;
+      }
+
+      &:hover {
+        background: #486ef7;
+      }
+    }
+
+   
+
+  }
+
+  &__questio {
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: inherit;
+
+    @media (max-width: 1610px) {
+      margin-top: 10px;
+      font-size: 13px;
+    }
+
+    p {
+      margin-right: 5px;
+    }
+  
+   
+  }
+}

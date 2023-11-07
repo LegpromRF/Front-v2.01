@@ -1,0 +1,56 @@
+.header__item a:hover > *:not(:first-child) {
+  background: #2C2C2C;
+  color: #FFF;
+}
+
+.header {
+  &__header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+
+    a {
+      display: flex;
+      align-items: center;
+      color: inherit;
+      font-size: 16px;
+      border-radius: 7px;
+      background: #FAFAFA;
+      padding-left: 18px;
+      color: #D8D8D8;
+      transition: all .4s ease-in-out;
+
+      span {
+        flex: 1 1 100%;
+      }
+
+      &:hover {
+        background: #242424;
+        color: #FFF;
+      }
+    }
+
+    &_active {
+      a {
+        background: #242424;
+        color: #FFF;
+      }
+    }
+  }
+
+  &__itemNumber {
+    border-radius: 7px;
+    background: #FDFDFD;
+    padding: 14px 18px;
+    color: #D8D8D8;
+    transition: all .4s ease-in-out;
+
+    &_active {
+      background: #2C2C2C;
+      color: #FFF;
+    }
+  }
+}

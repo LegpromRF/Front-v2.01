@@ -1,0 +1,85 @@
+@import '@/styles/_variables.scss';
+
+.headerNav {
+
+  &__user {
+    display: flex;
+    align-items: center;
+    border-radius: 7px;
+    background: #F5F5F5;
+    margin: 15px 0;
+
+    &:hover {
+      background: #e7e6e6;
+    }
+
+  }
+
+  &__icon {
+    border-radius: 7px;
+    background: #FFF;
+    height:  100%;
+    display: flex;
+    align-items: center;
+    padding: 18px 11px;
+    margin-right: 14px;
+
+  }
+
+  &__name {
+    padding-top: 13px;
+    color: $colorText;
+
+  }
+
+  &__nameTitle {
+    font-size: 16px;
+    margin-right: 4px;
+
+  }
+
+  &__nameTarif {
+
+  }
+
+  &__mail {
+    padding: 3px 0 14px 0;
+    font-weight: 300;
+    font-size: 13px;
+    color: $colorText;
+  }
+
+  &__control {
+    display: flex;
+    gap: 9px;
+    justify-content: space-between;
+
+    &_closed {
+      flex-direction: column;
+    }
+  }
+
+  &__item {
+    display: flex;
+    border-radius: 7px;
+    background: #F5F5F5;
+    padding: 15px 32px;
+    justify-content: end;
+    opacity: 1;
+    transition: opacity .4s ease;
+
+    &_inactive {
+      opacity: 0;
+      display: none;
+    }
+
+    &_closed {
+      padding: 15px 18px;
+    }
+
+    &:hover {
+      background: #e7e6e6;
+    }
+  }
+
+}

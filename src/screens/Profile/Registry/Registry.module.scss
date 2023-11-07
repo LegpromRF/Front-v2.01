@@ -1,0 +1,93 @@
+@import '@/styles/_variables.scss';
+
+.registry {
+  margin-bottom: 200px;
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    
+    
+    
+    @media (max-width: 1350px) {
+      display: block;
+      align-items: center;
+    }
+
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 1350px) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &__item {
+    display: flex;
+    gap: 15px;
+    @media (max-width:1350px) {
+      width: 0;
+      display: flex;
+      flex: 1 1 100%;
+    }
+    a {
+      
+      color: #FFF;
+      font-size: 16px;
+      border-radius: 7px;
+      background-color: #242424;
+      padding: 13px;
+      width: 370px;
+    
+
+      &:hover {
+        background-color: #242424;
+      }
+      @media (max-width:1350px) {
+        width: 0;
+        display: flex;
+        flex: 1 1 100%;
+      }
+     
+    }
+
+    &_archive {
+
+      a {
+        background-color: rgba(250, 250, 250, 0.80);
+        backdrop-filter: blur(25px);
+        color: inherit;
+        margin-left: 10px;
+        transition: all .4s ease-in;
+
+        &:hover {
+          background-color: #242424;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+
+  
+  
+
+  &__cards {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -16px;
+  
+
+    @media (max-width: 1150px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: none;
+    }
+  }
+
+
+}

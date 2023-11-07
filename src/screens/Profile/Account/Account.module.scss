@@ -1,0 +1,516 @@
+@import '@/styles/_variables.scss';
+
+.account {
+
+  &_header {
+
+
+  }
+
+  &__ico {
+    @media (max-width: 550px) {
+      display: none;
+     }
+  }
+
+  &__user {
+    display: flex;
+ 
+    margin-top: 16px;
+  }
+
+  &__userIco {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    
+  }
+
+  &__userInfo {
+    width: 100%;
+    border-radius: 7px;
+    background: #FAFAFA;
+    padding: 20px 25px;
+    margin-left: 12px;
+  
+    @media (min-width: 850px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; 
+    }
+
+    @media (max-width: 850px) {
+      & > *:first-child {
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (max-width: 550px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      margin-left: 0;
+    }
+
+    
+  }
+
+  &__userBlock {
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 850px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    @media (max-width: 550px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+  }
+
+  &__userName {
+    font-size: 16px;
+    margin-right: 30px;
+
+    span {
+      margin-right: 10px;
+    }
+
+    @media (max-width: 550px) {
+     margin-bottom: 15px;
+    }
+  }
+
+  &__userButtons {
+    display: flex;
+
+    & > *:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+
+  &__userButton {
+    display: flex;
+  
+    cursor: pointer;
+    @media (max-width: 850px) {
+
+      justify-content: center;
+    }
+
+    span {
+      border-radius: 5.077px;
+      background: #F3F3F3;
+      padding: 7px 21px;
+      line-height: 19.038px; /* 135.989% */
+      cursor: pointer;
+
+      @media (max-width: 850px) {
+        padding: 13px 30px;
+      }
+      
+    }
+
+    
+
+    span:hover {
+      background: #dbd9d9;
+    }
+  }
+
+  &__userButtonText {
+
+    background: #F3F3F3;
+    padding: 7px 50px 7px 21px;
+    line-height: 19.038px; /* 135.989% */
+    border-radius: 5px 0 0 5px ;
+    &:hover {
+      background: #dbd9d9;
+    }
+
+    @media (max-width: 850px) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 7px 80px 7px 15px;
+    }
+    
+  }
+
+  &__userButtonIco {
+    border-radius:  0 5px  5px 0  ;
+    background: #EDEDED;
+    padding: 7px 15px;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      background: #dbd9d9;
+    }
+  }
+
+  &__content {
+    display: flex;
+    gap: 25px;
+    height: 100%;
+    margin-top: 25px;
+    min-height: 100%;
+
+    @media (max-width: 1200px) {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__contentBody {
+    padding: 25px;
+    border-radius: 7px;
+    border: 0.8px solid #DADADA;
+    min-height: 100%;
+  }
+
+  &__contentTitle {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 20px;
+
+    @media (max-width: 850px) {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+  }
+
+  &__contentSubTitle {
+    text-align: center;
+    font-weight: 300;
+    line-height: 18px; 
+    margin-bottom: 15px;
+
+    @media (max-width: 850px) {
+      font-size: 16px;
+      line-height: 150%;
+      margin-bottom: 25px;
+      margin-top: 20px;
+    }
+  }
+
+  /*====================*/
+
+  &__workload {
+    flex: 1 1 20%;
+    order: 1;
+    @media (max-width: 1200px) {
+      order: 2;
+      flex: 1 1 100%;
+    }
+  }
+
+
+
+  &__workloadStatus {
+    margin-bottom: 25px;
+  }
+
+  &__workloadTrue {
+    display: flex;
+    flex: 1 1 100%;
+    padding: 12px 0;
+    background-color: $blue;
+    color: #FFF;
+    font-weight: 300;
+    justify-content: center;
+    border-radius: 5px;
+
+  }
+
+  &__workloadMedals {
+
+  }
+
+  &__medalsItems {
+
+  }
+
+  &__medalsItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+
+    &_notActive {
+      color: #cccccc;
+    }
+  }
+
+
+
+  &__medalsTitle {
+    display: flex;
+    align-items: center;
+    flex: 1 1 100%;
+
+    h4 {
+      font-weight: 300;
+      margin-left: 12px;
+    }
+
+    @media (max-width: 1000px) {
+      font-size: 16px;
+    }
+  }
+
+  &__medalsIcon {
+
+  }
+
+  &__medalsSupport {
+
+  }
+
+  /*====================*/
+
+  &__info {
+    flex: 1 1 60%;
+    order: 2;
+
+    @media (max-width: 1200px) {
+      order: 1;
+      flex: 1 1 100%;
+    }
+  }
+
+  &__infoHeader {
+    display: flex;
+    gap: 10px;
+
+    @media (max-width: 1200px) {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__infoHeaderItem {
+    border-radius: 5px;
+    border: 0.8px solid #242424;
+    background: #F5F5F5;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all .3s ease-in;
+
+    &_active {
+      background: #242424;
+      color: #F5F5F5;
+    }
+
+    &:hover {
+      background: #242424;
+      color: #F5F5F5;
+    }
+
+    @media (max-width: 1200px) {
+      flex: 1 0 25%;
+      padding: 15px 0;
+      text-align: center;
+      margin-bottom: 10px;
+
+    }
+
+    @media (max-width: 500px) {
+      flex: 1 1 100%;
+    }
+  }
+
+  &__infoMain {
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+
+    @media (max-width: 850px) {
+      flex-wrap: wrap;
+    }
+
+  }
+
+  &__infoMainItem {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 33%;
+
+    @media (max-width: 850px) {
+      text-align: center;
+      flex: 1 1 100%;
+    }
+  }
+
+  &__infoMainTitle {
+    margin-bottom: 10px;
+
+    @media (max-width: 850px) {
+      margin-bottom: 20px;
+      font-weight: 300;
+      font-size: 16px;
+    }
+  }
+
+  &__infoMainBlock {
+
+    border-radius: 5px;
+    background: #EDEDED;
+    padding: 16px;
+    text-align: center;
+    font-size: 16px;
+
+    @media (max-width: 850px) {
+      margin-bottom: 15px;
+      font-weight: 400;
+      font-size: 18px;
+    }
+  }
+
+  &__infoFull {
+    margin-top: 41px;
+
+  }
+
+  &__infoFullRow {
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 850px) {
+      flex-wrap: wrap;
+     
+    }
+
+  }
+
+  &__infoFullColumn {
+    flex: 1 1 25%;
+    margin-bottom: 28px;
+
+    @media (max-width: 850px) {
+      flex: 1 1 50%;
+    }
+
+    @media (max-width: 550px) {
+      text-align: center;
+      flex: 1 1 100%;
+    }
+  }
+
+  &__infoFullTitle {
+    margin-bottom: 7px;
+
+    @media (max-width: 850px) {
+      font-size: 16px;
+    }
+
+    @media (max-width: 550px) {
+      font-size: 18px;
+      margin-bottom: 11px;
+    }
+  }
+
+  &__infoFullSubTitle {
+    font-weight: 300;
+
+    @media (max-width: 850px) {
+      font-size: 14px;
+    }
+
+    @media (max-width: 550px) {
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+  }
+
+  /*====================*/
+  &__raiting {
+    flex: 1 1 20%;
+    order: 3;
+  }
+
+  &__raitingStats {
+
+  }
+
+  &__raitingCheck {
+
+  }
+
+  &__raitingItems {
+
+  }
+
+  &__raitingItem {
+
+  }
+
+  &__raitingTitle {
+    text-align: center;
+    font-weight: 300;
+    margin-bottom: 8px;
+
+    @media (max-width: 1000px) {
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+  }
+
+  &__raitingScale {
+    border-radius: 5px;
+    background: #9FB4FF;
+    margin-bottom: 15px;
+
+    @media (max-width: 1000px) {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__raitingScaleActive {
+    font-weight: 300;
+    border-radius: 5px;
+    background: #0036FF;
+    width: 60%;
+    color: #F5F5F5;
+    padding: 9px 13px;
+
+    @media (max-width: 1000px) {
+      padding: 14px 18px;
+      font-size: 16px;
+    }
+  }
+
+  &__raitingCheck {
+    margin-top: 25px;
+    
+    @media (max-width: 500px) {
+      margin-bottom: 100px;
+    }
+  }
+
+  &__raitingCheckButton {
+    @include buttonGradient ();
+    padding: 12px;
+    display: flex;
+    flex: 1 1 100%;
+    color: #F5F5F5;
+    justify-content: center;
+    border-radius: 7px;
+    margin-bottom: 12px;
+
+    @media (max-width: 850px) {
+      padding: 16px;
+      font-size: 16px;
+    }
+  }
+}
+
+
+
+.account__userButton:hover > * {
+  background: #dbd9d9;
+}

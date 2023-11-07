@@ -1,0 +1,41 @@
+.raiting {
+
+  display: flex;
+  align-items: center;
+
+  &__star {
+    display: flex;
+
+    & > *:not(:last-child) {
+      margin-right: 2px;
+    }
+  }
+
+  &__starItem {
+    width: 17px;
+
+  }
+
+  &__starItemOpacity {
+    width: 17px;
+  }
+
+  &__grade {
+    font-weight: 300;
+    margin-left: 6px;
+  }
+
+  &__stats {
+    margin-left: 6px;
+    font-weight: 300;
+
+    &_green {
+      color: #00902A;
+    }
+
+    &_red {
+      color: #FF0A00;
+    }
+  }
+
+}

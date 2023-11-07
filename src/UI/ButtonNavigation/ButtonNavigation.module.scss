@@ -1,0 +1,57 @@
+@import '@/styles/_variables.scss';
+
+.button {
+  opacity: 1;
+  transition: opacity .4s ease-in;
+
+  &_closed {
+    opacity: 0;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    border-radius: 7px;
+    background: #F5F5F5;
+    color: inherit;
+    font-size: 16px;
+    padding: 20px 18px;
+    justify-content: space-between;
+    transition: all .2s ease;
+    margin-top: 15px;
+    
+    
+    &:hover {
+      background-color:$blue;
+      color: #F5F5F5;
+    }
+
+
+    &:hover svg > * {
+      stroke: #FFFFFF;
+    }
+  }
+
+  &__linkActive {
+    
+    @media (min-width:700px) {
+      width: 110%;
+    }
+    
+    background-color:$blue;
+    color: #fff;
+
+    &:hover svg {
+      stroke: #FFFFFF;
+    }
+  }
+
+  &__linkActiveMenuBase {
+    background-color:$blue;
+    color: #fff;
+
+    & svg > * {
+      stroke: #FFFFFF;
+    }
+  }
+}

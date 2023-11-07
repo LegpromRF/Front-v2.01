@@ -1,0 +1,64 @@
+html,
+body{
+   height: 100%;
+   line-height: 1;
+   font-weight: 400;
+   color: $colorText;
+   font-size: $fontSize;
+   font-family: $fontFamily;
+   background-color: $background;
+   overflow-x: hidden;
+    
+}
+
+
+#__next {
+   display: flex;
+	min-height: 100%;
+	flex-direction: column;
+}
+
+.page {
+   display: flex;
+   flex: 1 1 100%;
+   min-height: 100%;
+   
+}
+
+.page.profile {
+   background-color: #f4f4f4;
+   margin-bottom: 100px;
+}
+
+[class*="__container"] {
+   max-width: $containerWidth;
+   margin: 0px auto;
+   padding: 0px $containerPadding;
+
+   width: 100%;
+   height: 100%;
+
+  
+}
+
+[class*="__profileContainer"] {
+   max-width: 1872px;
+   padding: 0px $containerPadding;
+   margin: 0px auto;
+   width: 100%;
+   height: 100%;
+}
+
+@media (max-width:750px) {
+   [class*="__profileContainer"] {
+      max-width: 1872px;
+      padding: 0px 17px;
+      
+
+   }
+}
+
+a {
+   color: inherit;
+}
+

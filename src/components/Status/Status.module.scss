@@ -1,0 +1,34 @@
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border-radius: 7px;
+  border: 0.8px solid #DADADA;
+  background: rgba(245, 245, 245, 0.80);
+  backdrop-filter: blur(25px);
+  padding: 16px;
+  gap: 20px;
+
+  @media (max-width: 550px) {
+    gap: 10px;
+  }
+
+  &__descriptions {
+    @media (max-width: 550px) {
+      flex: 1 1 100%;
+    }
+  }
+
+  &__statusItem {
+    display: flex;
+    align-items: center;
+  
+    span {
+      margin-left: 10px;
+    }
+  }
+ 
+}
+
+
+

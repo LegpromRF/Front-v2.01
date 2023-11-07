@@ -1,0 +1,155 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: block;
+  background-color: #FAFAFA;
+  height: 100%;
+  width: 320px;
+  transition: all .3s ease-in;
+  transform: translate(-100%);
+
+  &__active {
+    transform: translate(0%);
+  }
+
+  &__content {
+    min-height: 100%;
+    padding: 25px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    transition: all .5s ease 0s;
+  }
+
+  @media (max-width: 1300px) {
+    &__bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100vw;
+      background-color: rgba(0,0,0,0.6);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: all .5s ease 0s;
+    
+      &_active {
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+  }
+
+&__head {
+  min-height: 100%;
+  color: inherit;
+}
+
+&__title {
+  text-align: center;
+  font-size: 16px;
+}
+
+&__buttons {
+  flex: 1 1 100%;
+}
+
+&__footer {
+
+}
+
+&__referal {
+
+  margin-bottom: 20px;
+
+  & a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    border-radius: 7px;
+    background: #242424;
+    color: #F2F2F2;
+    font-size: 16px;
+
+    &:hover {
+      background: #313131;
+    }
+  }
+}
+
+&__wrapper {
+  padding: 21.5px 0;
+  background-color: #242424;
+  color: #fafafa;
+
+  @media (min-width: 1300px) {
+    padding: 22px 0;
+  }
+}
+
+&__balance {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+&__money {
+  margin-right: 50px;
+
+  @media (max-width: 540px) {
+    margin-right: 20px;
+  }
+ 
+  &_number {
+    font-size: 20px;
+    margin-bottom: 4px;
+
+    @media (max-width: 540px) {
+      font-size: 15px;
+      margin-bottom: 2px
+    }
+  }
+
+  &_text{
+    font-size: 12px;
+    font-weight: 300;
+    
+    @media (max-width: 540px) {
+      font-size: 11px;
+      margin-bottom: 2px
+    }
+  }
+}
+
+&__buttonsFooter {
+  display: flex;
+  align-items: center;
+}
+
+&__button {
+  background-color: #2C2C2C;
+  padding: 5px 20px;
+  font-size: 17px;
+  border-radius: 7px;
+  margin-right: 10px;
+  cursor: pointer;
+  
+  align-items: center;
+
+  &:hover {
+    background-color: #393939;
+  }
+}
+
+&__control {
+  display: flex;
+  margin-left: 52px;
+
+  @media (max-width: 540px) {
+    margin-left: 20px;
+  }
+}  
+}

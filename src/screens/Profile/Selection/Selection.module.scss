@@ -1,0 +1,259 @@
+@import '@/styles/_variables.scss';
+
+.selection {
+
+  &__header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    & > * {
+      flex: 1 1 31%;
+
+      @media (max-width: 800px) {
+        flex: 1 1 100%;
+      }
+    }
+  }
+
+  &__content {
+
+    border-radius: 7px;
+    background: #FAFAFA;
+    padding: 15px;
+    width: 100%;
+    margin-top: 20px;
+    flex-wrap: wrap;
+
+    @media (max-width: 1350px) {
+      margin-left: 0;
+    }
+
+    @media (min-width: 1200px) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+  }
+
+  &__info {
+
+    @media (min-width: 520px) {
+      display: flex;
+      align-items: center;
+    }
+
+    @media (max-width: 1200px) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__name {
+    font-size: 16px;
+    margin-right: 7px;
+
+    @media (max-width: 520px) {
+      text-align: center;
+      margin-bottom: 10px;
+      line-height: 135%;
+    }
+  
+  }
+
+ &__number {
+  color: #979797;
+  font-size: 12px;
+  font-weight: 300;
+
+  @media (max-width: 520px) {
+    font-size: 14px;
+    text-align: center;
+  }
+ }
+
+  &__control {
+
+    @media (min-width: 1200px) {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+  }
+
+  &__items {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  &__controlItem { 
+
+    a {
+      display: flex;
+      align-items: center;
+
+      @media (max-width:600px) {
+        justify-content: space-between;
+      }
+    }
+    @media (max-width:600px) {
+      width: 100%;
+    }
+
+    border-radius: 5.077px;
+    background: #EDEDED;
+    cursor: pointer;
+
+    &:hover {
+      background: #d8d8d8;
+    }
+  }
+
+  &__controlTitle {
+    font-size: 14px;
+    line-height: 19.038px; 
+    padding: 12px 33px 12px 12px;
+    border-radius: 5.077px;
+    background: #F3F3F3;
+  
+
+    &:hover {
+      background: #ebebeb;
+    }
+
+    @media (max-width: 600px) {
+      padding: 12px 0 12px 12px;
+      width: 100%;
+    }
+  }
+
+  &__controlIcon {
+    padding: 12px;
+  
+  }
+
+  &__respond {
+    
+    @media (max-width: 1200px) {
+      width: 100%;
+      
+    }
+   
+    a {
+      border-radius: 7px;
+      background: $blue;
+      color: #F5F5F5;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+      padding: 20px 44px;
+      transition: all .4s ease;
+
+      @media (max-width: 1200px) {
+       display: flex;
+       flex: 1 1 100%;
+       text-align: center;
+       align-items: center;
+       justify-content: center;
+       margin-top: 20px;
+      }
+
+ 
+
+      &:hover {
+        background: #4465de;
+      }
+    }
+
+    &_orange {
+
+      a {
+        border-radius: 7px;
+        @include buttonGradient ();
+        color: #F5F5F5;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        padding: 20px 44px;
+        transition: all .4s ease;
+  
+        @media (max-width: 1200px) {
+         display: flex;
+         flex: 1 1 100%;
+         text-align: center;
+         align-items: center;
+         justify-content: center;
+         margin-top: 20px;
+        }
+      }
+    }
+  }
+
+
+  &__search {
+
+    margin-top: 25px;
+    margin-bottom: 25px;
+    line-height: 135%;
+
+    @media (min-width: 620px) {
+      display: flex;
+      align-items: center;
+    }
+
+    span {
+      font-size: 16px;
+    }
+  }
+
+  &__searchBtn {
+    color: $red;
+    font-weight: 300;
+    padding: 8px 28px;
+    border-radius: 5px;
+    background: #EDEDED;
+    margin-left: 22px;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      background-color:#dfdede;
+
+    }
+
+    @media (max-width: 620px) {
+      padding: 12px 28px;
+      text-align: center;
+      margin-top: 10px;
+      margin-left: 0px;
+    }
+  }
+
+  &__searchBtnChoice {
+    color: #000;
+    font-weight: 300;
+    padding: 8px 28px;
+    border-radius: 5px;
+    background: #EDEDED;
+    margin-left: 22px;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      background-color: #dfdede;
+
+    }
+
+    @media (max-width: 620px) {
+      padding: 12px 28px;
+      text-align: center;
+      margin-top: 10px;
+      margin-left: 0px;
+    }
+  }
+  
+
+}

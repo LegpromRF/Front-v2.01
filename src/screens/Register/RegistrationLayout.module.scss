@@ -1,0 +1,225 @@
+@import '@/styles/_variables.scss';
+
+
+.registratio {
+
+  &__screen {
+    margin-top: 40px;
+  }
+  
+  &__pattern {
+    position: absolute;
+
+
+    @media (max-width: 560px) {
+      display: none;
+    }
+
+    &_1 {
+      top: 130px;
+      left: 150px;
+      
+      @media (max-width: 1000px) {
+        display: none;
+      }
+    }
+
+    &_2 {
+      top: 130px;
+      right: 150px;
+
+      @media (max-width: 1000px) {
+        top: 100px;
+      }
+
+      @media (max-width:600px) {
+        display: none;
+      }
+    }
+
+    &_3 {
+      z-index: 2;
+      bottom:-50px;
+      left: 250px;
+
+      @media (max-width: 1250px) {
+        bottom:0px;
+        left: 100px;
+        width: 200px;
+      }
+    }
+
+    &_4 {
+      bottom:-50px;
+      left: 100px;
+
+      @media (max-width: 1250px) {
+        bottom:0px;
+        left: 0px;
+        width: 200px;
+      }
+    }
+
+    &_5 {
+      bottom: -50px;
+      right: 80px;
+
+      @media (max-width: 1250px) {
+        bottom: 0px;
+        right: 0px;
+        width: 200px;
+      }
+    }
+
+    &_6 {
+      bottom:-50px;
+      right: 250px;
+
+      @media (max-width: 1250px) {
+        bottom: 0px;
+        right: 100px;
+        width: 200px;
+      }
+    }
+  }
+
+  &__header {
+    margin-top: 40px;
+    max-width:620px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: 16px;
+    margin-bottom: 15px;
+
+  }
+
+  &__steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    position: relative;
+    z-index: 10;
+    margin-bottom: 15px;
+  }
+
+  &__step {
+    border-radius: 7px;
+    background: #FDFDFD;
+    padding: 15px 40px;
+    flex: 1 1 22%;
+    text-align: center;
+
+  }
+
+  &__stepTitle {
+    font-size: 16px;
+    display: none;
+  }
+
+  &__stepNumber {
+    color: #D8D8D8;
+    font-size: 16px;
+  }
+
+  &__stepActive {
+    display: flex;
+    align-items: center;
+    background: #0036FF;
+    border-radius: 7px;
+  }
+
+  &__social {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+    position: relative;
+    z-index: 10;
+    max-width:620px;
+    margin: 0 auto;
+  }
+
+  &__item {
+    flex: 0 1 50%;
+    padding: 0 10px;
+    margin-bottom: 10px;
+
+    @media (max-width: 600px) {
+      flex: 1 1 100%;
+    }
+  }
+
+  &__itemBody {
+    display: flex;
+    align-items: center;
+    padding: 17px 20px;
+    background: rgba(250, 250, 250, 0.80);
+    backdrop-filter: blur(25px);
+    border-radius: 7px;
+    transition: all .4s ease;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(215, 213, 213, 0.8);
+    }
+  }
+
+  &__itemTitle {
+    margin-left: 10px;
+    color: #000;
+    font-size: 16px;
+  }
+
+  &__none {
+    display: none;
+  }
+
+}
+
+.form {
+    max-width:620px;
+    margin: 0 auto;
+  border-radius: 7px;
+  background: rgba(250, 250, 250, 0.80);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(25px);
+  margin-bottom: 10px;
+  position: relative;
+  z-index:10;
+ 
+  &__body {
+    padding: 35px;
+
+    @media (max-width: 600px) {
+      padding: 25px;
+    }
+  }
+}
+
+.registratio__stepActive {
+  @media (max-width: 560px) {
+    flex: 1 1 100%;
+  }
+}
+
+.registratio__stepActive .registratio__stepTitle {
+  display: flex;
+  color: #F5F5F5;
+  font-size: 16px;
+  padding: 0 100px 0 18px;
+
+  @media (max-width: 560px) {
+    flex: 1 1 100%;
+    padding: 0 0 0 18px;
+  }
+
+}
+
+.registratio__stepActive .registratio__stepNumber {
+  border-radius: 7px;
+  background: #204FFF;
+  padding: 15px 20px;
+  color: #FFF;
+
+}

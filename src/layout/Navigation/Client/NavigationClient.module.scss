@@ -1,0 +1,156 @@
+.nav {
+  position: fixed;
+  padding: 25px 12px;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: block;
+  background-color: #FAFAFA;
+  height: 100%;
+  width: 300px;
+  transition: all .3s ease-in;
+  transform: translate(-234px);
+
+  &__active {
+    transform: translate(0%);
+  }
+
+    &__content {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: all .5s ease 0s;
+  }
+
+  @media (max-width: 1300px) {
+    &__bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0,0,0,0.6);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: all .5s ease 0s;
+    
+      &_active {
+        opacity: 1;
+        pointer-events: all;
+      }
+    }
+ }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  &__head {
+    min-height: 100%;
+    color: inherit;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 16px;
+  }
+
+  &__buttons {
+    flex: 1 1 100%;
+  }
+
+  &__wrapper {
+    padding: 21.5px 0;
+
+
+
+  @media (min-width: 1300px) {
+    padding: 22px 0;
+  }
+  }
+  
+  &__control {
+    display: flex;
+    margin-left: 52px;
+
+    @media (max-width: 540px) {
+      margin-left: 20px;
+    }
+  }  
+
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 30;
+
+
+  @media (min-width: 1300px) {
+    z-index: 990;
+  }
+
+
+  &__wrapper {
+    padding: 17px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__content {
+    display: flex;
+  }
+
+  &__control {
+    display: flex;
+    justify-content: end;
+  }
+
+  &__contolButton {
+    position: relative;
+    align-items: center;
+    cursor: pointer;
+    background-color: #F5F5F5;
+    padding: 10px 20px;
+    border-radius: 7px;
+    display: flex;
+    color: #2C2C2C;
+    font-size: 16px;
+    font-weight: 300;
+    user-select: none;
+    transition: all 0.2s ease;
+
+    @media (max-width: 1300px) {
+      padding: 15px 20px;
+    }
+
+    @media (max-width: 540px) {
+      span {
+        display: none;
+      }
+    }
+
+    &:hover {
+      color: #F5F5F5;
+      background: #0036FF;
+    }
+
+    &_collapse {
+      font-size: 25px;
+
+      @media (max-width: 1300px) {
+        display: none;
+      }
+    }
+
+    & > *:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
+}
