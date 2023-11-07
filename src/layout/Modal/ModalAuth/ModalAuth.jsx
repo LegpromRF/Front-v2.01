@@ -140,10 +140,10 @@ const ModalAuth = () => {
                     case ConnectEvents.OneTapAuthEventsSDK.FULL_AUTH_NEEDED: //  = 'VKSDKOneTapAuthFullAuthNeeded'
                     case ConnectEvents.OneTapAuthEventsSDK.PHONE_VALIDATION_NEEDED: // = 'VKSDKOneTapAuthPhoneValidationNeeded'
                     case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN: // = 'VKSDKButtonOneTapAuthShowLogin'
-                        return Connect.redirectAuth({ url: 'https://legprom-rf.vercel.app/tokenpage'})
+                        return Connect.redirectAuth({ url: 'https://legpromrfreact.vercel.app/tokenpage'})
                     case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN_OPTIONS: // = 'VKSDKButtonOneTapAuthShowLoginOptions'
                         // Параметр url: ссылка для перехода после авторизации. Должен иметь https схему. Обязательный параметр.
-                        return Connect.redirectAuth({url: 'https://legprom-rf.vercel.app/tokenpage'})
+                        return Connect.redirectAuth({url: 'https://legpromrfreact.vercel.app/tokenpage'})
                     //
                 }
             },
