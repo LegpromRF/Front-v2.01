@@ -1,0 +1,45 @@
+.header__item a:hover > *:not(:first-child) {
+  background: #2C2C2C;
+  color: #FFF;
+}
+
+.header__header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.header__item a {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  font-size: 16px;
+  border-radius: 7px;
+  background: #FAFAFA;
+  padding-left: 18px;
+  color: #D8D8D8;
+  transition: all 0.4s ease-in-out;
+}
+.header__item a span {
+  flex: 1 1 100%;
+}
+.header__item a:hover {
+  background: #242424;
+  color: #FFF;
+}
+.header__item_active a {
+  background: #242424;
+  color: #FFF;
+}
+.header__itemNumber {
+  border-radius: 7px;
+  background: #FDFDFD;
+  padding: 14px 18px;
+  color: #D8D8D8;
+  transition: all 0.4s ease-in-out;
+}
+.header__itemNumber_active {
+  background: #2C2C2C;
+  color: #FFF;
+}
+
+/*# sourceMappingURL=HeaderProfile.module.css.map */

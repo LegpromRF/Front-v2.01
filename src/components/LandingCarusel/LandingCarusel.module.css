@@ -1,0 +1,139 @@
+.slider {
+  width: 100%;
+}
+@media (max-width: 700px) {
+  .slider {
+    width: 500px;
+  }
+}
+
+.swiper {
+  padding: 0 50px !important;
+  position: relative;
+}
+.swiper::after {
+  content: " ";
+  height: 100%;
+  width: 200px;
+  border-radius: 5px;
+  background: linear-gradient(270deg, #FBFBFB 0%, rgba(255, 255, 255, 0.04) 100%);
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.card {
+  margin-bottom: 100px;
+}
+@media (max-width: 700px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.card img {
+  width: 100%;
+}
+@media (max-width: 1290px) {
+  .card img {
+    width: 100%;
+    height: auto;
+  }
+}
+@media (max-width: 700px) {
+  .card img {
+    width: 353px;
+    height: 201px;
+  }
+}
+.card__item {
+  flex: 1 50%;
+  flex-shrink: 0;
+}
+.card__item:not(:last-child) {
+  margin-right: 20px;
+}
+@media (max-width: 700px) {
+  .card__item {
+    display: block;
+    width: 400px;
+    margin: 0 10px 20px 10px;
+  }
+  .card__item:not(:last-child) {
+    margin-right: 0px;
+  }
+}
+@media (max-width: 450px) {
+  .card__item {
+    width: 300px;
+  }
+}
+.card__body {
+  padding: 20px;
+  border-radius: 6px;
+  border: 0.8px solid #C8C8C8;
+}
+.card__title {
+  color: #000;
+  margin: 13px 0 6px 0;
+}
+.card__number {
+  color: #979797;
+  font-size: 12px;
+  font-weight: 300;
+}
+.card__info {
+  margin-top: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.card__infoItem {
+  border-radius: 5px;
+  background: #EDEDED;
+  padding: 13px;
+  flex: 1 0 40%;
+  margin: 7px 7px 7px 0;
+}
+@media (max-width: 700px) {
+  .card__infoItem {
+    flex: 1 1 100%;
+  }
+}
+.card__label {
+  color: #000;
+  font-size: 12px;
+  font-weight: 300;
+  padding-bottom: 5px;
+}
+.card__description {
+  color: #000;
+  font-weight: 400;
+  font-size: 16px;
+}
+.card__footer {
+  margin-top: 13px;
+  display: flex;
+  align-items: center;
+}
+.card__activity {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  font-size: 12px;
+  font-weight: 300;
+}
+.card__activity span {
+  margin-left: 3px;
+}
+
+.cardRegistru__body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+/*# sourceMappingURL=LandingCarusel.module.css.map */

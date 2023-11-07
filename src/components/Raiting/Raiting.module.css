@@ -1,0 +1,32 @@
+.raiting {
+  display: flex;
+  align-items: center;
+}
+.raiting__star {
+  display: flex;
+}
+.raiting__star > *:not(:last-child) {
+  margin-right: 2px;
+}
+.raiting__starItem {
+  width: 17px;
+}
+.raiting__starItemOpacity {
+  width: 17px;
+}
+.raiting__grade {
+  font-weight: 300;
+  margin-left: 6px;
+}
+.raiting__stats {
+  margin-left: 6px;
+  font-weight: 300;
+}
+.raiting__stats_green {
+  color: #00902A;
+}
+.raiting__stats_red {
+  color: #FF0A00;
+}
+
+/*# sourceMappingURL=Raiting.module.css.map */

@@ -3,7 +3,7 @@ import axios from 'axios'
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {Controller, useForm} from "react-hook-form";
 import { Config, Connect, ConnectEvents } from '@vkontakte/superappkit';
 
@@ -11,7 +11,7 @@ import InputMask from 'react-input-mask';
 // import Link from "next/link";
 
 import {useDispatch, useSelector} from "react-redux";
-import {setAuthMethod, setAuthMode, setVerifying, toggleModal } from "@/store/auth/authModal.slice.js";
+import {setAuthMethod, setVerifying, toggleModal } from "@/store/auth/authModal.slice.js";
 import {login} from "@store/auth/auth.slice";
 import ModalLayout from '@layout/Modal/ModalLayout.jsx';
 import styles from './ModalRegister.module.scss';
@@ -33,7 +33,6 @@ const ModalAuth = () => {
     const selectAuthData = createSelector(selectAuth, (auth) => ({
         isAuthenticated: auth.isAuthenticated
     }))
-    const isAuthenticated = useSelector(selectAuthData)
 
     const dispatch = useDispatch();
 
@@ -144,7 +143,8 @@ const ModalAuth = () => {
                         return login(event)
                     case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN_OPTIONS: // = 'VKSDKButtonOneTapAuthShowLoginOptions'
                         // Параметр url: ссылка для перехода после авторизации. Должен иметь https схему. Обязательный параметр.
-                        return Connect.redirectAuth({url: 'https://https://legprom-rf.vercel.app/tokenpage'})
+                        return Connect.redirectAuth({url: 'https://legprom-rf.vercel.app/tokenpage'})
+                    //
                 }
             },
             options: {
@@ -167,7 +167,7 @@ const ModalAuth = () => {
                 .appendChild(oneTapButton.getFrame());
         }
 
-    }, []);
+    }, );
 
 
     const handleVerification = async (kind) => {

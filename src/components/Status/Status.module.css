@@ -1,0 +1,30 @@
+.status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  border-radius: 7px;
+  border: 0.8px solid #DADADA;
+  background: rgba(245, 245, 245, 0.8);
+  backdrop-filter: blur(25px);
+  padding: 16px;
+  gap: 20px;
+}
+@media (max-width: 550px) {
+  .status {
+    gap: 10px;
+  }
+}
+@media (max-width: 550px) {
+  .status__descriptions {
+    flex: 1 1 100%;
+  }
+}
+.status__statusItem {
+  display: flex;
+  align-items: center;
+}
+.status__statusItem span {
+  margin-left: 10px;
+}
+
+/*# sourceMappingURL=Status.module.css.map */

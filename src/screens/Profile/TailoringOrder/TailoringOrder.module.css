@@ -1,0 +1,67 @@
+.tailoring__title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 36px;
+}
+.tailoring__title h2 {
+  font-size: 16px;
+  margin-right: 5px;
+}
+@media (max-width: 1300px) {
+  .tailoring__title {
+    margin-top: 80px;
+  }
+}
+.tailoring__number {
+  color: #979797;
+  font-size: 12px;
+  font-weight: 300;
+}
+.tailoring__header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.tailoring__header > * {
+  flex: 1 1 31%;
+}
+@media (max-width: 800px) {
+  .tailoring__header > * {
+    flex: 1 1 100%;
+  }
+}
+.tailoring__warning {
+  margin-top: 26px;
+}
+.tailoring__warningHeader {
+  font-size: 16px;
+}
+.tailoring__warningButton {
+  margin-top: 35px;
+}
+.tailoring__warningButton a {
+  border-radius: 7px;
+  background: #0036FF;
+  color: #FAFAFA;
+  font-size: 16px;
+  padding: 15px 20px;
+}
+.tailoring__warningButton a:hover {
+  background: #5f81fc;
+}
+.tailoring__warningIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+@media (max-width: 800px) {
+  .tailoring__warningIcon {
+    margin-top: 40px;
+    margin-bottom: 100px;
+  }
+}
+
+/*# sourceMappingURL=TailoringOrder.module.css.map */

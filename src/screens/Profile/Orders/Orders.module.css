@@ -1,0 +1,78 @@
+.orders__header {
+  margin-bottom: 30px;
+  gap: 50px;
+}
+@media (min-width: 1450px) {
+  .orders__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+.orders__list {
+  display: flex;
+  align-items: center;
+  flex: 1 1 30%;
+  gap: 20px;
+}
+.orders__list > * {
+  flex: 1 1 100%;
+}
+@media (max-width: 1437px) {
+  .orders__list {
+    margin-bottom: 20px;
+  }
+}
+@media (max-width: 800px) {
+  .orders__list {
+    flex-wrap: wrap;
+    flex: 1 1 100%;
+  }
+}
+.orders__cards {
+  display: flex;
+  margin: 0 -15px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.orders__add {
+  margin: 0 15px;
+}
+@media (max-width: 1000px) {
+  .orders__add {
+    flex: 1 1 100%;
+    margin: 0 15px;
+  }
+}
+.orders__addBody {
+  padding: 45px;
+  border-radius: 7px;
+  background: #FAFAFA;
+  position: relative;
+  border: 1px solid transparent;
+  margin-top: 15px;
+}
+.orders__addBody:hover {
+  background: #f0efef;
+  border: 1px solid #e2e0e0;
+}
+.orders__addTitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px; /* 125% */
+  text-align: center;
+  margin-bottom: 7px;
+}
+.orders__addSubTitle {
+  color: #000;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 300;
+}
+.orders__addStatus {
+  position: absolute;
+  bottom: -4px;
+  left: -1px;
+}
+
+/*# sourceMappingURL=Orders.module.css.map */
