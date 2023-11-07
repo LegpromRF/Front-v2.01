@@ -129,12 +129,21 @@ const ModalAuth = () => {
             callback: (event) => {
                 const { type } = event;
 
+                const params = {
+                    "api_version": "5.207",
+                    "silent_token": event.payload.token,
+                    "uuid": event.payload.uuid
+                }
+
                 if (!type) {
                     return;
                 }
 
                 switch (type) {
                     case ConnectEvents.OneTapAuthEventsSDK.LOGIN_SUCCESS: // = 'VKSDKOneTapAuthLoginSuccess'
+                        axios.post(apiEndpoints.vkLogin, params)
+                            .then((response) => console.log(response))
+                            .catch((error) => console.log(error))
                         console.log(event);
                         return
                     case ConnectEvents.OneTapAuthEventsSDK.FULL_AUTH_NEEDED: //  = 'VKSDKOneTapAuthFullAuthNeeded'

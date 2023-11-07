@@ -9,5 +9,7 @@ export const apiEndpoints = {
     login: apiHOST + 'login',
     logout: apiHOST + 'logout',
     yandexReg: apiHOST + 'yandex/register',
-    yandexLogin: apiHOST + 'yandex/login'
+    yandexLogin: apiHOST + 'yandex/login',
+    vkReg: apiHOST + 'vk/register',
+    vkLogin: apiHOST + 'vk/login',
 }

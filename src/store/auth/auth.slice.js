@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -9,7 +10,6 @@ export const authSlice = createSlice({
     reducers: {
         login: (state, action) => {
             state.isAuthenticated = true;
-            axios.
             history.push('/profile/home')
         },
         logout: (state) => {
