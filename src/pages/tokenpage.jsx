@@ -2,7 +2,7 @@
 import {Navigate, useLocation} from "react-router-dom";
 import {useEffect} from "react";
 
-function FunctionTokenPage() {
+function TokenPage() {
    let location = useLocation()
 
     useEffect(() => {
@@ -10,7 +10,7 @@ function FunctionTokenPage() {
 
     }, [location]);
 
-    return <Navigate to={'/profile/home'}/>
+    return <Navigate to={'/profile'}/>
 }
 
-export default FunctionTokenPage
+export default TokenPage
