@@ -1,6 +1,6 @@
 import styles from './NavigationGuest.module.scss'
 
-import ButtonNavigation from '@/UI/ButtonNavigation/ButtonNavigation';
+import ButtonNavigation from '@components/UI/ButtonNavigation/ButtonNavigation';
 
 
 

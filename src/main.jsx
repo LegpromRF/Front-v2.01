@@ -12,21 +12,28 @@ import HomeProfile from "@/pages/profile/home.jsx";
 import Error404 from "@/pages/404.jsx";
 import NoLayout from "@/pages/nolayout.jsx";
 import TokenPage from "@/pages/tokenpage.jsx";
-// import App from "@/App.jsx";
+import PrivateRoute from "@components/routing/privateRoute.jsx";
+import path from "path";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Root />,
-        errorElement: <Error404 />
     },
     {
         path: "/nolayout",
         element: <NoLayout />
     },
     {
-        path: "profile/home",
-        element: <HomeProfile />
+        path: "/profile",
+        element: <PrivateRoute><HomeProfile /></PrivateRoute>,
+        children: [
+            {
+                path: "home",
+                element: <HomeProfile/>
+            }
+
+        ]
     },
     {
         path: "/tokenpage",
@@ -39,6 +46,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Provider store={store}>
           <RouterProvider router={router} />
       </Provider>
-
             </React.StrictMode>,
 )

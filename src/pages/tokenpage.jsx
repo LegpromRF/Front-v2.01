@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-function TokenPage() {
+export default function functionTokenPage() {
     useEffect(() => {
         const script = document.createElement('script');
         script.src = 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-token-with-polyfills-latest.js';
@@ -8,7 +8,7 @@ function TokenPage() {
         document.head.appendChild(script);
 
         script.onload = () => {
-            window.YaSendSuggestToken('https://legprom-rf.vercel.app/');
+            window.YaSendSuggestToken('https://legpromrfreact.vercel.app/');
         };
     }, []);
 
@@ -16,5 +16,3 @@ function TokenPage() {
         <></>
     );
 }
-
-export default TokenPage;

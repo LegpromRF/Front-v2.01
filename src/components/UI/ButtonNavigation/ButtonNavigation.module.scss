@@ -1,4 +1,4 @@
-@import '@/styles/_variables.scss';
+@import '@styles/variables';
 
 .button {
   opacity: 1;
@@ -9,7 +9,6 @@
   }
 
   &__link {
-    position: relative;
     display: flex;
     align-items: center;
     border-radius: 7px;
@@ -20,8 +19,8 @@
     justify-content: space-between;
     transition: all .2s ease;
     margin-top: 15px;
-
-
+    
+    
     &:hover {
       background-color:$blue;
       color: #F5F5F5;
@@ -31,18 +30,14 @@
     &:hover svg > * {
       stroke: #FFFFFF;
     }
-
-    &__pushed {
-      display: flex;
-    }
   }
 
   &__linkActive {
-
+    
     @media (min-width:700px) {
       width: 110%;
     }
-
+    
     background-color:$blue;
     color: #fff;
 
@@ -59,24 +54,4 @@
       stroke: #FFFFFF;
     }
   }
-}
-
-.container {
-  overflow: hidden;
-
-}
-
-.closed {
-  overflow: hidden;
-  transition: all .3s ease;
-  margin-top: -200px;
-}
-
-.opened {
-  display: flex;
-  margin-top: 0;
-  max-height: 100%;
-  flex-direction: column;
-  padding: 12px 0 12px 12px;
-  transition: margin-top .3s ease;
 }

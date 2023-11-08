@@ -54,7 +54,7 @@ const Layout = ({children, roll}) => {
                         </div>
                     </div>
                 </div>
-                <div className={activeHeader ? [styles.home__header, styles.home__header_open].join(' ') : [styles.home__header, styles.home__header_close].join(' ')}>
+                <div className={isNavOpen ? [styles.home__header, styles.home__header_open].join(' ') : [styles.home__header, styles.home__header_close].join(' ')}>
                     <div className={[styles.home__welcome, styles.home__text].join(' ')}>Добро пожаловать, ekb-invest103@yandex.ru !</div>
                     <div className={styles.home__contacts}>
                         <div className={styles.home__text_nowrap}>Обращайтесь! Тел: +7-958-111-4884</div>

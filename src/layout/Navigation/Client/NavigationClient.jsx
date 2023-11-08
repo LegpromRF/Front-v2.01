@@ -1,8 +1,8 @@
 import styles from './NavigationClient.module.scss'
 
-import ButtonNavigation from '@/UI/ButtonNavigation/ButtonNavigation';
-import ButtonNavigationCollapsible from "@/UI/ButtonNavigationCollapsible/ButtonNavigationCollapsible";
-import HeaderNavigation from '@/UI/HeaderNavigation/HeaderNavigation';
+import ButtonNavigation from '@components/UI/ButtonNavigation/ButtonNavigation';
+import ButtonNavigationCollapsible from "@components/UI/ButtonNavigationCollapsible/ButtonNavigationCollapsible";
+import HeaderNavigation from '@components/UI/HeaderNavigation/HeaderNavigation';
 
 import Logo from '@public/Logo/logo.png'
 import {useDispatch, useSelector } from "react-redux";
