@@ -38,6 +38,7 @@ const VkAuth = () => {
                         console.log(event);
                         return
                     case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN: // = 'VKSDKButtonOneTapAuthShowLogin'
+                        console.log(event);
                         return
                     case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN_OPTIONS: // = 'VKSDKButtonOneTapAuthShowLoginOptions'
                         console.log(event);
