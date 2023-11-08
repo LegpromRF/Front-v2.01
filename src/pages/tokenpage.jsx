@@ -1,9 +1,18 @@
 
-import {Navigate, useLocation} from "react-router-dom";
+import {Navigate, redirect, useLocation} from "react-router-dom";
 import {useEffect} from "react";
+import vkAPI from "@/utils/services/auth/vkAPI.js";
 
 function TokenPage() {
    let location = useLocation()
+    async function handleVKRegister(data) {
+        try {
+            await vkAPI(data, 'register')
+            return redirect('/profile/home')
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
         const urlParams = new URLSearchParams(location.search);
@@ -15,14 +24,13 @@ function TokenPage() {
             const jsonPayload = JSON.parse(decodedPayload);
 
             // Теперь у вас есть доступ к данным пользователя и Silent token
-            const userData = jsonPayload.user;
-            const uuid = jsonPayload.uuid
-            const silentToken = jsonPayload.token;
+            const data = {
+                userData: jsonPayload.user,
+                uuid: jsonPayload.uuid,
+                silentToken: jsonPayload.token
+            }
 
-            // Выводим полученные данные в консоль
-            console.log("User Data:", userData);
-            console.log("Silent Token:", silentToken);
-            console.log("UUID:", uuid);
+            handleVKRegister(data)
         }
     }, [location]);
 
