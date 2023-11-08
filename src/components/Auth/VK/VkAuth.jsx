@@ -39,7 +39,7 @@ const VkAuth = () => {
                     case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN: // = 'VKSDKButtonOneTapAuthShowLogin'
                         console.log(event)
                         // vkAPI(event, 'register')
-                        return Connect.redirectAuth({ url: 'https://legpromrfreact.vercel.app/tokenpage'} )
+                        return Connect.redirectAuth({ url: 'https://legpromrfreact.vercel.app/profile'} )
                     // case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN_OPTIONS: // = 'VKSDKButtonOneTapAuthShowLoginOptions'
                     //     console.log(event);
                     //     // Параметр url: ссылка для перехода после авторизации. Должен иметь https схему. Обязательный параметр.
