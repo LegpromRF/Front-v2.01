@@ -38,11 +38,12 @@ const VkAuth = () => {
                         console.log(event);
                         return
                     case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN: // = 'VKSDKButtonOneTapAuthShowLogin'
+                        console.log(event)
                         return Connect.redirectAuth({ url: 'https://legpromrfreact.vercel.app/tokenpage'})
-                    case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN_OPTIONS: // = 'VKSDKButtonOneTapAuthShowLoginOptions'
-                        console.log(event);
-                        // Параметр url: ссылка для перехода после авторизации. Должен иметь https схему. Обязательный параметр.
-                        return Connect.redirectAuth({url: 'https://legpromrfreact.vercel.app/tokenpage'})
+                    // case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN_OPTIONS: // = 'VKSDKButtonOneTapAuthShowLoginOptions'
+                    //     console.log(event);
+                    //     // Параметр url: ссылка для перехода после авторизации. Должен иметь https схему. Обязательный параметр.
+                    //     return Connect.redirectAuth({url: 'https://legpromrfreact.vercel.app/tokenpage'})
                     //
                 }
             },

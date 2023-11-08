@@ -6,14 +6,11 @@ function FunctionTokenPage() {
    let location = useLocation()
 
     useEffect(() => {
-        console.log(location.search)
+        console.log(location.pathname)
 
     }, [location]);
 
-    return (
-        <>
-        </>
-    )
+    return <Navigate to={'/profile/home'}/>
 }
 
 export default FunctionTokenPage
