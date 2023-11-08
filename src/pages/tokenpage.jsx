@@ -6,7 +6,7 @@ function FunctionTokenPage() {
    let location = useLocation()
 
     useEffect(() => {
-        console.log(location.search)
+        console.log(location.pathname)
 
     }, [location]);
 
