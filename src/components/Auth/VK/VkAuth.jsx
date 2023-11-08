@@ -39,6 +39,7 @@ const VkAuth = () => {
                         return
                     case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN: // = 'VKSDKButtonOneTapAuthShowLogin'
                         console.log(event);
+                        Connect.redirectAuth({ url: 'https://...', state: 'dj29fnsadjsd82...'});
                         return
                     case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN_OPTIONS: // = 'VKSDKButtonOneTapAuthShowLoginOptions'
                         console.log(event);
