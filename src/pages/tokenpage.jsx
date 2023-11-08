@@ -10,7 +10,10 @@ function TokenPage() {
 
     }, [location]);
 
-    return <Navigate to={'/profile'}/>
+    return (
+        <>
+        </>
+    )
 }
 
 export default TokenPage

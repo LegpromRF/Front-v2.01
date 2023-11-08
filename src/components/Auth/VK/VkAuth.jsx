@@ -28,9 +28,8 @@ const VkAuth = () => {
 
                 switch (type) {
                     case ConnectEvents.OneTapAuthEventsSDK.LOGIN_SUCCESS:// = 'VKSDKOneTapAuthLoginSuccess'
-                        vkAPI(event, 'login')
                         console.log(event);
-                        return
+                        return onAuthUser(event)
                     case ConnectEvents.OneTapAuthEventsSDK.FULL_AUTH_NEEDED: //  = 'VKSDKOneTapAuthFullAuthNeeded'
                         console.log(event);
                         return
@@ -39,10 +38,8 @@ const VkAuth = () => {
                         return
                     case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN: // = 'VKSDKButtonOneTapAuthShowLogin'
                         console.log(event)
-                        alert(event)
-                        vkAPI(event, 'register')
-                        alert(event)
-                        return Connect.redirectAuth({ url: 'https://legpromrfreact.vercel.app/tokenpage'})
+                        // vkAPI(event, 'register')
+                        return Connect.redirectAuth({ url: 'https://legpromrfreact.vercel.app/tokenpage'} )
                     // case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN_OPTIONS: // = 'VKSDKButtonOneTapAuthShowLoginOptions'
                     //     console.log(event);
                     //     // Параметр url: ссылка для перехода после авторизации. Должен иметь https схему. Обязательный параметр.
@@ -63,6 +60,19 @@ const VkAuth = () => {
                 },
             },
         });
+
+        // Ваш обработчик события, который вызывается при успешной авторизации пользователя
+        function onAuthUser(evt) {
+            // Здесь вы можете получить данные пользователя и Silent token из объекта evt
+            var userData = evt.user;
+            var silentToken = evt.token;
+
+            // Теперь у вас есть доступ к данным пользователя и Silent token для дальнейшей обработки.
+            console.log("User Data:", userData);
+            console.log("Silent Token:", silentToken);
+
+            // Вы можете использовать полученные данные и токен в соответствии с вашими потребностями.
+        }
 
         if (oneTapButton) {
 
