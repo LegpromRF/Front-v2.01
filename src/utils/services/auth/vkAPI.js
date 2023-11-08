@@ -5,9 +5,9 @@ import axios from "axios";
 export default function vkAPI(data, authMode) {
     let redirectURI = ``
     if (authMode === 'register') {
-        const redirectURI = apiEndpoints.vkReg
+        redirectURI = apiEndpoints.vkReg
     } else if (authMode === 'login') {
-        const redirectURI = apiEndpoints.vkLogin
+        redirectURI = apiEndpoints.vkLogin
     }
 
     const params = {
