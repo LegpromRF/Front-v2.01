@@ -7,6 +7,7 @@ function FunctionTokenPage() {
 
     useEffect(() => {
         console.log(location.pathname)
+
     }, [location]);
 
     return <Navigate to={'/profile/home'}/>

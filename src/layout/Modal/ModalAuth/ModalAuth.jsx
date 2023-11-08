@@ -82,12 +82,12 @@ const ModalAuth = () => {
                         <div
                             className={styles.form__subtitle}
                         >
-                            {authMode === 'register' ? 'Уже зарегистрированы?' : 'Уже есть аккаунт?'}
+                            {authMode === 'register' ? 'Уже зарегистрированы?' : 'Еще нет аккаунта?'}
                             <Link
                                 className={styles.form__mode}
                                 onClick={() => dispatch(authMode === 'register'? setAuthMode('login') : setAuthMode('register'))}
                             >
-                                Войти
+                                {authMode === 'register' ? 'Войти'  : 'Зарегистрироваться'}
                             </Link>
                         </div>
                         <div className={styles.switch}>

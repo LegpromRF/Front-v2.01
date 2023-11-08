@@ -6,7 +6,7 @@ import {Navigate} from "react-router-dom";
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        isAuthenticated: false
+        isAuthenticated: true
     },
     reducers: {
         login: (state, action) => {
