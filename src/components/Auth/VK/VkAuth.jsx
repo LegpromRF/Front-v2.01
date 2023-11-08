@@ -49,6 +49,7 @@ const VkAuth = () => {
                     //     return Connect.redirectAuth({url: 'https://legpromrfreact.vercel.app/tokenpage'})
                     //
                 }
+                console.log(event)
             },
             options: {
                 showAlternativeLogin: false,
