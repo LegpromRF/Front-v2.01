@@ -38,6 +38,7 @@ const VkAuth = () => {
                         console.log(event);
                         return
                     case ConnectEvents.ButtonOneTapAuthEventsSDK.SHOW_LOGIN: // = 'VKSDKButtonOneTapAuthShowLogin'
+                        console.log(event)
                         alert(event)
                         vkAPI(event, 'register')
                         return Connect.redirectAuth({ url: 'https://legpromrfreact.vercel.app/tokenpage'})
