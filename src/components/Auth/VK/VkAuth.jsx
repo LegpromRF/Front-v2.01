@@ -1,7 +1,5 @@
 import {useEffect} from 'react';
 import {Config, Connect, ConnectEvents} from "@vkontakte/superappkit";
-import axios from "axios";
-import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 import styles from "@layout/Modal/ModalAuth/ModalAuth.module.scss";
 import vkAPI from "@/utils/services/auth/vkAPI.js";
 

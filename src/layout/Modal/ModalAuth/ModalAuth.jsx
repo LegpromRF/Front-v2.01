@@ -16,7 +16,7 @@ import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 import {Link} from "react-router-dom";
 import VkAuth from "@components/Auth/VK/VkAuth.jsx";
 import handleVerification from "@/utils/services/auth/verficationCode.js";
-import {validationSchema} from "@/utils/services/validation/validationSchema.js";
+import {validationSchema} from "@/utils/validation/validationSchema.js";
 
 
 

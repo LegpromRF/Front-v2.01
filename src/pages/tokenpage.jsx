@@ -1,18 +1,15 @@
-import { useEffect } from 'react';
 
-export default function functionTokenPage() {
+import {Navigate, useLocation} from "react-router-dom";
+import {useEffect} from "react";
+
+function FunctionTokenPage() {
+   let location = useLocation()
+
     useEffect(() => {
-        const script = document.createElement('script');
-        script.src = 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-token-with-polyfills-latest.js';
-        script.async = true;
-        document.head.appendChild(script);
+        console.log(location.pathname)
+    }, [location]);
 
-        script.onload = () => {
-            window.YaSendSuggestToken('https://legpromrfreact.vercel.app/');
-        };
-    }, []);
-
-    return (
-        <></>
-    );
+    return <Navigate to={'/profile/home'}/>
 }
+
+export default FunctionTokenPage
