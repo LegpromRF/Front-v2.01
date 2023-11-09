@@ -1,7 +1,10 @@
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 import axios from "axios";
+import {useDispatch} from "react-redux";
+import {loginSuccessful} from "@store/auth/auth.slice.js";
 
-export default function handleLogin(data, authMethod) {
+export default function useHandleLogin(data, authMethod) {
+    const dispatcher = useDispatch()
     const apiURL = apiEndpoints.login
     let login = ''
     if (authMethod === "sms") {
@@ -18,8 +21,8 @@ export default function handleLogin(data, authMethod) {
 
     console.log(params, data)
     axios.post(apiURL, params)
-        .then((response) => {
-            response && history.push('/profile/home')
+        .then(() => {
+            dispatcher(loginSuccessful())
         })
         .catch((error) => {
             console.error(error)

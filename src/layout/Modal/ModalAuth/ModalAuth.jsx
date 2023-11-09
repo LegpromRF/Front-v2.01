@@ -8,12 +8,11 @@ import InputMask from 'react-input-mask';
 
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthMethod, setAuthMode, toggleModal} from "@/store/auth/authModal.slice.js";
-import {login} from "@store/auth/auth.slice";
 import ModalLayout from '@layout/Modal/ModalLayout.jsx';
 import styles from './ModalAuth.module.scss';
 import {createSelector} from "@reduxjs/toolkit";
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import VkAuth from "@components/Auth/VK/VkAuth.jsx";
 import handleVerification from "@/utils/services/auth/verficationCode.js";
 import {validationSchema} from "@/utils/validation/validationSchema.js";
@@ -31,7 +30,7 @@ const ModalAuth = () => {
         verifying: authModal.verifying,
     }))
     const { authMode, authMethod, verifying } = useSelector(selectAuthModalData)
-
+    const isAuthenticated = useSelector((state)=> state.auth.isAuthenticated)
     const dispatch = useDispatch();
 
     const {
@@ -262,6 +261,9 @@ const ModalAuth = () => {
                         </div>
                     </form>
                 )
+            }
+            {
+                isAuthenticated && <Navigate to={'/profile/home'} />
             }
         </ModalLayout>
     );
