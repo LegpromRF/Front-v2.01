@@ -211,7 +211,7 @@ const ModalAuth = () => {
                                         className={styles.form__button}
                                         onClick={() => {
                                             console.log('pushed')
-                                            dispatch(login(getValues(), authMethod))
+                                            dispatch(login)
                                         }}
                                         type={"button"}
                                         disabled={Object.keys(errors).length > 0}
