@@ -2,13 +2,9 @@ import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 import axios from "axios";
 
 
-export default function yandexAPI(data, authMode) {
-    let redirectURI = ``
-    if (authMode === 'register') {
-        const redirectURI = apiEndpoints.yandexReg
-    } else if (authMode === 'login') {
-        const redirectURI = apiEndpoints.yandexLogin
-    }
+export default function yandexAPI(data) {
+    const redirectURI = apiEndpoints.yandexReg
+
     axios.post(redirectURI, {
         access_token: data.access_token
     })

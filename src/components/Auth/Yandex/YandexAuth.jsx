@@ -37,7 +37,6 @@ const YandexAuth = () => {
                     return result.handler()
                 })
                 .then(function(data) {
-                    yandexAPI(data, authMode)
                     console.log('Сообщение с токеном: ', data);
                     document.body.innerHTML += `Сообщение с токеном: ${JSON.stringify(data)}`;
                 })
