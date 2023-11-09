@@ -18,6 +18,7 @@ import handleVerification from "@/utils/services/auth/verficationCode.js";
 import {validationSchema} from "@/utils/validation/validationSchema.js";
 import YandexAuth from "@components/Auth/Yandex/YandexAuth.jsx";
 import handleLogin from "@/utils/services/auth/handleLogin.js";
+import {loginSuccessful} from "@store/auth/auth.slice.js";
 
 
 
@@ -32,7 +33,6 @@ const ModalAuth = () => {
     const { authMode, authMethod, verifying } = useSelector(selectAuthModalData)
     const isAuthenticated = useSelector((state)=> state.auth.isAuthenticated)
     const dispatch = useDispatch();
-
     const {
         control,
         formState: { errors },
@@ -69,6 +69,12 @@ const ModalAuth = () => {
                 console.log('Error:', error)
                 console.log(params)
             })
+    }
+
+    async function processLogin(data, authMethod) {
+        if (await handleLogin(data, authMethod)) {
+            dispatch(loginSuccessful())
+        }
     }
 
 
@@ -211,7 +217,7 @@ const ModalAuth = () => {
                                         className={styles.form__button}
                                         onClick={() => {
                                             console.log('pushed')
-                                            handleLogin(getValues(), authMethod)
+                                            processLogin(getValues(), authMethod)
                                         }}
                                         type={"button"}
                                         disabled={Object.keys(errors).length > 0}
