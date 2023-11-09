@@ -3,8 +3,15 @@ import axios from "axios";
 
 export default function handleLogin(data, authMethod) {
     const apiURL = apiEndpoints.login
+    let login = ''
+    if (authMethod === "sms") {
+        login = data.phone.replace(/\D/g, '')
+    } else {
+        login = data.email
+    }
+
     const params = {
-        login: data.login,
+        login: login,
         kind: authMethod,
         password: data.password
     }
