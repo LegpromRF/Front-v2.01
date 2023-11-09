@@ -7,7 +7,7 @@ import {login} from "@store/auth/auth.slice.js";
 
 export default async function useVkAPI(data) {
     const dispatcher = useDispatch()
-    const  redirectURI = apiEndpoints.vkLogin
+    const redirectURI = apiEndpoints.vkLogin
     const params = {
         "api_version": "5.207",
         "silent_token": data.silentToken,

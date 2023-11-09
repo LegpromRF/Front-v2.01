@@ -12,6 +12,7 @@ import HomeProfile from "@/pages/profile/home.jsx";
 import NoLayout from "@/pages/nolayout.jsx";
 import VKIDtokenpage from "@/pages/VKIDtokenpage.jsx";
 import PrivateRoute from "@components/routing/privateRoute.jsx";
+import Yatokenpage from "@/pages/Yatokenpage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -37,10 +38,10 @@ const router = createBrowserRouter([
         path: "/VKIDtokenpage",
         element: <VKIDtokenpage />
     },
-    // {
-    //     path: "/yatokenpage",
-    //     element: <Yatokenpage />
-    // }
+    {
+        path: "/yatokenpage",
+        element: <Yatokenpage />
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -5,7 +5,6 @@ import yandexAPI from "@/utils/services/auth/yandexAPI.js";
 import styles from "@layout/Modal/ModalAuth/ModalAuth.module.scss";
 
 const YandexAuth = () => {
-
     const selectAuthModal = (state) => state.authModal
     const selectAuthModalData = createSelector(selectAuthModal, (authModal) => ({
         authMode: authModal.authMode,
@@ -23,7 +22,7 @@ const YandexAuth = () => {
                     client_id: 'a6273e01cb89483dbecc90c845a8360a',
                     response_type: 'token',
                 },
-                `https://legprom-rf.vercel.app/tokenpage/`,
+                `https://legpromrfreact.vercel.app/Yatokenpage`,
                 {
                     view: "button",
                     parentId: "yandex",

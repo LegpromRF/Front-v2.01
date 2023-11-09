@@ -17,6 +17,7 @@ import {Link} from "react-router-dom";
 import VkAuth from "@components/Auth/VK/VkAuth.jsx";
 import handleVerification from "@/utils/services/auth/verficationCode.js";
 import {validationSchema} from "@/utils/validation/validationSchema.js";
+import YandexAuth from "@components/Auth/Yandex/YandexAuth.jsx";
 
 
 
@@ -222,7 +223,7 @@ const ModalAuth = () => {
 
                     </div>
                     <div className={styles.form__footer}>
-                        {/*<YandexAuth />*/}
+                        <YandexAuth />
                         <VkAuth />
                     </div>
                 </form>

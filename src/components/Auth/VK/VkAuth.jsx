@@ -3,7 +3,7 @@ import {Config, Connect, ConnectEvents} from "@vkontakte/superappkit";
 import styles from "@layout/Modal/ModalAuth/ModalAuth.module.scss";
 import useVkAPI from "@/utils/services/auth/useVkAPI.js";
 
-const VkAuth = () => {
+export default function VkAuth() {
     useEffect(() => {
         Config.init({
             appId: 51786995,
@@ -73,5 +73,3 @@ const VkAuth = () => {
         ></div>
     );
 };
-
-export default VkAuth;
