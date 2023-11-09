@@ -1,7 +1,7 @@
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 import axios from "axios";
 
-export default function handleLogin(data, authMethod) {
+export default async function handleLogin(data, authMethod) {
     const apiURL = apiEndpoints.login
     let login = ''
     if (authMethod === "sms") {
@@ -17,11 +17,7 @@ export default function handleLogin(data, authMethod) {
     }
 
     console.log(params, data)
-    axios.post(apiURL, params)
-        .then(() => {
-            return true
-        })
-        .catch((error) => {
-            console.error(error)
-        })
+    return axios.post(apiURL, params)
+        .then(() => true)
+        .catch(() => false)
 }
