@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
-import {Navigate, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {login} from "@store/auth/auth.slice.js";
+import {loginSuccessful} from "@store/auth/auth.slice.js";
 import yandexAPI from "@/utils/services/auth/yandexAPI.js";
 
 const Yatokenpage = () => {
@@ -12,7 +12,7 @@ const Yatokenpage = () => {
     async function handleYaRegister(data) {
         try {
             await yandexAPI(data, 'register')
-            dispatcher(login)
+            dispatcher(loginSuccessful())
         } catch (error) {
             console.log(error)
         }
