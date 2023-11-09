@@ -8,6 +8,8 @@ export default function handleLogin(data, authMethod) {
         kind: authMethod,
         password: data.password
     }
+
+    console.log(params)
     axios.post(apiURL, params)
         .then((response) => {
             response && history.push('/profile/home')
