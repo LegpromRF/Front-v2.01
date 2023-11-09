@@ -19,6 +19,12 @@ const Yatokenpage = () => {
     }
 
     useEffect(() => {
+        const yandexScript = document.createElement('script');
+        yandexScript.src = 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js';
+        yandexScript.async = true;
+        document.head.appendChild(yandexScript);
+
+
         const urlParams = new URLSearchParams(location.hash);
         const payloadParam = urlParams.get('payload');
 
@@ -32,12 +38,18 @@ const Yatokenpage = () => {
 
             handleYaRegister(data)
         }
+
+        yandexScript.onload = () => {
+            yandexScript.YaSendSuggestToken(
+                'https://legpromrfreact.vercel.app/'
+            )
+        }
     }, [location]);
 
     return (
         <>
             {
-                isAuthenticated && <Navigate to={'/profile'} />
+                // isAuthenticated && <Navigate to={'/profile'} />
             }
         </>
     );

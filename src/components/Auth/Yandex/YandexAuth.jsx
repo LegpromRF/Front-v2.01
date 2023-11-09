@@ -17,7 +17,7 @@ const YandexAuth = () => {
         yandexScript.async = true;
         document.head.appendChild(yandexScript);
         yandexScript.onload = () => {
-            window.YaAuthSuggest.init(
+            yandexScript.YaAuthSuggest.init(
                 {
                     client_id: 'a6273e01cb89483dbecc90c845a8360a',
                     response_type: 'token',
