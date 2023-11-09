@@ -7,13 +7,11 @@ import {
 } from "react-router-dom";
 import Root from "./components/routing/root.jsx";
 import {Provider} from "react-redux";
-import {store} from "@store/store.js"
+import { store } from "@store/store.js"
 import HomeProfile from "@/pages/profile/home.jsx";
-import Error404 from "@/pages/404.jsx";
 import NoLayout from "@/pages/nolayout.jsx";
-import TokenPage from "@/pages/tokenpage.jsx";
+import VKIDtokenpage from "@/pages/VKIDtokenpage.jsx";
 import PrivateRoute from "@components/routing/privateRoute.jsx";
-import path from "path";
 
 const router = createBrowserRouter([
     {
@@ -36,8 +34,12 @@ const router = createBrowserRouter([
         ]
     },
     {
-        path: "/tokenpage",
-        element: <TokenPage />
+        path: "/VKIDtokenpage",
+        element: <VKIDtokenpage />
+    },
+    {
+        path: "/yatokenpage",
+        element: <Yatokenpage />
     }
 ]);
 

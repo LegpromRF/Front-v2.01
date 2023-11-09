@@ -2,13 +2,18 @@
 import {Navigate, redirect, useLocation} from "react-router-dom";
 import {useEffect} from "react";
 import vkAPI from "@/utils/services/auth/vkAPI.js";
+import {login} from "@store/auth/auth.slice.js";
+import {useDispatch, useSelector} from "react-redux";
 
-function TokenPage() {
+function VKIDtokenpage() {
    let location = useLocation()
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
+
+    const dispatcher = useDispatch()
     async function handleVKRegister(data) {
         try {
             await vkAPI(data, 'register')
-            return redirect('/profile/home')
+            dispatcher(login)
         } catch (error) {
             console.log(error)
         }
@@ -36,8 +41,11 @@ function TokenPage() {
 
     return (
         <>
+            {
+                isAuthenticated && <Navigate to={'/profile'} />
+            }
         </>
     )
 }
 
-export default TokenPage
+export default VKIDtokenpage

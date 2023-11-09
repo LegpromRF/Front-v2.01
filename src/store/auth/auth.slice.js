@@ -9,22 +9,8 @@ export const authSlice = createSlice({
         isAuthenticated: true
     },
     reducers: {
-        login: (state, action) => {
-            const params = {
-                "login": action.payload.login,
-                "kind": action.payload.authMethod,
-                "password": action.payload.password
-            }
-            console.log(action)
-            axios.post(apiEndpoints.login, params)
-                .then((response) => {
-                    console.log(response)
-                    state.isAuthenticated = true;
-                    history.push("/profile/home")
-                })
-                .catch((error) => console.log(error, params))
-
-
+        login: (state) => {
+            state.isAuthenticated = true;
         },
         logout: (state) => {
             state.isAuthenticated = false;
