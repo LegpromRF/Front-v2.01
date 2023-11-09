@@ -1,16 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
-import {Navigate} from "react-router-dom";
+import {Navigate, redirect} from "react-router-dom";
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
-        isAuthenticated: true
+        isAuthenticated: false
     },
     reducers: {
         login: (state) => {
             state.isAuthenticated = true;
+            redirect('/profile')
         },
         logout: (state) => {
             state.isAuthenticated = false;

@@ -39,17 +39,13 @@ const Yatokenpage = () => {
             handleYaRegister(data)
         }
 
-    }, [location]);
-
-    useEffect(() => {
-        window.onload = () => {
+        yandexScript.onload = () => {
             window.YaSendSuggestToken(
                 'https://legpromrfreact.vercel.app/',
                 {}
             )
         }
-    }, []);
-
+    }, [location]);
 
     return (
         <>

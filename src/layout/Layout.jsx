@@ -13,8 +13,10 @@ import { store } from "@store/store";
 
 import { isMobile } from 'react-device-detect';
 import {Link} from "react-router-dom";
+import getUserName from "@/utils/services/profileData/getUserName.js";
 
 const Layout = ({children, roll}) => {
+    const username = getUserName()
 
   /*=========== Window and Nav =============*/
 
@@ -55,7 +57,7 @@ const Layout = ({children, roll}) => {
                     </div>
                 </div>
                 <div className={isNavOpen ? [styles.home__header, styles.home__header_open].join(' ') : [styles.home__header, styles.home__header_close].join(' ')}>
-                    <div className={[styles.home__welcome, styles.home__text].join(' ')}>Добро пожаловать, ekb-invest103@yandex.ru !</div>
+                    <div className={[styles.home__welcome, styles.home__text].join(' ')}>Добро пожаловать{username ? `, ${username} !` : '!'}</div>
                     <div className={styles.home__contacts}>
                         <div className={styles.home__text_nowrap}>Обращайтесь! Тел: +7-958-111-4884</div>
                         <div className={styles.home__links}>
