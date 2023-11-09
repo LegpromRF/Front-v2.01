@@ -40,7 +40,7 @@ const Yatokenpage = () => {
         }
 
         yandexScript.onload = () => {
-            yandexScript.YaSendSuggestToken(
+            window.YaSendSuggestToken(
                 'https://legpromrfreact.vercel.app/'
             )
         }
