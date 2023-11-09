@@ -1,15 +1,13 @@
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 import axios from "axios";
+import {useDispatch} from "react-redux";
+import {login} from "@store/auth/auth.slice.js";
 
 
-export default async function vkAPI(data, authMode) {
-    let redirectURI = ``
-    if (authMode === 'register') {
-        redirectURI = apiEndpoints.vkReg
-    } else if (authMode === 'login') {
-        redirectURI = apiEndpoints.vkLogin
-    }
 
+export default async function useVkAPI(data) {
+    const dispatcher = useDispatch()
+    const  redirectURI = apiEndpoints.vkLogin
     const params = {
         "api_version": "5.207",
         "silent_token": data.silentToken,
@@ -17,7 +15,10 @@ export default async function vkAPI(data, authMode) {
     }
 
     axios.post(redirectURI, params)
-        .then((response) =>
-            console.log(response))
+        .then((response) => {
+            console.log(response)
+            dispatcher(login)
+            history.push('/profile')
+        })
         .catch((error) => console.log(error))
 }

@@ -1,6 +1,7 @@
 import {useEffect} from 'react';
 import {Config, Connect, ConnectEvents} from "@vkontakte/superappkit";
 import styles from "@layout/Modal/ModalAuth/ModalAuth.module.scss";
+import vkAPI from "@/utils/services/auth/vkAPI.js";
 
 const VkAuth = () => {
     useEffect(() => {
@@ -27,8 +28,7 @@ const VkAuth = () => {
 
                 switch (type) {
                     case ConnectEvents.OneTapAuthEventsSDK.LOGIN_SUCCESS:// = 'VKSDKOneTapAuthLoginSuccess'
-                        console.log(event);
-                        return
+                        return vkAPI(event)
                     case ConnectEvents.OneTapAuthEventsSDK.FULL_AUTH_NEEDED: //  = 'VKSDKOneTapAuthFullAuthNeeded'
                         console.log(event);
                         return
