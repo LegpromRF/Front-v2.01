@@ -11,7 +11,7 @@ export const authSlice = createSlice({
     reducers: {
         login: (state) => {
             state.isAuthenticated = true;
-            redirect('/profile')
+            console.log('state')
         },
         logout: (state) => {
             state.isAuthenticated = false;

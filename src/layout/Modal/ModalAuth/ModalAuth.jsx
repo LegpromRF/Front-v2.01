@@ -18,6 +18,7 @@ import VkAuth from "@components/Auth/VK/VkAuth.jsx";
 import handleVerification from "@/utils/services/auth/verficationCode.js";
 import {validationSchema} from "@/utils/validation/validationSchema.js";
 import YandexAuth from "@components/Auth/Yandex/YandexAuth.jsx";
+import handleLogin from "@/utils/services/auth/handleLogin.js";
 
 
 
@@ -211,7 +212,7 @@ const ModalAuth = () => {
                                         className={styles.form__button}
                                         onClick={() => {
                                             console.log('pushed')
-                                            dispatch(login)
+                                            handleLogin(getValues(), authMethod)
                                         }}
                                         type={"button"}
                                         disabled={Object.keys(errors).length > 0}
