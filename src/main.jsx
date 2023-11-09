@@ -37,10 +37,10 @@ const router = createBrowserRouter([
         path: "/VKIDtokenpage",
         element: <VKIDtokenpage />
     },
-    {
-        path: "/yatokenpage",
-        element: <Yatokenpage />
-    }
+    // {
+    //     path: "/yatokenpage",
+    //     element: <Yatokenpage />
+    // }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
