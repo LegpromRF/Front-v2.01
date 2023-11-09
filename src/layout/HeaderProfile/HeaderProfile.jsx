@@ -6,8 +6,8 @@ import Logo from 'public/logo.png'
 import getUserName from "@/utils/services/profileData/getUserName.js";
 
 const HeaderProfile = ({active}) => {
-  const username = getUserName()
-  console.log(username)
+  // const username = getUserName()
+  // console.log(username)
   return ( 
     <header>
       <div className={[styles.header, styles.header__profileContainer].join(' ')}>
@@ -27,7 +27,7 @@ const HeaderProfile = ({active}) => {
           </div>
         </div>
         <div className={styles.home__header}>
-          <div className={[styles.home__welcome, styles.home__text].join(' ')}>Добро пожаловать{username ? `, ${username} !` : '!'}</div>
+          {/*<div className={[styles.home__welcome, styles.home__text].join(' ')}>Добро пожаловать{username ? `, ${username} !` : '!'}</div>*/}
           <div className={styles.home__contacts}>
             <div className={styles.home__text}>Обращайтесь! Тел: +7-958-111-4884</div>
             <div className={styles.home__links}>

@@ -2,14 +2,14 @@ const test = 'justifyapi'
 const prod = 'api.legpromrf'
 
 
-export const apiHOST = `https://${test}.ru/auth/`
+export const apiHOST = `https://${test}.ru/`
 export const apiEndpoints = {
-    verification: apiHOST + 'send_verification',
-    register: apiHOST + 'register',
-    login: apiHOST + 'login',
-    logout: apiHOST + 'logout',
-    yandexReg: apiHOST + 'yandex/register',
-    yandexLogin: apiHOST + 'yandex/login',
-    vkReg: apiHOST + 'vk/register',
-    vkLogin: apiHOST + 'vk/login',
+    verification: apiHOST + 'auth/send_verification',
+    register: apiHOST + 'auth/register',
+    login: apiHOST + 'auth/login',
+    logout: apiHOST + 'auth/logout',
+    yandexReg: apiHOST + 'auth/yandex/register',
+    yandexLogin: apiHOST + 'auth/yandex/login',
+    vkReg: apiHOST + 'auth/vk/register',
+    vkLogin: apiHOST + 'auth/vk/login',
 }
