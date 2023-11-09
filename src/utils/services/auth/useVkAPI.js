@@ -1,7 +1,7 @@
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 import axios from "axios";
 import {useDispatch} from "react-redux";
-import {login} from "@store/auth/auth.slice.js";
+import {loginSuccessful} from "@store/auth/auth.slice.js";
 
 
 
@@ -17,8 +17,7 @@ export default async function useVkAPI(data) {
     axios.post(redirectURI, params)
         .then((response) => {
             console.log(response)
-            dispatcher(login)
-            history.push('/profile')
+            dispatcher(loginSuccessful())
         })
         .catch((error) => console.log(error))
 }

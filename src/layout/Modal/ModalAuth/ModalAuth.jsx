@@ -263,7 +263,7 @@ const ModalAuth = () => {
                 )
             }
             {
-                isAuthenticated && <Navigate to={'/profile/home'} />
+                isAuthenticated && <Navigate to={'/profile/home'}/>
             }
         </ModalLayout>
     );
