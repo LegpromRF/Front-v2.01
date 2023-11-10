@@ -1,7 +1,7 @@
 
 import {Navigate, useLocation} from "react-router-dom";
 import {useEffect} from "react";
-import vkAPI from "@/utils/services/auth/useVkAPI.js";
+import vkAPI from "@/utils/services/auth/vkAPI.js";
 import {loginSuccessful} from "@store/auth/auth.slice.js";
 import {useDispatch, useSelector} from "react-redux";
 

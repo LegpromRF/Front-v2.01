@@ -26,7 +26,7 @@ const YandexAuth = () => {
                 {
                     view: "button",
                     parentId: "yandex",
-                    buttonSize: 'xs',
+                    buttonSize: 's',
                     buttonView: 'main',
                     buttonTheme: 'light',
                     buttonBorderRadius: "18",

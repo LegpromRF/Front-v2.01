@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { yupResolver } from '@hookform/resolvers/yup';
+import {yupResolver} from '@hookform/resolvers/yup';
 
 import {Controller, useForm} from "react-hook-form";
 
@@ -22,7 +22,6 @@ import {loginSuccessful} from "@store/auth/auth.slice.js";
 import {useState} from "react";
 
 
-
 const ModalAuth = () => {
     const [loginIssue, setLoginIssue] = useState('')
     const selectAuthModal = (state) => state.authModal
@@ -31,12 +30,12 @@ const ModalAuth = () => {
         authMethod: authModal.authMethod,
         verifying: authModal.verifying,
     }))
-    const { authMode, authMethod, verifying } = useSelector(selectAuthModalData)
-    const isAuthenticated = useSelector((state)=> state.auth.isAuthenticated)
+    const {authMode, authMethod, verifying} = useSelector(selectAuthModalData)
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
     const dispatch = useDispatch();
     const {
         control,
-        formState: { errors },
+        formState: {errors},
         getValues
     } = useForm({
         mode: "onChange",
@@ -61,14 +60,13 @@ const ModalAuth = () => {
             password: data.password
         }
 
-        axios.post(apiURL,  params)
+        axios.post(apiURL, params)
             .then((response) => {
                 dispatch(toggleModal())
                 console.log('Success', response)
             })
             .catch((error) => {
                 console.log('Error:', error)
-                console.log(params)
             })
     }
 
@@ -96,9 +94,9 @@ const ModalAuth = () => {
                             {authMode === 'register' ? 'Уже зарегистрированы?' : 'Еще нет аккаунта?'}
                             <Link
                                 className={styles.form__mode}
-                                onClick={() => dispatch(authMode === 'register'? setAuthMode('login') : setAuthMode('register'))}
+                                onClick={() => dispatch(authMode === 'register' ? setAuthMode('login') : setAuthMode('register'))}
                             >
-                                {authMode === 'register' ? 'Войти'  : 'Зарегистрироваться'}
+                                {authMode === 'register' ? 'Войти' : 'Зарегистрироваться'}
                             </Link>
                         </div>
                         <div className={styles.switch}>
@@ -118,7 +116,7 @@ const ModalAuth = () => {
                     </div>
                     <div className={styles.form__inputs}>
                         {
-                            authMode === 'register'?
+                            authMode === 'register' ?
                                 <>
                                     {
                                         authMethod === 'email' &&
@@ -126,13 +124,13 @@ const ModalAuth = () => {
                                             <Controller
                                                 name='email'
                                                 control={control}
-                                                render={({ field }) => (
+                                                render={({field}) => (
                                                     <input
                                                         type='text'
                                                         placeholder='Почта'
                                                         {...field}
                                                     />
-                                                )} />
+                                                )}/>
                                             {errors.email && <p>{errors.email.message}</p>}
                                         </>
                                     }
@@ -142,27 +140,27 @@ const ModalAuth = () => {
                                             <Controller
                                                 name='phone'
                                                 control={control}
-                                                render={({ field }) => (
+                                                render={({field}) => (
                                                     <InputMask
                                                         mask="+7 (999) 999-99-99"
                                                         type='text'
                                                         placeholder='Телефон'
                                                         {...field}
                                                     />
-                                                )} />
+                                                )}/>
                                             {errors.phone && <p>{errors.phone.message}</p>}
                                         </>
                                     }
                                     <Controller
                                         name='regPassword'
                                         control={control}
-                                        render={({ field }) => (
+                                        render={({field}) => (
                                             <input
                                                 type='password'
                                                 placeholder='Придумайте пароль'
                                                 {...field}
                                             />
-                                        )} />
+                                        )}/>
                                     {errors.regPassword && <p>{errors.regPassword.message} </p>}
                                     <button
                                         className={styles.form__button}
@@ -176,18 +174,18 @@ const ModalAuth = () => {
                                 :
                                 <>
                                     {
-                                        authMethod === 'email'?
+                                        authMethod === 'email' ?
                                             <>
                                                 <Controller
                                                     name='email'
                                                     control={control}
-                                                    render={({ field }) => (
+                                                    render={({field}) => (
                                                         <input
                                                             type='text'
                                                             placeholder='Почта'
                                                             {...field}
                                                         />
-                                                    )} />
+                                                    )}/>
                                                 {errors.email && <p>{errors.email.message}</p>}
                                             </>
                                             :
@@ -195,27 +193,27 @@ const ModalAuth = () => {
                                                 <Controller
                                                     name='phone'
                                                     control={control}
-                                                    render={({ field }) => (
+                                                    render={({field}) => (
                                                         <InputMask
                                                             mask="+7 (999) 999-99-99"
                                                             type='text'
                                                             placeholder='Телефон'
                                                             {...field}
                                                         />
-                                                    )} />
+                                                    )}/>
                                                 {errors.phone && <p>{errors.phone.message}</p>}
                                             </>
                                     }
                                     <Controller
                                         name='password'
                                         control={control}
-                                        render={({ field }) => (
+                                        render={({field}) => (
                                             <input
                                                 type='password'
                                                 placeholder='Пароль'
                                                 {...field}
                                             />
-                                        )} />
+                                        )}/>
                                     {errors.password && <p>{errors.password.message} </p>}
                                     {loginIssue && <p>{loginIssue}</p>}
                                     <button
@@ -234,8 +232,8 @@ const ModalAuth = () => {
 
                     </div>
                     <div className={styles.form__footer}>
-                        <YandexAuth />
-                        <VkAuth />
+                        <YandexAuth/>
+                        <VkAuth/>
                     </div>
                 </form>
             }
@@ -249,14 +247,14 @@ const ModalAuth = () => {
                             <Controller
                                 name='verificationCode'
                                 control={control}
-                                render={({ field }) => (
+                                render={({field}) => (
                                     <InputMask
                                         mask="9 9 9 9 9 9"
                                         type='text'
                                         placeholder='Код подтверждения'
                                         {...field}
                                     />
-                                )} />
+                                )}/>
                             {errors.verificationCode && <p>{errors.verificationCode.message}</p>}
 
                         </div>
