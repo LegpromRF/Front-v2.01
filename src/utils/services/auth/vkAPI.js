@@ -11,7 +11,7 @@ export default async function vkAPI(data) {
 
     axios.post(redirectURI, params)
         .then((response) => {
-            console.log(response)
+            console.log(response, params)
         })
         .catch((error) => console.log(error))
 }
