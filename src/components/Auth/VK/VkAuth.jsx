@@ -19,7 +19,7 @@ export default function VkAuth() {
         });
 
         const oneTapButton = Connect.buttonOneTapAuth({
-            callback: (event) => {
+            callback: async (event) => {
                 const { type } = event;
 
                 if (!type) {
@@ -28,7 +28,8 @@ export default function VkAuth() {
 
                 switch (type) {
                     case ConnectEvents.OneTapAuthEventsSDK.LOGIN_SUCCESS:// = 'VKSDKOneTapAuthLoginSuccess'
-                        return vkAPI(event)
+                        await vkAPI(event)
+                        return
                     case ConnectEvents.OneTapAuthEventsSDK.FULL_AUTH_NEEDED: //  = 'VKSDKOneTapAuthFullAuthNeeded'
                         console.log(event);
                         return
