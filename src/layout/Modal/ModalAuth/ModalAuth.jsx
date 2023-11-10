@@ -19,11 +19,12 @@ import {validationSchema} from "@/utils/validation/validationSchema.js";
 import YandexAuth from "@components/Auth/Yandex/YandexAuth.jsx";
 import handleLogin from "@/utils/services/auth/handleLogin.js";
 import {loginSuccessful} from "@store/auth/auth.slice.js";
+import {useState} from "react";
 
 
 
 const ModalAuth = () => {
-
+    const [loginIssue, setLoginIssue] = useState('')
     const selectAuthModal = (state) => state.authModal
     const selectAuthModalData = createSelector(selectAuthModal, (authModal) => ({
         authMode: authModal.authMode,
@@ -72,8 +73,11 @@ const ModalAuth = () => {
     }
 
     async function processLogin(data, authMethod) {
-        if (await handleLogin(data, authMethod)) {
+        const result = await handleLogin(data, authMethod)
+        if (result === true) {
             dispatch(loginSuccessful())
+        } else {
+            setLoginIssue(result)
         }
     }
 
@@ -213,6 +217,7 @@ const ModalAuth = () => {
                                             />
                                         )} />
                                     {errors.password && <p>{errors.password.message} </p>}
+                                    {loginIssue && <p>{loginIssue}</p>}
                                     <button
                                         className={styles.form__button}
                                         onClick={() => {
