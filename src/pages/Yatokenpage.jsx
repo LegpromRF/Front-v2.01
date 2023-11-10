@@ -20,7 +20,7 @@ const Yatokenpage = () => {
 
     useEffect(() => {
         const yandexScript = document.createElement('script');
-        yandexScript.src = 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js';
+        yandexScript.src = 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-token-with-polyfills-latest.js';
         yandexScript.async = true;
         yandexScript.defer = true;
         document.head.appendChild(yandexScript);
@@ -41,15 +41,11 @@ const Yatokenpage = () => {
         }
 
         yandexScript.onload = () => {
-            if (window.YaSendSuggestToken) {
-                window.YaSendSuggestToken(
-                    'https://legpromrfreact.vercel.app/',
-                    {}
-                );
-            } else {
-                console.error('Ошибка: window.YaSendSuggestToken не определена');
-            }
-        };
+            window.YaSendSuggestToken(
+                'https://legpromrfreact.vercel.app/',
+                {}
+            );
+    };
     }, [location]);
 
     return (

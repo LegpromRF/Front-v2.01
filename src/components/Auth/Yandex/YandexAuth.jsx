@@ -1,7 +1,6 @@
 import {useEffect} from 'react';
 import {createSelector} from "@reduxjs/toolkit";
 import {useSelector} from "react-redux";
-import yandexAPI from "@/utils/services/auth/yandexAPI.js";
 import styles from "@layout/Modal/ModalAuth/ModalAuth.module.scss";
 
 const YandexAuth = () => {
@@ -9,7 +8,6 @@ const YandexAuth = () => {
     const selectAuthModalData = createSelector(selectAuthModal, (authModal) => ({
         authMode: authModal.authMode,
     }))
-    const authMode = useSelector(selectAuthModalData)
 
     useEffect(() => {
         const yandexScript = document.createElement('script');

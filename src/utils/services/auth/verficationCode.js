@@ -1,6 +1,5 @@
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 import axios from "axios";
-import {setVerifying} from "@store/auth/authModal.slice.js";
 
 export default async function handleVerification(authMethod, data) {
     let login = ''
@@ -23,6 +22,5 @@ export default async function handleVerification(authMethod, data) {
             console.log('Error:', error)
         })
 
-    dispatch(setVerifying())
     console.log(data, login, authMethod)
 }
