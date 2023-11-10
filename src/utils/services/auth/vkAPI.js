@@ -10,6 +10,13 @@ export default async function vkAPI(data) {
     }
 
     return axios.post(redirectURI, params)
-        .then((response) => response.data.status.ok ? true : response.data.details)
+        .then((response) => {
+            console.log(response)
+            if (response.data.status.ok) {
+                return true
+            } else {
+                return response.data.details
+            }
+        })
         .catch((error) => console.log(error, params, data))
 }

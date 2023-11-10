@@ -20,10 +20,10 @@ export default function VkAuth() {
 
         const oneTapButton = Connect.buttonOneTapAuth({
             callback: async (event) => {
-                const { type } = event;
+                const { type } = event
 
                 if (!type) {
-                    return;
+                    return
                 }
 
                 switch (type) {
