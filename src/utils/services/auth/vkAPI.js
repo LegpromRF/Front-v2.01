@@ -13,5 +13,5 @@ export default async function vkAPI(data) {
         .then((response) => {
             console.log(response, params)
         })
-        .catch((error) => console.log(error, params))
+        .catch((error) => console.log(error, params, data))
 }
