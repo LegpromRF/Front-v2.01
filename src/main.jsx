@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <VKIDtokenpage />
     },
     {
-        path: "/yatokenpage",
+        path: "/Yatokenpage",
         element: <Yatokenpage />
     }
 ]);
