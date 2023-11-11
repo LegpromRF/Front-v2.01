@@ -277,9 +277,6 @@ const ModalAuth = () => {
                     </form>
                 )
             }
-            {
-                isAuthenticated && <Navigate to={'/profile/home'}/>
-            }
         </ModalLayout>
     );
 };
