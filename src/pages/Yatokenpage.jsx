@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {loginSuccess} from "@store/auth/auth.slice.js";
 import yandexAPI from "@/utils/services/auth/yandexAPI.js";
@@ -11,6 +11,11 @@ const Yatokenpage = () => {
     // Хук для изменения стейта успешной авторизации
     const dispatcher = useDispatch()
 
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        isAuthenticated && navigate('/profile/home')
+    }, [isAuthenticated]);
     async function handleYaRegister(data) {
         try {
             await yandexAPI(data, 'register')
