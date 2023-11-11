@@ -19,6 +19,7 @@ const Yatokenpage = () => {
             return true
         } catch (error) {
             console.log(error)
+            return false
         }
     }
 
