@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 function VKIDtokenpage() {
     let location = useLocation()
-    const dispatcher = useDispatch()
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
 
@@ -16,8 +16,9 @@ function VKIDtokenpage() {
 
     async function handleVKRegister(data) {
         try {
-            await vkAPI(data, 'register')
-            dispatcher(loginSuccess())
+            if (await vkAPI(data)) {
+                dispatch(loginSuccess())
+            }
         } catch (error) {
             console.log(error)
         }
