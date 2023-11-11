@@ -5,8 +5,8 @@ export default async function vkAPI(data) {
     const redirectURI = apiEndpoints.vkLogin
     const params = {
         "api_version": "5.207",
-        "silent_token": data.payload.token,
-        "uuid": data.payload.uuid
+        "silent_token": data.silentToken,
+        "uuid": data.uuid
     }
 
     console.log(data)
