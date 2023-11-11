@@ -12,7 +12,7 @@ const Yatokenpage = () => {
     async function handleYaRegister(data) {
         try {
             await yandexAPI(data, 'register')
-            console.log(await yandexAPI(data, 'register'))
+            alert(await yandexAPI(data, 'register'))
             dispatcher(loginSuccessful())
         } catch (error) {
             console.log(error)
