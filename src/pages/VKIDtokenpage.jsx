@@ -6,7 +6,7 @@ import {loginSuccessful} from "@store/auth/auth.slice.js";
 import {useDispatch, useSelector} from "react-redux";
 
 function VKIDtokenpage() {
-   let location = useLocation()
+    let location = useLocation()
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
 
     const dispatcher = useDispatch()

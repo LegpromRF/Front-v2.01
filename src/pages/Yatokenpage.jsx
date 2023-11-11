@@ -51,7 +51,7 @@ const Yatokenpage = () => {
     return (
         <>
             {
-                isAuthenticated && <Navigate to={'/profile'} />
+
             }
         </>
     );
