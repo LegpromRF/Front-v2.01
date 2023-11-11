@@ -1,11 +1,13 @@
 import {useEffect} from 'react';
 import {createSelector} from "@reduxjs/toolkit";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import styles from "@layout/Modal/ModalAuth/ModalAuth.module.scss";
 import {Navigate} from "react-router-dom";
+import {loginSuccess} from "@store/auth/auth.slice.js";
 
 const YandexAuth = () => {
     const selectAuthModal = (state) => state.authModal
+    const dispatch = useDispatch()
     const selectAuthModalData = createSelector(selectAuthModal, (authModal) => ({
         authMode: authModal.authMode,
     }))
@@ -39,8 +41,8 @@ const YandexAuth = () => {
                 })
                 .then(function(data) {
                     console.log('Сообщение с токеном: ', data);
+                    dispatch(loginSuccess)
                     document.body.innerHTML += `Сообщение с токеном: ${JSON.stringify(data)}`;
-                    return isAuthenticated && <Navigate to={'/profile'} />
                 })
                 .catch(function(error) {
                     console.log('Что-то пошло не так: ', error);

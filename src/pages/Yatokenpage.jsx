@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {Navigate, useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {loginSuccessful} from "@store/auth/auth.slice.js";
+import {loginSuccess} from "@store/auth/auth.slice.js";
 import yandexAPI from "@/utils/services/auth/yandexAPI.js";
 
 const Yatokenpage = () => {
@@ -13,7 +13,7 @@ const Yatokenpage = () => {
         try {
             await yandexAPI(data, 'register')
             alert(await yandexAPI(data, 'register'))
-            dispatcher(loginSuccessful())
+            dispatcher(loginSuccess())
         } catch (error) {
             console.log(error)
         }
@@ -51,9 +51,6 @@ const Yatokenpage = () => {
 
     return (
         <>
-            {
-
-            }
         </>
     );
 };

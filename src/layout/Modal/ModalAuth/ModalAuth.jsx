@@ -12,14 +12,14 @@ import ModalLayout from '@layout/Modal/ModalLayout.jsx';
 import styles from './ModalAuth.module.scss';
 import {createSelector} from "@reduxjs/toolkit";
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
 import VkAuth from "@components/Auth/VK/VkAuth.jsx";
 import handleVerification from "@/utils/services/auth/verficationCode.js";
 import {validationSchema} from "@/utils/validation/validationSchema.js";
 import YandexAuth from "@components/Auth/Yandex/YandexAuth.jsx";
 import handleLogin from "@/utils/services/auth/handleLogin.js";
-import {loginSuccessful} from "@store/auth/auth.slice.js";
-import {useState} from "react";
+import {loginSuccess} from "@store/auth/auth.slice.js";
+import {useEffect, useState} from "react";
 
 
 const ModalAuth = () => {
@@ -33,6 +33,12 @@ const ModalAuth = () => {
     const {authMode, authMethod, verifying} = useSelector(selectAuthModalData)
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
     const dispatch = useDispatch();
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        isAuthenticated && navigate('/profile/home')
+    }, [isAuthenticated]);
+
     const {
         control,
         formState: {errors},
@@ -73,7 +79,7 @@ const ModalAuth = () => {
     async function processLogin(data, authMethod) {
         const result = await handleLogin(data, authMethod)
         if (result === true) {
-            dispatch(loginSuccessful())
+            dispatch(loginSuccess())
         } else {
             setLoginIssue(result)
         }

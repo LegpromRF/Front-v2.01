@@ -2,7 +2,7 @@
 import {Navigate, useLocation} from "react-router-dom";
 import {useEffect} from "react";
 import vkAPI from "@/utils/services/auth/vkAPI.js";
-import {loginSuccessful} from "@store/auth/auth.slice.js";
+import {loginSuccess} from "@store/auth/auth.slice.js";
 import {useDispatch, useSelector} from "react-redux";
 
 function VKIDtokenpage() {
@@ -13,7 +13,7 @@ function VKIDtokenpage() {
     async function handleVKRegister(data) {
         try {
             await vkAPI(data, 'register')
-            dispatcher(loginSuccessful())
+            dispatcher(loginSuccess())
         } catch (error) {
             console.log(error)
         }
