@@ -16,6 +16,7 @@ const Yatokenpage = () => {
             await yandexAPI(data, 'register')
             alert(await yandexAPI(data, 'register'))
             dispatcher(loginSuccess())
+            return true
         } catch (error) {
             console.log(error)
         }
@@ -41,15 +42,17 @@ const Yatokenpage = () => {
                 access_token: jsonPayload.access_token,
             }
 
-            handleYaRegister(data)
+            if (handleYaRegister(data)) {
+                yandexScript.onload = () => {
+                    window.YaSendSuggestToken(
+                        'https://legpromrfreact.vercel.app/profile/home',
+                        {}
+                    );
+                };
+            }
         }
 
-    //     yandexScript.onload = () => {
-    //         window.YaSendSuggestToken(
-    //             'https://legpromrfreact.vercel.app/',
-    //             {}
-    //         );
-    // };
+
     }, [location]);
 
     return (
