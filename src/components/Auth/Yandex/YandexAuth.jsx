@@ -41,7 +41,7 @@ const YandexAuth = () => {
                 })
                 .then(function(data) {
                     console.log('Сообщение с токеном: ', data);
-                    dispatch(loginSuccess)
+                    dispatch(loginSuccess())
                     document.body.innerHTML += `Сообщение с токеном: ${JSON.stringify(data)}`;
                 })
                 .catch(function(error) {
