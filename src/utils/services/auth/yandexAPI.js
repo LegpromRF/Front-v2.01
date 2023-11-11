@@ -8,6 +8,13 @@ export default function yandexAPI(data) {
     axios.post(redirectURI, {
         access_token: data.access_token
     })
-        .then((response) => console.log(response.data))
-        .catch((error) => console.log(error))
+        .then((response) => {
+            console.log(response)
+            if (response.data.status.ok) {
+                return true
+            } else {
+                return response.data.details
+            }
+        })
+        .catch((error) => console.log(error, params, data))
 }

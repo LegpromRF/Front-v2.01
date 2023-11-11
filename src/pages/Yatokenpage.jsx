@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {useLocation} from "react-router-dom";
+import {Navigate, useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {loginSuccessful} from "@store/auth/auth.slice.js";
 import yandexAPI from "@/utils/services/auth/yandexAPI.js";
@@ -51,7 +51,7 @@ const Yatokenpage = () => {
     return (
         <>
             {
-                // isAuthenticated && <Navigate to={'/profile'} />
+                isAuthenticated && <Navigate to={'/profile'} />
             }
         </>
     );
