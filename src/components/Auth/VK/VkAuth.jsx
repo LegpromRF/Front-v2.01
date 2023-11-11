@@ -32,7 +32,8 @@ export default function VkAuth() {
                 switch (type) {
                     case ConnectEvents.OneTapAuthEventsSDK.LOGIN_SUCCESS:// = 'VKSDKOneTapAuthLoginSuccess'
                         console.log(event);
-                        return dispatch(loginSuccess)
+
+                        return dispatch(loginSuccess())
                     case ConnectEvents.OneTapAuthEventsSDK.FULL_AUTH_NEEDED: //  = 'VKSDKOneTapAuthFullAuthNeeded'
                         console.log(event);
                         return
