@@ -38,6 +38,8 @@ function VKIDtokenpage() {
                 silentToken: jsonPayload.token
             }
 
+            console.log(data)
+
             handleVKRegister(data)
         }
     }, [location]);
