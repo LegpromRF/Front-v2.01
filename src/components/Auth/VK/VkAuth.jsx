@@ -1,7 +1,6 @@
 import {useEffect} from 'react';
 import {Config, Connect, ConnectEvents} from "@vkontakte/superappkit";
 import styles from "@layout/Modal/ModalAuth/ModalAuth.module.scss";
-import vkAPI from "@/utils/services/auth/vkAPI.js";
 import {useDispatch} from "react-redux";
 import {loginSuccess} from "@store/auth/auth.slice.js";
 
@@ -76,4 +75,4 @@ export default function VkAuth() {
             id="vk"
         ></div>
     );
-};
+}
