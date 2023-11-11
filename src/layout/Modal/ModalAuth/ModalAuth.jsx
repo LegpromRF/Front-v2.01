@@ -12,7 +12,7 @@ import ModalLayout from '@layout/Modal/ModalLayout.jsx';
 import styles from './ModalAuth.module.scss';
 import {createSelector} from "@reduxjs/toolkit";
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
-import {Link, Navigate, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import VkAuth from "@components/Auth/VK/VkAuth.jsx";
 import handleVerification from "@/utils/services/auth/verficationCode.js";
 import {validationSchema} from "@/utils/validation/validationSchema.js";
