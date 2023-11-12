@@ -2,7 +2,7 @@ import styles from './Layout.module.scss'
 
 import LogoHeader from '@public/Logo/logo.png'
 
-import { useState } from "react";
+import {useEffect, useState} from "react";
 
 // import NavigationPerformer from '@layout/Navigation/Performer/NavigationPerformer'
 import NavigationClient from '@layout/Navigation/Client/NavigationClient';
@@ -14,10 +14,26 @@ import { store } from "@store/store";
 import { isMobile } from 'react-device-detect';
 import {Link} from "react-router-dom";
 import getUserName from "@/utils/services/profileData/getUserName.js";
+import {setUserName} from "@store/session/userdata.slice.js";
 
 const Layout = ({children}) => {
-    const username = getUserName()
-    console.log(username)
+    const dispatch = useDispatch()
+    const username = useSelector((state) => state.userdata.username)
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const fetchedUsername = await getUserName()
+            console.log(fetchedUsername)
+            if (fetchedUsername) {
+                dispatch(setUserName(fetchedUsername))
+            } else {
+                dispatch(setUserName(null))
+            }
+        }
+
+        fetchUser()
+    }, []);
+    
 
   /*=========== Window and Nav =============*/
 
