@@ -30,7 +30,7 @@ export default async function vkAPI(data, authMode) {
     return axios.post(redirectURI, params)
         .then((response) => {
             console.log(response)
-            if (response.data.status === 200) {
+            if (response.data.status === 204) {
                 return true
             } else {
                 console.log(response.data.details)
