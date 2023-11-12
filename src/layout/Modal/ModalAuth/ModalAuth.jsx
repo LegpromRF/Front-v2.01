@@ -7,14 +7,14 @@ import {Controller, useForm} from "react-hook-form";
 import InputMask from 'react-input-mask';
 
 import {useDispatch, useSelector} from "react-redux";
-import {setAuthMethod, setAuthMode, toggleModal} from "@/store/auth/authModal.slice.js";
+import {setAuthMethod, setAuthMode, setVerifying, toggleModal} from "@/store/auth/authModal.slice.js";
 import ModalLayout from '@layout/Modal/ModalLayout.jsx';
 import styles from './ModalAuth.module.scss';
 import {createSelector} from "@reduxjs/toolkit";
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 import {Link, useNavigate} from "react-router-dom";
 import VkAuth from "@components/Auth/VK/VkAuth.jsx";
-import handleVerification from "@/utils/services/auth/verficationCode.js";
+import handleVerification from "@/utils/services/auth/handleVerification.js";
 import {validationSchema} from "@/utils/validation/validationSchema.js";
 import YandexAuth from "@components/Auth/Yandex/YandexAuth.jsx";
 import handleLogin from "@/utils/services/auth/handleLogin.js";
@@ -170,7 +170,10 @@ const ModalAuth = () => {
                                     {errors.regPassword && <p>{errors.regPassword.message} </p>}
                                     <button
                                         className={styles.form__button}
-                                        onClick={() => handleVerification(authMethod, getValues())}
+                                        onClick={() => {
+                                            dispatch(setVerifying())
+                                            handleVerification(authMethod, getValues())
+                                        }}
                                         type={"button"}
                                         disabled={Object.keys(errors).length > 0}
                                     >

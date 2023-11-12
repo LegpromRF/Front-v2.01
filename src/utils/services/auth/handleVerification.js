@@ -2,6 +2,7 @@ import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 import axios from "axios";
 
 export default async function handleVerification(authMethod, data) {
+
     let login = ''
     if (authMethod === "sms") {
         login = data.phone.replace(/\D/g, '')
