@@ -7,6 +7,7 @@ export const authModalSlice = createSlice({
         authMode: 'register',
         authMethod: 'email',
         verifying: false,
+        authIssue: '',
     },
     reducers: {
         toggleModal: (state) => {
@@ -24,6 +25,9 @@ export const authModalSlice = createSlice({
         setVerifying: (state) => {
             state.verifying = true
             state.authMode = null
+        },
+        setAuthIssue: (state, action) => {
+            state.authIssue = action.payload
         }
     }
 })

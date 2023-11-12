@@ -24,7 +24,6 @@ export default function VkAuth() {
         async function processLogin(event) {
             if (await vkAPI(event, 'login') === true) {
                 dispatch(loginSuccess())
-                console.log('Login successful')
             }
         }
 

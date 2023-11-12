@@ -11,7 +11,7 @@ export default async function vkAPI(data, authMode) {
             params = {
                 "api_version": "5.207",
                 "silent_token": data.payload.token,
-                "uuid": data.payload.uuid
+                "uuid": data.payload.uuid,
             }
             break
         case "register":
@@ -24,17 +24,14 @@ export default async function vkAPI(data, authMode) {
             break
     }
 
-
-    console.log('data:', data)
-
-    return axios.post(redirectURI, params)
+    return axios
+        .post(redirectURI, params, {
+            withCredentials: true
+        })
         .then((response) => {
-            console.log(response)
             if (response.data.status === 204) {
-                console.log('code 204')
                 return true
             } else {
-                console.log(response.data.details)
                 return response.data.details
             }
         })
