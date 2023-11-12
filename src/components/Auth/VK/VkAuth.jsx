@@ -21,9 +21,10 @@ export default function VkAuth() {
             },
         });
 
-        function processLogin(event) {
-            vkAPI(event, 'login')
-            dispatch(loginSuccess())
+        async function processLogin(event) {
+            if (await vkAPI(event, 'login') === true) {
+                dispatch(loginSuccess())
+            }
         }
 
         const oneTapButton = Connect.buttonOneTapAuth({
