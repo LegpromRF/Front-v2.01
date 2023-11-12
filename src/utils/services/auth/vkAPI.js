@@ -9,7 +9,7 @@ export default async function vkAPI(data, authMode) {
         "uuid": data.uuid
     }
 
-    console.log(data)
+    console.log('data:', data)
 
     return axios.post(redirectURI, params)
         .then((response) => {
