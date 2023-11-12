@@ -3,6 +3,7 @@ import {Config, Connect, ConnectEvents} from "@vkontakte/superappkit";
 import styles from "@layout/Modal/ModalAuth/ModalAuth.module.scss";
 import {useDispatch} from "react-redux";
 import {loginSuccess} from "@store/auth/auth.slice.js";
+import vkAPI from "@/utils/services/auth/vkAPI.js";
 
 export default function VkAuth() {
     const dispatch = useDispatch()
@@ -20,6 +21,11 @@ export default function VkAuth() {
             },
         });
 
+        function processLogin(event) {
+            vkAPI(event, 'login')
+            dispatch(loginSuccess())
+        }
+
         const oneTapButton = Connect.buttonOneTapAuth({
             callback: async (event) => {
                 const { type } = event
@@ -31,7 +37,7 @@ export default function VkAuth() {
                 switch (type) {
                     case ConnectEvents.OneTapAuthEventsSDK.LOGIN_SUCCESS:// = 'VKSDKOneTapAuthLoginSuccess'
                         console.log(event);
-                        return dispatch(loginSuccess())
+                        return processLogin(event)
                     case ConnectEvents.OneTapAuthEventsSDK.FULL_AUTH_NEEDED: //  = 'VKSDKOneTapAuthFullAuthNeeded'
                         console.log(event);
                         return

@@ -1,8 +1,8 @@
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 import axios from "axios";
 
-export default async function vkAPI(data) {
-    const redirectURI = apiEndpoints.vkLogin
+export default async function vkAPI(data, authMode) {
+    const redirectURI = authMode === "login" ? apiEndpoints.vkLogin : apiEndpoints.vkReg
     const params = {
         "api_version": "5.207",
         "silent_token": data.silentToken,
