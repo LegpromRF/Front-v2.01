@@ -15,7 +15,7 @@ import { isMobile } from 'react-device-detect';
 import {Link} from "react-router-dom";
 import getUserName from "@/utils/services/profileData/getUserName.js";
 
-const Layout = ({children, roll}) => {
+const Layout = ({children}) => {
     const username = getUserName()
     console.log(username)
 
@@ -25,12 +25,6 @@ const Layout = ({children, roll}) => {
         return !isMobile;
     });
     const isNavOpen = useSelector((state) => state.navigation.isNavOpen)
-    const dispatch = useDispatch()
-
-  /*================== Role ====================*/
-
-  /* ['Заказчик', 'Исполнитель', 'Гость'] */
-  const userRoll = 'Заказчик';
 
   return ( 
     <>

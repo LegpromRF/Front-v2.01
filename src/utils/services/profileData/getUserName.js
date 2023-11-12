@@ -7,8 +7,11 @@ export default async function getUserName() {
             withCredentials: true
         })
         .then((response) => {
-            console.log(response)
-            return response.data
+            if (response.data.status === 200) {
+                console.log(response)
+                return response.data.data
+            } else return false
+
         })
         .catch((error) => console.log(error))
 }
