@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {isMobile} from "react-device-detect";
 
 export const navigationSlice = createSlice({
     name: 'navigation',
     initialState: {
-        isNavOpen: true
+        isNavOpen: !isMobile
     },
     reducers: {
         toggleNav: (state) => {
