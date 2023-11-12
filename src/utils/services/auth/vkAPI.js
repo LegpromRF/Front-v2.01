@@ -26,7 +26,8 @@ export default async function vkAPI(data, authMode) {
 
     return axios
         .post(redirectURI, params, {
-            withCredentials: true
+            withCredentials: true,
+            AccessControlAllowOrigin: true
         })
         .then((response) => {
             if (response.data.status === 204) {

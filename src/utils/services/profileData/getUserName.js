@@ -3,7 +3,9 @@ import {apiHOST} from "@/utils/constants/apiEndpoints.js";
 
 export default async function getUserName() {
     axios
-        .get(`${apiHOST}lk/welcome`)
+        .get(`${apiHOST}lk/welcome`, {
+            withCredentials: true
+        })
         .then((response) => {
             console.log(response)
             return response.data
