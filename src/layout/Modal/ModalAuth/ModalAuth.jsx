@@ -63,7 +63,7 @@ const ModalAuth = () => {
             login: login,
             kind: authMethod,
             verification_code: data.verificationCode.replace(/\s/g, ''),
-            password: data.password
+            password: data.regPassword
         }
 
         console.log(params)
