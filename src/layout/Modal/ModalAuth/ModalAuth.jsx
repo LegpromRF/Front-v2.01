@@ -66,6 +66,8 @@ const ModalAuth = () => {
             password: data.password
         }
 
+        console.log(params)
+
         axios.post(apiURL, params)
             .then((response) => {
                 dispatch(toggleModal())
@@ -88,7 +90,7 @@ const ModalAuth = () => {
 
     return (
         <ModalLayout>
-            {
+            { !verifying &&
                 <form className={styles.form}>
                     <div className={styles.form__header}>
                         <div className={styles.form__title}>
