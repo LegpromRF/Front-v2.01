@@ -1,17 +1,12 @@
 import {useEffect} from 'react';
-import {createSelector} from "@reduxjs/toolkit";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import styles from "@layout/Modal/ModalAuth/ModalAuth.module.scss";
 import {loginSuccess} from "@store/auth/auth.slice.js";
 
 const YandexAuth = () => {
-    const selectAuthModal = (state) => state.authModal
-    const dispatch = useDispatch()
-    const selectAuthModalData = createSelector(selectAuthModal, (authModal) => ({
-        authMode: authModal.authMode,
-    }))
 
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
         const yandexScript = document.createElement('script');
