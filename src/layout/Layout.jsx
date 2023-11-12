@@ -17,6 +17,7 @@ import getUserName from "@/utils/services/profileData/getUserName.js";
 
 const Layout = ({children, roll}) => {
     const username = getUserName()
+    console.log(username)
 
   /*=========== Window and Nav =============*/
 
