@@ -31,6 +31,7 @@ export default async function vkAPI(data, authMode) {
         .then((response) => {
             console.log(response)
             if (response.data.status === 204) {
+                console.log('code 204')
                 return true
             } else {
                 console.log(response.data.details)
