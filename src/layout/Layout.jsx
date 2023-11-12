@@ -9,7 +9,6 @@ import NavigationClient from '@layout/Navigation/Client/NavigationClient';
 // import NavigationGuest from '@layout/Navigation/Guest/NavigationGuest';
 
 import { useDispatch, useSelector} from "react-redux";
-import { store } from "@store/store";
 
 import { isMobile } from 'react-device-detect';
 import {Link} from "react-router-dom";
@@ -24,7 +23,7 @@ const Layout = ({children}) => {
         const fetchUser = async () => {
             const fetchedUsername = await getUserName()
             console.log(fetchedUsername)
-            if (fetchedUsername) {
+            if (typeof fetchedUsername === "string") {
                 dispatch(setUserName(fetchedUsername))
             }
         }
