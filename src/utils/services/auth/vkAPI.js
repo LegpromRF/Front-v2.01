@@ -33,6 +33,7 @@ export default async function vkAPI(data, authMode) {
             if (response.data.status.ok) {
                 return true
             } else {
+                console.log(response.data.details)
                 return response.data.details
             }
         })
