@@ -10,7 +10,7 @@ export default async function vkAPI(data, authMode) {
             redirectURI= apiEndpoints.vkLogin
             params = {
                 "api_version": "5.207",
-                "silent_token": data.payload.silentToken,
+                "silent_token": data.payload.token,
                 "uuid": data.payload.uuid
             }
             break
