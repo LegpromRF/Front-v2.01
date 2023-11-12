@@ -26,8 +26,6 @@ const Layout = ({children}) => {
             console.log(fetchedUsername)
             if (fetchedUsername) {
                 dispatch(setUserName(fetchedUsername))
-            } else {
-                dispatch(setUserName(null))
             }
         }
 
@@ -68,7 +66,7 @@ const Layout = ({children}) => {
                     </div>
                 </div>
                 <div className={isNavOpen ? [styles.home__header, styles.home__header_open].join(' ') : [styles.home__header, styles.home__header_close].join(' ')}>
-                    <div className={[styles.home__welcome, styles.home__text].join(' ')}>Добро пожаловать{username ? `, ${username} !` : '!'}</div>
+                    <div className={[styles.home__welcome, styles.home__text].join(' ')}>Добро пожаловать{username ? `, ${username}!` : '!'}</div>
                     <div className={styles.home__contacts}>
                         <div className={styles.home__text_nowrap}>Обращайтесь! Тел: +7-958-111-4884</div>
                         <div className={styles.home__links}>
