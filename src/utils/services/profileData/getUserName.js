@@ -2,7 +2,7 @@ import axios from "axios";
 import {apiHOST} from "@/utils/constants/apiEndpoints.js";
 
 export default async function getUserName() {
-    axios
+    return axios
         .get(`${apiHOST}lk/welcome`, {
             withCredentials: true
         })
