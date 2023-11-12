@@ -116,34 +116,6 @@
       }
   }
 
-  &__guest {
-    
-    margin-top: 15px;
-    font-size: 16px;
-    max-width: 428px;
-    text-align: center;
-    
-    a {
-      cursor: pointer;
-      text-decoration: underline;
-      color: inherit;
-    }
-
-    & a:hover {
-      text-decoration: none;
-    }
-
-    @media (max-width: 1290px) {
-      max-width: none;
-      display: flex;
-      justify-content: center;
-    }
-
-    @media (max-width: 500px) {
-      margin-top: 0px;
-    }
-  }
-
   &__text {
     display: flex;
     max-width: 456px;
