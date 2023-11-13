@@ -1,13 +1,10 @@
-import HeaderProfile from '@/src/components/HeaderProfile/HeaderProfile';
+import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
 import styles from './CreateOrder.module.scss'
 
-import TitleProfile from "@/src/components/TitleProfile/TitleProfile";
-import Layout from "@/src/layout/Layout";
-import ModalLayout from '@/src/layout/Modal/ModalLayout'
-
-import Link from "next/link";
+import TitleProfile from "@components/TitleProfile/TitleProfile";
+import Layout from "@layout/Layout";
+import ModalLayout from '@layout/Modal/ModalLayout'
 import { useState } from "react";
-import Head from 'next/head';
 
 const CreateOrder = () => {
 
