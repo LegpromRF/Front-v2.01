@@ -1,9 +1,7 @@
 import styles from './HeaderProfile.module.scss'
-
-import Link from "next/link";
-import Image from 'next/image';
-import Logo from 'public/logo.png'
+import Logo from '/public/Logo/logo.png'
 import getUserName from "@/utils/services/profileData/getUserName.js";
+import {Link} from "react-router-dom";
 
 const HeaderProfile = ({active}) => {
   // const username = getUserName()
@@ -13,8 +11,8 @@ const HeaderProfile = ({active}) => {
       <div className={[styles.header, styles.header__profileContainer].join(' ')}>
         <div className={styles.header__content}>
           <div className={styles.header__logo}>
-            <Link href='/'>
-              <Image 
+            <Link to='/'>
+              <img
                 src={Logo} 
                 alt="LegpromRF"  
                 width={135} 
@@ -31,18 +29,18 @@ const HeaderProfile = ({active}) => {
           <div className={styles.home__contacts}>
             <div className={styles.home__text}>Обращайтесь! Тел: +7-958-111-4884</div>
             <div className={styles.home__links}>
-              <Link
+              <a
                   className={""}
                   href={"https://wa.me/+79261894737"}
               >
                 WA
-              </Link>
-              <Link
+              </a>
+              <a
                   className={""}
                   href={"https://t.me/LegpromRF_bot"}
               >
                 TG
-              </Link>
+              </a>
             </div>
           </div>
         </div>
