@@ -16,7 +16,7 @@ function VKIDtokenpage() {
 
     async function handleVKRegister(data) {
         try {
-            if (await vkAPI(data)) {
+            if (await vkAPI(data, 'register')) {
                 dispatch(loginSuccess())
             }
         } catch (error) {
