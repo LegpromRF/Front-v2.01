@@ -71,6 +71,7 @@ const ModalAuth = () => {
         axios.post(apiURL, params)
             .then((response) => {
                 dispatch(toggleModal())
+                dispatch(loginSuccess())
                 console.log('Success', response)
             })
             .catch((error) => {
