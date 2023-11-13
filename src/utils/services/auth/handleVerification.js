@@ -15,6 +15,8 @@ export default async function handleVerification(authMethod, data) {
         kind: authMethod
     }
 
+    console.log(params)
+
     axios.get(apiURL, { params })
         .then((response) => {
             console.log('Success:', response.data)

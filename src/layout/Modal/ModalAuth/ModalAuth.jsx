@@ -82,6 +82,7 @@ const ModalAuth = () => {
 
     async function processLogin(data, authMethod) {
         const result = await handleLogin(data, authMethod)
+        console.log(result)
         if (result === true) {
             dispatch(loginSuccess())
         } else {

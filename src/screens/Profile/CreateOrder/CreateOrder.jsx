@@ -413,7 +413,7 @@ const CreateOrder = () => {
           <ModalLayout active={modalActive3} setActive={setModalActive3} height="1000">
               <h3 className={styles.form__modalTitle}>Выберите тариф</h3>
               <p className={styles.form__modalSubTitle}>
-                Оплатите <span className={styles.form__modalProSpan}>PRO</span> и отправьте заявку сразу всемподходящим исполнителям! Также у вам будут
+                Оплатите <span className={styles.form__modalProSpan}>PRO</span> и отправьте заявку сразу всем подходящим исполнителям! Также у вам будут
                 доступны контакты всех исполнителей.
               </p>
               <div className={styles.form__buttomTarif}>
