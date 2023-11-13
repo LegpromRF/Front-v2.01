@@ -32,12 +32,11 @@ const router = createBrowserRouter([
                 index: true,
                 element: <HomeProfile/>
             },
-            {
-                path: "createorder",
-                element: <CreateOrderPage />
-            }
-
         ]
+    },
+    {
+        path: "/profile/createorder",
+        element: <CreateOrderPage />
     },
     {
         path: "/VKIDtokenpage",
