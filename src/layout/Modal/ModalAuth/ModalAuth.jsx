@@ -71,6 +71,7 @@ const ModalAuth = () => {
         axios.post(apiURL, params)
             .then((response) => {
                 dispatch(toggleModal())
+                dispatch(setVerifying(false))
                 dispatch(loginSuccess())
                 console.log('Success', response)
             })
@@ -174,7 +175,7 @@ const ModalAuth = () => {
                                     <button
                                         className={styles.form__button}
                                         onClick={() => {
-                                            dispatch(setVerifying())
+                                            dispatch(setVerifying(true))
                                             handleVerification(authMethod, getValues())
                                         }}
                                         type={"button"}

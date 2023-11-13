@@ -22,8 +22,8 @@ export const authModalSlice = createSlice({
         setAuthMethod: (state, action) => {
             state.authMethod = action.payload
         },
-        setVerifying: (state) => {
-            state.verifying = true
+        setVerifying: (state, action) => {
+            state.verifying = action.payload
             state.authMode = null
         },
         setAuthIssue: (state, action) => {
