@@ -36,7 +36,7 @@ const ModalAuth = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        isAuthenticated && navigate('/profile/home')
+        isAuthenticated && navigate('/profile')
     }, [isAuthenticated]);
 
     const {
