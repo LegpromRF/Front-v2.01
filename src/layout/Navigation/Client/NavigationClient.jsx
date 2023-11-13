@@ -61,7 +61,7 @@ const NavigationClient = () => {
                                 icon : null
                             },
                             'Создать заявку': {
-                                link : 'profile/createorder',
+                                link : '/createorder',
                                 icon : null
                             },
                             'Мои заказы': {
