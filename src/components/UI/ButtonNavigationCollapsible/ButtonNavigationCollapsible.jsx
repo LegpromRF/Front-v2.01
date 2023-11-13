@@ -1,7 +1,7 @@
 import styles from './ButtonNavigationCollapsible.module.scss'
 import {useState} from "react";
 import {Link} from "react-router-dom";
-
+import PropTypes from "prop-types";
 
 const ButtonNavigationCollapsible = ({children, title, stopPropagation, hide, active, activeLink, links}) => {
     const [open, setOpen] = useState(false);
@@ -30,8 +30,8 @@ const ButtonNavigationCollapsible = ({children, title, stopPropagation, hide, ac
                 <div className={open ? styles.opened : styles.closed}>
                     {
                         open && (
-                            Object.entries(links).map(([title, props]) => (
-                                <Link className={activeLink ? [styles.button__link, styles.button__linkActiveMenuBase].join(' ') : styles.button__link} to={props.link}>
+                            Object.entries(links).map(([title, props], index) => (
+                                <Link key={index} className={activeLink ? [styles.button__link, styles.button__linkActiveMenuBase].join(' ') : styles.button__link} to={props.link}>
                                     <span>{title}</span>
                                     {props.icon}
                                 </Link>
@@ -42,6 +42,13 @@ const ButtonNavigationCollapsible = ({children, title, stopPropagation, hide, ac
             </div>
         </div>
     );
+}
+
+ButtonNavigationCollapsible.propTypes = {
+    links: {
+        link: PropTypes.string.isRequired,
+        icon: PropTypes.string
+    }
 }
 
 export default ButtonNavigationCollapsible;

@@ -13,6 +13,7 @@ import NoLayout from "@/pages/nolayout.jsx";
 import VKIDtokenpage from "@/pages/VKIDtokenpage.jsx";
 import PrivateRoute from "@components/routing/privateRoute.jsx";
 import Yatokenpage from "@/pages/Yatokenpage.jsx";
+import CreateOrder from "@screens/Profile/CreateOrder/CreateOrder.jsx";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: "home",
                 element: <HomeProfile/>
+            },
+            {
+                path: "createorder",
+                element: <CreateOrder />
             }
 
         ]
