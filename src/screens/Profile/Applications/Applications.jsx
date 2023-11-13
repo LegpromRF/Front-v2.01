@@ -3,8 +3,6 @@ import Layout from "@/src/layout/Layout";
 import styles from './Applications.module.scss'
 import HeaderProfile from "@/src/components/HeaderProfile/HeaderProfile";
 
-import Head from "next/head";
-import Link from "next/link";
 
 const AboutOrder = () => {
   return ( 

@@ -1,7 +1,6 @@
 import styles from './RegistryCard.module.scss'
 
-import Link from 'next/link';
-import Image from 'next/image';
+
 
 import Img1 from 'public/Landing/card_img_1.png'
 import { useState } from 'react';

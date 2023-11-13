@@ -1,12 +1,10 @@
 import Layout from "@/src/layout/Layout";
-import Head from "next/head";
-import HeaderProfile from "@/src/components/HeaderProfile/HeaderProfile";
+import HeaderProfile from "@components/HeaderProfile/HeaderProfile";
 
 import camera from 'public/icon/ChangeOrder/camera.svg'
 
 import styles from './ChangeOrder.module.scss'
-import Image from "next/image";
-import Link from "next/link";
+
 
 const ChangeOrder = () => {
 
@@ -14,9 +12,9 @@ const ChangeOrder = () => {
 
   return ( 
     <>
-      <Head>
-        <title>Сдача заказа - LegpromRF</title>
-      </Head>
+      {/*<Head>*/}
+      {/*  <title>Сдача заказа - LegpromRF</title>*/}
+      {/*</Head>*/}
       <Layout>
         <div className={styles.change}>
           <div className={styles.change__title}>

@@ -1,7 +1,6 @@
-import Layout from "@/src/layout/Layout";
+import Layout from "@/layout/Layout";
 
-import Head from "next/head";
-import Link from "next/link";
+i
 
 import styles from './ArchiveOrders.module.scss'
 

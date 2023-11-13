@@ -6,8 +6,6 @@ import TitleProfile from "@/src/components/TitleProfile/TitleProfile";
 
 import icon from 'public/icon/iconTz.png'
 
-import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 
 const Offer = () => {

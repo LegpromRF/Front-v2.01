@@ -1,14 +1,12 @@
-import Layout from "@/src/layout/Layout";
+import Layout from "@layout/Layout";
 
 import styles from './Orders.module.scss'
 
-import Status from "@/src/components/Status/Status";
-import TitleProfile from "@/src/components/TitleProfile/TitleProfile";
-import OrdersCard from "@/src/components/OrdersCard/OrdersCard";
-import HeaderProfile from "@/src/components/HeaderProfile/HeaderProfile";
+import Status from "@components/Status/Status";
+import TitleProfile from "@components/TitleProfile/TitleProfile";
+import OrdersCard from "@components/OrdersCard/OrdersCard";
+import HeaderProfile from "@components/HeaderProfile/HeaderProfile";
 
-import Link from "next/link";
-import Head from "next/head";
 import { useState } from "react";
 
 const Orders = () => {

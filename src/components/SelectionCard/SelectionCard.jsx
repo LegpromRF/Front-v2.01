@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Raiting from '../Raiting/Raiting';
 import styles from './SelectionCard.module.scss'
-import Link from 'next/link';
+
 
 const SelectionCard = ({recommendation, choice}) => {
 

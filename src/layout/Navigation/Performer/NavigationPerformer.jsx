@@ -3,8 +3,7 @@ import styles from './Performer.module.scss'
 import HeaderNavigation from '@/src/UI/HeaderNavigation/HeaderNavigation';
 import ButtonNavigation from '@/src/UI/ButtonNavigation/ButtonNavigation';
 
-import Link from 'next/link'
-import Image from 'next/image';
+
 
 import ad from 'public/icon/adPro.svg';
 import { useState } from 'react';

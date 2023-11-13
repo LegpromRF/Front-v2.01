@@ -1,11 +1,10 @@
-import Layout from "@/src/layout/Layout";
-import Link from "next/link";
+import Layout from "@layout/Layout";
+
 
 import styles from './Performers.module.scss'
-import HeaderProfile from "@/src/components/HeaderProfile/HeaderProfile";
-import Raiting from "@/src/components/Raiting/Raiting";
+import HeaderProfile from "@components/HeaderProfile/HeaderProfile";
+import Raiting from "@components/Raiting/Raiting";
 
-import Image from "next/image";
 
 import statusActive from '/public/statusActive.png'
 import statusIsNotActive from '/public/statusIsNotActive.png'

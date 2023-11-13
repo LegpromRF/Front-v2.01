@@ -3,8 +3,6 @@ import Layout from "@/src/layout/Layout";
 import styles from './CheckTz.module.scss'
 import icon from 'public/icon/iconTz.png'
 
-import Link from "next/link";
-import Image from "next/image";
 
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
