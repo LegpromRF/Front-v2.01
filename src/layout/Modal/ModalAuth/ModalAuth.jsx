@@ -246,7 +246,7 @@ const ModalAuth = () => {
 
                     </div>
                     <div className={styles.form__footer}>
-                        {/*<YandexAuth/>*/}
+                        <YandexAuth/>
                         <VkAuth/>
                     </div>
                 </form>
