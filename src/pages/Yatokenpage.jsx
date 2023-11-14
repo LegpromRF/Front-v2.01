@@ -11,11 +11,6 @@ const Yatokenpage = () => {
     // Хук для изменения стейта успешной авторизации
     const dispatcher = useDispatch()
 
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        isAuthenticated && navigate('/profile/home')
-    }, [isAuthenticated]);
     async function handleYaRegister(data) {
         try {
             await yandexAPI(data, 'register')
@@ -51,7 +46,7 @@ const Yatokenpage = () => {
             if (handleYaRegister(data)) {
                 yandexScript.onload = () => {
                     window.YaSendSuggestToken(
-                        'https://legpromrfreact.vercel.app/profile/home',
+                        'https://legpromrfreact.vercel.app/',
                         {}
                     );
                 };
