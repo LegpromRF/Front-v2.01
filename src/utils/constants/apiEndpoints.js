@@ -2,7 +2,7 @@ const test = 'justifyapi'
 const prod = 'api.legpromrf'
 
 
-export const apiHOST = `https://${test}.ru/`
+export const apiHOST = `https://${prod}.ru/`
 export const apiEndpoints = {
     verification: apiHOST + 'auth/send_verification',
     register: apiHOST + 'auth/register',
