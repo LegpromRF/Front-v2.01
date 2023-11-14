@@ -19,6 +19,6 @@ export default async function handleLogin(data, authMethod) {
     console.log(params, data)
     return axios.post(apiURL, params)
         .then((response) => console.log(response))
-        .then((response) => response.data.status.ok ? true : response.data.details)
+        .then((response) => response.data.status === 200 ? true : response.data.details)
         .catch(() => false)
 }
