@@ -26,5 +26,4 @@ export default async function handleLogin(data, authMethod) {
                 return response.data.details
             }
         })
-        .catch(() => false)
 }
