@@ -35,7 +35,7 @@ const Yatokenpage = () => {
 
             // Парсинг URL
             const urlParams = new URLSearchParams(location.hash);
-            const urlHash = urlParams.get('access_token')
+            const urlHash = urlParams.get('#access_token')
             console.log(urlHash)
             console.log(location)
             // console.log(payloadParam)
