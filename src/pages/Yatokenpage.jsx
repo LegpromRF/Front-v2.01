@@ -31,17 +31,14 @@ const Yatokenpage = () => {
         yandexScript.defer = true;
         document.head.appendChild(yandexScript);
 
-        // Парсинг URL
-        const urlParams = new URLSearchParams(location.search);
-        const payloadParam = urlParams.get('access_token');
-        console.log(location)
-        urlParams.forEach((value,key) => {
-                console.log(`${key}: ${value}`);
-            }
-        )
-        console.log(payloadParam)
+        yandexScript.onload = () => {
 
-        if (payloadParam) {
+            // Парсинг URL
+            const urlParams = new URLSearchParams(location.hash);
+            const payloadParam = urlParams.get('access_token');
+            console.log(location)
+            console.log(payloadParam)
+
             const decodedPayload = decodeURIComponent(payloadParam);
             const jsonPayload = JSON.parse(decodedPayload);
 
@@ -51,15 +48,11 @@ const Yatokenpage = () => {
 
             handleYaRegister(data)
 
-            yandexScript.onload = () => {
-                window.YaSendSuggestToken(
-                    'https://legpromrfreact.vercel.app/',
-                    {}
-                );
-            };
+            window.YaSendSuggestToken(
+                'https://legpromrfreact.vercel.app/',
+                {}
+            );
         }
-
-
     }, [location]);
 
     return (
