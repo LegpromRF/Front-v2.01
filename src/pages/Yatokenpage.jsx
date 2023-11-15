@@ -1,7 +1,5 @@
 import {useEffect} from 'react';
-import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {loginSuccess} from "@store/auth/auth.slice.js";
+import {useLocation} from "react-router-dom";
 import yandexAPI from "@/utils/services/auth/yandexAPI.js";
 
 const Yatokenpage = () => {
