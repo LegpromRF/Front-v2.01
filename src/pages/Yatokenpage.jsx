@@ -43,14 +43,14 @@ const Yatokenpage = () => {
                 access_token: jsonPayload.access_token,
             }
 
-            if (handleYaRegister(data)) {
-                yandexScript.onload = () => {
-                    window.YaSendSuggestToken(
-                        'https://legpromrfreact.vercel.app/',
-                        {}
-                    );
-                };
-            }
+            handleYaRegister(data)
+
+            yandexScript.onload = () => {
+                window.YaSendSuggestToken(
+                    'https://legpromrfreact.vercel.app/',
+                    {}
+                );
+            };
         }
 
 
