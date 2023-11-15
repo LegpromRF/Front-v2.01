@@ -35,11 +35,11 @@ const Yatokenpage = () => {
 
             // Парсинг URL
             const urlParams = new URLSearchParams(location.hash);
-            const payloadParam = urlParams.get('access_token');
+            console.log(urlParams)
             console.log(location)
-            console.log(payloadParam)
-
-            const decodedPayload = decodeURIComponent(payloadParam);
+            // console.log(payloadParam)
+            //
+            // const decodedPayload = decodeURIComponent(payloadParam);
             const jsonPayload = JSON.parse(decodedPayload);
 
             const data = {
