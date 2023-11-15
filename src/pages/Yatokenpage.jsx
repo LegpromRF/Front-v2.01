@@ -1,12 +1,12 @@
 import {useEffect} from 'react';
-import {useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {loginSuccess} from "@store/auth/auth.slice.js";
 import yandexAPI from "@/utils/services/auth/yandexAPI.js";
 
 const Yatokenpage = () => {
     // Хук для парсинга URL
-    const location = useLocation()
+    const location = useParams()
 
     // Хук для изменения стейта успешной авторизации
     const dispatcher = useDispatch()
@@ -34,17 +34,17 @@ const Yatokenpage = () => {
         yandexScript.onload = () => {
 
             // Парсинг URL
-            const urlParams = new URLSearchParams(location.hash);
-            console.log(urlParams)
+            // const urlParams = new URLSearchParams(location.hash);
+            // console.log(urlParams)
             console.log(location)
             // console.log(payloadParam)
             //
             // const decodedPayload = decodeURIComponent(payloadParam);
-            const jsonPayload = JSON.parse(decodedPayload);
-
-            const data = {
-                access_token: jsonPayload.access_token,
-            }
+            // const jsonPayload = JSON.parse(decodedPayload);
+            //
+            // const data = {
+            //     access_token: jsonPayload.access_token,
+            // }
 
             handleYaRegister(data)
 
