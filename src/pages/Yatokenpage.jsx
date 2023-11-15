@@ -34,6 +34,7 @@ const Yatokenpage = () => {
         // Парсинг URL
         const urlParams = new URLSearchParams(location.hash);
         const payloadParam = urlParams.get('payload');
+        console.log(urlParams)
         console.log(payloadParam)
 
         if (payloadParam) {
