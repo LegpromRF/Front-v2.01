@@ -32,8 +32,9 @@ const Yatokenpage = () => {
         document.head.appendChild(yandexScript);
 
         // Парсинг URL
-        const urlParams = new URLSearchParams(location.hash);
+        const urlParams = new URLSearchParams(location.search);
         const payloadParam = urlParams.get('access_token');
+        console.log(location)
         urlParams.forEach((value,key) => {
                 console.log(`${key}: ${value}`);
             }
