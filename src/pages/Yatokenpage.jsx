@@ -37,7 +37,7 @@ const Yatokenpage = () => {
             handleYaRegister(data)
 
             window.YaSendSuggestToken(
-                'https://legpromrfreact.vercel.app/profile',
+                'https://legpromrfreact.vercel.app/',
                 {}
             );
         }
