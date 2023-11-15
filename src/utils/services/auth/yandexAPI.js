@@ -6,7 +6,7 @@ export default function yandexAPI(data) {
     const redirectURI = apiEndpoints.yandexReg
 
     axios.post(redirectURI, {
-        access_token: data.access_token
+        access_token: data
     })
         .then((response) => {
             console.log(response)
@@ -16,5 +16,5 @@ export default function yandexAPI(data) {
                 return response.data.details
             }
         })
-        .catch((error) => console.log(error, params, data))
+        .catch((error) => console.log(error, data))
 }

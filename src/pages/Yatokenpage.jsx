@@ -35,17 +35,10 @@ const Yatokenpage = () => {
 
             // Парсинг URL
             const urlParams = new URLSearchParams(location.hash);
-            const urlHash = urlParams.get('#access_token')
-            console.log(urlHash)
-            console.log(location)
-            // console.log(payloadParam)
-            //
-            // const decodedPayload = decodeURIComponent(payloadParam);
-            // const jsonPayload = JSON.parse(decodedPayload);
-            //
-            // const data = {
-            //     access_token: jsonPayload.access_token,
-            // }
+            const accessToken = urlParams.get('#access_token')
+            const data = {
+                access_token: accessToken,
+            }
 
             handleYaRegister(data)
 
