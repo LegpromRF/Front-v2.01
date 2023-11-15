@@ -8,13 +8,9 @@ const Yatokenpage = () => {
     // Хук для парсинга URL
     let location = useLocation()
 
-    // Хук для изменения стейта успешной авторизации
-    const dispatcher = useDispatch()
-
     async function handleYaRegister(data) {
         try {
             if (await yandexAPI(data, 'register')) {
-                dispatcher(loginSuccess())
                 return true
             }
         } catch (error) {
@@ -43,7 +39,7 @@ const Yatokenpage = () => {
             handleYaRegister(data)
 
             window.YaSendSuggestToken(
-                'https://legpromrfreact.vercel.app/',
+                'https://legpromrfreact.vercel.app/profile/',
                 {}
             );
         }
