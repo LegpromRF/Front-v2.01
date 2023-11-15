@@ -13,10 +13,10 @@ const Yatokenpage = () => {
 
     async function handleYaRegister(data) {
         try {
-            await yandexAPI(data, 'register')
-            alert(await yandexAPI(data, 'register'))
-            dispatcher(loginSuccess())
-            return true
+            if (await yandexAPI(data, 'register')) {
+                dispatcher(loginSuccess())
+                return true
+            }
         } catch (error) {
             console.log(error)
             return false
@@ -47,7 +47,7 @@ const Yatokenpage = () => {
                 {}
             );
         }
-    }, [location]);
+    }, [location.hash]);
 
     return (
         <>
