@@ -6,7 +6,7 @@ import yandexAPI from "@/utils/services/auth/yandexAPI.js";
 
 const Yatokenpage = () => {
     // Хук для парсинга URL
-    const location = useParams()
+    let {location} = useParams()
 
     // Хук для изменения стейта успешной авторизации
     const dispatcher = useDispatch()
