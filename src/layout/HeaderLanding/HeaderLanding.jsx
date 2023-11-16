@@ -10,7 +10,7 @@ import {Link} from "react-router-dom";
 
 const HeaderLanding = () => {
     const dispatch = useDispatch()
-    const isShown = useSelector((state) => state.authModal.isShown)
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
     const [activeMenu, setActiveMenu] = useState(false);
 
     useEffect( () => {
@@ -60,7 +60,15 @@ const HeaderLanding = () => {
                 <div className={styles.header__question}>
                   <Link to="/nolayout">Задать вопрос</Link>
                 </div>
-                <div className={styles.header__login} onClick={() => dispatch(toggleModal())}>Авторизация</div>
+                  {
+                      isAuthenticated ? (
+                          <Link className={styles.header__login} to={'/profile'}>Личный кабинет</Link>
+                      )
+                          :
+                      (
+                          <div className={styles.header__login} onClick={() => dispatch(toggleModal())}>Авторизация</div>
+                      )
+                  }
                 <ModalAuth />
               </div>
           </div>
