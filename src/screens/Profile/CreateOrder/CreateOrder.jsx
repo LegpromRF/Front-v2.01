@@ -146,7 +146,11 @@ const CreateOrder = () => {
   /*==============================================*/
 
     useEffect(() => {
-        fetchProduct()
+        async function dataFetching() {
+           await fetchProduct()
+        }
+
+        dataFetching()
     }, []);
   return ( 
     <>
