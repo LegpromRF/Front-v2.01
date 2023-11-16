@@ -23,6 +23,7 @@ const Layout = ({children}) => {
         async function fetchUser()  {
             const fetchedUsername = await getUserName()
             dispatch(setUserName(fetchedUsername))
+            console.log(username)
         }
 
         fetchUser()
