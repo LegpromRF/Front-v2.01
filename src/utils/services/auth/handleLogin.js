@@ -17,7 +17,9 @@ export default async function handleLogin(data, authMethod) {
     }
 
     console.log(params, data)
-    return axios.post(apiURL, params)
+    return axios.post(apiURL, params, {
+        withCredentials: true
+    })
         .then((response) => {
             console.log(response)
             if (response.data.status === 204) {
