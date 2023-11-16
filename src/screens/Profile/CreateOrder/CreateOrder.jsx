@@ -4,8 +4,9 @@ import styles from './CreateOrder.module.scss'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
 import ModalLayout from '@layout/Modal/ModalLayout'
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {fetchProducts} from "@/utils/services/createOrder/fetchOrderData.js";
 
 const CreateOrder = () => {
 
@@ -143,6 +144,10 @@ const CreateOrder = () => {
     const [modalActive3, setModalActive3] = useState(false)
 
   /*==============================================*/
+
+    useEffect(() => {
+        fetchProducts()
+    }, []);
   return ( 
     <>
     {/*<Head>*/}

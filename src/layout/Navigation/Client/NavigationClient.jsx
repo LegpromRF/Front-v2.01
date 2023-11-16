@@ -37,7 +37,7 @@ const NavigationClient = () => {
             <div className={styles.nav__buttons}>
                 <ButtonNavigation
                     title="Все возможности"
-                    href="/profile/home"
+                    href="/profile "
                     >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                         <path d="M5.2974 7.56134V13.0494" stroke="#242424" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
