@@ -6,7 +6,7 @@ import Layout from "@layout/Layout";
 import ModalLayout from '@layout/Modal/ModalLayout'
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {fetchProduct} from "@/utils/services/createOrder/fetchOrderData.js";
+import getPropObject, {fetchProduct} from "@/utils/services/createOrder/fetchOrderData.js";
 
 const CreateOrder = () => {
 
@@ -146,12 +146,13 @@ const CreateOrder = () => {
   /*==============================================*/
 
     useEffect(() => {
-        async function dataFetching() {
-           await fetchProduct()
+        async function getProp() {
+            const prop = await getPropObject('spr_pol')
             console.log('finished')
+            console.log(prop)
         }
 
-        dataFetching()
+        getProp()
     }, []);
   return ( 
     <>
