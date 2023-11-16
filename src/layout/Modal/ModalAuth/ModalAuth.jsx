@@ -81,6 +81,7 @@ const ModalAuth = () => {
         console.log(result)
         if (result === true) {
             dispatch(loginSuccess())
+            navigate('/profile')
         } else {
             setLoginIssue(result)
         }
