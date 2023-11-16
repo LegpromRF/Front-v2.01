@@ -20,15 +20,13 @@ const Layout = ({children}) => {
     const username = useSelector((state) => state.userdata.username)
 
     useEffect(() => {
-        const fetchUser = async () => {
+        async function fetchUser()  {
             const fetchedUsername = await getUserName()
-            if (typeof fetchedUsername === "string") {
-                dispatch(setUserName(fetchedUsername))
-            }
+            dispatch(setUserName(fetchedUsername))
         }
 
         fetchUser()
-    }, []);
+    }, [username]);
     
 
   /*=========== Window and Nav =============*/
