@@ -15,18 +15,9 @@ const CreateOrder = () => {
     const [typeActive1, setTypeActive1] = useState(false)
     const [typeActive2, setTypeActive2] = useState(false)
 
-    const activeType1 = () => {
-      if(typeActive2) {
-        setTypeActive2(false)
-      }
-      setTypeActive1(!typeActive1)
-    }
-
-    const activeType2 = () => {
-      if(typeActive1) {
-        setTypeActive1(false)
-      }
-      setTypeActive2(!typeActive2)
+    const handleTypeClick = (type) => {
+        setTypeActive1(type === 1 && !typeActive1);
+        setTypeActive2(type === 2 && !typeActive2);
     }
 
   /* ============== drop-down list =============== */
@@ -65,6 +56,7 @@ const CreateOrder = () => {
 
     // const type = ['Перчатки и защита рук', 'Перчатки', 'Защита рук', 'Защита ног', 'Защита тела', 'Обувь', 'Материал для шитья'];
     const [sprVidProduct, setSprVidProduct] = useState([])
+    const [sprPol, setSprPol] = useState([])
     const applications = ['Торжественная одежда', 'Повседневная одежда', 'Рабочая одежда', 'Модная одежда'];
     const deliveryRegion = ['Москва', 'Санкт-Петербург', 'Краснодар', 'Ростов', 'Крым', 'Сочи', 'Воронеж']
     const additionally = ['Декатировка', 'Санфоризация', 'Оживка'];
@@ -75,36 +67,24 @@ const CreateOrder = () => {
     const [activeInput3, setActiveInput3] = useState(false);
     const [activeInput4, setActiveInput4] = useState(false);
 
-    const handleChange1 = (e) => {
-      if (e.target.value.length > 0 ) {
-        setActiveInput1(true);
-      } else if (e.target.value.length === 0 ) {
-        setActiveInput1(false);
-      }
-    }
-
-    const handleChange2 = (e) => {
-      if (e.target.value.length > 0 ) {
-        setActiveInput2(true);
-      } else if (e.target.value.length === 0 ) {
-        setActiveInput2(false);
-      }
-    }
-
-    const handleChange3 = (e) => {
-      if (e.target.value.length > 0 ) {
-        setActiveInput3(true);
-      } else if (e.target.value.length === 0 ) {
-        setActiveInput3(false);
-      }
-    }
-
-    const handleChange4 = (e) => {
-      if (e.target.value.length > 0 ) {
-        setActiveInput4(true);
-      } else if (e.target.value.length === 0 ) {
-        setActiveInput4(false);
-      }
+    const handleInputChange = (index) => (e) => {
+        const value = e.target.value;
+        switch (index) {
+            case 1:
+                setActiveInput1(value.length > 0);
+                break;
+            case 2:
+                setActiveInput2(value.length > 0);
+                break;
+            case 3:
+                setActiveInput3(value.length > 0);
+                break;
+            case 4:
+                setActiveInput4(value.length > 0);
+                break;
+            default:
+                break;
+        }
     }
 
   /* ============= Preview images upload =========== */
@@ -149,9 +129,15 @@ const CreateOrder = () => {
     useEffect(() => {
         async function loadOptions() {
             try {
-                const vidProduct = await getPropObject('spr_pol')
+                const pol = await getPropObject('spr_pol')
+                setSprPol(pol)
+                console.log(pol)
+
+                const vidProduct = await getPropObject('spr_vid_product')
                 setSprVidProduct(vidProduct)
                 console.log(vidProduct)
+
+
             } catch (error) {
                 console.log(error)
             }
@@ -179,8 +165,23 @@ const CreateOrder = () => {
         <div className={styles.createOrder__order}>
           <div className={styles.createOrder__type}>
             <div className={styles.createOrder__typeTitle}>Вид пошива</div>
-            <div onClick={activeType1} className={typeActive1 ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ') : styles.createOrder__typeItem}>одежда</div>
-            <div onClick={activeType2} className={typeActive2 ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ') : styles.createOrder__typeItem}>другие виды изделий</div>
+              {
+                  Object.entries(sprVidProduct).map(([value, num], index) => {
+                      return (
+                          <div
+                              key={index}
+                              onClick={() => handleTypeClick(index + 1)}
+                              className={typeActive1 ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ')
+                                  :
+                                  styles.createOrder__typeItem}
+                          >
+                              {value}
+                          </div>
+                      )
+                  })
+              }
+            {/*<div onClick={activeType1} className={typeActive1 ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ') : styles.createOrder__typeItem}>одежда</div>*/}
+            {/*<div onClick={activeType2} className={typeActive2 ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ') : styles.createOrder__typeItem}>другие виды изделий</div>*/}
             {typeActive1 || typeActive2 
               ?
                 <div className={styles.createOrder__typeWarning}>От вида пошива зависят остальные параметры заказа.</div>
@@ -207,10 +208,13 @@ const CreateOrder = () => {
                                 {valueInput1}
                             </div>
                             <div className={visibleList1 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                              {Object.entries(sprVidProduct).map(([value, num], index) => {
-                                return ( 
-                                <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
-                              )})}
+                              {
+                                  Object.entries(sprPol).map(([value, num], index) => {
+                                      return (
+                                          <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
+                                      )
+                                  })
+                              }
                             </div>
                           </div>
 
@@ -268,7 +272,7 @@ const CreateOrder = () => {
                               </div>
                             </h3>
                             <input 
-                              onChange={handleChange1}
+                              onChange={handleInputChange(1)}
                               className={activeInput1 ? [styles.form__control, styles.form__controlActiveOrange].join(' ') : styles.form__control} 
                               placeholder="нажмите для ввода" 
                               type="text" 
@@ -293,7 +297,7 @@ const CreateOrder = () => {
                               </div>
                             </h3>
                             <input 
-                              onChange={handleChange2}
+                              onChange={handleInputChange(2)}
                               className={activeInput2 ? [styles.form__control, styles.form__controlActiveOrange].join(' ') : styles.form__control} 
                               placeholder="нажмите для ввода" 
                               type="text" 
@@ -394,7 +398,7 @@ const CreateOrder = () => {
               <p className={styles.form__modalSubTitle}>Для получения уведомлений о статусе вашего ТЗ и подтверждения вашего акаунта,  укажите свою электронную почту.</p>
               <input 
                 className={ activeInput3 ? [styles.form__inputActive, styles.form__inputModal].join(' ') : styles.form__inputModal} 
-                onChange={handleChange3} 
+                onChange={handleInputChange(3)}
                 type="text" 
                 placeholder="Ваша почта"
               />
@@ -413,7 +417,7 @@ const CreateOrder = () => {
               <p className={styles.form__modalSubTitle}>На почту pav*******@mail.ru был отправлен код подтверждения. Введите его в поле ниже</p>
               <input 
                 className={ activeInput4 ? [styles.form__inputActive, styles.form__inputModal].join(' ') : styles.form__inputModal} 
-                onChange={handleChange4} 
+                onChange={handleInputChange(4)}
                 type="text" 
                 placeholder="Код из сообщения"
               />
