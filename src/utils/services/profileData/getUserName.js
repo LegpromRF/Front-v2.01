@@ -10,7 +10,10 @@ export default async function getUserName() {
             if (response.data.status === 200) {
                 console.log(response)
                 return response.data.data
-            } else return false
+            } else {
+                console.log(response)
+                return false
+            }
 
         })
         .catch((error) => console.log(error))

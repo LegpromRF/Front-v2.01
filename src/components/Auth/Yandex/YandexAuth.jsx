@@ -2,6 +2,7 @@ import {useEffect} from 'react';
 import {useDispatch} from "react-redux";
 import styles from "@layout/Modal/ModalAuth/ModalAuth.module.scss";
 import {loginSuccess} from "@store/auth/auth.slice.js";
+import yandexAPI from "@/utils/services/auth/yandexAPI.js";
 
 const YandexAuth = () => {
 
@@ -13,6 +14,13 @@ const YandexAuth = () => {
         yandexScript.src = 'https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js';
         yandexScript.async = true;
         document.head.appendChild(yandexScript);
+
+        async function processLogin(data) {
+            if (await yandexAPI(data)) {
+                
+            }
+        }
+
         yandexScript.onload = () => {
             window.YaAuthSuggest.init(
                 {

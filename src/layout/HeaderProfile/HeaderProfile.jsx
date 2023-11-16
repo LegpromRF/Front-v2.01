@@ -1,6 +1,5 @@
 import styles from './HeaderProfile.module.scss'
 import Logo from '/public/Logo/logo.png'
-import getUserName from "@/utils/services/profileData/getUserName.js";
 import {Link} from "react-router-dom";
 
 const HeaderProfile = ({active}) => {
@@ -25,7 +24,6 @@ const HeaderProfile = ({active}) => {
           </div>
         </div>
         <div className={styles.home__header}>
-          {/*<div className={[styles.home__welcome, styles.home__text].join(' ')}>Добро пожаловать{username ? `, ${username} !` : '!'}</div>*/}
           <div className={styles.home__contacts}>
             <div className={styles.home__text}>Обращайтесь! Тел: +7-958-111-4884</div>
             <div className={styles.home__links}>
