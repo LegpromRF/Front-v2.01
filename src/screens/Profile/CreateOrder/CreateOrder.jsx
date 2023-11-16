@@ -6,7 +6,7 @@ import Layout from "@layout/Layout";
 import ModalLayout from '@layout/Modal/ModalLayout'
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import getPropObject, {fetchProduct} from "@/utils/services/createOrder/fetchOrderData.js";
+import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 
 const CreateOrder = () => {
 
@@ -63,7 +63,8 @@ const CreateOrder = () => {
 
   /* ============== Input =============== */
 
-    const type = ['Перчатки и защита рук', 'Перчатки', 'Защита рук', 'Защита ног', 'Защита тела', 'Обувь', 'Материал для шитья'];
+    // const type = ['Перчатки и защита рук', 'Перчатки', 'Защита рук', 'Защита ног', 'Защита тела', 'Обувь', 'Материал для шитья'];
+    const [sprVidProduct, setSprVidProduct] = useState([])
     const applications = ['Торжественная одежда', 'Повседневная одежда', 'Рабочая одежда', 'Модная одежда'];
     const deliveryRegion = ['Москва', 'Санкт-Петербург', 'Краснодар', 'Ростов', 'Крым', 'Сочи', 'Воронеж']
     const additionally = ['Декатировка', 'Санфоризация', 'Оживка'];
@@ -146,13 +147,18 @@ const CreateOrder = () => {
   /*==============================================*/
 
     useEffect(() => {
-        async function getProp() {
-            const prop = await getPropObject('spr_pol')
-            console.log('finished')
-            console.log(prop)
+        async function loadOptions() {
+            try {
+                const vidProduct = await getPropObject('spr_pol')
+                setSprVidProduct(vidProduct)
+                console.log(vidProduct)
+            } catch (error) {
+                console.log(error)
+            }
+
         }
 
-        getProp()
+        loadOptions()
     }, []);
   return ( 
     <>
@@ -201,9 +207,9 @@ const CreateOrder = () => {
                                 {valueInput1}
                             </div>
                             <div className={visibleList1 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                              {type.map((elem, index) => {
+                              {Object.entries(sprVidProduct).map(([value, num], index) => {
                                 return ( 
-                                <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{elem}</div>
+                                <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
                               )})}
                             </div>
                           </div>
