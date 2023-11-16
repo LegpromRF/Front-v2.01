@@ -35,10 +35,6 @@ const ModalAuth = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    useEffect(() => {
-        isAuthenticated && navigate('/profile')
-    }, [isAuthenticated]);
-
     const {
         control,
         formState: {errors},
