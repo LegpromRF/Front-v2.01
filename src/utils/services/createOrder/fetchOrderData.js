@@ -15,6 +15,11 @@ async function fetchProduct() {
 }
 
 export default async function getPropObject(index) {
-    const prop = await fetchProduct()
-    return prop.get(index)
+    try {
+        const prop = await fetchProduct()
+        return prop[index]
+    } catch (error) {
+        console.log(error)
+    }
+
 }
