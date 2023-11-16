@@ -4,9 +4,11 @@ import styles from "@layout/Modal/ModalAuth/ModalAuth.module.scss";
 import {useDispatch} from "react-redux";
 import {loginSuccess} from "@store/auth/auth.slice.js";
 import vkAPI from "@/utils/services/auth/vkAPI.js";
+import {useNavigate} from "react-router-dom";
 
 export default function VkAuth() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     useEffect(() => {
         Config.init({
             appId: 51786995,
@@ -24,6 +26,7 @@ export default function VkAuth() {
         async function processLogin(event) {
             if (await vkAPI(event, 'login') === true) {
                 dispatch(loginSuccess())
+                navigate('/profile')
             }
         }
 
