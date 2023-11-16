@@ -6,7 +6,7 @@ import Layout from "@layout/Layout";
 import ModalLayout from '@layout/Modal/ModalLayout'
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {fetchProduct, fetchProducts} from "@/utils/services/createOrder/fetchOrderData.js";
+import {fetchProduct} from "@/utils/services/createOrder/fetchOrderData.js";
 
 const CreateOrder = () => {
 
@@ -148,6 +148,7 @@ const CreateOrder = () => {
     useEffect(() => {
         async function dataFetching() {
            await fetchProduct()
+            console.log('finished')
         }
 
         dataFetching()
