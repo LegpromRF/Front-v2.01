@@ -22,7 +22,6 @@ const Layout = ({children}) => {
     useEffect(() => {
         const fetchUser = async () => {
             const fetchedUsername = await getUserName()
-            console.log(fetchedUsername)
             if (typeof fetchedUsername === "string") {
                 dispatch(setUserName(fetchedUsername))
             }

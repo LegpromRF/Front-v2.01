@@ -8,10 +8,8 @@ export default async function getUserName() {
         })
         .then((response) => {
             if (response.data.status === 200) {
-                console.log(response)
                 return response.data.data
             } else {
-                console.log(response)
                 return false
             }
 
