@@ -165,15 +165,16 @@ const CreateOrder = () => {
         <TitleProfile>Техническое задание</TitleProfile>
       
         <div className={styles.createOrder__header}>
-          <HeaderProfile title="Характеристики" number="1" href='/profile/createorder/' active={true}/>
-          <HeaderProfile title="Тип изделия" number="2" href='/nolayout' active={false}/>
-          <HeaderProfile title="Документация" number="3" href='/nolayout' active={false}/>
-          <HeaderProfile title="Размеры" number="4" href='/nolayout' active={false}/>
+            <HeaderProfile title="Изделие" number="1" href='/profile/createorder/' active={true}/>
+            <HeaderProfile title="Закупка" number="2" href='/nolayout' active={false}/>
+            <HeaderProfile title="Технология" number="3" href='/nolayout' active={false}/>
+            <HeaderProfile title="Условия" number="4" href='/nolayout' active={false}/>
+            <HeaderProfile title="Контакты" number="5" href='/nolayout' active={false}/>
         </div>
 
         <div className={styles.createOrder__order}>
           <div className={styles.createOrder__type}>
-            <div className={styles.createOrder__typeTitle}>Вид пошива</div>
+            <div className={styles.createOrder__typeTitle}>Вид продукции</div>
               {
                   Object.entries(options.sprVidProduct).map(([value, num], index) => {
                       return (
@@ -228,7 +229,7 @@ const CreateOrder = () => {
                           </div>
 
                           <div className={styles.form__item}>
-                            <h3 className={styles.form__itemLabel}><span>Сферы применения</span> <span className={styles.form__itemLabel_star}>*</span></h3>
+                            <h3 className={styles.form__itemLabel}><span>Назначение</span> <span className={styles.form__itemLabel_star}>*</span></h3>
                             <div 
                               onClick={() => setVisibleList2(!visibleList2)} 
                               className={valueInput2 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
@@ -243,7 +244,7 @@ const CreateOrder = () => {
                           </div>
 
                           <div className={styles.form__item}>
-                            <h3 className={styles.form__itemLabel}><span>Регион доставки</span> <span className={styles.form__itemLabel_star}>*</span></h3>
+                            <h3 className={styles.form__itemLabel}><span>Вид изделия</span> <span className={styles.form__itemLabel_star}>*</span></h3>
                             <div 
                               onClick={() => setVisibleList3(!visibleList3)} 
                               className={valueInput3 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
