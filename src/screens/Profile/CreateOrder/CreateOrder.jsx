@@ -4,7 +4,7 @@ import styles from './CreateOrder.module.scss'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
 import ModalLayout from '@layout/Modal/ModalLayout'
-import {useEffect, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {Link} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 
@@ -146,6 +146,15 @@ const CreateOrder = () => {
 
         loadOptions()
     }, []);
+
+    const options = useMemo(() => {
+        return {
+            sprPol,
+            sprVidProduct
+        };
+    }, [sprPol, sprVidProduct]);
+
+
   return ( 
     <>
     {/*<Head>*/}
@@ -166,7 +175,7 @@ const CreateOrder = () => {
           <div className={styles.createOrder__type}>
             <div className={styles.createOrder__typeTitle}>Вид пошива</div>
               {
-                  Object.entries(sprVidProduct).map(([value, num], index) => {
+                  Object.entries(options.sprVidProduct).map(([value, num], index) => {
                       return (
                           <div
                               key={index}
@@ -209,7 +218,7 @@ const CreateOrder = () => {
                             </div>
                             <div className={visibleList1 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
                               {
-                                  Object.entries(sprPol).map(([value, num], index) => {
+                                  Object.entries(options.sprPol).map(([value, num], index) => {
                                       return (
                                           <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
                                       )
