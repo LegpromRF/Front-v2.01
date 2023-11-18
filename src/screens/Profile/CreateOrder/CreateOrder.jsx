@@ -55,6 +55,11 @@ const CreateOrder = () => {
       setVisibleList4(false)
     }
 
+    const clickMenu5 = (e) => {
+        setValueInput5( e.target.innerHTML)
+        setVisibleList5(false)
+    }
+
   /* ============== Input =============== */
 
     // const type = ['Перчатки и защита рук', 'Перчатки', 'Защита рук', 'Защита ног', 'Защита тела', 'Обувь', 'Материал для шитья'];
@@ -262,7 +267,7 @@ const CreateOrder = () => {
                                 {
                                     Object.entries(formInputs.sferaPrim).map(([value, num], index) => {
                                         return (
-                                            <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
+                                            <div key={index} onClick={clickMenu2} className={styles.form__listItem}>{value}</div>
                                         )
                                     })
                                 }
@@ -280,7 +285,7 @@ const CreateOrder = () => {
                                     {
                                         Object.entries(formInputs.vidOdejdy).map(([value, num], index) => {
                                             return (
-                                                <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
+                                                <div key={index} onClick={clickMenu3} className={styles.form__listItem}>{value}</div>
                                             )
                                         })
                                     }
@@ -298,7 +303,7 @@ const CreateOrder = () => {
                                     {
                                         Object.entries(formInputs.pol).map(([value, num], index) => {
                                             return (
-                                                <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
+                                                <div key={index} onClick={clickMenu4} className={styles.form__listItem}>{value}</div>
                                             )
                                         })
                                     }
@@ -316,7 +321,7 @@ const CreateOrder = () => {
                                     {
                                         Object.entries(formInputs.sezons).map(([value, num], index) => {
                                             return (
-                                                <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
+                                                <div key={index} onClick={clickMenu5} className={styles.form__listItem}>{value}</div>
                                             )
                                         })
                                     }
