@@ -26,11 +26,14 @@ const CreateOrder = () => {
     const [visibleList2, setVisibleList2] = useState(false)
     const [visibleList3, setVisibleList3] = useState(false)
     const [visibleList4, setVisibleList4] = useState(false)
+    const [visibleList5, setVisibleList5] = useState(false)
+
 
     const [valueInput1, setValueInput1] = useState('нажмите для выбора')
     const [valueInput2, setValueInput2] = useState('нажмите для выбора')
     const [valueInput3, setValueInput3] = useState('нажмите для выбора')
     const [valueInput4, setValueInput4] = useState('нажмите для выбора')
+    const [valueInput5, setValueInput5] = useState('нажмите для выбора')
 
     const clickMenu1 = (e) => {
       setValueInput1( e.target.innerHTML)
@@ -147,9 +150,9 @@ const CreateOrder = () => {
     useEffect(() => {
         async function loadOptions() {
             try {
+                const options = await getPropObject();
                 for (const [state, setState, propName] of optionStatePairs) {
-                    const options = await getPropObject(propName);
-                    setState(options);
+                    setState(options[propName]);
                     console.log(options);
                 }
             } catch (error) {
@@ -269,11 +272,11 @@ const CreateOrder = () => {
                             <div className={styles.form__item}>
                                 <h3 className={styles.form__itemLabel}><span>Вид изделия</span> <span className={styles.form__itemLabel_star}>*</span></h3>
                                 <div
-                                    onClick={() => setVisibleList2(!visibleList2)}
-                                    className={valueInput2 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
-                                    {valueInput2}
+                                    onClick={() => setVisibleList3(!visibleList3)}
+                                    className={valueInput3 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
+                                    {valueInput3}
                                 </div>
-                                <div className={visibleList2 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
+                                <div className={visibleList3 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
                                     {
                                         Object.entries(formInputs.vidOdejdy).map(([value, num], index) => {
                                             return (
@@ -287,11 +290,11 @@ const CreateOrder = () => {
                             <div className={styles.form__item}>
                                 <h3 className={styles.form__itemLabel}><span>Пол и возраст</span> <span className={styles.form__itemLabel_star}>*</span></h3>
                                 <div
-                                    onClick={() => setVisibleList2(!visibleList2)}
-                                    className={valueInput2 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
-                                    {valueInput2}
+                                    onClick={() => setVisibleList4(!visibleList4)}
+                                    className={valueInput4 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
+                                    {valueInput4}
                                 </div>
-                                <div className={visibleList2 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
+                                <div className={visibleList4 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
                                     {
                                         Object.entries(formInputs.pol).map(([value, num], index) => {
                                             return (
@@ -305,11 +308,11 @@ const CreateOrder = () => {
                             <div className={styles.form__item}>
                                 <h3 className={styles.form__itemLabel}><span>Сезон</span> <span className={styles.form__itemLabel_star}>*</span></h3>
                                 <div
-                                    onClick={() => setVisibleList2(!visibleList2)}
-                                    className={valueInput2 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
-                                    {valueInput2}
+                                    onClick={() => setVisibleList5(!visibleList5)}
+                                    className={valueInput5 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
+                                    {valueInput5}
                                 </div>
-                                <div className={visibleList2 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
+                                <div className={visibleList5 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
                                     {
                                         Object.entries(formInputs.sezons).map(([value, num], index) => {
                                             return (
