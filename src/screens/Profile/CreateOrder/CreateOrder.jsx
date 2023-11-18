@@ -196,7 +196,7 @@ const CreateOrder = () => {
           <div className={styles.createOrder__type}>
             <div className={styles.createOrder__typeTitle}>Вид продукции</div>
               {
-                  Object.entries(formInputs.sprVidProduct).map(([value, num], index) => {
+                  Object.entries(formInputs.vidProduct).map(([value, num], index) => {
                       return (
                           <div
                               key={index}
