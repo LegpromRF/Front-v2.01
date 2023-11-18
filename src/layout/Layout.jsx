@@ -1,15 +1,10 @@
 import styles from './Layout.module.scss'
-
 import LogoHeader from '@public/Logo/logo.png'
-
 import {useEffect, useState} from "react";
-
 // import NavigationPerformer from '@layout/Navigation/Performer/NavigationPerformer'
 import NavigationClient from '@layout/Navigation/Client/NavigationClient';
 // import NavigationGuest from '@layout/Navigation/Guest/NavigationGuest';
-
 import { useDispatch, useSelector} from "react-redux";
-
 import { isMobile } from 'react-device-detect';
 import {Link} from "react-router-dom";
 import getUserName from "@/utils/services/profileData/getUserName.js";
@@ -67,17 +62,11 @@ const Layout = ({children}) => {
                     <div className={styles.home__contacts}>
                         <div className={styles.home__text_nowrap}>Обращайтесь! Тел: +7-958-111-4884</div>
                         <div className={styles.home__links}>
-                            <a
-                                className={styles.home__link}
-                                href={"https://wa.me/+79261894737"}
-                            >
-                                <img src={"/icon/SocialMedia/whatsapp.png"} alt={"whatsapp"}/>
+                            <a href={"https://wa.me/+79261894737"}>
+                                <img className={styles.home__link} src={"/icon/SocialMedia/whatsapp.png"} alt={"whatsapp"}/>
                             </a>
-                            <a
-                                className={styles.home__link}
-                                href={"https://t.me/LegpromRF_bot"}
-                            >
-                                <img src={"/icon/SocialMedia/telegram.png"} alt={"telegram"}/>
+                            <a href={"https://t.me/LegpromRF_bot"}>
+                                <img className={styles.home__link} src={"/icon/SocialMedia/telegram.png"} alt={"telegram"}/>
                             </a>
                         </div>
                     </div>
