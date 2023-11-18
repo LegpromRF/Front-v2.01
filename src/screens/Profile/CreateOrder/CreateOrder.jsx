@@ -55,8 +55,15 @@ const CreateOrder = () => {
   /* ============== Input =============== */
 
     // const type = ['Перчатки и защита рук', 'Перчатки', 'Защита рук', 'Защита ног', 'Защита тела', 'Обувь', 'Материал для шитья'];
-    const [sprVidProduct, setSprVidProduct] = useState([])
-    const [sprPol, setSprPol] = useState([])
+    const [pol, setPol] = useState([])
+    const [priceSegment, setPriceSegment] = useState([])
+    const [regularZakaz, setRegularZakaz] = useState([])
+    const [sezons, setSezons] = useState([])
+    const [sferaPrim, setSferaPrim] = useState([])
+    const [tipOdejdy, setTipOdejdy] = useState([])
+    const [vidOdejdy, setVidOdejdy] = useState([])
+    const [vidPostavki, setVidPostavki] = useState([])
+    const [vidProduct, setVidProduct] = useState([])
     const applications = ['Торжественная одежда', 'Повседневная одежда', 'Рабочая одежда', 'Модная одежда'];
     const deliveryRegion = ['Москва', 'Санкт-Петербург', 'Краснодар', 'Ростов', 'Крым', 'Сочи', 'Воронеж']
     const additionally = ['Декатировка', 'Санфоризация', 'Оживка'];
@@ -125,34 +132,47 @@ const CreateOrder = () => {
     const [modalActive3, setModalActive3] = useState(false)
 
   /*==============================================*/
+    const optionStatePairs = [
+            ['pol', setPol, 'spr_pol'],
+            ['priceSegment', setPriceSegment, 'spr_price_segment'],
+            ['regularZakaz', setRegularZakaz, 'spr_regular_zakaz'],
+            ['sezons', setSezons, 'spr_sezons'],
+            ['sferaPrim', setSferaPrim, 'spr_sfera_prim'],
+            ['tipOdejdy', setTipOdejdy, 'spr_tip_odejdy'],
+            ['vidOdejdy', setVidOdejdy, 'spr_vid_odejdy'],
+            ['vidPostavki', setVidPostavki, 'spr_vid_postavki'],
+            ['vidProduct', setVidProduct, 'spr_vid_product'],
+    ]
 
     useEffect(() => {
         async function loadOptions() {
             try {
-                const pol = await getPropObject('spr_pol')
-                setSprPol(pol)
-                console.log(pol)
-
-                const vidProduct = await getPropObject('spr_vid_product')
-                setSprVidProduct(vidProduct)
-                console.log(vidProduct)
-
-
+                for (const [state, setState, propName] of optionStatePairs) {
+                    const options = await getPropObject(propName);
+                    setState(options);
+                    console.log(options);
+                }
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
-
         }
 
-        loadOptions()
+        loadOptions();
     }, []);
 
-    const options = useMemo(() => {
+    const formInputs = useMemo(() => {
         return {
-            sprPol,
-            sprVidProduct
+            pol,
+            priceSegment,
+            regularZakaz,
+            sezons,
+            sferaPrim,
+            tipOdejdy,
+            vidOdejdy,
+            vidPostavki,
+            vidProduct
         };
-    }, [sprPol, sprVidProduct]);
+    }, [pol, priceSegment, regularZakaz, sezons, sferaPrim, tipOdejdy, vidOdejdy, vidPostavki, vidProduct]);
 
 
   return ( 
@@ -219,7 +239,7 @@ const CreateOrder = () => {
                             </div>
                             <div className={visibleList1 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
                               {
-                                  Object.entries(options.sprPol).map(([value, num], index) => {
+                                  Object.entries(formInputs.tipOdejdy).map(([value, num], index) => {
                                       return (
                                           <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
                                       )
@@ -236,27 +256,69 @@ const CreateOrder = () => {
                                 {valueInput2}
                             </div>
                             <div className={visibleList2 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                              {applications.map((elem, index) => {
-                                return ( 
-                                <div key={index} onClick={clickMenu2} className={styles.form__listItem}>{elem}</div>
-                              )})}
+                                {
+                                    Object.entries(formInputs.sferaPrim).map(([value, num], index) => {
+                                        return (
+                                            <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
+                                        )
+                                    })
+                                }
                             </div>
                           </div>
 
-                          <div className={styles.form__item}>
-                            <h3 className={styles.form__itemLabel}><span>Вид изделия</span> <span className={styles.form__itemLabel_star}>*</span></h3>
-                            <div 
-                              onClick={() => setVisibleList3(!visibleList3)} 
-                              className={valueInput3 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
-                                {valueInput3}
+                            <div className={styles.form__item}>
+                                <h3 className={styles.form__itemLabel}><span>Вид изделия</span> <span className={styles.form__itemLabel_star}>*</span></h3>
+                                <div
+                                    onClick={() => setVisibleList2(!visibleList2)}
+                                    className={valueInput2 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
+                                    {valueInput2}
+                                </div>
+                                <div className={visibleList2 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
+                                    {
+                                        Object.entries(formInputs.vidOdejdy).map(([value, num], index) => {
+                                            return (
+                                                <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
-                            <div className={visibleList3 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                              {deliveryRegion.map((elem, index) => {
-                                return ( 
-                                <div key={index} onClick={clickMenu3} className={styles.form__listItem}>{elem}</div>
-                              )})}
+
+                            <div className={styles.form__item}>
+                                <h3 className={styles.form__itemLabel}><span>Пол и возраст</span> <span className={styles.form__itemLabel_star}>*</span></h3>
+                                <div
+                                    onClick={() => setVisibleList2(!visibleList2)}
+                                    className={valueInput2 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
+                                    {valueInput2}
+                                </div>
+                                <div className={visibleList2 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
+                                    {
+                                        Object.entries(formInputs.pol).map(([value, num], index) => {
+                                            return (
+                                                <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
-                          </div>
+
+                            <div className={styles.form__item}>
+                                <h3 className={styles.form__itemLabel}><span>Сезон</span> <span className={styles.form__itemLabel_star}>*</span></h3>
+                                <div
+                                    onClick={() => setVisibleList2(!visibleList2)}
+                                    className={valueInput2 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
+                                    {valueInput2}
+                                </div>
+                                <div className={visibleList2 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
+                                    {
+                                        Object.entries(formInputs.sezons).map(([value, num], index) => {
+                                            return (
+                                                <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
 
                         </div>
                       </div>

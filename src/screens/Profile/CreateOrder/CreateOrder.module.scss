@@ -91,7 +91,7 @@
       color: #FAFAFA;
     }
 
-    &_active {
+    &:focus {
       background: #0036FF;
       color: #FAFAFA;
     }
