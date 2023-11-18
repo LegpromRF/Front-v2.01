@@ -240,3 +240,12 @@
   bottom: 50%;
   transform: rotate(45deg) translate(0px, 72%);
 }
+
+.home {
+  &__links {
+    gap: 8px;
+  }
+  &__link {
+    width: 20px;
+  }
+}

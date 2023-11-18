@@ -28,16 +28,16 @@ const HeaderProfile = ({active}) => {
             <div className={styles.home__text}>Обращайтесь! Тел: +7-958-111-4884</div>
             <div className={styles.home__links}>
               <a
-                  className={""}
+                  className={styles.home__link}
                   href={"https://wa.me/+79261894737"}
               >
                 <img src={"/icon/SocialMedia/whatsapp.png"} alt={"whatsapp"}/>
               </a>
               <a
-                  className={""}
+                  className={styles.home__link}
                   href={"https://t.me/LegpromRF_bot"}
               >
-                <img src={"/icon/SocialMedia/whatsapp.png"} alt={"telegram"}/>
+                <img src={"/icon/SocialMedia/telegram.png"} alt={"telegram"}/>
               </a>
             </div>
           </div>
