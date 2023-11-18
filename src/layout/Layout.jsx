@@ -67,18 +67,18 @@ const Layout = ({children}) => {
                     <div className={styles.home__contacts}>
                         <div className={styles.home__text_nowrap}>Обращайтесь! Тел: +7-958-111-4884</div>
                         <div className={styles.home__links}>
-                            <Link
+                            <a
                                 className={""}
-                                to={"https://wa.me/+79261894737"}
+                                href={"https://wa.me/+79261894737"}
                             >
-                                WA
-                            </Link>
-                            <Link
+                                <img src={"/icon/SocialMedia/whatsapp.png"} alt={"whatsapp"}/>
+                            </a>
+                            <a
                                 className={""}
-                                to={"http://t.me/LegpromRF_bot"}
+                                href={"https://t.me/LegpromRF_bot"}
                             >
-                                TG
-                            </Link>
+                                <img src={"/icon/SocialMedia/whatsapp.png"} alt={"telegram"}/>
+                            </a>
                         </div>
                     </div>
                 </div>
