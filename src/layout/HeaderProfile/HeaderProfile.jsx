@@ -31,13 +31,13 @@ const HeaderProfile = ({active}) => {
                   className={""}
                   href={"https://wa.me/+79261894737"}
               >
-                WA
+                <img src={"/icon/SocialMedia/whatsapp.png"} alt={"whatsapp"}/>
               </a>
               <a
                   className={""}
                   href={"https://t.me/LegpromRF_bot"}
               >
-                TG
+                <img src={"/icon/SocialMedia/whatsapp.png"} alt={"telegram"}/>
               </a>
             </div>
           </div>
