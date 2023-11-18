@@ -27,6 +27,7 @@ const CreateOrder = () => {
     const [visibleList3, setVisibleList3] = useState(false)
     const [visibleList4, setVisibleList4] = useState(false)
     const [visibleList5, setVisibleList5] = useState(false)
+    const [visibleList6, setVisibleList6] = useState(false)
 
 
     const [valueInput1, setValueInput1] = useState('нажмите для выбора')
@@ -34,6 +35,7 @@ const CreateOrder = () => {
     const [valueInput3, setValueInput3] = useState('нажмите для выбора')
     const [valueInput4, setValueInput4] = useState('нажмите для выбора')
     const [valueInput5, setValueInput5] = useState('нажмите для выбора')
+    const [valueInput6, setValueInput6] = useState('нажмите для выбора')
 
     const clickMenu1 = (e) => {
       setValueInput1( e.target.innerHTML)
@@ -60,6 +62,11 @@ const CreateOrder = () => {
         setVisibleList5(false)
     }
 
+    const clickMenu6 = (e) => {
+        setValueInput6( e.target.innerHTML)
+        setVisibleList6(false)
+    }
+
   /* ============== Input =============== */
 
     // const type = ['Перчатки и защита рук', 'Перчатки', 'Защита рук', 'Защита ног', 'Защита тела', 'Обувь', 'Материал для шитья'];
@@ -78,7 +85,6 @@ const CreateOrder = () => {
 
     const [activeInput1, setActiveInput1] = useState(false);
     const [activeInput2, setActiveInput2] = useState(false);
-
     const [activeInput3, setActiveInput3] = useState(false);
     const [activeInput4, setActiveInput4] = useState(false);
 
@@ -156,9 +162,9 @@ const CreateOrder = () => {
         async function loadOptions() {
             try {
                 const options = await getPropObject();
+                console.log(options);
                 for (const [state, setState, propName] of optionStatePairs) {
                     setState(options[propName]);
-                    console.log(options);
                 }
             } catch (error) {
                 console.log(error);
@@ -403,13 +409,13 @@ const CreateOrder = () => {
                             </h3>
                             <div 
                               onClick={() => setVisibleList4(!visibleList4)} 
-                              className={valueInput4 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveOrange].join(' ') : styles.form__control}>
-                                {valueInput4}
+                              className={valueInput6 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveOrange].join(' ') : styles.form__control}>
+                                {valueInput6}
                             </div>
-                            <div className={visibleList4 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
+                            <div className={visibleList6 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
                               {additionally.map((elem, index) => {
                                 return ( 
-                                <div key={index} onClick={clickMenu4} className={styles.form__listItem}>{elem}</div>
+                                <div key={index} onClick={clickMenu6} className={styles.form__listItem}>{elem}</div>
                               )})}
                             </div>
                           </div>
