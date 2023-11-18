@@ -62,6 +62,14 @@
       flex-direction: column;
     }
   }
+
+  &__links {
+    gap: 8px;
+  }
+
+  &__link {
+    width: 20px;
+  }
 }
 
 
