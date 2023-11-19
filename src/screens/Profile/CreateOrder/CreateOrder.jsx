@@ -124,8 +124,8 @@ const CreateOrder = () => {
                     const label = labels[propName] || propName;
 
                     setState({
-                        ...options[propName],
-                        label: label
+                        label,
+                        options: options[propName],
                     });
                 }
             } catch (error) {
