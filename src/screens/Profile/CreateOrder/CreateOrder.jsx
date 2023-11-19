@@ -109,15 +109,15 @@ const CreateOrder = () => {
                 const options = await getPropObject();
                 console.log(options);
                 const labels = {
-                    pol: "Пол",
-                    priceSegment: "Ценовой сегмент",
-                    regularZakaz: "Обычный заказ",
-                    sezons: "Сезоны",
-                    sferaPrim: "Сфера применения",
-                    tipOdejdy: "Тип одежды",
-                    vidOdejdy: "Вид одежды",
-                    vidPostavki: "Вид поставки",
-                    vidProduct: "Вид продукта",
+                    spr_pol: "Пол",
+                    spr_priceSegment: "Ценовой сегмент",
+                    spr_regularZakaz: "Обычный заказ",
+                    spr_sezons: "Сезоны",
+                    spr_sferaPrim: "Сфера применения",
+                    spr_tipOdejdy: "Тип одежды",
+                    spr_vidOdejdy: "Вид одежды",
+                    spr_vidPostavki: "Вид поставки",
+                    spr_vidProduct: "Вид продукта",
                 };
 
                 for (const [setState, propName] of optionStatePairs) {
