@@ -9,19 +9,6 @@ import {Link} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 
 const CreateOrder = () => {
-
-  /* ============== sewing type selection =============== */
-
-    // const [typeActive1, setTypeActive1] = useState(false)
-    // const [typeActive2, setTypeActive2] = useState(false)
-
-    // const handleTypeClick = (type) => {
-    //     setTypeActive1(type === 1 && !typeActive1);
-    //     setTypeActive2(type === 2 && !typeActive2);
-    // }
-
-  /* ============== drop-down list =============== */
-
     const [typeActive, setTypeActive] = useState([false, false]);
     const handleTypeClick = (index) => setTypeActive(prev => prev.map((value, i) => i === index));
 
@@ -33,54 +20,6 @@ const CreateOrder = () => {
         setVisibleLists(prev => prev.map((value, i) => (i === index ? false : value)));
     };
 
-    // const [visibleList1, setVisibleList1] = useState(false)
-    // const [visibleList2, setVisibleList2] = useState(false)
-    // const [visibleList3, setVisibleList3] = useState(false)
-    // const [visibleList4, setVisibleList4] = useState(false)
-    // const [visibleList5, setVisibleList5] = useState(false)
-    // const [visibleList6, setVisibleList6] = useState(false)
-
-
-    // const [valueInput1, setValueInput1] = useState('нажмите для выбора')
-    // const [valueInput2, setValueInput2] = useState('нажмите для выбора')
-    // const [valueInput3, setValueInput3] = useState('нажмите для выбора')
-    // const [valueInput4, setValueInput4] = useState('нажмите для выбора')
-    // const [valueInput5, setValueInput5] = useState('нажмите для выбора')
-    // const [valueInput6, setValueInput6] = useState('нажмите для выбора')
-
-    // const clickMenu1 = (e) => {
-    //   setValueInput1( e.target.innerHTML)
-    //   setVisibleList1(false)
-    // }
-    //
-    // const clickMenu2 = (e) => {
-    //   setValueInput2( e.target.innerHTML)
-    //   setVisibleList2(false)
-    // }
-    //
-    // const clickMenu3 = (e) => {
-    //   setValueInput3( e.target.innerHTML)
-    //   setVisibleList3(false)
-    // }
-    //
-    // const clickMenu4 = (e) => {
-    //   setValueInput4( e.target.innerHTML)
-    //   setVisibleList4(false)
-    // }
-    //
-    // const clickMenu5 = (e) => {
-    //     setValueInput5( e.target.innerHTML)
-    //     setVisibleList5(false)
-    // }
-    //
-    // const clickMenu6 = (e) => {
-    //     setValueInput6( e.target.innerHTML)
-    //     setVisibleList6(false)
-    // }
-
-  /* ============== Input =============== */
-
-    // const type = ['Перчатки и защита рук', 'Перчатки', 'Защита рук', 'Защита ног', 'Защита тела', 'Обувь', 'Материал для шитья'];
     const [pol, setPol] = useState([])
     const [priceSegment, setPriceSegment] = useState([])
     const [regularZakaz, setRegularZakaz] = useState([])
@@ -115,8 +54,6 @@ const CreateOrder = () => {
                 break;
         }
     }
-
-  /* ============= Preview images upload =========== */
 
     const [visibleControlImage, setVisibleControlImage] = useState(false)
     const [preview, setPreview] = useState([]);
@@ -171,8 +108,25 @@ const CreateOrder = () => {
             try {
                 const options = await getPropObject();
                 console.log(options);
+                const labels = {
+                    pol: "Пол",
+                    priceSegment: "Ценовой сегмент",
+                    regularZakaz: "Обычный заказ",
+                    sezons: "Сезоны",
+                    sferaPrim: "Сфера применения",
+                    tipOdejdy: "Тип одежды",
+                    vidOdejdy: "Вид одежды",
+                    vidPostavki: "Вид поставки",
+                    vidProduct: "Вид продукта",
+                };
+
                 for (const [setState, propName] of optionStatePairs) {
-                    setState(options[propName]);
+                    const label = labels[propName] || propName;
+
+                    setState({
+                        ...options[propName],
+                        label,
+                    });
                 }
             } catch (error) {
                 console.log(error);
@@ -218,7 +172,7 @@ const CreateOrder = () => {
           <div className={styles.createOrder__type}>
             <div className={styles.createOrder__typeTitle}>Вид продукции</div>
               {
-                  Object.entries(formInputs.vidProduct).map(([value, num], index) => {
+                  Object.entries(formInputs.vidProduct.options).map(([value, num], index) => {
                       return (
                           <div
                               key={index}
@@ -250,10 +204,10 @@ const CreateOrder = () => {
                         <div className={styles.form__row}>
                             <div className={styles.form__title}>Основная информация</div>
                             <div className={styles.form__items}>
-                                {[formInputs.tipOdejdy, formInputs.sferaPrim, formInputs.vidOdejdy, formInputs.pol, formInputs.sezons].map((options, index) => (
+                                {[formInputs.tipOdejdy, formInputs.sferaPrim, formInputs.vidOdejdy, formInputs.pol, formInputs.sezons].map((values, index) => (
                                     <div key={index} className={styles.form__item}>
                                         <h3 className={styles.form__itemLabel}>
-                                            <span>{options.label}</span> <span className={styles.form__itemLabel_star}>*</span>
+                                            <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
                                         </h3>
                                         <div
                                             onClick={() => setVisibleLists(prev => prev.map((value, i) => (i === index ? !value : value)))}
@@ -262,8 +216,8 @@ const CreateOrder = () => {
                                             {inputValues[index]}
                                         </div>
                                         <div className={visibleLists[index] ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                                            {Object.entries(options).map(([value, num], i) => (
-                                                <div key={i} onClick={clickMenu(index, options)} className={styles.form__listItem}>
+                                            {Object.entries(values.options).map(([value, num], i) => (
+                                                <div key={i} onClick={clickMenu(index, values.options)} className={styles.form__listItem}>
                                                     {value}
                                                 </div>
                                             ))}
