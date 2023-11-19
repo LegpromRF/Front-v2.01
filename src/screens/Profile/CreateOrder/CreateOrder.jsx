@@ -12,60 +12,71 @@ const CreateOrder = () => {
 
   /* ============== sewing type selection =============== */
 
-    const [typeActive1, setTypeActive1] = useState(false)
-    const [typeActive2, setTypeActive2] = useState(false)
+    // const [typeActive1, setTypeActive1] = useState(false)
+    // const [typeActive2, setTypeActive2] = useState(false)
 
-    const handleTypeClick = (type) => {
-        setTypeActive1(type === 1 && !typeActive1);
-        setTypeActive2(type === 2 && !typeActive2);
-    }
+    // const handleTypeClick = (type) => {
+    //     setTypeActive1(type === 1 && !typeActive1);
+    //     setTypeActive2(type === 2 && !typeActive2);
+    // }
 
   /* ============== drop-down list =============== */
 
-    const [visibleList1, setVisibleList1] = useState(false)
-    const [visibleList2, setVisibleList2] = useState(false)
-    const [visibleList3, setVisibleList3] = useState(false)
-    const [visibleList4, setVisibleList4] = useState(false)
-    const [visibleList5, setVisibleList5] = useState(false)
-    const [visibleList6, setVisibleList6] = useState(false)
+    const [typeActive, setTypeActive] = useState([false, false]);
+    const handleTypeClick = (index) => setTypeActive(prev => prev.map((value, i) => i === index));
+
+    const [visibleLists, setVisibleLists] = useState(Array(6).fill(false));
+    const [inputValues, setInputValues] = useState(Array(6).fill('нажмите для выбора'));
+
+    const clickMenu = (index) => (e) => {
+        setInputValues(prev => prev.map((value, i) => (i === index ? e.target.innerHTML : value)));
+        setVisibleLists(prev => prev.map((value, i) => (i === index ? false : value)));
+    };
+
+    // const [visibleList1, setVisibleList1] = useState(false)
+    // const [visibleList2, setVisibleList2] = useState(false)
+    // const [visibleList3, setVisibleList3] = useState(false)
+    // const [visibleList4, setVisibleList4] = useState(false)
+    // const [visibleList5, setVisibleList5] = useState(false)
+    // const [visibleList6, setVisibleList6] = useState(false)
 
 
-    const [valueInput1, setValueInput1] = useState('нажмите для выбора')
-    const [valueInput2, setValueInput2] = useState('нажмите для выбора')
-    const [valueInput3, setValueInput3] = useState('нажмите для выбора')
-    const [valueInput4, setValueInput4] = useState('нажмите для выбора')
-    const [valueInput5, setValueInput5] = useState('нажмите для выбора')
-    const [valueInput6, setValueInput6] = useState('нажмите для выбора')
+    // const [valueInput1, setValueInput1] = useState('нажмите для выбора')
+    // const [valueInput2, setValueInput2] = useState('нажмите для выбора')
+    // const [valueInput3, setValueInput3] = useState('нажмите для выбора')
+    // const [valueInput4, setValueInput4] = useState('нажмите для выбора')
+    // const [valueInput5, setValueInput5] = useState('нажмите для выбора')
+    // const [valueInput6, setValueInput6] = useState('нажмите для выбора')
 
-    const clickMenu1 = (e) => {
-      setValueInput1( e.target.innerHTML)
-      setVisibleList1(false)
-    }
-
-    const clickMenu2 = (e) => {
-      setValueInput2( e.target.innerHTML)
-      setVisibleList2(false)
-    }
-
-    const clickMenu3 = (e) => {
-      setValueInput3( e.target.innerHTML)
-      setVisibleList3(false)
-    }
-
-    const clickMenu4 = (e) => {
-      setValueInput4( e.target.innerHTML)
-      setVisibleList4(false)
-    }
-
-    const clickMenu5 = (e) => {
-        setValueInput5( e.target.innerHTML)
-        setVisibleList5(false)
-    }
-
-    const clickMenu6 = (e) => {
-        setValueInput6( e.target.innerHTML)
-        setVisibleList6(false)
-    }
+    // const clickMenu1 = (e) => {
+    //   setValueInput1( e.target.innerHTML)
+    //   setVisibleList1(false)
+    // }
+    //
+    // const clickMenu2 = (e) => {
+    //   setValueInput2( e.target.innerHTML)
+    //   setVisibleList2(false)
+    // }
+    //
+    // const clickMenu3 = (e) => {
+    //   setValueInput3( e.target.innerHTML)
+    //   setVisibleList3(false)
+    // }
+    //
+    // const clickMenu4 = (e) => {
+    //   setValueInput4( e.target.innerHTML)
+    //   setVisibleList4(false)
+    // }
+    //
+    // const clickMenu5 = (e) => {
+    //     setValueInput5( e.target.innerHTML)
+    //     setVisibleList5(false)
+    // }
+    //
+    // const clickMenu6 = (e) => {
+    //     setValueInput6( e.target.innerHTML)
+    //     setVisibleList6(false)
+    // }
 
   /* ============== Input =============== */
 
@@ -79,9 +90,6 @@ const CreateOrder = () => {
     const [vidOdejdy, setVidOdejdy] = useState([])
     const [vidPostavki, setVidPostavki] = useState([])
     const [vidProduct, setVidProduct] = useState([])
-    const applications = ['Торжественная одежда', 'Повседневная одежда', 'Рабочая одежда', 'Модная одежда'];
-    const deliveryRegion = ['Москва', 'Санкт-Петербург', 'Краснодар', 'Ростов', 'Крым', 'Сочи', 'Воронеж']
-    const additionally = ['Декатировка', 'Санфоризация', 'Оживка'];
 
     const [activeInput1, setActiveInput1] = useState(false);
     const [activeInput2, setActiveInput2] = useState(false);
@@ -147,15 +155,15 @@ const CreateOrder = () => {
 
   /*==============================================*/
     const optionStatePairs = [
-            ['pol', setPol, 'spr_pol'],
-            ['priceSegment', setPriceSegment, 'spr_price_segment'],
-            ['regularZakaz', setRegularZakaz, 'spr_regular_zakaz'],
-            ['sezons', setSezons, 'spr_sezons'],
-            ['sferaPrim', setSferaPrim, 'spr_sfera_prim'],
-            ['tipOdejdy', setTipOdejdy, 'spr_tip_odejdy'],
-            ['vidOdejdy', setVidOdejdy, 'spr_vid_odejdy'],
-            ['vidPostavki', setVidPostavki, 'spr_vid_postavki'],
-            ['vidProduct', setVidProduct, 'spr_vid_product'],
+            [setPol, 'spr_pol'],
+            [setPriceSegment, 'spr_price_segment'],
+            [setRegularZakaz, 'spr_regular_zakaz'],
+            [setSezons, 'spr_sezons'],
+            [setSferaPrim, 'spr_sfera_prim'],
+            [setTipOdejdy, 'spr_tip_odejdy'],
+            [setVidOdejdy, 'spr_vid_odejdy'],
+            [setVidPostavki, 'spr_vid_postavki'],
+            [setVidProduct, 'spr_vid_product'],
     ]
 
     useEffect(() => {
@@ -163,7 +171,7 @@ const CreateOrder = () => {
             try {
                 const options = await getPropObject();
                 console.log(options);
-                for (const [state, setState, propName] of optionStatePairs) {
+                for (const [setState, propName] of optionStatePairs) {
                     setState(options[propName]);
                 }
             } catch (error) {
@@ -200,10 +208,10 @@ const CreateOrder = () => {
       
         <div className={styles.createOrder__header}>
             <HeaderProfile title="Изделие" number="1" href='/profile/createorder/' active={true}/>
-            <HeaderProfile title="Закупка" number="2" href='/nolayout' active={false}/>
-            <HeaderProfile title="Технология" number="3" href='/nolayout' active={false}/>
-            <HeaderProfile title="Условия" number="4" href='/nolayout' active={false}/>
-            <HeaderProfile title="Контакты" number="5" href='/nolayout' active={false}/>
+            <HeaderProfile title="Закупка" number="2" href='/profile/purchase' active={false}/>
+            <HeaderProfile title="Технология" number="3" href='/profile/technology' active={false}/>
+            <HeaderProfile title="Условия" number="4" href='/profile/conditions' active={false}/>
+            <HeaderProfile title="Контакты" number="5" href='/profile/contacts' active={false}/>
         </div>
 
         <div className={styles.createOrder__order}>
@@ -215,7 +223,7 @@ const CreateOrder = () => {
                           <div
                               key={index}
                               onClick={() => handleTypeClick(index + 1)}
-                              className={typeActive1 ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ')
+                              className={typeActive[index] ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ')
                                   :
                                   styles.createOrder__typeItem}
                           >
@@ -226,201 +234,129 @@ const CreateOrder = () => {
               }
             {/*<div onClick={activeType1} className={typeActive1 ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ') : styles.createOrder__typeItem}>одежда</div>*/}
             {/*<div onClick={activeType2} className={typeActive2 ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ') : styles.createOrder__typeItem}>другие виды изделий</div>*/}
-            {typeActive1 || typeActive2 
-              ?
-                <div className={styles.createOrder__typeWarning}>От вида продукции зависят остальные параметры заказа.</div>
-              :
-                null
-            }
+            {/*{typeActive1 || typeActive2 */}
+            {/*  ?*/}
+            {/*    <div className={styles.createOrder__typeWarning}>От вида продукции зависят остальные параметры заказа.</div>*/}
+            {/*  :*/}
+            {/*    null*/}
+            {/*}*/}
           </div>
             <div className={styles.createOrder__content}>
               <div className={styles.createOrder__body}>
 
-                {typeActive1 || typeActive2 
-                ? 
+                  {typeActive.includes(true) && (
                   <form className={styles.form}>
                     <div className={styles.form__content}>
-                      <div className={styles.form__row}>
-                        <div className={styles.form__title}>Основная информация</div>
-                        <div className={styles.form__items}>
-
-                          <div className={styles.form__item}>
-                            <h3 className={styles.form__itemLabel}><span>Тип одежды</span> <span className={styles.form__itemLabel_star}>*</span></h3>
-                            <div 
-                              onClick={() => setVisibleList1(!visibleList1)} 
-                              className={valueInput1 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
-                                {valueInput1}
+                        <div className={styles.form__row}>
+                            <div className={styles.form__title}>Основная информация</div>
+                            <div className={styles.form__items}>
+                                {[formInputs.tipOdejdy, formInputs.sferaPrim, formInputs.vidOdejdy, formInputs.pol, formInputs.sezons].map((options, index) => (
+                                    <div key={index} className={styles.form__item}>
+                                        <h3 className={styles.form__itemLabel}>
+                                            <span>{options.label}</span> <span className={styles.form__itemLabel_star}>*</span>
+                                        </h3>
+                                        <div
+                                            onClick={() => setVisibleLists(prev => prev.map((value, i) => (i === index ? !value : value)))}
+                                            className={inputValues[index] !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}
+                                        >
+                                            {inputValues[index]}
+                                        </div>
+                                        <div className={visibleLists[index] ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
+                                            {Object.entries(options).map(([value, num], i) => (
+                                                <div key={i} onClick={clickMenu(index, options)} className={styles.form__listItem}>
+                                                    {value}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                            <div className={visibleList1 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                              {
-                                  Object.entries(formInputs.tipOdejdy).map(([value, num], index) => {
-                                      return (
-                                          <div key={index} onClick={clickMenu1} className={styles.form__listItem}>{value}</div>
-                                      )
-                                  })
-                              }
-                            </div>
-                          </div>
-
-                          <div className={styles.form__item}>
-                            <h3 className={styles.form__itemLabel}><span>Назначение</span> <span className={styles.form__itemLabel_star}>*</span></h3>
-                            <div 
-                              onClick={() => setVisibleList2(!visibleList2)} 
-                              className={valueInput2 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
-                                {valueInput2}
-                            </div>
-                            <div className={visibleList2 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                                {
-                                    Object.entries(formInputs.sferaPrim).map(([value, num], index) => {
-                                        return (
-                                            <div key={index} onClick={clickMenu2} className={styles.form__listItem}>{value}</div>
-                                        )
-                                    })
-                                }
-                            </div>
-                          </div>
-
-                            <div className={styles.form__item}>
-                                <h3 className={styles.form__itemLabel}><span>Вид изделия</span> <span className={styles.form__itemLabel_star}>*</span></h3>
-                                <div
-                                    onClick={() => setVisibleList3(!visibleList3)}
-                                    className={valueInput3 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
-                                    {valueInput3}
-                                </div>
-                                <div className={visibleList3 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                                    {
-                                        Object.entries(formInputs.vidOdejdy).map(([value, num], index) => {
-                                            return (
-                                                <div key={index} onClick={clickMenu3} className={styles.form__listItem}>{value}</div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </div>
-
-                            <div className={styles.form__item}>
-                                <h3 className={styles.form__itemLabel}><span>Пол и возраст</span> <span className={styles.form__itemLabel_star}>*</span></h3>
-                                <div
-                                    onClick={() => setVisibleList4(!visibleList4)}
-                                    className={valueInput4 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
-                                    {valueInput4}
-                                </div>
-                                <div className={visibleList4 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                                    {
-                                        Object.entries(formInputs.pol).map(([value, num], index) => {
-                                            return (
-                                                <div key={index} onClick={clickMenu4} className={styles.form__listItem}>{value}</div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </div>
-
-                            <div className={styles.form__item}>
-                                <h3 className={styles.form__itemLabel}><span>Сезон</span> <span className={styles.form__itemLabel_star}>*</span></h3>
-                                <div
-                                    onClick={() => setVisibleList5(!visibleList5)}
-                                    className={valueInput5 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}>
-                                    {valueInput5}
-                                </div>
-                                <div className={visibleList5 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                                    {
-                                        Object.entries(formInputs.sezons).map(([value, num], index) => {
-                                            return (
-                                                <div key={index} onClick={clickMenu5} className={styles.form__listItem}>{value}</div>
-                                            )
-                                        })
-                                    }
-                                </div>
-                            </div>
-
                         </div>
-                      </div>
-                      <div className={styles.form__row}>
-                        <div className={styles.form__title}>Дополнительная информация</div>
-                        <div className={styles.form__items}>
-                          <div className={styles.form__item}>
-                            <h3 className={styles.form__itemLabel}>
-                              <span>Плановый бюджет</span>
-                              <div className={styles.form__itemLabelPro}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="14" viewBox="0 0 28 14" fill="none">
-                                  <rect width="28" height="14" rx="3" fill="url(#paint0_linear_408_56651)"/>
-                                  <path d="M8.36991 7.83824H6.81923V6.89973H8.36991C8.60954 6.89973 8.8046 6.8623 8.95507 6.78743C9.10554 6.70989 9.2156 6.60294 9.28527 6.46658C9.35493 6.33021 9.38976 6.17647 9.38976 6.00535C9.38976 5.83155 9.35493 5.66979 9.28527 5.52005C9.2156 5.37032 9.10554 5.25 8.95507 5.15909C8.8046 5.06818 8.60954 5.02273 8.36991 5.02273H7.25392V9.91979H6V4.08021H8.36991C8.8464 4.08021 9.25462 4.1631 9.59457 4.32888C9.9373 4.49198 10.1992 4.71791 10.3804 5.00668C10.5615 5.29545 10.652 5.62567 10.652 5.99733C10.652 6.37433 10.5615 6.70053 10.3804 6.97594C10.1992 7.25134 9.9373 7.4639 9.59457 7.61364C9.25462 7.76337 8.8464 7.83824 8.36991 7.83824Z" fill="#F5F5F5"/>
-                                  <path d="M11.5172 4.08021H13.7868C14.2522 4.08021 14.652 4.14706 14.9864 4.28075C15.3236 4.41444 15.5827 4.6123 15.7638 4.87433C15.945 5.13636 16.0355 5.45856 16.0355 5.84091C16.0355 6.15374 15.9798 6.42246 15.8683 6.64706C15.7597 6.86898 15.605 7.05481 15.4044 7.20455C15.2065 7.3516 14.9739 7.46925 14.7064 7.55749L14.3093 7.75802H12.3365L12.3281 6.81952H13.7952C14.0153 6.81952 14.1978 6.78209 14.3427 6.70722C14.4876 6.63235 14.5963 6.52807 14.6688 6.39438C14.744 6.2607 14.7816 6.10561 14.7816 5.92914C14.7816 5.74198 14.7454 5.58021 14.6729 5.44385C14.6005 5.30749 14.4904 5.20321 14.3427 5.13102C14.1951 5.05882 14.0098 5.02273 13.7868 5.02273H12.7712V9.91979H11.5172V4.08021ZM14.9195 9.91979L13.5319 7.31684L14.8568 7.30882L16.2612 9.86364V9.91979H14.9195Z" fill="#F5F5F5"/>
-                                  <path d="M22 6.86364V7.14037C22 7.58422 21.9373 7.98262 21.8119 8.33556C21.6865 8.6885 21.5096 8.9893 21.2811 9.23797C21.0526 9.48396 20.7795 9.67246 20.4619 9.80348C20.147 9.93449 19.7973 10 19.4127 10C19.031 10 18.6813 9.93449 18.3636 9.80348C18.0488 9.67246 17.7757 9.48396 17.5444 9.23797C17.3131 8.9893 17.1334 8.6885 17.0052 8.33556C16.8798 7.98262 16.8171 7.58422 16.8171 7.14037V6.86364C16.8171 6.41711 16.8798 6.01872 17.0052 5.66845C17.1306 5.31551 17.3076 5.01471 17.536 4.76604C17.7673 4.51738 18.0404 4.32754 18.3553 4.19652C18.6729 4.06551 19.0226 4 19.4044 4C19.7889 4 20.1386 4.06551 20.4535 4.19652C20.7712 4.32754 21.0442 4.51738 21.2727 4.76604C21.504 5.01471 21.6823 5.31551 21.8077 5.66845C21.9359 6.01872 22 6.41711 22 6.86364ZM20.7335 7.14037V6.85561C20.7335 6.54545 20.7043 6.27273 20.6458 6.03743C20.5873 5.80214 20.5009 5.60428 20.3866 5.44385C20.2724 5.28342 20.1331 5.1631 19.9687 5.08289C19.8042 5 19.6162 4.95856 19.4044 4.95856C19.1926 4.95856 19.0045 5 18.8401 5.08289C18.6785 5.1631 18.5406 5.28342 18.4263 5.44385C18.3149 5.60428 18.2299 5.80214 18.1714 6.03743C18.1129 6.27273 18.0836 6.54545 18.0836 6.85561V7.14037C18.0836 7.44786 18.1129 7.72059 18.1714 7.95856C18.2299 8.19385 18.3163 8.39305 18.4305 8.55615C18.5448 8.71658 18.6841 8.83823 18.8485 8.92112C19.0129 9.00401 19.201 9.04545 19.4127 9.04545C19.6245 9.04545 19.8126 9.00401 19.977 8.92112C20.1414 8.83823 20.2793 8.71658 20.3908 8.55615C20.5023 8.39305 20.5873 8.19385 20.6458 7.95856C20.7043 7.72059 20.7335 7.44786 20.7335 7.14037Z" fill="#F5F5F5"/>
-                                  <defs>
-                                    <linearGradient id="paint0_linear_408_56651" x1="0" y1="0" x2="28.4235" y2="13.0798" gradientUnits="userSpaceOnUse">
-                                      <stop stopColor="#FF961B"/>
-                                      <stop offset="1" stopColor="#DA7600"/>
-                                    </linearGradient>
-                                  </defs>
-                                </svg>
-                              </div>
-                            </h3>
-                            <input 
-                              onChange={handleInputChange(1)}
-                              className={activeInput1 ? [styles.form__control, styles.form__controlActiveOrange].join(' ') : styles.form__control} 
-                              placeholder="нажмите для ввода" 
-                              type="text" 
-                            />
-                          </div>
-                          <div className={styles.form__item}>
-                            <h3 className={styles.form__itemLabel}>
-                            <span>Срок поставки</span>
-                              <div className={styles.form__itemLabelPro}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="14" viewBox="0 0 28 14" fill="none">
-                                  <rect width="28" height="14" rx="3" fill="url(#paint0_linear_408_56651)"/>
-                                  <path d="M8.36991 7.83824H6.81923V6.89973H8.36991C8.60954 6.89973 8.8046 6.8623 8.95507 6.78743C9.10554 6.70989 9.2156 6.60294 9.28527 6.46658C9.35493 6.33021 9.38976 6.17647 9.38976 6.00535C9.38976 5.83155 9.35493 5.66979 9.28527 5.52005C9.2156 5.37032 9.10554 5.25 8.95507 5.15909C8.8046 5.06818 8.60954 5.02273 8.36991 5.02273H7.25392V9.91979H6V4.08021H8.36991C8.8464 4.08021 9.25462 4.1631 9.59457 4.32888C9.9373 4.49198 10.1992 4.71791 10.3804 5.00668C10.5615 5.29545 10.652 5.62567 10.652 5.99733C10.652 6.37433 10.5615 6.70053 10.3804 6.97594C10.1992 7.25134 9.9373 7.4639 9.59457 7.61364C9.25462 7.76337 8.8464 7.83824 8.36991 7.83824Z" fill="#F5F5F5"/>
-                                  <path d="M11.5172 4.08021H13.7868C14.2522 4.08021 14.652 4.14706 14.9864 4.28075C15.3236 4.41444 15.5827 4.6123 15.7638 4.87433C15.945 5.13636 16.0355 5.45856 16.0355 5.84091C16.0355 6.15374 15.9798 6.42246 15.8683 6.64706C15.7597 6.86898 15.605 7.05481 15.4044 7.20455C15.2065 7.3516 14.9739 7.46925 14.7064 7.55749L14.3093 7.75802H12.3365L12.3281 6.81952H13.7952C14.0153 6.81952 14.1978 6.78209 14.3427 6.70722C14.4876 6.63235 14.5963 6.52807 14.6688 6.39438C14.744 6.2607 14.7816 6.10561 14.7816 5.92914C14.7816 5.74198 14.7454 5.58021 14.6729 5.44385C14.6005 5.30749 14.4904 5.20321 14.3427 5.13102C14.1951 5.05882 14.0098 5.02273 13.7868 5.02273H12.7712V9.91979H11.5172V4.08021ZM14.9195 9.91979L13.5319 7.31684L14.8568 7.30882L16.2612 9.86364V9.91979H14.9195Z" fill="#F5F5F5"/>
-                                  <path d="M22 6.86364V7.14037C22 7.58422 21.9373 7.98262 21.8119 8.33556C21.6865 8.6885 21.5096 8.9893 21.2811 9.23797C21.0526 9.48396 20.7795 9.67246 20.4619 9.80348C20.147 9.93449 19.7973 10 19.4127 10C19.031 10 18.6813 9.93449 18.3636 9.80348C18.0488 9.67246 17.7757 9.48396 17.5444 9.23797C17.3131 8.9893 17.1334 8.6885 17.0052 8.33556C16.8798 7.98262 16.8171 7.58422 16.8171 7.14037V6.86364C16.8171 6.41711 16.8798 6.01872 17.0052 5.66845C17.1306 5.31551 17.3076 5.01471 17.536 4.76604C17.7673 4.51738 18.0404 4.32754 18.3553 4.19652C18.6729 4.06551 19.0226 4 19.4044 4C19.7889 4 20.1386 4.06551 20.4535 4.19652C20.7712 4.32754 21.0442 4.51738 21.2727 4.76604C21.504 5.01471 21.6823 5.31551 21.8077 5.66845C21.9359 6.01872 22 6.41711 22 6.86364ZM20.7335 7.14037V6.85561C20.7335 6.54545 20.7043 6.27273 20.6458 6.03743C20.5873 5.80214 20.5009 5.60428 20.3866 5.44385C20.2724 5.28342 20.1331 5.1631 19.9687 5.08289C19.8042 5 19.6162 4.95856 19.4044 4.95856C19.1926 4.95856 19.0045 5 18.8401 5.08289C18.6785 5.1631 18.5406 5.28342 18.4263 5.44385C18.3149 5.60428 18.2299 5.80214 18.1714 6.03743C18.1129 6.27273 18.0836 6.54545 18.0836 6.85561V7.14037C18.0836 7.44786 18.1129 7.72059 18.1714 7.95856C18.2299 8.19385 18.3163 8.39305 18.4305 8.55615C18.5448 8.71658 18.6841 8.83823 18.8485 8.92112C19.0129 9.00401 19.201 9.04545 19.4127 9.04545C19.6245 9.04545 19.8126 9.00401 19.977 8.92112C20.1414 8.83823 20.2793 8.71658 20.3908 8.55615C20.5023 8.39305 20.5873 8.19385 20.6458 7.95856C20.7043 7.72059 20.7335 7.44786 20.7335 7.14037Z" fill="#F5F5F5"/>
-                                  <defs>
-                                    <linearGradient id="paint0_linear_408_56651" x1="0" y1="0" x2="28.4235" y2="13.0798" gradientUnits="userSpaceOnUse">
-                                      <stop stopColor="#FF961B"/>
-                                      <stop offset="1" stopColor="#DA7600"/>
-                                    </linearGradient>
-                                  </defs>
-                                </svg>
-                              </div>
-                            </h3>
-                            <input 
-                              onChange={handleInputChange(2)}
-                              className={activeInput2 ? [styles.form__control, styles.form__controlActiveOrange].join(' ') : styles.form__control} 
-                              placeholder="нажмите для ввода" 
-                              type="text" 
-                            />
-                          </div>
-                          <div className={styles.form__item}>
-                            <h3 className={styles.form__itemLabel}>
-                              <span>Доп нанесения</span>
-                              <div className={styles.form__itemLabelPro}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="14" viewBox="0 0 28 14" fill="none">
-                                  <rect width="28" height="14" rx="3" fill="url(#paint0_linear_408_56651)"/>
-                                  <path d="M8.36991 7.83824H6.81923V6.89973H8.36991C8.60954 6.89973 8.8046 6.8623 8.95507 6.78743C9.10554 6.70989 9.2156 6.60294 9.28527 6.46658C9.35493 6.33021 9.38976 6.17647 9.38976 6.00535C9.38976 5.83155 9.35493 5.66979 9.28527 5.52005C9.2156 5.37032 9.10554 5.25 8.95507 5.15909C8.8046 5.06818 8.60954 5.02273 8.36991 5.02273H7.25392V9.91979H6V4.08021H8.36991C8.8464 4.08021 9.25462 4.1631 9.59457 4.32888C9.9373 4.49198 10.1992 4.71791 10.3804 5.00668C10.5615 5.29545 10.652 5.62567 10.652 5.99733C10.652 6.37433 10.5615 6.70053 10.3804 6.97594C10.1992 7.25134 9.9373 7.4639 9.59457 7.61364C9.25462 7.76337 8.8464 7.83824 8.36991 7.83824Z" fill="#F5F5F5"/>
-                                  <path d="M11.5172 4.08021H13.7868C14.2522 4.08021 14.652 4.14706 14.9864 4.28075C15.3236 4.41444 15.5827 4.6123 15.7638 4.87433C15.945 5.13636 16.0355 5.45856 16.0355 5.84091C16.0355 6.15374 15.9798 6.42246 15.8683 6.64706C15.7597 6.86898 15.605 7.05481 15.4044 7.20455C15.2065 7.3516 14.9739 7.46925 14.7064 7.55749L14.3093 7.75802H12.3365L12.3281 6.81952H13.7952C14.0153 6.81952 14.1978 6.78209 14.3427 6.70722C14.4876 6.63235 14.5963 6.52807 14.6688 6.39438C14.744 6.2607 14.7816 6.10561 14.7816 5.92914C14.7816 5.74198 14.7454 5.58021 14.6729 5.44385C14.6005 5.30749 14.4904 5.20321 14.3427 5.13102C14.1951 5.05882 14.0098 5.02273 13.7868 5.02273H12.7712V9.91979H11.5172V4.08021ZM14.9195 9.91979L13.5319 7.31684L14.8568 7.30882L16.2612 9.86364V9.91979H14.9195Z" fill="#F5F5F5"/>
-                                  <path d="M22 6.86364V7.14037C22 7.58422 21.9373 7.98262 21.8119 8.33556C21.6865 8.6885 21.5096 8.9893 21.2811 9.23797C21.0526 9.48396 20.7795 9.67246 20.4619 9.80348C20.147 9.93449 19.7973 10 19.4127 10C19.031 10 18.6813 9.93449 18.3636 9.80348C18.0488 9.67246 17.7757 9.48396 17.5444 9.23797C17.3131 8.9893 17.1334 8.6885 17.0052 8.33556C16.8798 7.98262 16.8171 7.58422 16.8171 7.14037V6.86364C16.8171 6.41711 16.8798 6.01872 17.0052 5.66845C17.1306 5.31551 17.3076 5.01471 17.536 4.76604C17.7673 4.51738 18.0404 4.32754 18.3553 4.19652C18.6729 4.06551 19.0226 4 19.4044 4C19.7889 4 20.1386 4.06551 20.4535 4.19652C20.7712 4.32754 21.0442 4.51738 21.2727 4.76604C21.504 5.01471 21.6823 5.31551 21.8077 5.66845C21.9359 6.01872 22 6.41711 22 6.86364ZM20.7335 7.14037V6.85561C20.7335 6.54545 20.7043 6.27273 20.6458 6.03743C20.5873 5.80214 20.5009 5.60428 20.3866 5.44385C20.2724 5.28342 20.1331 5.1631 19.9687 5.08289C19.8042 5 19.6162 4.95856 19.4044 4.95856C19.1926 4.95856 19.0045 5 18.8401 5.08289C18.6785 5.1631 18.5406 5.28342 18.4263 5.44385C18.3149 5.60428 18.2299 5.80214 18.1714 6.03743C18.1129 6.27273 18.0836 6.54545 18.0836 6.85561V7.14037C18.0836 7.44786 18.1129 7.72059 18.1714 7.95856C18.2299 8.19385 18.3163 8.39305 18.4305 8.55615C18.5448 8.71658 18.6841 8.83823 18.8485 8.92112C19.0129 9.00401 19.201 9.04545 19.4127 9.04545C19.6245 9.04545 19.8126 9.00401 19.977 8.92112C20.1414 8.83823 20.2793 8.71658 20.3908 8.55615C20.5023 8.39305 20.5873 8.19385 20.6458 7.95856C20.7043 7.72059 20.7335 7.44786 20.7335 7.14037Z" fill="#F5F5F5"/>
-                                  <defs>
-                                    <linearGradient id="paint0_linear_408_56651" x1="0" y1="0" x2="28.4235" y2="13.0798" gradientUnits="userSpaceOnUse">
-                                      <stop stopColor="#FF961B"/>
-                                      <stop offset="1" stopColor="#DA7600"/>
-                                    </linearGradient>
-                                  </defs>
-                                </svg>
-                              </div>
-                            </h3>
-                            <div 
-                              onClick={() => setVisibleList4(!visibleList4)} 
-                              className={valueInput6 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveOrange].join(' ') : styles.form__control}>
-                                {valueInput6}
-                            </div>
-                            <div className={visibleList6 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                              {additionally.map((elem, index) => {
-                                return ( 
-                                <div key={index} onClick={clickMenu6} className={styles.form__listItem}>{elem}</div>
-                              )})}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      {/*<div className={styles.form__row}>*/}
+                      {/*  <div className={styles.form__title}>Дополнительная информация</div>*/}
+                      {/*  <div className={styles.form__items}>*/}
+                      {/*    <div className={styles.form__item}>*/}
+                      {/*      <h3 className={styles.form__itemLabel}>*/}
+                      {/*        <span>Плановый бюджет</span>*/}
+                      {/*        <div className={styles.form__itemLabelPro}>*/}
+                      {/*          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="14" viewBox="0 0 28 14" fill="none">*/}
+                      {/*            <rect width="28" height="14" rx="3" fill="url(#paint0_linear_408_56651)"/>*/}
+                      {/*            <path d="M8.36991 7.83824H6.81923V6.89973H8.36991C8.60954 6.89973 8.8046 6.8623 8.95507 6.78743C9.10554 6.70989 9.2156 6.60294 9.28527 6.46658C9.35493 6.33021 9.38976 6.17647 9.38976 6.00535C9.38976 5.83155 9.35493 5.66979 9.28527 5.52005C9.2156 5.37032 9.10554 5.25 8.95507 5.15909C8.8046 5.06818 8.60954 5.02273 8.36991 5.02273H7.25392V9.91979H6V4.08021H8.36991C8.8464 4.08021 9.25462 4.1631 9.59457 4.32888C9.9373 4.49198 10.1992 4.71791 10.3804 5.00668C10.5615 5.29545 10.652 5.62567 10.652 5.99733C10.652 6.37433 10.5615 6.70053 10.3804 6.97594C10.1992 7.25134 9.9373 7.4639 9.59457 7.61364C9.25462 7.76337 8.8464 7.83824 8.36991 7.83824Z" fill="#F5F5F5"/>*/}
+                      {/*            <path d="M11.5172 4.08021H13.7868C14.2522 4.08021 14.652 4.14706 14.9864 4.28075C15.3236 4.41444 15.5827 4.6123 15.7638 4.87433C15.945 5.13636 16.0355 5.45856 16.0355 5.84091C16.0355 6.15374 15.9798 6.42246 15.8683 6.64706C15.7597 6.86898 15.605 7.05481 15.4044 7.20455C15.2065 7.3516 14.9739 7.46925 14.7064 7.55749L14.3093 7.75802H12.3365L12.3281 6.81952H13.7952C14.0153 6.81952 14.1978 6.78209 14.3427 6.70722C14.4876 6.63235 14.5963 6.52807 14.6688 6.39438C14.744 6.2607 14.7816 6.10561 14.7816 5.92914C14.7816 5.74198 14.7454 5.58021 14.6729 5.44385C14.6005 5.30749 14.4904 5.20321 14.3427 5.13102C14.1951 5.05882 14.0098 5.02273 13.7868 5.02273H12.7712V9.91979H11.5172V4.08021ZM14.9195 9.91979L13.5319 7.31684L14.8568 7.30882L16.2612 9.86364V9.91979H14.9195Z" fill="#F5F5F5"/>*/}
+                      {/*            <path d="M22 6.86364V7.14037C22 7.58422 21.9373 7.98262 21.8119 8.33556C21.6865 8.6885 21.5096 8.9893 21.2811 9.23797C21.0526 9.48396 20.7795 9.67246 20.4619 9.80348C20.147 9.93449 19.7973 10 19.4127 10C19.031 10 18.6813 9.93449 18.3636 9.80348C18.0488 9.67246 17.7757 9.48396 17.5444 9.23797C17.3131 8.9893 17.1334 8.6885 17.0052 8.33556C16.8798 7.98262 16.8171 7.58422 16.8171 7.14037V6.86364C16.8171 6.41711 16.8798 6.01872 17.0052 5.66845C17.1306 5.31551 17.3076 5.01471 17.536 4.76604C17.7673 4.51738 18.0404 4.32754 18.3553 4.19652C18.6729 4.06551 19.0226 4 19.4044 4C19.7889 4 20.1386 4.06551 20.4535 4.19652C20.7712 4.32754 21.0442 4.51738 21.2727 4.76604C21.504 5.01471 21.6823 5.31551 21.8077 5.66845C21.9359 6.01872 22 6.41711 22 6.86364ZM20.7335 7.14037V6.85561C20.7335 6.54545 20.7043 6.27273 20.6458 6.03743C20.5873 5.80214 20.5009 5.60428 20.3866 5.44385C20.2724 5.28342 20.1331 5.1631 19.9687 5.08289C19.8042 5 19.6162 4.95856 19.4044 4.95856C19.1926 4.95856 19.0045 5 18.8401 5.08289C18.6785 5.1631 18.5406 5.28342 18.4263 5.44385C18.3149 5.60428 18.2299 5.80214 18.1714 6.03743C18.1129 6.27273 18.0836 6.54545 18.0836 6.85561V7.14037C18.0836 7.44786 18.1129 7.72059 18.1714 7.95856C18.2299 8.19385 18.3163 8.39305 18.4305 8.55615C18.5448 8.71658 18.6841 8.83823 18.8485 8.92112C19.0129 9.00401 19.201 9.04545 19.4127 9.04545C19.6245 9.04545 19.8126 9.00401 19.977 8.92112C20.1414 8.83823 20.2793 8.71658 20.3908 8.55615C20.5023 8.39305 20.5873 8.19385 20.6458 7.95856C20.7043 7.72059 20.7335 7.44786 20.7335 7.14037Z" fill="#F5F5F5"/>*/}
+                      {/*            <defs>*/}
+                      {/*              <linearGradient id="paint0_linear_408_56651" x1="0" y1="0" x2="28.4235" y2="13.0798" gradientUnits="userSpaceOnUse">*/}
+                      {/*                <stop stopColor="#FF961B"/>*/}
+                      {/*                <stop offset="1" stopColor="#DA7600"/>*/}
+                      {/*              </linearGradient>*/}
+                      {/*            </defs>*/}
+                      {/*          </svg>*/}
+                      {/*        </div>*/}
+                      {/*      </h3>*/}
+                      {/*      <input */}
+                      {/*        onChange={handleInputChange(1)}*/}
+                      {/*        className={activeInput1 ? [styles.form__control, styles.form__controlActiveOrange].join(' ') : styles.form__control} */}
+                      {/*        placeholder="нажмите для ввода" */}
+                      {/*        type="text" */}
+                      {/*      />*/}
+                      {/*    </div>*/}
+                      {/*    <div className={styles.form__item}>*/}
+                      {/*      <h3 className={styles.form__itemLabel}>*/}
+                      {/*      <span>Срок поставки</span>*/}
+                      {/*        <div className={styles.form__itemLabelPro}>*/}
+                      {/*          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="14" viewBox="0 0 28 14" fill="none">*/}
+                      {/*            <rect width="28" height="14" rx="3" fill="url(#paint0_linear_408_56651)"/>*/}
+                      {/*            <path d="M8.36991 7.83824H6.81923V6.89973H8.36991C8.60954 6.89973 8.8046 6.8623 8.95507 6.78743C9.10554 6.70989 9.2156 6.60294 9.28527 6.46658C9.35493 6.33021 9.38976 6.17647 9.38976 6.00535C9.38976 5.83155 9.35493 5.66979 9.28527 5.52005C9.2156 5.37032 9.10554 5.25 8.95507 5.15909C8.8046 5.06818 8.60954 5.02273 8.36991 5.02273H7.25392V9.91979H6V4.08021H8.36991C8.8464 4.08021 9.25462 4.1631 9.59457 4.32888C9.9373 4.49198 10.1992 4.71791 10.3804 5.00668C10.5615 5.29545 10.652 5.62567 10.652 5.99733C10.652 6.37433 10.5615 6.70053 10.3804 6.97594C10.1992 7.25134 9.9373 7.4639 9.59457 7.61364C9.25462 7.76337 8.8464 7.83824 8.36991 7.83824Z" fill="#F5F5F5"/>*/}
+                      {/*            <path d="M11.5172 4.08021H13.7868C14.2522 4.08021 14.652 4.14706 14.9864 4.28075C15.3236 4.41444 15.5827 4.6123 15.7638 4.87433C15.945 5.13636 16.0355 5.45856 16.0355 5.84091C16.0355 6.15374 15.9798 6.42246 15.8683 6.64706C15.7597 6.86898 15.605 7.05481 15.4044 7.20455C15.2065 7.3516 14.9739 7.46925 14.7064 7.55749L14.3093 7.75802H12.3365L12.3281 6.81952H13.7952C14.0153 6.81952 14.1978 6.78209 14.3427 6.70722C14.4876 6.63235 14.5963 6.52807 14.6688 6.39438C14.744 6.2607 14.7816 6.10561 14.7816 5.92914C14.7816 5.74198 14.7454 5.58021 14.6729 5.44385C14.6005 5.30749 14.4904 5.20321 14.3427 5.13102C14.1951 5.05882 14.0098 5.02273 13.7868 5.02273H12.7712V9.91979H11.5172V4.08021ZM14.9195 9.91979L13.5319 7.31684L14.8568 7.30882L16.2612 9.86364V9.91979H14.9195Z" fill="#F5F5F5"/>*/}
+                      {/*            <path d="M22 6.86364V7.14037C22 7.58422 21.9373 7.98262 21.8119 8.33556C21.6865 8.6885 21.5096 8.9893 21.2811 9.23797C21.0526 9.48396 20.7795 9.67246 20.4619 9.80348C20.147 9.93449 19.7973 10 19.4127 10C19.031 10 18.6813 9.93449 18.3636 9.80348C18.0488 9.67246 17.7757 9.48396 17.5444 9.23797C17.3131 8.9893 17.1334 8.6885 17.0052 8.33556C16.8798 7.98262 16.8171 7.58422 16.8171 7.14037V6.86364C16.8171 6.41711 16.8798 6.01872 17.0052 5.66845C17.1306 5.31551 17.3076 5.01471 17.536 4.76604C17.7673 4.51738 18.0404 4.32754 18.3553 4.19652C18.6729 4.06551 19.0226 4 19.4044 4C19.7889 4 20.1386 4.06551 20.4535 4.19652C20.7712 4.32754 21.0442 4.51738 21.2727 4.76604C21.504 5.01471 21.6823 5.31551 21.8077 5.66845C21.9359 6.01872 22 6.41711 22 6.86364ZM20.7335 7.14037V6.85561C20.7335 6.54545 20.7043 6.27273 20.6458 6.03743C20.5873 5.80214 20.5009 5.60428 20.3866 5.44385C20.2724 5.28342 20.1331 5.1631 19.9687 5.08289C19.8042 5 19.6162 4.95856 19.4044 4.95856C19.1926 4.95856 19.0045 5 18.8401 5.08289C18.6785 5.1631 18.5406 5.28342 18.4263 5.44385C18.3149 5.60428 18.2299 5.80214 18.1714 6.03743C18.1129 6.27273 18.0836 6.54545 18.0836 6.85561V7.14037C18.0836 7.44786 18.1129 7.72059 18.1714 7.95856C18.2299 8.19385 18.3163 8.39305 18.4305 8.55615C18.5448 8.71658 18.6841 8.83823 18.8485 8.92112C19.0129 9.00401 19.201 9.04545 19.4127 9.04545C19.6245 9.04545 19.8126 9.00401 19.977 8.92112C20.1414 8.83823 20.2793 8.71658 20.3908 8.55615C20.5023 8.39305 20.5873 8.19385 20.6458 7.95856C20.7043 7.72059 20.7335 7.44786 20.7335 7.14037Z" fill="#F5F5F5"/>*/}
+                      {/*            <defs>*/}
+                      {/*              <linearGradient id="paint0_linear_408_56651" x1="0" y1="0" x2="28.4235" y2="13.0798" gradientUnits="userSpaceOnUse">*/}
+                      {/*                <stop stopColor="#FF961B"/>*/}
+                      {/*                <stop offset="1" stopColor="#DA7600"/>*/}
+                      {/*              </linearGradient>*/}
+                      {/*            </defs>*/}
+                      {/*          </svg>*/}
+                      {/*        </div>*/}
+                      {/*      </h3>*/}
+                      {/*      <input */}
+                      {/*        onChange={handleInputChange(2)}*/}
+                      {/*        className={activeInput2 ? [styles.form__control, styles.form__controlActiveOrange].join(' ') : styles.form__control} */}
+                      {/*        placeholder="нажмите для ввода" */}
+                      {/*        type="text" */}
+                      {/*      />*/}
+                      {/*    </div>*/}
+                      {/*    <div className={styles.form__item}>*/}
+                      {/*      <h3 className={styles.form__itemLabel}>*/}
+                      {/*        <span>Доп нанесения</span>*/}
+                      {/*        <div className={styles.form__itemLabelPro}>*/}
+                      {/*          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="14" viewBox="0 0 28 14" fill="none">*/}
+                      {/*            <rect width="28" height="14" rx="3" fill="url(#paint0_linear_408_56651)"/>*/}
+                      {/*            <path d="M8.36991 7.83824H6.81923V6.89973H8.36991C8.60954 6.89973 8.8046 6.8623 8.95507 6.78743C9.10554 6.70989 9.2156 6.60294 9.28527 6.46658C9.35493 6.33021 9.38976 6.17647 9.38976 6.00535C9.38976 5.83155 9.35493 5.66979 9.28527 5.52005C9.2156 5.37032 9.10554 5.25 8.95507 5.15909C8.8046 5.06818 8.60954 5.02273 8.36991 5.02273H7.25392V9.91979H6V4.08021H8.36991C8.8464 4.08021 9.25462 4.1631 9.59457 4.32888C9.9373 4.49198 10.1992 4.71791 10.3804 5.00668C10.5615 5.29545 10.652 5.62567 10.652 5.99733C10.652 6.37433 10.5615 6.70053 10.3804 6.97594C10.1992 7.25134 9.9373 7.4639 9.59457 7.61364C9.25462 7.76337 8.8464 7.83824 8.36991 7.83824Z" fill="#F5F5F5"/>*/}
+                      {/*            <path d="M11.5172 4.08021H13.7868C14.2522 4.08021 14.652 4.14706 14.9864 4.28075C15.3236 4.41444 15.5827 4.6123 15.7638 4.87433C15.945 5.13636 16.0355 5.45856 16.0355 5.84091C16.0355 6.15374 15.9798 6.42246 15.8683 6.64706C15.7597 6.86898 15.605 7.05481 15.4044 7.20455C15.2065 7.3516 14.9739 7.46925 14.7064 7.55749L14.3093 7.75802H12.3365L12.3281 6.81952H13.7952C14.0153 6.81952 14.1978 6.78209 14.3427 6.70722C14.4876 6.63235 14.5963 6.52807 14.6688 6.39438C14.744 6.2607 14.7816 6.10561 14.7816 5.92914C14.7816 5.74198 14.7454 5.58021 14.6729 5.44385C14.6005 5.30749 14.4904 5.20321 14.3427 5.13102C14.1951 5.05882 14.0098 5.02273 13.7868 5.02273H12.7712V9.91979H11.5172V4.08021ZM14.9195 9.91979L13.5319 7.31684L14.8568 7.30882L16.2612 9.86364V9.91979H14.9195Z" fill="#F5F5F5"/>*/}
+                      {/*            <path d="M22 6.86364V7.14037C22 7.58422 21.9373 7.98262 21.8119 8.33556C21.6865 8.6885 21.5096 8.9893 21.2811 9.23797C21.0526 9.48396 20.7795 9.67246 20.4619 9.80348C20.147 9.93449 19.7973 10 19.4127 10C19.031 10 18.6813 9.93449 18.3636 9.80348C18.0488 9.67246 17.7757 9.48396 17.5444 9.23797C17.3131 8.9893 17.1334 8.6885 17.0052 8.33556C16.8798 7.98262 16.8171 7.58422 16.8171 7.14037V6.86364C16.8171 6.41711 16.8798 6.01872 17.0052 5.66845C17.1306 5.31551 17.3076 5.01471 17.536 4.76604C17.7673 4.51738 18.0404 4.32754 18.3553 4.19652C18.6729 4.06551 19.0226 4 19.4044 4C19.7889 4 20.1386 4.06551 20.4535 4.19652C20.7712 4.32754 21.0442 4.51738 21.2727 4.76604C21.504 5.01471 21.6823 5.31551 21.8077 5.66845C21.9359 6.01872 22 6.41711 22 6.86364ZM20.7335 7.14037V6.85561C20.7335 6.54545 20.7043 6.27273 20.6458 6.03743C20.5873 5.80214 20.5009 5.60428 20.3866 5.44385C20.2724 5.28342 20.1331 5.1631 19.9687 5.08289C19.8042 5 19.6162 4.95856 19.4044 4.95856C19.1926 4.95856 19.0045 5 18.8401 5.08289C18.6785 5.1631 18.5406 5.28342 18.4263 5.44385C18.3149 5.60428 18.2299 5.80214 18.1714 6.03743C18.1129 6.27273 18.0836 6.54545 18.0836 6.85561V7.14037C18.0836 7.44786 18.1129 7.72059 18.1714 7.95856C18.2299 8.19385 18.3163 8.39305 18.4305 8.55615C18.5448 8.71658 18.6841 8.83823 18.8485 8.92112C19.0129 9.00401 19.201 9.04545 19.4127 9.04545C19.6245 9.04545 19.8126 9.00401 19.977 8.92112C20.1414 8.83823 20.2793 8.71658 20.3908 8.55615C20.5023 8.39305 20.5873 8.19385 20.6458 7.95856C20.7043 7.72059 20.7335 7.44786 20.7335 7.14037Z" fill="#F5F5F5"/>*/}
+                      {/*            <defs>*/}
+                      {/*              <linearGradient id="paint0_linear_408_56651" x1="0" y1="0" x2="28.4235" y2="13.0798" gradientUnits="userSpaceOnUse">*/}
+                      {/*                <stop stopColor="#FF961B"/>*/}
+                      {/*                <stop offset="1" stopColor="#DA7600"/>*/}
+                      {/*              </linearGradient>*/}
+                      {/*            </defs>*/}
+                      {/*          </svg>*/}
+                      {/*        </div>*/}
+                      {/*      </h3>*/}
+                      {/*      <div */}
+                      {/*        onClick={() => setVisibleList4(!visibleList4)} */}
+                      {/*        className={valueInput6 !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveOrange].join(' ') : styles.form__control}>*/}
+                      {/*          {valueInput6}*/}
+                      {/*      </div>*/}
+                      {/*      <div className={visibleList6 ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>*/}
+                      {/*        {additionally.map((elem, index) => {*/}
+                      {/*          return ( */}
+                      {/*          <div key={index} onClick={clickMenu6} className={styles.form__listItem}>{elem}</div>*/}
+                      {/*        )})}*/}
+                      {/*      </div>*/}
+                      {/*    </div>*/}
+                      {/*  </div>*/}
+                      {/*</div>*/}
 
                       <div className={styles.form__row}>
                         <div className={styles.form__title}>Фото изделия</div>
@@ -453,32 +389,33 @@ const CreateOrder = () => {
                       </form>
                       </div>
                     </div>
-                  </form>                 
-                :
-                  <div className={styles.createOrder__noTypeActive}>
-                    <h2 className={styles.createOrder__warningTitle}>Выберите нужный вид пошива.</h2>
-                    <p className={styles.createOrder__warningsubTitle}>От этого будут зависить другие дополнительные <br /> характеристики вашего пошива.</p>
-                  </div>
-                }
+                  </form>
+                  )}
+                {/*:*/}
+                {/*  <div className={styles.createOrder__noTypeActive}>*/}
+                {/*    <h2 className={styles.createOrder__warningTitle}>Выберите нужный вид пошива.</h2>*/}
+                {/*    <p className={styles.createOrder__warningsubTitle}>От этого будут зависить другие дополнительные <br /> характеристики вашего пошива.</p>*/}
+                {/*  </div>*/}
+                {/*}*/}
               </div>
             </div>
         </div>
-        <div className={styles.form__button}>
-          <div className={styles.form__buttonBack}>Назад</div>
-          <button 
-            onClick={() => setModalActive(!modalActive)}
-            disabled={!(activeInput1 && activeInput2
-                && valueInput1 !== 'нажмите для выбора' &&
-                valueInput2 !== 'нажмите для выбора' && valueInput3 !== 'нажмите для выбора'
-                && valueInput4 !== 'нажмите для выбора')
-            }
-            className={activeInput1 && activeInput2 
-              && valueInput1 !== 'нажмите для выбора' && 
-              valueInput2 !== 'нажмите для выбора' && valueInput3 !== 'нажмите для выбора'
-              && valueInput4 !== 'нажмите для выбора' ? [styles.form__buttonForward, styles.form__buttonForwardActive].join(' ') : styles.form__buttonForward}>
-            Вперед
-          </button>
-          </div>
+        {/*<div className={styles.form__button}>*/}
+        {/*  <div className={styles.form__buttonBack}>Назад</div>*/}
+        {/*  <button */}
+        {/*    onClick={() => setModalActive(!modalActive)}*/}
+        {/*    disabled={!(activeInput1 && activeInput2*/}
+        {/*        && valueInput1 !== 'нажмите для выбора' &&*/}
+        {/*        valueInput2 !== 'нажмите для выбора' && valueInput3 !== 'нажмите для выбора'*/}
+        {/*        && valueInput4 !== 'нажмите для выбора')*/}
+        {/*    }*/}
+        {/*    className={activeInput1 && activeInput2 */}
+        {/*      && valueInput1 !== 'нажмите для выбора' && */}
+        {/*      valueInput2 !== 'нажмите для выбора' && valueInput3 !== 'нажмите для выбора'*/}
+        {/*      && valueInput4 !== 'нажмите для выбора' ? [styles.form__buttonForward, styles.form__buttonForwardActive].join(' ') : styles.form__buttonForward}>*/}
+        {/*    Вперед*/}
+        {/*  </button>*/}
+        {/*  </div>*/}
           <ModalLayout active={modalActive} setActive={setModalActive}>
               <h3 className={styles.form__modalTitle}>Укажите свою почту</h3>
               <p className={styles.form__modalSubTitle}>Для получения уведомлений о статусе вашего ТЗ и подтверждения вашего акаунта,  укажите свою электронную почту.</p>
