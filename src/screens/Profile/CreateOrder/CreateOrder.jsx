@@ -110,14 +110,14 @@ const CreateOrder = () => {
                 console.log(options);
                 const labels = {
                     spr_pol: "Пол",
-                    spr_priceSegment: "Ценовой сегмент",
-                    spr_regularZakaz: "Обычный заказ",
+                    spr_price_segment: "Ценовой сегмент",
+                    spr_regular_zakaz: "Обычный заказ",
                     spr_sezons: "Сезоны",
-                    spr_sferaPrim: "Сфера применения",
-                    spr_tipOdejdy: "Тип одежды",
-                    spr_vidOdejdy: "Вид одежды",
-                    spr_vidPostavki: "Вид поставки",
-                    spr_vidProduct: "Вид продукта",
+                    spr_sfera_prim: "Сфера применения",
+                    spr_tip_odejdy: "Тип одежды",
+                    spr_vid_odejdy: "Вид одежды",
+                    spr_vid_postavki: "Вид поставки",
+                    spr_vid_product: "Вид продукта",
                 };
 
                 for (const [setState, propName] of optionStatePairs) {
