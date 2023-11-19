@@ -10,7 +10,9 @@ import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 
 const CreateOrder = () => {
     const [typeActive, setTypeActive] = useState([false, false]);
-    const handleTypeClick = (index) => setTypeActive(prev => prev.map((value, i) => i === index));
+    const handleTypeClick = (index) => setTypeActive(
+        prev => prev.map((value, i) => i+1 === index)
+    );
 
     const [visibleLists, setVisibleLists] = useState(Array(6).fill(false));
     const [inputValues, setInputValues] = useState(Array(6).fill('нажмите для выбора'));
@@ -439,7 +441,7 @@ const CreateOrder = () => {
               </div>
               <div className={styles.form__modalFree}><Link to="/profile/selection">Вы можете также продолжить работать <br /> <span>бесплатно с ограничениями</span></Link></div>
           </ModalLayout>
-        
+
       </div>
     </Layout>
     </>
