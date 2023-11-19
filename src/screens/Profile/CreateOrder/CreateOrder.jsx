@@ -174,6 +174,7 @@ const CreateOrder = () => {
               {
                   Object.entries(formInputs.vidProduct).map(([value, num], index) => {
                       const label = formInputs.vidProduct.label || value
+                      console.log(formInputs)
                       return (
                           <div
                               key={index}
