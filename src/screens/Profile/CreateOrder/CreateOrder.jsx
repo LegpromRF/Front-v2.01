@@ -186,7 +186,7 @@ const CreateOrder = () => {
                                   :
                                   styles.createOrder__typeItem}
                           >
-                              {label}
+                              {value}
                           </div>
                       )
                   })
