@@ -125,7 +125,7 @@ const CreateOrder = () => {
 
                     setState({
                         ...options[propName],
-                        label,
+                        label: label
                     });
                 }
             } catch (error) {
