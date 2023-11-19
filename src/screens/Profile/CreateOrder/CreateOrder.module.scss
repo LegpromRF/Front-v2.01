@@ -86,6 +86,11 @@
     cursor: pointer;
     transition: all .4s ease;
 
+    &_active {
+      background: #0036FF;
+      color: #FAFAFA;
+    }
+
     &:hover {
       background: #0036FF;
       color: #FAFAFA;
