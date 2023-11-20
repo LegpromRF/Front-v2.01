@@ -173,21 +173,21 @@ const CreateOrder = () => {
         <div className={styles.createOrder__order}>
           <div className={styles.createOrder__type}>
             <div className={styles.createOrder__typeTitle}>Вид продукции</div>
-              {/*{*/}
-              {/*    formInputs.vidProduct.options && Object.entries(formInputs.vidProduct.options).map(([value, num], index) => {*/}
-              {/*        return (*/}
-              {/*            <div*/}
-              {/*                key={index}*/}
-              {/*                onClick={() => handleTypeClick(index)}*/}
-              {/*                className={typeActive[index] ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ')*/}
-              {/*                    :*/}
-              {/*                    styles.createOrder__typeItem}*/}
-              {/*            >*/}
-              {/*                {value}*/}
-              {/*            </div>*/}
-              {/*        )*/}
-              {/*    })*/}
-              {/*}*/}
+              {
+                  formInputs.vidProduct.options && Object.entries(formInputs.vidProduct.options).map(([value, num], index) => {
+                      return (
+                          <div
+                              key={index}
+                              onClick={() => handleTypeClick(index)}
+                              className={typeActive[index] ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ')
+                                  :
+                                  styles.createOrder__typeItem}
+                          >
+                              {value}
+                          </div>
+                      )
+                  })
+              }
             {/*<div onClick={activeType1} className={typeActive1 ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ') : styles.createOrder__typeItem}>одежда</div>*/}
             {/*<div onClick={activeType2} className={typeActive2 ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ') : styles.createOrder__typeItem}>другие виды изделий</div>*/}
             {/*{typeActive1 || typeActive2 */}
