@@ -356,7 +356,7 @@ const CreateOrder = () => {
         </div>
         <div className={styles.form__button}>
           <div className={styles.form__buttonBack}>Назад</div>
-          <button
+          <Link to={'/profile/order/purchase'}
             onClick={() => setModalActive(!modalActive)}
             // disabled={!(activeInput1 && activeInput2
             //     && valueInput1 !== 'нажмите для выбора' &&
@@ -369,7 +369,7 @@ const CreateOrder = () => {
             //   && valueInput4 !== 'нажмите для выбора' ? [styles.form__buttonForward, styles.form__buttonForwardActive].join(' ') : styles.form__buttonForward}
           >
             Вперед
-          </button>
+          </Link>
           </div>
           <ModalLayout active={modalActive} setActive={setModalActive}>
               <h3 className={styles.form__modalTitle}>Укажите свою почту</h3>
