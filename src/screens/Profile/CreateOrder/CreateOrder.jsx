@@ -9,14 +9,10 @@ import {Link} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 
 const CreateOrder = () => {
-    const [typeActive, setTypeActive] = useState([false, false]);
+    const [typeActive, setTypeActive] = useState(null);
     const handleTypeClick = (index) => {
-        console.log(typeActive, index)
-        setTypeActive((prev) => {
-            console.log(prev)
-            return prev.map((_, i) => i === index)
-        });
-    }
+        setTypeActive(index);
+    };
 
 
     const [visibleLists, setVisibleLists] = useState(Array(6).fill(false));
@@ -184,7 +180,7 @@ const CreateOrder = () => {
                           <div
                               key={index}
                               onClick={() => handleTypeClick(index)}
-                              className={typeActive[index] ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ')
+                              className={typeActive === index ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ')
                                   :
                                   styles.createOrder__typeItem}
                           >
