@@ -11,7 +11,7 @@ import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 const CreateOrder = () => {
     const [typeActive, setTypeActive] = useState([false, false]);
     const handleTypeClick = (index) => setTypeActive(
-        prev => prev.map((value, i) => i === index)
+        prev => prev.map((_, i) => i === index)
     );
 
     const [visibleLists, setVisibleLists] = useState(Array(6).fill(false));
@@ -355,22 +355,23 @@ const CreateOrder = () => {
               </div>
             </div>
         </div>
-        {/*<div className={styles.form__button}>*/}
-        {/*  <div className={styles.form__buttonBack}>Назад</div>*/}
-        {/*  <button */}
-        {/*    onClick={() => setModalActive(!modalActive)}*/}
-        {/*    disabled={!(activeInput1 && activeInput2*/}
-        {/*        && valueInput1 !== 'нажмите для выбора' &&*/}
-        {/*        valueInput2 !== 'нажмите для выбора' && valueInput3 !== 'нажмите для выбора'*/}
-        {/*        && valueInput4 !== 'нажмите для выбора')*/}
-        {/*    }*/}
-        {/*    className={activeInput1 && activeInput2 */}
-        {/*      && valueInput1 !== 'нажмите для выбора' && */}
-        {/*      valueInput2 !== 'нажмите для выбора' && valueInput3 !== 'нажмите для выбора'*/}
-        {/*      && valueInput4 !== 'нажмите для выбора' ? [styles.form__buttonForward, styles.form__buttonForwardActive].join(' ') : styles.form__buttonForward}>*/}
-        {/*    Вперед*/}
-        {/*  </button>*/}
-        {/*  </div>*/}
+        <div className={styles.form__button}>
+          <div className={styles.form__buttonBack}>Назад</div>
+          <button
+            // onClick={() => setModalActive(!modalActive)}
+            // disabled={!(activeInput1 && activeInput2
+            //     && valueInput1 !== 'нажмите для выбора' &&
+            //     valueInput2 !== 'нажмите для выбора' && valueInput3 !== 'нажмите для выбора'
+            //     && valueInput4 !== 'нажмите для выбора')
+            // }
+            // className={activeInput1 && activeInput2
+            //   && valueInput1 !== 'нажмите для выбора' &&
+            //   valueInput2 !== 'нажмите для выбора' && valueInput3 !== 'нажмите для выбора'
+            //   && valueInput4 !== 'нажмите для выбора' ? [styles.form__buttonForward, styles.form__buttonForwardActive].join(' ') : styles.form__buttonForward}
+          >
+            Вперед
+          </button>
+          </div>
           <ModalLayout active={modalActive} setActive={setModalActive}>
               <h3 className={styles.form__modalTitle}>Укажите свою почту</h3>
               <p className={styles.form__modalSubTitle}>Для получения уведомлений о статусе вашего ТЗ и подтверждения вашего акаунта,  укажите свою электронную почту.</p>
