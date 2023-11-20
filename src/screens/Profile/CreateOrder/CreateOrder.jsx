@@ -200,7 +200,6 @@ const CreateOrder = () => {
             <div className={styles.createOrder__content}>
               <div className={styles.createOrder__body}>
                   {
-                      typeActive.includes(true) && (
                           <form className={styles.form}>
                             <div className={styles.form__content}>
                                 <div className={styles.form__row}>
@@ -346,7 +345,6 @@ const CreateOrder = () => {
                               </div>
                             </div>
                           </form>
-                    )
                   }
                 {/*:*/}
                 {/*  <div className={styles.createOrder__noTypeActive}>*/}
