@@ -189,8 +189,6 @@ const CreateOrder = () => {
                       )
                   })
               }
-            {/*<div onClick={activeType1} className={typeActive1 ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ') : styles.createOrder__typeItem}>одежда</div>*/}
-            {/*<div onClick={activeType2} className={typeActive2 ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ') : styles.createOrder__typeItem}>другие виды изделий</div>*/}
             {/*{typeActive1 || typeActive2 */}
             {/*  ?*/}
             {/*    <div className={styles.createOrder__typeWarning}>От вида продукции зависят остальные параметры заказа.</div>*/}
