@@ -202,31 +202,31 @@ const CreateOrder = () => {
                   {
                           <form className={styles.form}>
                             <div className={styles.form__content}>
-                                {/*<div className={styles.form__row}>*/}
-                                {/*    <div className={styles.form__title}>Основная информация</div>*/}
-                                {/*    <div className={styles.form__items}>*/}
-                                {/*        {[formInputs.tipOdejdy, formInputs.sferaPrim, formInputs.vidOdejdy, formInputs.pol, formInputs.sezons].map((values, index) => (*/}
-                                {/*            <div key={index} className={styles.form__item}>*/}
-                                {/*                <h3 className={styles.form__itemLabel}>*/}
-                                {/*                    <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>*/}
-                                {/*                </h3>*/}
-                                {/*                <div*/}
-                                {/*                    onClick={() => setVisibleLists(prev => prev.map((value, i) => (i === index ? !value : value)))}*/}
-                                {/*                    className={inputValues[index] !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}*/}
-                                {/*                >*/}
-                                {/*                    {inputValues[index]}*/}
-                                {/*                </div>*/}
-                                {/*                <div className={visibleLists[index] ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>*/}
-                                {/*                    {Object.entries(values.options).map(([value, num], i) => (*/}
-                                {/*                        <div key={i} onClick={clickMenu(index, values.options)} className={styles.form__listItem}>*/}
-                                {/*                            {value}*/}
-                                {/*                        </div>*/}
-                                {/*                    ))}*/}
-                                {/*                </div>*/}
-                                {/*            </div>*/}
-                                {/*        ))}*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
+                                <div className={styles.form__row}>
+                                    <div className={styles.form__title}>Основная информация</div>
+                                    <div className={styles.form__items}>
+                                        {[formInputs.tipOdejdy, formInputs.sferaPrim, formInputs.vidOdejdy, formInputs.pol, formInputs.sezons].map((values, index) => (
+                                            <div key={index} className={styles.form__item}>
+                                                <h3 className={styles.form__itemLabel}>
+                                                    <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                </h3>
+                                                <div
+                                                    onClick={() => setVisibleLists(prev => prev.map((value, i) => (i === index ? !value : value)))}
+                                                    className={inputValues[index] !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}
+                                                >
+                                                    {inputValues[index]}
+                                                </div>
+                                                <div className={visibleLists[index] ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
+                                                    {values.options && Object.entries(values.options).map(([value, num], i) => (
+                                                        <div key={i} onClick={clickMenu(index, values.options)} className={styles.form__listItem}>
+                                                            {value}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
                               {/*<div className={styles.form__row}>*/}
                               {/*  <div className={styles.form__title}>Дополнительная информация</div>*/}
                               {/*  <div className={styles.form__items}>*/}
