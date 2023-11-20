@@ -357,7 +357,7 @@ const CreateOrder = () => {
         <div className={styles.form__button}>
           <div className={styles.form__buttonBack}>Назад</div>
           <button
-            // onClick={() => setModalActive(!modalActive)}
+            onClick={() => setModalActive(!modalActive)}
             // disabled={!(activeInput1 && activeInput2
             //     && valueInput1 !== 'нажмите для выбора' &&
             //     valueInput2 !== 'нажмите для выбора' && valueInput3 !== 'нажмите для выбора'
