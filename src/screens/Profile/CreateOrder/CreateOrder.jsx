@@ -10,9 +10,14 @@ import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 
 const CreateOrder = () => {
     const [typeActive, setTypeActive] = useState([false, false]);
-    const handleTypeClick = (index) => setTypeActive(
-        prev => prev.map((_, i) => i === index)
-    );
+    const handleTypeClick = (index) => {
+        console.log(typeActive, index)
+        setTypeActive((prev) => {
+            console.log(prev)
+            prev.map((_, i) => i === index)
+        });
+    }
+
 
     const [visibleLists, setVisibleLists] = useState(Array(6).fill(false));
     const [inputValues, setInputValues] = useState(Array(6).fill('нажмите для выбора'));
