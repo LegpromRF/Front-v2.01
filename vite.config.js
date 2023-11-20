@@ -16,5 +16,8 @@ export default defineConfig({
       '@screens': path.resolve(__dirname, 'src/screens')
     },
   },
+  build: {
+    minify: false
+  },
   plugins: [react()],
 })
