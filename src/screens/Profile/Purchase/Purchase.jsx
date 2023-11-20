@@ -1,5 +1,5 @@
 import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
-import styles from './CreateOrder.module.scss'
+import styles from './Purchase.module.scss'
 
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
