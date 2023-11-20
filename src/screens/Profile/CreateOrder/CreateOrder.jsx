@@ -14,7 +14,7 @@ const CreateOrder = () => {
         console.log(typeActive, index)
         setTypeActive((prev) => {
             console.log(prev)
-            prev.map((_, i) => i === index)
+            return prev.map((_, i) => i === index)
         });
     }
 
