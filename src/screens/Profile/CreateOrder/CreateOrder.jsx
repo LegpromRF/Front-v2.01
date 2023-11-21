@@ -43,16 +43,16 @@ const CreateOrder = () => {
 
   /*==============================================*/
 
-    const dispatch = useDispatch()
-    const { step, formData } = useSelector((state) => state.form);
-    const handleNext = () => {
-        dispatch(setFormData(getValues())); // Сохранить данные формы
-        dispatch(setStep(step + 1));
-    };
-
-    const handlePrev = () => {
-        dispatch(setStep(step - 1));
-    };
+    // const dispatch = useDispatch()
+    // const { step, formData } = useSelector((state) => state.form);
+    // const handleNext = () => {
+    //     dispatch(setFormData(getValues())); // Сохранить данные формы
+    //     dispatch(setStep(step + 1));
+    // };
+    //
+    // const handlePrev = () => {
+    //     dispatch(setStep(step - 1));
+    // };
 
   return ( 
     <>
@@ -60,16 +60,16 @@ const CreateOrder = () => {
     {/*  <title>Создать заказ - LegpromRF</title>*/}
     {/*</Head>*/}
      <Layout>
-      <div className={styles.createOrder}>
-        <TitleProfile>Техническое задание</TitleProfile>
-      
-        <div className={styles.createOrder__header}>
-            <HeaderProfile title="Изделие" number="1" href='/profile/createorder/' active={true}/>
-            <HeaderProfile title="Закупка" number="2" href='/profile/purchase' active={false}/>
-            <HeaderProfile title="Технология" number="3" href='/profile/technology' active={false}/>
-            <HeaderProfile title="Условия" number="4" href='/profile/conditions' active={false}/>
-            <HeaderProfile title="Контакты" number="5" href='/profile/contacts' active={false}/>
-        </div>
+          <div className={styles.createOrder}>
+            <TitleProfile>Техническое задание</TitleProfile>
+
+            <div className={styles.createOrder__header}>
+                <HeaderProfile title="Изделие" number="1" href='/profile/createorder/' active={true}/>
+                <HeaderProfile title="Закупка" number="2" href='/profile/purchase' active={false}/>
+                <HeaderProfile title="Технология" number="3" href='/profile/technology' active={false}/>
+                <HeaderProfile title="Условия" number="4" href='/profile/conditions' active={false}/>
+                <HeaderProfile title="Контакты" number="5" href='/profile/contacts' active={false}/>
+            </div>
             <PurchaseStep />
             <div className={styles.form__button}>
               <div className={styles.form__buttonBack}>Назад</div>
@@ -154,8 +154,6 @@ const CreateOrder = () => {
               </div>
               <div className={styles.form__modalFree}><Link to="/profile/selection">Вы можете также продолжить работать <br /> <span>бесплатно с ограничениями</span></Link></div>
           </ModalLayout>
-
-      </div>
     </Layout>
     </>
    );
