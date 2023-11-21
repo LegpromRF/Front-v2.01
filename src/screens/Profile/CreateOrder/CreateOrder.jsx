@@ -43,6 +43,17 @@ const CreateOrder = () => {
 
   /*==============================================*/
 
+    const dispatch = useDispatch()
+    const { step, formData } = useSelector((state) => state.form);
+    const handleNext = () => {
+        dispatch(setFormData(getValues())); // Сохранить данные формы
+        dispatch(setStep(step + 1));
+    };
+
+    const handlePrev = () => {
+        dispatch(setStep(step - 1));
+    };
+
   return ( 
     <>
     {/*<Head>*/}
@@ -59,55 +70,26 @@ const CreateOrder = () => {
             <HeaderProfile title="Условия" number="4" href='/profile/conditions' active={false}/>
             <HeaderProfile title="Контакты" number="5" href='/profile/contacts' active={false}/>
         </div>
-
-        <div className={styles.createOrder__order}>
-          {/*<div className={styles.createOrder__type}>*/}
-          {/*  <div className={styles.createOrder__typeTitle}>Вид продукции</div>*/}
-          {/*    {*/}
-          {/*        formInputs.vidProduct.options && Object.entries(formInputs.vidProduct.options).map(([value, num], index) => {*/}
-          {/*            return (*/}
-          {/*                <div*/}
-          {/*                    key={index}*/}
-          {/*                    onClick={() => handleTypeClick(index)}*/}
-          {/*                    className={typeActive === index ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ')*/}
-          {/*                        :*/}
-          {/*                        styles.createOrder__typeItem}*/}
-          {/*                >*/}
-          {/*                    {value}*/}
-          {/*                </div>*/}
-          {/*            )*/}
-          {/*        })*/}
-          {/*    }*/}
-          {/*  /!*{typeActive1 || typeActive2 *!/*/}
-          {/*  /!*  ?*!/*/}
-          {/*  /!*    <div className={styles.createOrder__typeWarning}>От вида продукции зависят остальные параметры заказа.</div>*!/*/}
-          {/*  /!*  :*!/*/}
-          {/*  /!*    null*!/*/}
-          {/*  /!*}*!/*/}
-          {/*</div>*/}
-            <div className={styles.createOrder__content}>
-              <div className={styles.createOrder__body}>
-                  <PurchaseStep />
-              </div>
+            <PurchaseStep />
+            <div className={styles.form__button}>
+              <div className={styles.form__buttonBack}>Назад</div>
+              <Link to={'/profile/order/purchase'}
+                    onClick={() => setModalActive(!modalActive)}
+                  // disabled={!(activeInput1 && activeInput2
+                  //     && valueInput1 !== 'нажмите для выбора' &&
+                  //     valueInput2 !== 'нажмите для выбора' && valueInput3 !== 'нажмите для выбора'
+                  //     && valueInput4 !== 'нажмите для выбора')
+                  // }
+                  // className={activeInput1 && activeInput2
+                  //   && valueInput1 !== 'нажмите для выбора' &&
+                  //   valueInput2 !== 'нажмите для выбора' && valueInput3 !== 'нажмите для выбора'
+                  //   && valueInput4 !== 'нажмите для выбора' ? [styles.form__buttonForward, styles.form__buttonForwardActive].join(' ') : styles.form__buttonForward}
+              >
+                  Вперед
+              </Link>
             </div>
         </div>
-        <div className={styles.form__button}>
-          <div className={styles.form__buttonBack}>Назад</div>
-          <Link to={'/profile/order/purchase'}
-            onClick={() => setModalActive(!modalActive)}
-            // disabled={!(activeInput1 && activeInput2
-            //     && valueInput1 !== 'нажмите для выбора' &&
-            //     valueInput2 !== 'нажмите для выбора' && valueInput3 !== 'нажмите для выбора'
-            //     && valueInput4 !== 'нажмите для выбора')
-            // }
-            // className={activeInput1 && activeInput2
-            //   && valueInput1 !== 'нажмите для выбора' &&
-            //   valueInput2 !== 'нажмите для выбора' && valueInput3 !== 'нажмите для выбора'
-            //   && valueInput4 !== 'нажмите для выбора' ? [styles.form__buttonForward, styles.form__buttonForwardActive].join(' ') : styles.form__buttonForward}
-          >
-            Вперед
-          </Link>
-          </div>
+
           <ModalLayout active={modalActive} setActive={setModalActive}>
               <h3 className={styles.form__modalTitle}>Укажите свою почту</h3>
               <p className={styles.form__modalSubTitle}>Для получения уведомлений о статусе вашего ТЗ и подтверждения вашего акаунта,  укажите свою электронную почту.</p>

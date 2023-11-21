@@ -6,10 +6,10 @@
 import styles from "@screens/Profile/CreateOrder/CreateOrder.module.scss";
 
 const OrderFormLayout = ({ children }) => {
-    // const dispatch = useDispatch();
+
     // const history = useHistory();
     // const { register, handleSubmit, errors, getValues } = useForm();
-    // const { step, formData } = useSelector((state) => state.form);
+
     //
     // const onSubmit = () => {
     //     // Здесь вы можете отправить данные на сервер или выполнить другие действия
@@ -21,22 +21,21 @@ const OrderFormLayout = ({ children }) => {
     //     // history.push('/other-page');
     // };
 
-    // const handleNext = () => {
-    //     dispatch(setFormData(getValues())); // Сохранить данные формы
-    //     dispatch(setStep(step + 1));
-    // };
-    //
-    // const handlePrev = () => {
-    //     dispatch(setStep(step - 1));
-    // };
+
 
     return (
         <div>
-            <form className={styles.form}>
-                <div className={styles.form__content}>
-                    {children}
+            <div className={styles.createOrder__order}>
+                <div className={styles.createOrder__content}>
+                    <div className={styles.createOrder__body}>
+                        <form className={styles.form}>
+                            <div className={styles.form__content}>
+                                {children}
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
     );
 };
