@@ -20,14 +20,13 @@ const Technology = () => {
                 const options = await getPropObject('technology');
                 console.log(options);
                 const labels = {
-                    spr_tz_lekala: "Пол",
-                    spr_tz_tehnolog: "Ценовой сегмент",
-                    spr_tz_sirye: "Обычный заказ",
-                    spr_vid_tkani: "Сезоны",
-                    spr_vid_uslug: "Сфера применения",
-                    spr_dop_uslug: "Тип одежды",
-                    spr_obraz_poshiv: "Вид одежды",
-                    spr_obraz_pay: "Вид поставки",
+                    spr_dop_uslugi: "Пол",
+                    spr_obraz_pay: "Ценовой сегмент",
+                    spr_obraz_poshiv: "Обычный заказ",
+                    spr_tz_sirye: "Сезоны",
+                    spr_tz_tehnolog: "Сфера применения",
+                    spr_vid_tkani: "Тип одежды",
+                    spr_vid_uslug: "Вид одежды",
                 }
 
                 const updatedOptions = Object.entries(labels).map(([propName, label]) => {
