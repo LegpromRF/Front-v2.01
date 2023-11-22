@@ -79,7 +79,7 @@ const Technology = () => {
                                         <div className={styles.form__content}>
                                             <div className={styles.form__row}>
                                                 <div className={styles.form__items}>
-                                                    {formInputs.map((values, index) => (
+                                                    {formOptions.map((values, index) => (
                                                         <div key={index} className={styles.form__item}>
                                                             <h3 className={styles.form__itemLabel}>
                                                                 <span>Test</span> <span className={styles.form__itemLabel_star}>*</span>
