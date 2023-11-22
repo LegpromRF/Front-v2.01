@@ -1,15 +1,17 @@
 import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
 import styles from './CreateOrder.module.scss'
-
+import Select from 'react-select'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
 import ModalLayout from '@layout/Modal/ModalLayout'
 import {useEffect, useMemo, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
+import {Controller, useForm} from "react-hook-form";
 
 const CreateOrder = () => {
     const navigate = useNavigate()
+    const { control, handleSubmit } = useForm()
 
     const [typeActive, setTypeActive] = useState(null);
     const handleTypeClick = (index) => {
@@ -20,10 +22,10 @@ const CreateOrder = () => {
     const [visibleLists, setVisibleLists] = useState(Array(6).fill(false));
     const [inputValues, setInputValues] = useState(Array(6).fill('нажмите для выбора'));
 
-    const clickMenu = (index) => (e) => {
-        setInputValues(prev => prev.map((value, i) => (i === index ? e.target.innerHTML : value)));
-        setVisibleLists(prev => prev.map((value, i) => (i === index ? false : value)));
-    };
+    // const clickMenu = (index) => (e) => {
+    //     setInputValues(prev => prev.map((value, i) => (i === index ? e.target.innerHTML : value)));
+    //     setVisibleLists(prev => prev.map((value, i) => (i === index ? false : value)));
+    // };
 
     const [pol, setPol] = useState([])
     const [priceSegment, setPriceSegment] = useState([])
@@ -201,7 +203,11 @@ const CreateOrder = () => {
             <div className={styles.createOrder__content}>
               <div className={styles.createOrder__body}>
                   {
-                          <form className={styles.form}>
+                          <form
+                              className={styles.form}
+                              // onSubmit={handleSubmit(onSubmit)}
+                              
+                          >
                             <div className={styles.form__content}>
                                 <div className={styles.form__row}>
                                     <div className={styles.form__title}>Основная информация</div>
@@ -218,12 +224,24 @@ const CreateOrder = () => {
                                                     {inputValues[index]}
                                                 </div>
                                                 <div className={visibleLists[index] ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                                                    {values.options && Object.entries(values.options).map(([value, num], i) => (
-                                                        <div key={i} onClick={clickMenu(index, values.options)} className={styles.form__listItem}>
-                                                            {value}
-                                                        </div>
-                                                    ))}
+                                                    {values.options && (
+                                                        <Controller
+                                                            name={`productData[${index}]`}
+                                                            control={control}
+                                                            render={({ field }) => (
+                                                                <Select
+                                                                    {...field}
+                                                                    options={Object.entries(values.options).map(([value, num]) => ({
+                                                                        value,
+                                                                        label: value,
+                                                                    }))}
+                                                                    onChange={(selectedOption) => field.onChange(selectedOption?.value)}
+                                                                />
+                                                            )}
+                                                        />
+                                                    )}
                                                 </div>
+
                                             </div>
                                         ))}
                                     </div>
