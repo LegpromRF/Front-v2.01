@@ -8,22 +8,6 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 
-
-const HeaderProfile = ({ title, href, number, active }) => {
-    return (
-        <div className={styles.header}>
-            <div className={active ? [styles.header__item, styles.header__item_active].join(' ') : styles.header__item}>
-                <Link to={href}>
-                    <span>{title}</span>
-                    <div className={active ? [styles.header__itemNumber, styles.header__itemNumber_active].join(' ') : styles.header__itemNumber}>
-                        {number}
-                    </div>
-                </Link>
-            </div>
-        </div>
-    );
-}
-
 const Technology = () => {
     const navigate = useNavigate()
     const { control, handleSubmit, setValue } = useForm()
