@@ -199,6 +199,12 @@ const Purchase = () => {
                                                         />
                                                         <input type={'date'}></input>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={styles.form__content}>
+                                            <div className={styles.form__row}>
+                                                <div className={styles.form__items}>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
                                                         <Controller
