@@ -1,64 +1,43 @@
 import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
-import styles from './Purchase.module.scss'
+import styles from './Technology.module.scss'
 import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
 import {useEffect, useMemo, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
+import Select from "react-select";
 
-const Purchase = () => {
+const Technology = () => {
     const navigate = useNavigate()
     const { control, handleSubmit, setValue } = useForm()
 
-    const [pol, setPol] = useState([])
-    const [priceSegment, setPriceSegment] = useState([])
-    const [regularZakaz, setRegularZakaz] = useState([])
-    const [sezons, setSezons] = useState([])
-    const [sferaPrim, setSferaPrim] = useState([])
-    const [tipOdejdy, setTipOdejdy] = useState([])
-    const [vidOdejdy, setVidOdejdy] = useState([])
-    const [vidPostavki, setVidPostavki] = useState([])
-    const [vidProduct, setVidProduct] = useState([])
-
-    /*==============================================*/
-    const optionStatePairs = [
-        [setPol, 'spr_pol'],
-        [setPriceSegment, 'spr_price_segment'],
-        [setRegularZakaz, 'spr_regular_zakaz'],
-        [setSezons, 'spr_sezons'],
-        [setSferaPrim, 'spr_sfera_prim'],
-        [setTipOdejdy, 'spr_tip_odejdy'],
-        [setVidOdejdy, 'spr_vid_odejdy'],
-        [setVidPostavki, 'spr_vid_postavki'],
-        [setVidProduct, 'spr_vid_product'],
-    ]
+    const [options, setOptions] = useState({})
 
     useEffect(() => {
         async function loadOptions() {
             try {
-                const options = await getPropObject('purchase');
+                const options = await getPropObject('technology');
                 console.log(options);
                 const labels = {
-                    spr_pol: "Пол",
-                    spr_price_segment: "Ценовой сегмент",
-                    spr_regular_zakaz: "Обычный заказ",
-                    spr_sezons: "Сезоны",
-                    spr_sfera_prim: "Сфера применения",
-                    spr_tip_odejdy: "Тип одежды",
-                    spr_vid_odejdy: "Вид одежды",
-                    spr_vid_postavki: "Вид поставки",
-                    spr_vid_product: "Вид продукта",
-                };
-
-                for (const [setState, propName] of optionStatePairs) {
-                    const label = labels[propName] || propName;
-
-                    setState({
-                        label,
-                        options: options[propName],
-                    });
+                    spr_tz_lekala: "Пол",
+                    spr_tz_tehnolog: "Ценовой сегмент",
+                    spr_tz_sirye: "Обычный заказ",
+                    spr_vid_tkani: "Сезоны",
+                    spr_vid_uslug: "Сфера применения",
+                    spr_dop_uslug: "Тип одежды",
+                    spr_obraz_poshiv: "Вид одежды",
+                    spr_obraz_pay: "Вид поставки",
                 }
+
+                const updatedOptions = Object.entries(labels).map(([propName, label]) => {
+                    return {
+                        label,
+                        options: options[propName] || {}, // Здесь можно добавить проверку на наличие options[propName] и предпринять дополнительные действия, если это необходимо
+                    };
+                });
+
+                setOptions(updatedOptions)
             } catch (error) {
                 console.log(error);
             }
@@ -68,18 +47,8 @@ const Purchase = () => {
     }, []);
 
     const formInputs = useMemo(() => {
-        return {
-            pol,
-            priceSegment,
-            regularZakaz,
-            sezons,
-            sferaPrim,
-            tipOdejdy,
-            vidOdejdy,
-            vidPostavki,
-            vidProduct
-        };
-    }, [pol, priceSegment, regularZakaz, sezons, sferaPrim, tipOdejdy, vidOdejdy, vidPostavki, vidProduct]);
+        return options
+    }, [options]);
 
 
     return (
@@ -110,56 +79,26 @@ const Purchase = () => {
                                         <div className={styles.form__content}>
                                             <div className={styles.form__row}>
                                                 <div className={styles.form__items}>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="quantity"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"number"} {...field} />
+                                                    {[formInputs.options].map((values, index) => (
+                                                        <div key={index} className={styles.form__item}>
+                                                            <h3 className={styles.form__itemLabel}>
+                                                                <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                            </h3>
+                                                            {values.options && (
+                                                                values.options
                                                             )}
-                                                        />
-                                                    </div>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="pricePerItem"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"number"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="budget"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"number"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="price"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"number"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="startFrom"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"date"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
+                                                            {/*<div*/}
+                                                            {/*    onClick={() => setVisibleLists(prev => prev.map((value, i) => (i === index ? !value : value)))}*/}
+                                                            {/*    className={inputValues[index] !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}*/}
+                                                            {/*>*/}
+                                                            {/*    {inputValues[index]}*/}
+                                                            {/*</div>*/}
+                                                            {/*<div className={visibleLists[index] ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>*/}
+                                                            {/*    */}
+                                                            {/*</div>*/}
+
+                                                        </div>
+                                                    ))}
                                                 </div>
                                             </div>
                                         </div>
@@ -220,4 +159,4 @@ const Purchase = () => {
     );
 }
 
-export default Purchase
+export default Technology
