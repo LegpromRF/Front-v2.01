@@ -8,13 +8,7 @@ import {useEffect, useMemo, useState} from "react";
 import {Link} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 
-const PurchasePage = () => {
-    const [typeActive, setTypeActive] = useState(null);
-    const handleTypeClick = (index) => {
-        setTypeActive(index);
-    };
-
-
+const Purchase = () => {
     const [visibleLists, setVisibleLists] = useState(Array(6).fill(false));
     const [inputValues, setInputValues] = useState(Array(6).fill('нажмите для выбора'));
 
@@ -58,37 +52,6 @@ const PurchasePage = () => {
         }
     }
 
-    const [visibleControlImage, setVisibleControlImage] = useState(false)
-    const [preview, setPreview] = useState([]);
-
-    const fileobj= [];
-
-    const changedHandler = (e) => {
-        let files = e.target.files;
-        fileobj.push(files);
-        let reader;
-
-        for (var i = 0; i < fileobj[0].length; i++) {
-            reader = new FileReader();
-            reader.readAsDataURL(fileobj[0][i]);
-            reader.onload = e => {
-                preview.push(e.target.result);   // обновить массив вместо замены всего значения превью
-
-                setPreview([...new Set(preview)]); // spread into a new array to trigger rerender
-            }
-        }
-    }
-
-    const deleteImage=(e)=>{
-        const index = e.target.id;
-        let newPreview = [...preview];
-        newPreview.splice(index, 1);
-
-        setPreview(newPreview);
-    }
-
-    /* ============= Preview images upload =========== */
-
     const [modalActive, setModalActive] = useState(false)
     const [modalActive2, setModalActive2] = useState(false)
     const [modalActive3, setModalActive3] = useState(false)
@@ -109,7 +72,7 @@ const PurchasePage = () => {
     useEffect(() => {
         async function loadOptions() {
             try {
-                const options = await getPropObject();
+                const options = await getPropObject('purchase');
                 console.log(options);
                 const labels = {
                     spr_pol: "Пол",
@@ -275,4 +238,4 @@ const PurchasePage = () => {
     );
 }
 
-export default PurchasePage;
+export default Purchase

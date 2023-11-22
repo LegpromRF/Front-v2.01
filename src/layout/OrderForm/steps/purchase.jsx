@@ -3,42 +3,7 @@ import OrderFormLayout from "@layout/OrderForm/OrderFormLayout.jsx";
 import {useEffect, useMemo, useState} from "react";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 
-const PurchaseStep = () => {
-    const [pol, setPol] = useState([])
-    const [priceSegment, setPriceSegment] = useState([])
-    const [regularZakaz, setRegularZakaz] = useState([])
-    const [sezons, setSezons] = useState([])
-    const [sferaPrim, setSferaPrim] = useState([])
-    const [tipOdejdy, setTipOdejdy] = useState([])
-    const [vidOdejdy, setVidOdejdy] = useState([])
-    const [vidPostavki, setVidPostavki] = useState([])
-    const [vidProduct, setVidProduct] = useState([])
-
-    const formInputs = useMemo(() => {
-        return {
-            pol,
-            priceSegment,
-            regularZakaz,
-            sezons,
-            sferaPrim,
-            tipOdejdy,
-            vidOdejdy,
-            vidPostavki,
-            vidProduct
-        };
-    }, [pol, priceSegment, regularZakaz, sezons, sferaPrim, tipOdejdy, vidOdejdy, vidPostavki, vidProduct]);
-
-    const optionStatePairs = [
-        [setPol, 'spr_pol'],
-        [setPriceSegment, 'spr_price_segment'],
-        [setRegularZakaz, 'spr_regular_zakaz'],
-        [setSezons, 'spr_sezons'],
-        [setSferaPrim, 'spr_sfera_prim'],
-        [setTipOdejdy, 'spr_tip_odejdy'],
-        [setVidOdejdy, 'spr_vid_odejdy'],
-        [setVidPostavki, 'spr_vid_postavki'],
-        [setVidProduct, 'spr_vid_product'],
-    ]
+const ProductStep = () => {
 
     useEffect(() => {
         async function loadOptions() {
@@ -81,36 +46,6 @@ const PurchaseStep = () => {
         setVisibleLists(prev => prev.map((value, i) => (i === index ? false : value)));
     };
 
-    const [visibleControlImage, setVisibleControlImage] = useState(false)
-    const [preview, setPreview] = useState([]);
-
-    const fileobj= [];
-
-    const changedHandler = (e) => {
-        let files = e.target.files;
-        fileobj.push(files);
-        let reader;
-
-        for (var i = 0; i < fileobj[0].length; i++) {
-            reader = new FileReader();
-            reader.readAsDataURL(fileobj[0][i]);
-            reader.onload = e => {
-                preview.push(e.target.result);   // обновить массив вместо замены всего значения превью
-
-                setPreview([...new Set(preview)]); // spread into a new array to trigger rerender
-            }
-        }
-    }
-
-    const deleteImage=(e)=>{
-        const index = e.target.id;
-        let newPreview = [...preview];
-        newPreview.splice(index, 1);
-
-        setPreview(newPreview);
-    }
-
-
     return (
         <OrderFormLayout>
             {/*<div className={styles.createOrder__type}>*/}
@@ -139,33 +74,31 @@ const PurchaseStep = () => {
             {/*</div>*/}
             <div className={styles.createOrder__content}>
                 <div className={styles.createOrder__body}>
-                    {
-                        <div className={styles.form__row}>
-                            {/*<div className={styles.form__title}>Основная информация</div>*/}
-                            <div className={styles.form__items}>
-                                {[formInputs.tipOdejdy, formInputs.sferaPrim, formInputs.vidOdejdy, formInputs.pol, formInputs.sezons].map((values, index) => (
-                                    <div key={index} className={styles.form__item}>
-                                        <h3 className={styles.form__itemLabel}>
-                                            <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
-                                        </h3>
-                                        <div
-                                            onClick={() => setVisibleLists(prev => prev.map((value, i) => (i === index ? !value : value)))}
-                                            className={inputValues[index] !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}
-                                        >
-                                            {inputValues[index]}
-                                        </div>
-                                        <div className={visibleLists[index] ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                                            {values.options && Object.entries(values.options).map(([value, num], i) => (
-                                                <div key={i} onClick={clickMenu(index, values.options)} className={styles.form__listItem}>
-                                                    {value}
-                                                </div>
-                                            ))}
-                                        </div>
+                    <div className={styles.form__row}>
+                        {/*<div className={styles.form__title}>Основная информация</div>*/}
+                        <div className={styles.form__items}>
+                            {[formInputs.tipOdejdy, formInputs.sferaPrim, formInputs.vidOdejdy, formInputs.pol, formInputs.sezons].map((values, index) => (
+                                <div key={index} className={styles.form__item}>
+                                    <h3 className={styles.form__itemLabel}>
+                                        <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
+                                    </h3>
+                                    <div
+                                        onClick={() => setVisibleLists(prev => prev.map((value, i) => (i === index ? !value : value)))}
+                                        className={inputValues[index] !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}
+                                    >
+                                        {inputValues[index]}
                                     </div>
-                                ))}
-                            </div>
+                                    <div className={visibleLists[index] ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
+                                        {values.options && Object.entries(values.options).map(([value, num], i) => (
+                                            <div key={i} onClick={clickMenu(index, values.options)} className={styles.form__listItem}>
+                                                {value}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                    }
+                    </div>
                     {/*<div className={styles.form__row}>*/}
                     {/*  <div className={styles.form__title}>Дополнительная информация</div>*/}
                     {/*  <div className={styles.form__items}>*/}
@@ -283,7 +216,7 @@ const PurchaseStep = () => {
                         </form>
                     </div>
 
-                 </div>
+                </div>
                 {/*:*/}
                 {/*  <div className={styles.createOrder__noTypeActive}>*/}
                 {/*    <h2 className={styles.createOrder__warningTitle}>Выберите нужный вид пошива.</h2>*/}
@@ -294,4 +227,4 @@ const PurchaseStep = () => {
         </OrderFormLayout>
     )
 }
-export default PurchaseStep;
+export default ProductStep;

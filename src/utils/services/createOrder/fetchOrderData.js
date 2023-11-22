@@ -1,8 +1,8 @@
 import axios from "axios";
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 
-async function fetchProduct() {
-    return axios.get(apiEndpoints.product, {
+async function fetchData(endpoint) {
+    return axios.get(apiEndpoints[endpoint], {
         withCredentials: true,
     })
         .then((response) => {
@@ -14,9 +14,9 @@ async function fetchProduct() {
         })
 }
 
-export default async function getPropObject() {
+export default async function getPropObject(endpoint) {
     try {
-        const props = await fetchProduct()
+        const props = await fetchData(endpoint)
         console.log(props)
         return props
     } catch (error) {

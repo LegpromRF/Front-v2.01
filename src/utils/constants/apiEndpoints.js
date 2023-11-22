@@ -12,5 +12,5 @@ export const apiEndpoints = {
     yandexLogin: apiHOST + 'auth/yandex/login',
     vkReg: apiHOST + 'auth/vk/register',
     vkLogin: apiHOST + 'auth/vk/login',
-    product: apiHOST + 'bid/product'
+    product: apiHOST + 'bid/product',
 }
