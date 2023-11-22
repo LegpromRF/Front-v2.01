@@ -13,5 +13,5 @@ export const apiEndpoints = {
     vkReg: apiHOST + 'auth/vk/register',
     vkLogin: apiHOST + 'auth/vk/login',
     product: apiHOST + 'bid/product',
-    technology: apiHOST + 'bit/technology'
+    technology: apiHOST + 'bid/technology'
 }
