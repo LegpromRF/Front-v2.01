@@ -12,7 +12,7 @@ const Technology = () => {
     const navigate = useNavigate()
     const { control, handleSubmit, setValue } = useForm()
 
-    const [formOptions, setFormOptions] = useState([])
+    const [formOptions, setFormOptions] = useState({})
 
     async function loadOptions() {
         try {
@@ -70,7 +70,7 @@ const Technology = () => {
                                         <div className={styles.form__content}>
                                             <div className={styles.form__row}>
                                                 <div className={styles.form__items}>
-                                                    {formOptions.map((values, index) => (
+                                                    {Array.formOptions.map((values, index) => (
                                                         <div key={index} className={styles.form__item}>
                                                             <h3 className={styles.form__itemLabel}>
                                                                 <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
