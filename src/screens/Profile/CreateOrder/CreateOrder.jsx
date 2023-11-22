@@ -231,8 +231,8 @@ const CreateOrder = () => {
                                                                 styles={{
                                                                     control: (provided) => ({
                                                                         ...provided,
-                                                                        width: '100%'
-                                                                    })
+                                                                        width: '100%', // Устанавливайте нужную вам ширину
+                                                                    }),
                                                                 }}
                                                                 placeholder="нажмите для выбора"
                                                                 onChange={(selectedOption) => field.onChange(selectedOption?.value)}
