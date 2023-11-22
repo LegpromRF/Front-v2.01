@@ -153,7 +153,6 @@ const Purchase = () => {
                                                                 <input type={"number"} {...field} />
                                                             )}
                                                         />
-                                                        <input type={'number'}></input>
                                                     </div>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
@@ -164,7 +163,6 @@ const Purchase = () => {
                                                                 <input type={"number"} {...field} />
                                                             )}
                                                         />
-                                                        <input type={'number'}></input>
                                                     </div>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
@@ -175,7 +173,6 @@ const Purchase = () => {
                                                                 <input type={"number"} {...field} />
                                                             )}
                                                         />
-                                                        <input type={'number'}></input>
                                                     </div>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
@@ -186,7 +183,6 @@ const Purchase = () => {
                                                                 <input type={"number"} {...field} />
                                                             )}
                                                         />
-                                                        <input type={'number'}></input>
                                                     </div>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
@@ -197,7 +193,6 @@ const Purchase = () => {
                                                                 <input type={"number"} {...field} />
                                                             )}
                                                         />
-                                                        <input type={'date'}></input>
                                                     </div>
                                                 </div>
                                             </div>
@@ -214,7 +209,6 @@ const Purchase = () => {
                                                                 <input type={"number"} {...field} />
                                                             )}
                                                         />
-                                                        <input type={'text'}></input>
                                                     </div>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
@@ -225,7 +219,6 @@ const Purchase = () => {
                                                                 <input type={"number"} {...field} />
                                                             )}
                                                         />
-                                                        <input type={'date'}></input>
                                                     </div>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
@@ -236,7 +229,6 @@ const Purchase = () => {
                                                                 <input type={"number"} {...field} />
                                                             )}
                                                         />
-                                                        <input type={'number'}></input>
                                                     </div>
                                                 </div>
                                             </div>
