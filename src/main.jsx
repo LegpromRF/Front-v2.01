@@ -15,6 +15,7 @@ import PrivateRoute from "@components/routing/privateRoute.jsx";
 import Yatokenpage from "@/pages/Yatokenpage.jsx";
 import CreateOrderPage from "@/pages/profile/order/createorder.jsx";
 import PurchasePage from "@/pages/profile/order/purchase.jsx";
+import TechnologyPage from "@/pages/profile/order/technology.jsx";
 
 const router = createBrowserRouter([
     {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
     {
         path: "/profile/order/purchase",
         element: <PurchasePage />
+    },
+    {
+        path: "/profile/order/technology",
+        element: <TechnologyPage />
     },
     {
         path: "/VKIDtokenpage",
