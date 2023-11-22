@@ -217,30 +217,31 @@ const CreateOrder = () => {
                                                 <h3 className={styles.form__itemLabel}>
                                                     <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
                                                 </h3>
-                                                <div
-                                                    onClick={() => setVisibleLists(prev => prev.map((value, i) => (i === index ? !value : value)))}
-                                                    className={inputValues[index] !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}
-                                                >
-                                                    {inputValues[index]}
-                                                </div>
-                                                <div className={visibleLists[index] ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
-                                                    {values.options && (
-                                                        <Controller
-                                                            name={`productData[${index}]`}
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <Select
-                                                                    {...field}
-                                                                    options={Object.entries(values.options).map(([value, num]) => ({
-                                                                        value,
-                                                                        label: value,
-                                                                    }))}
-                                                                    onChange={(selectedOption) => field.onChange(selectedOption?.value)}
-                                                                />
-                                                            )}
-                                                        />
-                                                    )}
-                                                </div>
+                                                {values.options && (
+                                                    <Controller
+                                                        name={`productData[${index}]`}
+                                                        control={control}
+                                                        render={({ field }) => (
+                                                            <Select
+                                                                {...field}
+                                                                options={Object.entries(values.options).map(([value, num]) => ({
+                                                                    value,
+                                                                    label: value,
+                                                                }))}
+                                                                onChange={(selectedOption) => field.onChange(selectedOption?.value)}
+                                                            />
+                                                        )}
+                                                    />
+                                                )}
+                                                {/*<div*/}
+                                                {/*    onClick={() => setVisibleLists(prev => prev.map((value, i) => (i === index ? !value : value)))}*/}
+                                                {/*    className={inputValues[index] !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}*/}
+                                                {/*>*/}
+                                                {/*    {inputValues[index]}*/}
+                                                {/*</div>*/}
+                                                {/*<div className={visibleLists[index] ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>*/}
+                                                {/*    */}
+                                                {/*</div>*/}
 
                                             </div>
                                         ))}
