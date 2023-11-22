@@ -1,4 +1,5 @@
-import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
+import { Link } from 'react-router-dom';
+// import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
 import styles from './Technology.module.scss'
 import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
@@ -7,6 +8,29 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import Select from "react-select";
+
+const headers = [
+    { title: "Изделие", number: "1", href: '/profile/createorder/', active: true },
+    { title: "Закупка", number: "2", href: '/profile/purchase', active: false },
+    { title: "Технология", number: "3", href: '/profile/technology', active: false },
+    { title: "Условия", number: "4", href: '/profile/conditions', active: false },
+    { title: "Контакты", number: "5", href: '/profile/contacts', active: false },
+];
+
+const HeaderProfile = ({ title, href, number, active }) => {
+    return (
+        <div className={styles.header}>
+            <div className={active ? [styles.header__item, styles.header__item_active].join(' ') : styles.header__item}>
+                <Link to={href}>
+                    <span>{title}</span>
+                    <div className={active ? [styles.header__itemNumber, styles.header__itemNumber_active].join(' ') : styles.header__itemNumber}>
+                        {number}
+                    </div>
+                </Link>
+            </div>
+        </div>
+    );
+}
 
 const Technology = () => {
     const navigate = useNavigate()
@@ -32,7 +56,7 @@ const Technology = () => {
                 const updatedOptions = Object.entries(labels).map(([propName, label]) => {
                     return {
                         label,
-                        options: options[propName] || {}, // Здесь можно добавить проверку на наличие options[propName] и предпринять дополнительные действия, если это необходимо
+                        options: options[propName] || {},
                     };
                 });
 
@@ -56,11 +80,15 @@ const Technology = () => {
                     <TitleProfile>Техническое задание</TitleProfile>
 
                     <div className={styles.createOrder__header}>
-                        <HeaderProfile title="Изделие" number="1" href='/profile/createorder/' active={true}/>
-                        <HeaderProfile title="Закупка" number="2" href='/profile/purchase' active={false}/>
-                        <HeaderProfile title="Технология" number="3" href='/profile/technology' active={false}/>
-                        <HeaderProfile title="Условия" number="4" href='/profile/conditions' active={false}/>
-                        <HeaderProfile title="Контакты" number="5" href='/profile/contacts' active={false}/>
+                        {headers.map((header, index) => (
+                            <HeaderProfile
+                                key={index}
+                                title={header.title}
+                                number={header.number}
+                                href={header.href}
+                                active={header.active}
+                            />
+                        ))}
                     </div>
 
                     <div className={styles.createOrder__order}>
@@ -140,13 +168,9 @@ const Technology = () => {
                     </div>
                     <div className={styles.form__button}>
                         <div className={styles.form__buttonBack}>Назад</div>
-                        <button
-                            onClick={() => {
-                                navigate('/profile/order/technology')
-                            }}
-                        >
+                        <Link to="/profile/order/technology">
                             Вперед
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </Layout>
