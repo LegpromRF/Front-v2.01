@@ -56,9 +56,11 @@ const Technology = () => {
                 const updatedOptions = Object.entries(labels).map(([propName, label]) => {
                     return {
                         label,
-                        options: options[propName] || {},
+                        options: options[propName],
                     };
                 });
+
+                console.log(updatedOptions)
 
                 setFormOptions(updatedOptions)
 
