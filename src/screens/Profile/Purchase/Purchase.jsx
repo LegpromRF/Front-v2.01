@@ -158,7 +158,7 @@ const Purchase = () => {
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
                                                         <Controller
-                                                            name="quantity"
+                                                            name="pricePerItem"
                                                             control={control}
                                                             render={({ field }) => (
                                                                 <input type={"number"} {...field} />
@@ -169,7 +169,7 @@ const Purchase = () => {
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
                                                         <Controller
-                                                            name="quantity"
+                                                            name="budget"
                                                             control={control}
                                                             render={({ field }) => (
                                                                 <input type={"number"} {...field} />
@@ -180,7 +180,7 @@ const Purchase = () => {
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
                                                         <Controller
-                                                            name="quantity"
+                                                            name="price"
                                                             control={control}
                                                             render={({ field }) => (
                                                                 <input type={"number"} {...field} />
@@ -191,7 +191,7 @@ const Purchase = () => {
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
                                                         <Controller
-                                                            name="quantity"
+                                                            name="startFrom"
                                                             control={control}
                                                             render={({ field }) => (
                                                                 <input type={"number"} {...field} />
@@ -202,7 +202,7 @@ const Purchase = () => {
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
                                                         <Controller
-                                                            name="quantity"
+                                                            name="timing"
                                                             control={control}
                                                             render={({ field }) => (
                                                                 <input type={"number"} {...field} />
@@ -213,7 +213,7 @@ const Purchase = () => {
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
                                                         <Controller
-                                                            name="quantity"
+                                                            name="giveUntil"
                                                             control={control}
                                                             render={({ field }) => (
                                                                 <input type={"number"} {...field} />
@@ -224,7 +224,7 @@ const Purchase = () => {
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
                                                         <Controller
-                                                            name="quantity"
+                                                            name="getPartly"
                                                             control={control}
                                                             render={({ field }) => (
                                                                 <input type={"number"} {...field} />
