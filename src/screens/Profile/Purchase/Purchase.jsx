@@ -1,6 +1,6 @@
 import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
 import styles from './Purchase.module.scss'
-
+import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
 import ModalLayout from '@layout/Modal/ModalLayout'
@@ -9,8 +9,7 @@ import {Link} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 
 const Purchase = () => {
-    const [visibleLists, setVisibleLists] = useState(Array(6).fill(false));
-    const [inputValues, setInputValues] = useState(Array(6).fill('нажмите для выбора'));
+    const { control, handleSubmit, setValue } = useForm()
 
     const clickMenu = (index) => (e) => {
         setInputValues(prev => prev.map((value, i) => (i === index ? e.target.innerHTML : value)));
@@ -147,6 +146,90 @@ const Purchase = () => {
                                                 <div className={styles.form__items}>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>Test</h3>
+                                                        <Controller
+                                                            name="quantity"
+                                                            control={control}
+                                                            render={({ field }) => (
+                                                                <input type={"number"} {...field} />
+                                                            )}
+                                                        />
+                                                        <input type={'number'}></input>
+                                                    </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>Test</h3>
+                                                        <Controller
+                                                            name="quantity"
+                                                            control={control}
+                                                            render={({ field }) => (
+                                                                <input type={"number"} {...field} />
+                                                            )}
+                                                        />
+                                                        <input type={'number'}></input>
+                                                    </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>Test</h3>
+                                                        <Controller
+                                                            name="quantity"
+                                                            control={control}
+                                                            render={({ field }) => (
+                                                                <input type={"number"} {...field} />
+                                                            )}
+                                                        />
+                                                        <input type={'number'}></input>
+                                                    </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>Test</h3>
+                                                        <Controller
+                                                            name="quantity"
+                                                            control={control}
+                                                            render={({ field }) => (
+                                                                <input type={"number"} {...field} />
+                                                            )}
+                                                        />
+                                                        <input type={'number'}></input>
+                                                    </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>Test</h3>
+                                                        <Controller
+                                                            name="quantity"
+                                                            control={control}
+                                                            render={({ field }) => (
+                                                                <input type={"number"} {...field} />
+                                                            )}
+                                                        />
+                                                        <input type={'date'}></input>
+                                                    </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>Test</h3>
+                                                        <Controller
+                                                            name="quantity"
+                                                            control={control}
+                                                            render={({ field }) => (
+                                                                <input type={"number"} {...field} />
+                                                            )}
+                                                        />
+                                                        <input type={'text'}></input>
+                                                    </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>Test</h3>
+                                                        <Controller
+                                                            name="quantity"
+                                                            control={control}
+                                                            render={({ field }) => (
+                                                                <input type={"number"} {...field} />
+                                                            )}
+                                                        />
+                                                        <input type={'date'}></input>
+                                                    </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>Test</h3>
+                                                        <Controller
+                                                            name="quantity"
+                                                            control={control}
+                                                            render={({ field }) => (
+                                                                <input type={"number"} {...field} />
+                                                            )}
+                                                        />
                                                         <input type={'number'}></input>
                                                     </div>
                                                 </div>

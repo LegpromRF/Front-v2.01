@@ -176,30 +176,30 @@ const CreateOrder = () => {
         </div>
 
         <div className={styles.createOrder__order}>
-          <div className={styles.createOrder__type}>
-            <div className={styles.createOrder__typeTitle}>Вид продукции</div>
-              {
-                  formInputs.vidProduct.options && Object.entries(formInputs.vidProduct.options).map(([value, num], index) => {
-                      return (
-                          <div
-                              key={index}
-                              onClick={() => handleTypeClick(index)}
-                              className={typeActive === index ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ')
-                                  :
-                                  styles.createOrder__typeItem}
-                          >
-                              {value}
-                          </div>
-                      )
-                  })
-              }
-            {/*{typeActive1 || typeActive2 */}
-            {/*  ?*/}
-            {/*    <div className={styles.createOrder__typeWarning}>От вида продукции зависят остальные параметры заказа.</div>*/}
-            {/*  :*/}
-            {/*    null*/}
-            {/*}*/}
-          </div>
+          {/*<div className={styles.createOrder__type}>*/}
+          {/*  <div className={styles.createOrder__typeTitle}>Вид продукции</div>*/}
+          {/*    {*/}
+          {/*        formInputs.vidProduct.options && Object.entries(formInputs.vidProduct.options).map(([value, num], index) => {*/}
+          {/*            return (*/}
+          {/*                <div*/}
+          {/*                    key={index}*/}
+          {/*                    onClick={() => handleTypeClick(index)}*/}
+          {/*                    className={typeActive === index ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ')*/}
+          {/*                        :*/}
+          {/*                        styles.createOrder__typeItem}*/}
+          {/*                >*/}
+          {/*                    {value}*/}
+          {/*                </div>*/}
+          {/*            )*/}
+          {/*        })*/}
+          {/*    }*/}
+          {/*  /!*{typeActive1 || typeActive2 *!/*/}
+          {/*  /!*  ?*!/*/}
+          {/*  /!*    <div className={styles.createOrder__typeWarning}>От вида продукции зависят остальные параметры заказа.</div>*!/*/}
+          {/*  /!*  :*!/*/}
+          {/*  /!*    null*!/*/}
+          {/*  /!*}*!/*/}
+          {/*</div>*/}
             <div className={styles.createOrder__content}>
               <div className={styles.createOrder__body}>
                   {
@@ -224,10 +224,14 @@ const CreateOrder = () => {
                                                         render={({ field }) => (
                                                             <Select
                                                                 {...field}
-                                                                options={Object.entries(values.options).map(([value, num]) => ({
+                                                                options={
+                                                                Object.entries(values.options).map(([value, num]) => (
+                                                                    {
                                                                     value,
                                                                     label: value,
-                                                                }))}
+                                                                })
+                                                                )
+                                                            }
                                                                 styles={{
                                                                     control: (provided) => ({
                                                                         ...provided,
