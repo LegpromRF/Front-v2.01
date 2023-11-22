@@ -12,7 +12,7 @@ const Technology = () => {
     const navigate = useNavigate()
     const { control, handleSubmit, setValue } = useForm()
 
-    const [formOptions, setFormOptions] = useState({})
+    const [formOptions, setFormOptions] = useState([])
 
     async function loadOptions() {
         try {
@@ -31,7 +31,7 @@ const Technology = () => {
             const updatedOptions = Object.entries(labels).map(([propName, label]) => {
                 return {
                     label,
-                    options: options[propName],
+                    options: Array.isArray(options[propName]) ? options[propName] : [options[propName]],
                 };
             });
             
