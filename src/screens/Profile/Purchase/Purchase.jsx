@@ -190,7 +190,7 @@ const Purchase = () => {
                                                             name="startFrom"
                                                             control={control}
                                                             render={({ field }) => (
-                                                                <input type={"number"} {...field} />
+                                                                <input type={"date"} {...field} />
                                                             )}
                                                         />
                                                     </div>
@@ -216,7 +216,7 @@ const Purchase = () => {
                                                             name="giveUntil"
                                                             control={control}
                                                             render={({ field }) => (
-                                                                <input type={"number"} {...field} />
+                                                                <input type={"date"} {...field} />
                                                             )}
                                                         />
                                                     </div>
