@@ -361,7 +361,7 @@ const CreateOrder = () => {
           <button
             onClick={() => {
                 setModalActive(!modalActive)
-                navigate('/profile/purchase')
+                navigate('/profile/order/purchase')
             }}
             // disabled={!(activeInput1 && activeInput2
             //     && valueInput1 !== 'нажмите для выбора' &&
