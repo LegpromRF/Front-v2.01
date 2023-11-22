@@ -12,7 +12,7 @@ const Technology = () => {
     const navigate = useNavigate()
     const { control, handleSubmit, setValue } = useForm()
 
-    const [options, setOptions] = useState({})
+    const [formOptions, setFormOptions] = useState({})
 
     useEffect(() => {
         async function loadOptions() {
@@ -37,7 +37,7 @@ const Technology = () => {
                     };
                 });
 
-                setOptions(updatedOptions)
+                setFormOptions(updatedOptions)
             } catch (error) {
                 console.log(error);
             }
@@ -47,8 +47,8 @@ const Technology = () => {
     }, []);
 
     const formInputs = useMemo(() => {
-        return options
-    }, [options]);
+        return formOptions
+    }, [formOptions]);
 
 
     return (
@@ -79,7 +79,7 @@ const Technology = () => {
                                         <div className={styles.form__content}>
                                             <div className={styles.form__row}>
                                                 <div className={styles.form__items}>
-                                                    {[formInputs.options].map((values, index) => (
+                                                    {formInputs.map((values, index) => (
                                                         <div key={index} className={styles.form__item}>
                                                             <h3 className={styles.form__itemLabel}>
                                                                 <span>Test</span> <span className={styles.form__itemLabel_star}>*</span>
@@ -87,15 +87,15 @@ const Technology = () => {
                                                             {values.options && (
                                                                 values.options
                                                             )}
-                                                            <div
-                                                                onClick={() => setVisibleLists(prev => prev.map((value, i) => (i === index ? !value : value)))}
-                                                                className={inputValues[index] !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}
-                                                            >
-                                                                {inputValues[index]}
-                                                            </div>
-                                                            <div className={visibleLists[index] ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>
+                                                            {/*<div*/}
+                                                            {/*    onClick={() => setVisibleLists(prev => prev.map((value, i) => (i === index ? !value : value)))}*/}
+                                                            {/*    className={inputValues[index] !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}*/}
+                                                            {/*>*/}
+                                                            {/*    {inputValues[index]}*/}
+                                                            {/*</div>*/}
+                                                            {/*<div className={visibleLists[index] ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>*/}
 
-                                                            </div>
+                                                            {/*</div>*/}
 
                                                         </div>
                                                     ))}
