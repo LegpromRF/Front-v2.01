@@ -37,12 +37,12 @@ const Technology = () => {
                 });
 
                 setFormOptions(updatedOptions)
-                console.log(formOptions)
+
             } catch (error) {
                 console.log(error);
             }
         }
-
+        console.log(formOptions)
         loadOptions();
     }, []);
 
