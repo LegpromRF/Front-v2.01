@@ -228,6 +228,13 @@ const CreateOrder = () => {
                                                                     value,
                                                                     label: value,
                                                                 }))}
+                                                                styles={{
+                                                                    control: (provided) => ({
+                                                                        ...provided,
+                                                                        width: '100%'
+                                                                    })
+                                                                }}
+                                                                placeholder="нажмите для выбора"
                                                                 onChange={(selectedOption) => field.onChange(selectedOption?.value)}
                                                             />
                                                         )}
