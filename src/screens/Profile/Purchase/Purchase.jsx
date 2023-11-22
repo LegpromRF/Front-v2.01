@@ -135,15 +135,22 @@ const Purchase = () => {
                     </div>
 
                     <div className={styles.createOrder__order}>
-                        <div className={styles.createOrder__type}>
-                            <div className={styles.createOrder__typeTitle}>Вид продукции</div>
-                        </div>
+                        {/*<div className={styles.createOrder__type}>*/}
+                        {/*    <div className={styles.createOrder__typeTitle}>Вид продукции</div>*/}
+                        {/*</div>*/}
                         <div className={styles.createOrder__content}>
                             <div className={styles.createOrder__body}>
                                 {
                                     <form className={styles.form}>
                                         <div className={styles.form__content}>
-
+                                            <div className={styles.form__row}>
+                                                <div className={styles.form__items}>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>Test</h3>
+                                                        <input type={'number'}></input>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
                                 }
