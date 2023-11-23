@@ -11,7 +11,6 @@ import {Controller, useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
 
 const CreateOrder = () => {
-    const navigate = useNavigate()
     const { control, getValues, formState: {isValid}, handleSubmit } = useForm()
     const [formOptions, setFormOptions] = useState([])
 
@@ -332,7 +331,7 @@ const CreateOrder = () => {
               <Link
                   to="/profile/order/purchase"
                   onClick={() => {
-                      console.log(getValues("productData"))
+                      console.log(getValues())
                   }}
                     className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
               >

@@ -136,7 +136,7 @@ const Purchase = () => {
                                                             }}
                                                             render={({ field }) => (
                                                                 <div>
-                                                                    <input type={"number"} {...field} placeholder="Введите целое число" />
+                                                                    <input type={"date"} {...field} placeholder="Введите целое число" />
                                                                 </div>
                                                             )}
                                                         />
