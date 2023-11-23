@@ -7,6 +7,7 @@ import Layout from "@layout/Layout";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
+import Select from "react-select";
 
 const Technology = () => {
     const navigate = useNavigate()
@@ -76,7 +77,31 @@ const Technology = () => {
                                                                 <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
                                                             </h3>
                                                             {values.options && (
-                                                                <div>{values.options}</div>
+                                                                <Controller
+                                                                    name={`productData[${index}]`}
+                                                                    control={control}
+                                                                    render={({ field }) => (
+                                                                        <Select
+                                                                            {...field}
+                                                                            options={
+                                                                                Object.entries(values.options).map(([value, num]) => (
+                                                                                    {
+                                                                                        value,
+                                                                                        label: value,
+                                                                                    })
+                                                                                )
+                                                                            }
+                                                                            styles={{
+                                                                                control: (provided) => ({
+                                                                                    ...provided,
+                                                                                    width: '100%', // Устанавливайте нужную вам ширину
+                                                                                }),
+                                                                            }}
+                                                                            placeholder="нажмите для выбора"
+                                                                            onChange={(selectedOption) => field.onChange(selectedOption?.value)}
+                                                                        />
+                                                                    )}
+                                                                />
                                                             )}
                                                         </div>
                                                     ))}
