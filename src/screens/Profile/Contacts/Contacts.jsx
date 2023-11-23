@@ -114,6 +114,7 @@ const Contacts = () => {
                                   <input
                                     type="file"
                                     accept=".doc"
+                                    placeholder={"Вставьте текстовый файл"}
                                     onChange={(e) => {
                                       field.onChange(e.target.files[0]);
                                     }}
@@ -122,6 +123,26 @@ const Contacts = () => {
                               )}
                             />
                           </div>
+                            <div className={styles.form__item}>
+                                <h3 className={styles.form__itemLabel}></h3>
+                                <Controller
+                                    name="image"
+                                    control={control}
+                                    render={({ field }) => (
+                                        <div>
+                                            <input
+                                                type="image"
+                                                accept=".doc"
+                                                placeholder={"Вставьте изображение"}
+                                                onChange={(e) => {
+                                                    field.onChange(e.target.files[0]);
+                                                }}
+                                                alt={"Изображение"}
+                                            />
+                                        </div>
+                                    )}
+                                />
+                            </div>
                         </div>
                       </div>
                     </div>
