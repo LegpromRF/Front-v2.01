@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {conditionsSuccess} from "@store/orderForm/form.slice.js";
 
 const Conditions = () => {
-    const { control, handleSubmit, setValue } = useForm()
+    const { control, handleSubmit, getValues, setValue } = useForm()
     const [formOptions, setFormOptions] = useState([])
 
     const purchase = useSelector((state) => state.form.purchaseStep)
@@ -128,6 +128,7 @@ const Conditions = () => {
                         <div className={styles.form__buttonBack}>Назад</div>
                         <Link
                             onClick={() => {
+                                console.log(getValues())
                                 dispatch(conditionsSuccess())
                             }}
                             to="/profile/order/contacts"

@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {technologySuccess} from "@store/orderForm/form.slice.js";
 
 const Technology = () => {
-    const { control, handleSubmit, setValue } = useForm()
+    const { control, handleSubmit, getValues, setValue } = useForm()
     const [formOptions, setFormOptions] = useState([])
 
     const purchase = useSelector((state) => state.form.purchaseStep)
@@ -172,6 +172,7 @@ const Technology = () => {
                         <div className={styles.form__buttonBack}>Назад</div>
                         <Link
                             onClick={() => {
+                                console.log(getValues())
                                 dispatch(technologySuccess())
                             }}
                             to="/profile/order/conditions"

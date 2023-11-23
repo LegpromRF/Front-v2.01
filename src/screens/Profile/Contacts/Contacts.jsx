@@ -12,7 +12,7 @@ import Select from "react-select";
 
 const Contacts = () => {
   const navigate = useNavigate();
-  const { control, handleSubmit, setValue } = useForm();
+  const { control, handleSubmit, getValues, setValue } = useForm();
   const [formOptions, setFormOptions] = useState([]);
   const purchase = useSelector((state) => state.form.purchaseStep);
   const technology = useSelector((state) => state.form.technologyStep);
@@ -149,7 +149,7 @@ const Contacts = () => {
                                 }}
                                 render={({ field }) => (
                                     <div>
-                                      <input type={"text"} {...field} placeholder="Введите ссылку на Telegram" />
+                                      <input type={"text"} {...field} placeholder="Введите ссылку на TG" />
                                     </div>
                                 )}
                             />
@@ -256,9 +256,10 @@ const Contacts = () => {
               <div className={styles.form__buttonBack}>Назад</div>
               <Link
                 onClick={() => {
+                  console.log(getValues())
                   dispatch(purchaseSuccess());
                 }}
-                to="/profile/order/technology"
+                to="#"
               >
                 Вперед
               </Link>

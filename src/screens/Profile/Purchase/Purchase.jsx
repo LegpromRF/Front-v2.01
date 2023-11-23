@@ -12,7 +12,7 @@ import Select from "react-select";
 
 const Purchase = () => {
     const navigate = useNavigate()
-    const { control, handleSubmit, watch, setValue } = useForm()
+    const { control, handleSubmit, watch, getValues, setValue } = useForm()
     const [formOptions, setFormOptions] = useState([])
     const purchase = useSelector((state) => state.form.purchaseStep)
     const technology = useSelector((state) => state.form.technologyStep)
@@ -141,6 +141,27 @@ const Purchase = () => {
                                                             )}
                                                         />
                                                     </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>
+                                                            <span>Срок исполнения заказа с момента получения аванса/сырья</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                        </h3>
+                                                        <Controller
+                                                            name="telegram"
+                                                            control={control}
+                                                            rules={{
+                                                                required: {
+                                                                    value: true,
+                                                                    message: 'Это поле обязательно'
+                                                                },
+
+                                                            }}
+                                                            render={({ field }) => (
+                                                                <div>
+                                                                    <input type={"text"} {...field} placeholder="Введите ссылку на TG" />
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className={styles.form__row}>
@@ -218,6 +239,7 @@ const Purchase = () => {
                             <div className={styles.form__buttonBack}>Назад</div>
                             <Link
                                 onClick={() => {
+                                    console.log(getValues())
                                     dispatch(purchaseSuccess())
                                 }}
                                 to="/profile/order/technology"
