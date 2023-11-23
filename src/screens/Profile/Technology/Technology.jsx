@@ -17,13 +17,14 @@ const Technology = () => {
             const options = await getPropObject('technology');
             console.log(options);
             const labels = {
-                spr_dop_uslugi: "Пол",
-                spr_obraz_pay: "Ценовой сегмент",
-                spr_obraz_poshiv: "Обычный заказ",
-                spr_tz_sirye: "Сезоны",
-                spr_tz_tehnolog: "Сфера применения",
-                spr_vid_tkani: "Тип одежды",
-                spr_vid_uslug: "Вид одежды",
+                spr_dop_uslugi: "Дополнительные услуги",
+                spr_obraz_pay: "Оплата пошива образца",
+                spr_obraz_poshiv: "Пошив образца",
+                spr_tz_sirye: "Сырье",
+                spr_tz_tehnolog: "Технологическая документация",
+                spr_vid_tkani: "Вид сырья",
+                spr_vid_uslug: "Вид нанесения",
+                spr_tz_lekala: "Конструкторская документация"
             }
 
             const updatedOptions = Object.entries(labels).map(([propName, label]) => {
@@ -102,40 +103,9 @@ const Technology = () => {
                                                     ))}
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className={styles.form__content}>
                                             <div className={styles.form__row}>
                                                 <div className={styles.form__items}>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="timing"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"number"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="giveUntil"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"date"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="getPartly"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"number"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>

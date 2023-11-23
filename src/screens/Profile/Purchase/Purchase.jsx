@@ -76,56 +76,38 @@ const Purchase = () => {
                                         <div className={styles.form__content}>
                                             <div className={styles.form__row}>
                                                 <div className={styles.form__items}>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="quantity"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"number"} {...field} />
+                                                    {formOptions && formOptions.map((values, index) => (
+                                                        <div key={index} className={styles.form__item}>
+                                                            <h3 className={styles.form__itemLabel}>
+                                                                <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                            </h3>
+                                                            {values.options && (
+                                                                <Controller
+                                                                    name={`productData[${index}]`}
+                                                                    control={control}
+                                                                    render={({ field }) => (
+                                                                        <Select
+                                                                            {...field}
+                                                                            options={
+                                                                                Object.entries(values.options).map(([value, num]) => ({
+                                                                                    value,
+                                                                                    label: value,
+                                                                                }))
+                                                                            }
+                                                                            styles={{
+                                                                                control: (provided) => ({
+                                                                                    ...provided,
+                                                                                    width: '100%', // Устанавливайте нужную вам ширину
+                                                                                }),
+                                                                            }}
+                                                                            placeholder="нажмите для выбора"
+                                                                            onChange={(selectedOption) => field.onChange(selectedOption?.value)}
+                                                                        />
+                                                                    )}
+                                                                />
                                                             )}
-                                                        />
-                                                    </div>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="pricePerItem"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"number"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="budget"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"number"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="price"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"number"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="startFrom"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"date"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
+                                                        </div>
+                                                    ))}
                                                 </div>
                                             </div>
                                         </div>

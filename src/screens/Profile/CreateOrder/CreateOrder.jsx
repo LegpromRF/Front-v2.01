@@ -24,7 +24,7 @@ const CreateOrder = () => {
         fileobj.push(files);
         let reader;
 
-        for (var i = 0; i < fileobj[0].length; i++) {
+        for (let i = 0; i < fileobj[0].length; i++) {
             reader = new FileReader();
             reader.readAsDataURL(fileobj[0][i]);
             reader.onload = e => {
