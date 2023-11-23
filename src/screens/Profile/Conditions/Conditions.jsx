@@ -17,11 +17,11 @@ const Conditions = () => {
             const options = await getPropObject('conditions');
             console.log(options);
             const labels = {
-                spr_3variants: "Пол",
-                spr_prersonal: "Ценовой сегмент",
-                spr_oborud: "Обычный заказ",
-                spr_upakovka: "Сезоны",
-                spr_markirovka: "Сфера применения",
+                spr_3variants: "Доступ на производство для ОТК заказчика",
+                spr_prersonal: "Требования к персоналу",
+                spr_oborud: "Требования к оборудованию",
+                spr_upakovka: "Требования к упаковке",
+                spr_markirovka: "Требования к маркировке",
             }
 
             const updatedOptions = Object.entries(labels).map(([propName, label]) => {
@@ -144,7 +144,7 @@ const Conditions = () => {
                     </div>
                     <div className={styles.form__button}>
                         <div className={styles.form__buttonBack}>Назад</div>
-                        <Link to="/profile/order/technology">
+                        <Link to="/profile/order/contacts">
                             Вперед
                         </Link>
                     </div>

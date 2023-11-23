@@ -4,13 +4,21 @@ import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
+import {useDispatch, useSelector} from "react-redux";
+import {purchaseSuccess} from "@store/orderForm/form.slice.js";
 
 const Purchase = () => {
     const navigate = useNavigate()
     const { control, handleSubmit, setValue } = useForm()
     const [formOptions, setFormOptions] = useState([])
+    const purchase = useSelector((state) => state.form.purchaseStep)
+    const technology = useSelector((state) => state.form.technologyStep)
+    const conditions = useSelector((state) => state.form.conditionsStep)
+    const contacts = useSelector((state) => state.form.contactsStep)
+
+    const dispatch = useDispatch()
 
     async function loadOptions() {
         try {
@@ -59,10 +67,10 @@ const Purchase = () => {
 
                     <div className={styles.createOrder__header}>
                         <HeaderProfile title="Изделие" number="1" href='/profile/order/createorder/' active={true}/>
-                        <HeaderProfile title="Закупка" number="2" href='/profile/order/purchase' active={false}/>
-                        <HeaderProfile title="Технология" number="3" href='/profile/order/technology' active={false}/>
-                        <HeaderProfile title="Условия" number="4" href='/profile/order/conditions' active={false}/>
-                        <HeaderProfile title="Контакты" number="5" href='/profile/order/contacts' active={false}/>
+                        <HeaderProfile title="Закупка" number="2" href='/profile/order/purchase' active={purchase}/>
+                        <HeaderProfile title="Технология" number="3" href='/profile/order/technology' active={technology}/>
+                        <HeaderProfile title="Условия" number="4" href='/profile/order/conditions' active={conditions}/>
+                        <HeaderProfile title="Контакты" number="5" href='/profile/order/contacts' active={contacts}/>
                     </div>
 
                     <div className={styles.createOrder__order}>
@@ -153,14 +161,17 @@ const Purchase = () => {
                         </div>
                     </div>
                     <div className={styles.form__button}>
-                        <div className={styles.form__buttonBack}>Назад</div>
-                        <button
-                            onClick={() => {
-                                navigate('/profile/order/technology')
-                            }}
-                        >
-                            Вперед
-                        </button>
+                        <div className={styles.form__button}>
+                            <div className={styles.form__buttonBack}>Назад</div>
+                            <Link
+                                onClick={() => {
+                                    dispatch(purchaseSuccess())
+                                }}
+                                to="/profile/order/technology"
+                            >
+                                Вперед
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </Layout>
