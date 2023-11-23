@@ -12,7 +12,7 @@ import Select from "react-select";
 
 const Purchase = () => {
     const navigate = useNavigate()
-    const { control, handleSubmit, setValue } = useForm()
+    const { control, handleSubmit, watch, setValue } = useForm()
     const [formOptions, setFormOptions] = useState([])
     const purchase = useSelector((state) => state.form.purchaseStep)
     const technology = useSelector((state) => state.form.technologyStep)
@@ -49,6 +49,9 @@ const Purchase = () => {
         loadOptions();
     }, []);
 
+    const firstFieldValue = watch('quantity') || 0;
+    const secondFieldValue = watch('price') || 0;
+    const sum = parseFloat(firstFieldValue) + parseFloat(secondFieldValue)
 
     return (
         <>
@@ -157,10 +160,16 @@ const Purchase = () => {
                                                             }}
                                                             render={({ field }) => (
                                                                 <div>
-                                                                    <input type={"number"} step={0.01} {...field} placeholder="Введите целое число" />
+                                                                    <input type={"number"} step={0.01} {...field} placeholder="Введите цену" />
                                                                 </div>
                                                             )}
                                                         />
+                                                    </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>
+                                                            <span>Общий бюджет:</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                            <div>{sum}</div>
+                                                        </h3>
                                                     </div>
                                                 </div>
                                             </div>
