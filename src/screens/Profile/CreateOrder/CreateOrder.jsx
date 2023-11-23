@@ -71,8 +71,6 @@ const CreateOrder = () => {
                     spr_sfera_prim: "Сфера применения",
                     spr_tip_odejdy: "Тип одежды",
                     spr_vid_odejdy: "Вид одежды",
-                    spr_vid_postavki: "Вид поставки",
-                    spr_vid_product: "Вид продукта",
                 };
 
                 const updatedOptions = Object.entries(labels).map(([propName, label]) => {
