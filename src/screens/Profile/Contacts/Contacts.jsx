@@ -1,5 +1,5 @@
 import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
-import styles from './Purchase.module.scss'
+import styles from './Contacts.module.scss'
 import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
@@ -26,8 +26,7 @@ const Purchase = () => {
             const options = await getPropObject('purchase');
             console.log(options);
             const labels = {
-                spr_price_nds: "Цена",
-                tz_reg_post: "Регион",
+                spr_tz_status: "Статус",
             };
 
             const updatedOptions = Object.entries(labels).map(([propName, label]) => {
@@ -103,7 +102,7 @@ const Purchase = () => {
                                                                                 }),
                                                                             }}
                                                                             placeholder="нажмите для выбора"
-                                                                            onChange={(selectedOption) => field.onChange(selectedOption)}
+                                                                            onChange={(selectedOption) => field.onChange(selectedOption?.value)}
                                                                         />
                                                                     )}
                                                                 />
