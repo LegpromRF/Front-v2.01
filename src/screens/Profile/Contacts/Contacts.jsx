@@ -113,7 +113,7 @@ const Contacts = () => {
                                 <div>
                                   <input
                                     type="file"
-                                    accept=".docx, .txt"
+                                    accept=".docx, .txt, .pdf"
                                     aria-label={"Текстовый документ"}
                                     onChange={(e) => {
                                       field.onChange(e.target.files[0]);
@@ -133,7 +133,7 @@ const Contacts = () => {
                                         <div>
                                             <input
                                                 type="file"
-                                                accept="image/"
+                                                accept="image/*"
                                                 aria-label={"Изображение"}
                                                 onChange={(e) => {
                                                     field.onChange(e.target.files[0]);
