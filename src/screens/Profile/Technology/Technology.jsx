@@ -32,7 +32,7 @@ const Technology = () => {
             const updatedOptions = Object.entries(labels).map(([propName, label]) => {
                 return {
                     label,
-                    options: Array.isArray(options[propName]) ? options[propName] : [options[propName]],
+                    options: options[propName]
                 };
             });
             
