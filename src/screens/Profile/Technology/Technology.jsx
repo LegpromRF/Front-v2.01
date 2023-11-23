@@ -5,14 +5,11 @@ import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import Select from "react-select";
 
 const Technology = () => {
-    const navigate = useNavigate()
     const { control, handleSubmit, setValue } = useForm()
-
     const [formOptions, setFormOptions] = useState([])
 
     async function loadOptions() {

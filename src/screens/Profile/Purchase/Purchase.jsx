@@ -3,83 +3,49 @@ import styles from './Purchase.module.scss'
 import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 
 const Purchase = () => {
     const navigate = useNavigate()
     const { control, handleSubmit, setValue } = useForm()
+    const [formOptions, setFormOptions] = useState([])
 
-    const [pol, setPol] = useState([])
-    const [priceSegment, setPriceSegment] = useState([])
-    const [regularZakaz, setRegularZakaz] = useState([])
-    const [sezons, setSezons] = useState([])
-    const [sferaPrim, setSferaPrim] = useState([])
-    const [tipOdejdy, setTipOdejdy] = useState([])
-    const [vidOdejdy, setVidOdejdy] = useState([])
-    const [vidPostavki, setVidPostavki] = useState([])
-    const [vidProduct, setVidProduct] = useState([])
+    async function loadOptions() {
+        try {
+            const options = await getPropObject('purchase');
+            console.log(options);
+            const labels = {
+                spr_pol: "Пол",
+                spr_price_segment: "Ценовой сегмент",
+                spr_regular_zakaz: "Обычный заказ",
+                spr_sezons: "Сезоны",
+                spr_sfera_prim: "Сфера применения",
+                spr_tip_odejdy: "Тип одежды",
+                spr_vid_odejdy: "Вид одежды",
+                spr_vid_postavki: "Вид поставки",
+                spr_vid_product: "Вид продукта",
+            };
 
-    /*==============================================*/
-    const optionStatePairs = [
-        [setPol, 'spr_pol'],
-        [setPriceSegment, 'spr_price_segment'],
-        [setRegularZakaz, 'spr_regular_zakaz'],
-        [setSezons, 'spr_sezons'],
-        [setSferaPrim, 'spr_sfera_prim'],
-        [setTipOdejdy, 'spr_tip_odejdy'],
-        [setVidOdejdy, 'spr_vid_odejdy'],
-        [setVidPostavki, 'spr_vid_postavki'],
-        [setVidProduct, 'spr_vid_product'],
-    ]
+            const updatedOptions = Object.entries(labels).map(([propName, label]) => {
+                return {
+                    label,
+                    options: options[propName]
+                };
+            });
+
+            console.log(updatedOptions)
+
+            setFormOptions(updatedOptions)
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
-        async function loadOptions() {
-            try {
-                const options = await getPropObject('purchase');
-                console.log(options);
-                const labels = {
-                    spr_pol: "Пол",
-                    spr_price_segment: "Ценовой сегмент",
-                    spr_regular_zakaz: "Обычный заказ",
-                    spr_sezons: "Сезоны",
-                    spr_sfera_prim: "Сфера применения",
-                    spr_tip_odejdy: "Тип одежды",
-                    spr_vid_odejdy: "Вид одежды",
-                    spr_vid_postavki: "Вид поставки",
-                    spr_vid_product: "Вид продукта",
-                };
-
-                for (const [setState, propName] of optionStatePairs) {
-                    const label = labels[propName] || propName;
-
-                    setState({
-                        label,
-                        options: options[propName],
-                    });
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
         loadOptions();
     }, []);
-
-    const formInputs = useMemo(() => {
-        return {
-            pol,
-            priceSegment,
-            regularZakaz,
-            sezons,
-            sferaPrim,
-            tipOdejdy,
-            vidOdejdy,
-            vidPostavki,
-            vidProduct
-        };
-    }, [pol, priceSegment, regularZakaz, sezons, sferaPrim, tipOdejdy, vidOdejdy, vidPostavki, vidProduct]);
 
 
     return (
