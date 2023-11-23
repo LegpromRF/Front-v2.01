@@ -137,6 +137,14 @@
 
 .form {
 
+  input[type='file'] {
+    color: rgba(0, 0, 0, 0)
+  }
+
+  ::-webkit-file-upload-button {
+    display: none;
+  }
+
   &__content {
     margin-top: 20px;
   }
@@ -565,12 +573,4 @@
     }
   }
 
-}
-
-input[type='file'] {
-  color: rgba(0, 0, 0, 0)
-}
-
-::-webkit-file-upload-button {
-  display: none;
 }
