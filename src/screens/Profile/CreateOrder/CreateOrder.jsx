@@ -8,6 +8,7 @@ import {useEffect, useMemo, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import {Controller, useForm} from "react-hook-form";
+import {useDispatch, useSelector} from "react-redux";
 
 const CreateOrder = () => {
     const navigate = useNavigate()
@@ -16,6 +17,13 @@ const CreateOrder = () => {
 
     const [visibleControlImage, setVisibleControlImage] = useState(false)
     const [preview, setPreview] = useState([]);
+
+    const purchase = useSelector((state) => state.form.purchaseStep)
+    const technology = useSelector((state) => state.form.technologyStep)
+    const conditions = useSelector((state) => state.form.conditionsStep)
+    const contacts = useSelector((state) => state.form.contactsStep)
+
+    const dispatch = useDispatch()
 
     const fileobj= [];
 
@@ -95,13 +103,13 @@ const CreateOrder = () => {
       <div className={styles.createOrder}>
         <TitleProfile>Техническое задание</TitleProfile>
 
-        <div className={styles.createOrder__header}>
-            <HeaderProfile title="Изделие" number="1" href='/profile/order/createorder/' active={true}/>
-            <HeaderProfile title="Закупка" number="2" href='/profile/order/purchase' active={false}/>
-            <HeaderProfile title="Технология" number="3" href='/profile/order/technology' active={false}/>
-            <HeaderProfile title="Условия" number="4" href='/profile/order/conditions' active={false}/>
-            <HeaderProfile title="Контакты" number="5" href='/profile/order/contacts' active={false}/>
-        </div>
+          <div className={styles.createOrder__header}>
+              <HeaderProfile title="Изделие" number="1" href='/profile/order/createorder/' active={true}/>
+              <HeaderProfile title="Закупка" number="2" href='/profile/order/purchase' active={purchase}/>
+              <HeaderProfile title="Технология" number="3" href='/profile/order/technology' active={technology}/>
+              <HeaderProfile title="Условия" number="4" href='/profile/order/conditions' active={conditions}/>
+              <HeaderProfile title="Контакты" number="5" href='/profile/order/contacts' active={contacts}/>
+          </div>
 
         <div className={styles.createOrder__order}>
           {/*<div className={styles.createOrder__type}>*/}

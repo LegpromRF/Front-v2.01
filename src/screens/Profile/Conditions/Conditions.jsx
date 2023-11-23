@@ -7,10 +7,19 @@ import Layout from "@layout/Layout";
 import {useEffect, useState} from "react";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import Select from "react-select";
+import {useDispatch, useSelector} from "react-redux";
+import {conditionsSuccess, purchaseSuccess} from "@store/orderForm/form.slice.js";
 
 const Conditions = () => {
     const { control, handleSubmit, setValue } = useForm()
     const [formOptions, setFormOptions] = useState([])
+
+    const purchase = useSelector((state) => state.form.purchaseStep)
+    const technology = useSelector((state) => state.form.technologyStep)
+    const conditions = useSelector((state) => state.form.conditionsStep)
+    const contacts = useSelector((state) => state.form.contactsStep)
+
+    const dispatch = useDispatch()
 
     async function loadOptions() {
         try {
@@ -52,10 +61,10 @@ const Conditions = () => {
 
                     <div className={styles.createOrder__header}>
                         <HeaderProfile title="Изделие" number="1" href='/profile/order/createorder/' active={true}/>
-                        <HeaderProfile title="Закупка" number="2" href='/profile/order/purchase' active={false}/>
-                        <HeaderProfile title="Технология" number="3" href='/profile/order/technology' active={false}/>
-                        <HeaderProfile title="Условия" number="4" href='/profile/order/conditions' active={false}/>
-                        <HeaderProfile title="Контакты" number="5" href='/profile/order/contacts' active={false}/>
+                        <HeaderProfile title="Закупка" number="2" href='/profile/order/purchase' active={purchase}/>
+                        <HeaderProfile title="Технология" number="3" href='/profile/order/technology' active={technology}/>
+                        <HeaderProfile title="Условия" number="4" href='/profile/order/conditions' active={conditions}/>
+                        <HeaderProfile title="Контакты" number="5" href='/profile/order/contacts' active={contacts}/>
                     </div>
 
                     <div className={styles.createOrder__order}>
@@ -104,36 +113,7 @@ const Conditions = () => {
                                         <div className={styles.form__content}>
                                             <div className={styles.form__row}>
                                                 <div className={styles.form__items}>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="timing"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"number"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="giveUntil"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"date"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
-                                                    <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>Test</h3>
-                                                        <Controller
-                                                            name="getPartly"
-                                                            control={control}
-                                                            render={({ field }) => (
-                                                                <input type={"number"} {...field} />
-                                                            )}
-                                                        />
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -144,7 +124,12 @@ const Conditions = () => {
                     </div>
                     <div className={styles.form__button}>
                         <div className={styles.form__buttonBack}>Назад</div>
-                        <Link to="/profile/order/contacts">
+                        <Link
+                            onClick={() => {
+                                dispatch(conditionsSuccess())
+                            }}
+                            to="/profile/order/contacts"
+                        >
                             Вперед
                         </Link>
                     </div>

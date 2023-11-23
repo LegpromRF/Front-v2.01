@@ -8,6 +8,7 @@ import {Link, useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import {useDispatch, useSelector} from "react-redux";
 import {purchaseSuccess} from "@store/orderForm/form.slice.js";
+import Select from "react-select";
 
 const Purchase = () => {
     const navigate = useNavigate()
