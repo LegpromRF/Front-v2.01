@@ -11,7 +11,7 @@ import {Controller, useForm} from "react-hook-form";
 
 const CreateOrder = () => {
     const navigate = useNavigate()
-    const { control, handleSubmit } = useForm()
+    const { control, getValues, handleSubmit } = useForm()
     const [formOptions, setFormOptions] = useState([])
 
     const [visibleControlImage, setVisibleControlImage] = useState(false)
@@ -152,6 +152,7 @@ const CreateOrder = () => {
                                                         render={({ field }) => (
                                                             <Select
                                                                 {...field}
+                                                                required={true}
                                                                 isMulti={values.label === 'Пол и возраст'}
                                                                 options={
                                                                 Object.entries(values.options).map(([value, num]) => (
@@ -317,7 +318,13 @@ const CreateOrder = () => {
         </div>
           <div className={styles.form__button}>
               <div className={styles.form__buttonBack}>Назад</div>
-              <Link to="/profile/order/purchase">
+              <Link
+                  to="/profile/order/purchase"
+                  onClick={() => {
+                      console.log(getValues())
+                  }}
+
+              >
                   Вперед
               </Link>
           </div>
