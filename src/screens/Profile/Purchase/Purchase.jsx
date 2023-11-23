@@ -120,12 +120,6 @@ const Purchase = () => {
                                                         </h3>
                                                         <Controller
                                                             name="count"
-                                                            rules={{
-                                                                required: 'Это поле обязательно',
-                                                                pattern: {
-                                                                    value: /^[0-9]*$/
-                                                                }
-                                                            }}
                                                             render={({ field }) => (
                                                                 <div>
                                                                     <input type={"number"} {...field} placeholder="Введите целое число" />
