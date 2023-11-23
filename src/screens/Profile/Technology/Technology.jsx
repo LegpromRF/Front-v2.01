@@ -71,7 +71,7 @@ const Technology = () => {
                                         <div className={styles.form__content}>
                                             <div className={styles.form__row}>
                                                 <div className={styles.form__items}>
-                                                    {formOptions.map((values, index) => (
+                                                    {formOptions && formOptions.map((values, index) => (
                                                         <div key={index} className={styles.form__item}>
                                                             <h3 className={styles.form__itemLabel}>
                                                                 <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
@@ -84,12 +84,10 @@ const Technology = () => {
                                                                         <Select
                                                                             {...field}
                                                                             options={
-                                                                                Object.entries(values.options).map(([value, num]) => (
-                                                                                    {
-                                                                                        value,
-                                                                                        label: value,
-                                                                                    })
-                                                                                )
+                                                                                Object.entries(values.options).map(([value, num]) => ({
+                                                                                    value,
+                                                                                    label: value,
+                                                                                }))
                                                                             }
                                                                             styles={{
                                                                                 control: (provided) => ({
