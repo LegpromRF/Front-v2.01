@@ -152,6 +152,7 @@ const CreateOrder = () => {
                                                         render={({ field }) => (
                                                             <Select
                                                                 {...field}
+                                                                isMulti={values.label === 'Пол и возраст'}
                                                                 options={
                                                                 Object.entries(values.options).map(([value, num]) => (
                                                                     {
