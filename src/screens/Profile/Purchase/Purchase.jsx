@@ -116,10 +116,10 @@ const Purchase = () => {
                                                 <div className={styles.form__items}>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>
-                                                            <span>Целое число</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                            <span>Количество</span> <span className={styles.form__itemLabel_star}>*</span>
                                                         </h3>
                                                         <Controller
-                                                            name="count"
+                                                            name="quantity"
                                                             control={control}
                                                             rules={{
                                                                 required: {
@@ -134,6 +134,30 @@ const Purchase = () => {
                                                             render={({ field }) => (
                                                                 <div>
                                                                     <input type={"number"} {...field} placeholder="Введите целое число" />
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>
+                                                            <span>Цена за шт.</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                        </h3>
+                                                        <Controller
+                                                            name="count"
+                                                            control={control}
+                                                            rules={{
+                                                                required: {
+                                                                    value: true,
+                                                                    message: 'Это поле обязательно'
+                                                                },
+                                                                pattern: {
+                                                                    value: /^\d+(\.\d{1,2})?$/,
+                                                                    message: 'Введите число с двумя знаками после запятой',
+                                                                }
+                                                            }}
+                                                            render={({ field }) => (
+                                                                <div>
+                                                                    <input type={"number"} step={0.01} {...field} placeholder="Введите целое число" />
                                                                 </div>
                                                             )}
                                                         />
