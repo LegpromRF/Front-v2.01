@@ -84,7 +84,7 @@ const Technology = () => {
                                                                         <Select
                                                                             {...field}
                                                                             options={
-                                                                                Object.values(values.options).map(([value, num]) => ({
+                                                                                Object.entries(values.options).map(([value, num]) => ({
                                                                                     value,
                                                                                     label: value,
                                                                                 }))
