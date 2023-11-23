@@ -31,6 +31,9 @@ const Conditions = () => {
                 spr_oborud: "Требования к оборудованию",
                 spr_upakovka: "Требования к упаковке",
                 spr_markirovka: "Требования к маркировке",
+                spr_usl_pay: "Условия оплаты",
+                spr_usl_priem: "Условия приемки",
+                spr_usl_dostav: "Условия доставки"
             }
 
             const updatedOptions = Object.entries(labels).map(([propName, label]) => {
