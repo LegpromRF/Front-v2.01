@@ -114,11 +114,12 @@ const Contacts = () => {
                                   <input
                                     type="file"
                                     accept=".docx, .txt"
-                                    placeholder={"Вставьте текстовый файл"}
+                                    aria-label={"Текстовый документ"}
                                     onChange={(e) => {
                                       field.onChange(e.target.files[0]);
                                     }}
                                   />
+                                    {field.value && <p>Выбран файл: {field.value.name}</p>}
                                 </div>
                               )}
                             />
@@ -133,12 +134,18 @@ const Contacts = () => {
                                             <input
                                                 type="image"
                                                 accept="image/"
-                                                placeholder={"Вставьте изображение"}
+                                                aria-label={"Изображение"}
                                                 onChange={(e) => {
                                                     field.onChange(e.target.files[0]);
                                                 }}
                                                 alt={"Изображение"}
                                             />
+                                            {field.value && (
+                                                <div>
+                                                    <p>Выбрано изображение:</p>
+                                                    <img src={URL.createObjectURL(field.value)} alt="Изображение" />
+                                                </div>
+                                            )}
                                         </div>
                                     )}
                                 />
