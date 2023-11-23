@@ -100,8 +100,7 @@ const Conditions = () => {
                                                                                 }),
                                                                             }}
                                                                             placeholder="нажмите для выбора"
-                                                                            onChange={(selectedOption) => field.onChange(selectedOption?.value)}
-                                                                        />
+                                                                            onChange={(selectedOption) => field.onChange(selectedOption)}                                                                        />
                                                                     )}
                                                                 />
                                                             )}
