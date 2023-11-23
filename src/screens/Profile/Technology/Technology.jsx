@@ -7,10 +7,19 @@ import Layout from "@layout/Layout";
 import {useEffect, useState} from "react";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import Select from "react-select";
+import {useDispatch, useSelector} from "react-redux";
+import {purchaseSuccess, technologySuccess} from "@store/orderForm/form.slice.js";
 
 const Technology = () => {
     const { control, handleSubmit, setValue } = useForm()
     const [formOptions, setFormOptions] = useState([])
+
+    const purchase = useSelector((state) => state.form.purchaseStep)
+    const technology = useSelector((state) => state.form.technologyStep)
+    const conditions = useSelector((state) => state.form.conditionsStep)
+    const contacts = useSelector((state) => state.form.contactsStep)
+
+    const dispatch = useDispatch()
 
     async function loadOptions() {
         try {
@@ -55,10 +64,10 @@ const Technology = () => {
 
                     <div className={styles.createOrder__header}>
                         <HeaderProfile title="Изделие" number="1" href='/profile/order/createorder/' active={true}/>
-                        <HeaderProfile title="Закупка" number="2" href='/profile/order/purchase' active={false}/>
-                        <HeaderProfile title="Технология" number="3" href='/profile/order/technology' active={false}/>
-                        <HeaderProfile title="Условия" number="4" href='/profile/order/conditions' active={false}/>
-                        <HeaderProfile title="Контакты" number="5" href='/profile/order/contacts' active={false}/>
+                        <HeaderProfile title="Закупка" number="2" href='/profile/order/purchase' active={purchase}/>
+                        <HeaderProfile title="Технология" number="3" href='/profile/order/technology' active={technology}/>
+                        <HeaderProfile title="Условия" number="4" href='/profile/order/conditions' active={conditions}/>
+                        <HeaderProfile title="Контакты" number="5" href='/profile/order/contacts' active={contacts}/>
                     </div>
 
                     <div className={styles.createOrder__order}>
@@ -116,7 +125,12 @@ const Technology = () => {
                     </div>
                     <div className={styles.form__button}>
                         <div className={styles.form__buttonBack}>Назад</div>
-                        <Link to="/profile/order/technology">
+                        <Link
+                            onClick={() => {
+                                dispatch(technologySuccess())
+                            }}
+                            to="/profile/order/conditions"
+                        >
                             Вперед
                         </Link>
                     </div>
