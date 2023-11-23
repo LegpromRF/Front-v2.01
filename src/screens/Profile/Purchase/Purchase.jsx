@@ -112,6 +112,29 @@ const Purchase = () => {
                                                     ))}
                                                 </div>
                                             </div>
+                                            <div className={styles.form__row}>
+                                                <div className={styles.form__items}>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>
+                                                            <span>Целое число</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                        </h3>
+                                                        <Controller
+                                                            name="count"
+                                                            rules={{
+                                                                required: 'Это поле обязательно',
+                                                                pattern: {
+                                                                    value: /^[0-9]*$/
+                                                                }
+                                                            }}
+                                                            render={({ field }) => (
+                                                                <div>
+                                                                    <input type={"number"} {...field} placeholder="Введите целое число" />
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className={styles.form__content}>
                                             <div className={styles.form__row}>
