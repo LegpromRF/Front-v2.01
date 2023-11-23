@@ -15,5 +15,6 @@ export const apiEndpoints = {
     product: apiHOST + 'bid/product',
     purchase: apiHOST + 'bid/purchase',
     technology: apiHOST + 'bid/technology',
-    conditions: apiHOST + 'bid/conditions'
+    conditions: apiHOST + 'bid/conditions',
+    contacts: apiHOST + 'bid/contacts'
 }
