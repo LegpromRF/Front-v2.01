@@ -26,15 +26,8 @@ const Purchase = () => {
             const options = await getPropObject('purchase');
             console.log(options);
             const labels = {
-                spr_pol: "Пол",
-                spr_price_segment: "Ценовой сегмент",
-                spr_regular_zakaz: "Обычный заказ",
-                spr_sezons: "Сезоны",
-                spr_sfera_prim: "Сфера применения",
-                spr_tip_odejdy: "Тип одежды",
-                spr_vid_odejdy: "Вид одежды",
-                spr_vid_postavki: "Вид поставки",
-                spr_vid_product: "Вид продукта",
+                spr_price_nds: "Цена",
+                spr_regions: "Регион",
             };
 
             const updatedOptions = Object.entries(labels).map(([propName, label]) => {
