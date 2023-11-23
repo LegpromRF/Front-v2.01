@@ -16,6 +16,7 @@ import Yatokenpage from "@/pages/Yatokenpage.jsx";
 import CreateOrderPage from "@/pages/profile/order/createorder.jsx";
 import PurchasePage from "@/pages/profile/order/purchase.jsx";
 import TechnologyPage from "@/pages/profile/order/technology.jsx";
+import ConditionsPage from "@/pages/profile/order/conditions.jsx";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
     {
         path: "/profile/order/technology",
         element: <TechnologyPage />
+    },
+    {
+        path: "/profile/order/conditions",
+        element: <ConditionsPage />
     },
     {
         path: "/VKIDtokenpage",
