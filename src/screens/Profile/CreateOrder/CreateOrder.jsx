@@ -134,7 +134,7 @@ const CreateOrder = () => {
                           <form
                               className={styles.form}
                               // onSubmit={handleSubmit(onSubmit)}
-                              
+
                           >
                             <div className={styles.form__content}>
                                 <div className={styles.form__row}>
@@ -165,7 +165,7 @@ const CreateOrder = () => {
                                                                 styles={{
                                                                     control: (provided) => ({
                                                                         ...provided,
-                                                                        width: '100%', // Устанавливайте нужную вам ширину
+                                                                        width: 'auto', // Устанавливайте нужную вам ширину
                                                                     }),
                                                                 }}
                                                                 placeholder="нажмите для выбора"
@@ -321,7 +321,7 @@ const CreateOrder = () => {
               <Link
                   to="/profile/order/purchase"
                   onClick={() => {
-                      console.log(getValues())
+                      console.log(getValues("productData"))
                   }}
 
               >
