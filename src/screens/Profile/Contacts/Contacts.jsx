@@ -132,7 +132,7 @@ const Contacts = () => {
                                     render={({ field }) => (
                                         <div>
                                             <input
-                                                type="image"
+                                                type="file"
                                                 accept="image/"
                                                 aria-label={"Изображение"}
                                                 onChange={(e) => {

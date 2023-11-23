@@ -566,3 +566,11 @@
   }
 
 }
+
+input[type='file'] {
+  color: rgba(0, 0, 0, 0)
+}
+
+::-webkit-file-upload-button {
+  display: none;
+}
