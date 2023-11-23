@@ -57,9 +57,9 @@ const CreateOrder = () => {
                 const options = await getPropObject('product');
                 console.log(options);
                 const labels = {
-                    spr_pol: "Пол",
+                    spr_pol: "Пол и возраст",
                     spr_price_segment: "Ценовой сегмент",
-                    spr_regular_zakaz: "Обычный заказ",
+                    spr_regular_zakaz: "Регулярность заказа",
                     spr_sezons: "Сезоны",
                     spr_sfera_prim: "Сфера применения",
                     spr_tip_odejdy: "Тип одежды",
