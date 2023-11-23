@@ -10,7 +10,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {purchaseSuccess} from "@store/orderForm/form.slice.js";
 import Select from "react-select";
 
-const Purchase = () => {
+const Contacts = () => {
   const navigate = useNavigate();
   const { control, handleSubmit, setValue } = useForm();
   const [formOptions, setFormOptions] = useState([]);
@@ -154,6 +154,4 @@ const Purchase = () => {
   );
 };
 
-export default Purchase;
-
-export default Purchase
+export default Contacts
