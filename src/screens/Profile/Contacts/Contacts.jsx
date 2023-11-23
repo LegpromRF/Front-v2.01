@@ -1,3 +1,4 @@
+import * as yup from 'yup';
 import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
 import styles from './Contacts.module.scss'
 import { useForm, Controller } from 'react-hook-form'
@@ -11,20 +12,14 @@ import {purchaseSuccess} from "@store/orderForm/form.slice.js";
 import Select from "react-select";
 
 const Contacts = () => {
-  const navigate = useNavigate();
-  const { control, handleSubmit, getValues, setValue } = useForm();
+  const { control, handleSubmit, formState: { errors } } = useForm();
   const [formOptions, setFormOptions] = useState([]);
-  const purchase = useSelector((state) => state.form.purchaseStep);
-  const technology = useSelector((state) => state.form.technologyStep);
-  const conditions = useSelector((state) => state.form.conditionsStep);
-  const contacts = useSelector((state) => state.form.contactsStep);
-
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject('contacts');
-      console.log(options);
       const labels = {
         spr_tz_status: 'Статус',
       };
@@ -36,17 +31,41 @@ const Contacts = () => {
         };
       });
 
-      console.log(updatedOptions);
-
       setFormOptions(updatedOptions);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }, []);
 
   useEffect(() => {
     loadOptions();
-  }, []);
+  }, [loadOptions]);
+
+  const onSubmit = async (data) => {
+    try {
+      const schema = yup.object().shape({
+        nameSurname: yup.string().required('Это поле обязательно'),
+        date: yup.string().required('Это поле обязательно'),
+        email: yup.string().required('Это поле обязательно'),
+        telegram: yup.string().required('Это поле обязательно'),
+      });
+
+      await schema.validate(data);
+
+      console.log(data);
+      dispatch(purchaseSuccess());
+    } catch (error) {
+      // if (error.response && error.response.data && error.response.data.errors) {
+      //   setFormErrors(error.response.data.errors);
+      // } else {
+      //   setFormErrors({ general: 'An error occurred. Please try again later.' });
+      // }
+    }
+  };
+
+  const { purchase, technology, conditions, contacts } = useSelector((state) => state.form);
 
   return (
     <>
@@ -65,8 +84,10 @@ const Contacts = () => {
           <div className={styles.createOrder__order}>
             <div className={styles.createOrder__content}>
               <div className={styles.createOrder__body}>
-                {formOptions && (
-                  <form className={styles.form}>
+                {loading ? (
+                  <div>Loading...</div>
+                ) : (
+                  <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.form__content}>
                       <div className={styles.form__row}>
                         <div className={styles.form__items}>
@@ -75,20 +96,20 @@ const Contacts = () => {
                               <span>ФИО контактного лица</span> <span className={styles.form__itemLabel_star}>*</span>
                             </h3>
                             <Controller
-                                name="nameSurname"
-                                control={control}
-                                rules={{
-                                  required: {
-                                    value: true,
-                                    message: 'Это поле обязательно'
-                                  },
-
-                                }}
-                                render={({ field }) => (
-                                    <div>
-                                      <input type={"text"} {...field} placeholder="Введите ФИО" />
-                                    </div>
-                                )}
+                              name="nameSurname"
+                              control={control}
+                              rules={{
+                                required: {
+                                  value: true,
+                                  message: 'Это поле обязательно'
+                                },
+                              }}
+                              render={({ field }) => (
+                                <div>
+                                  <input type={"text"} {...field} placeholder="Введите ФИО" />
+                                  {errors.nameSurname && <p className={styles.form__error}>{errors.nameSurname.message}</p>}
+                                </div>
+                              )}
                             />
                           </div>
                           <div className={styles.form__item}>
@@ -96,20 +117,20 @@ const Contacts = () => {
                               <span>Телефон</span> <span className={styles.form__itemLabel_star}>*</span>
                             </h3>
                             <Controller
-                                name="date"
-                                control={control}
-                                rules={{
-                                  required: {
-                                    value: true,
-                                    message: 'Это поле обязательно'
-                                  },
-
-                                }}
-                                render={({ field }) => (
-                                    <div>
-                                      <input type={"tel"} {...field} placeholder="Введите номер телефона" />
-                                    </div>
-                                )}
+                              name="date"
+                              control={control}
+                              rules={{
+                                required: {
+                                  value: true,
+                                  message: 'Это поле обязательно'
+                                },
+                              }}
+                              render={({ field }) => (
+                                <div>
+                                  <input type={"tel"} {...field} placeholder="Введите номер телефона" />
+                                  {errors.date && <p className={styles.form__error}>{errors.date.message}</p>}
+                                </div>
+                              )}
                             />
                           </div>
                           <div className={styles.form__item}>
@@ -117,20 +138,20 @@ const Contacts = () => {
                               <span>Email</span> <span className={styles.form__itemLabel_star}>*</span>
                             </h3>
                             <Controller
-                                name="email"
-                                control={control}
-                                rules={{
-                                  required: {
-                                    value: true,
-                                    message: 'Это поле обязательно'
-                                  },
-
-                                }}
-                                render={({ field }) => (
-                                    <div>
-                                      <input type={"email"} {...field} placeholder="Введите email" />
-                                    </div>
-                                )}
+                              name="email"
+                              control={control}
+                              rules={{
+                                required: {
+                                  value: true,
+                                  message: 'Это поле обязательно'
+                                },
+                              }}
+                              render={({ field }) => (
+                                <div>
+                                  <input type={"email"} {...field} placeholder="Введите email" />
+                                  {errors.email && <p className={styles.form__error}>{errors.email.message}</p>}
+                                </div>
+                              )}
                             />
                           </div>
                           <div className={styles.form__item}>
@@ -138,20 +159,20 @@ const Contacts = () => {
                               <span>Телеграм</span> <span className={styles.form__itemLabel_star}>*</span>
                             </h3>
                             <Controller
-                                name="telegram"
-                                control={control}
-                                rules={{
-                                  required: {
-                                    value: true,
-                                    message: 'Это поле обязательно'
-                                  },
-
-                                }}
-                                render={({ field }) => (
-                                    <div>
-                                      <input type={"text"} {...field} placeholder="Введите ссылку на TG" />
-                                    </div>
-                                )}
+                              name="telegram"
+                              control={control}
+                              rules={{
+                                required: {
+                                  value: true,
+                                  message: 'Это поле обязательно'
+                                },
+                              }}
+                              render={({ field }) => (
+                                <div>
+                                  <input type={"text"} {...field} placeholder="Введите ссылку на TG" />
+                                  {errors.telegram && <p className={styles.form__error}>{errors.telegram.message}</p>}
+                                </div>
+                              )}
                             />
                           </div>
                         </div>
@@ -159,34 +180,34 @@ const Contacts = () => {
                       <div className={styles.form__row}>
                         <div className={styles.form__items}>
                           {formOptions.map((values, index) => (
-                              <div key={index} className={styles.form__item}>
-                                <h3 className={styles.form__itemLabel}>
-                                  <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
-                                </h3>
-                                {values.options && (
-                                    <Controller
-                                        name={`productData[${index}]`}
-                                        control={control}
-                                        render={({ field }) => (
-                                            <Select
-                                                {...field}
-                                                options={Object.entries(values.options).map(([value, num]) => ({
-                                                  value,
-                                                  label: value,
-                                                }))}
-                                                styles={{
-                                                  control: (provided) => ({
-                                                    ...provided,
-                                                    width: '100%',
-                                                  }),
-                                                }}
-                                                placeholder="нажмите для выбора"
-                                                onChange={(selectedOption) => field.onChange(selectedOption)}
-                                            />
-                                        )}
+                            <div key={index} className={styles.form__item}>
+                              <h3 className={styles.form__itemLabel}>
+                                <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
+                              </h3>
+                              {values.options && (
+                                <Controller
+                                  name={`productData[${index}]`}
+                                  control={control}
+                                  render={({ field }) => (
+                                    <Select
+                                      {...field}
+                                      options={Object.entries(values.options).map(([value, num]) => ({
+                                        value,
+                                        label: value,
+                                      }))}
+                                      styles={{
+                                        control: (provided) => ({
+                                          ...provided,
+                                          width: '100%',
+                                        }),
+                                      }}
+                                      placeholder="нажмите для выбора"
+                                      onChange={(selectedOption) => field.onChange(selectedOption)}
                                     />
-                                )}
-                              </div>
+                                  )}
+                                />
+                              )}
+                            </div>
                           ))}
                         </div>
                       </div>
@@ -201,43 +222,45 @@ const Contacts = () => {
                                 <div>
                                   <input
                                     type="file"
+                                    multiple={true}
                                     accept=".docx, .xlsx, .pdf"
                                     aria-label={"Текстовый документ"}
                                     onChange={(e) => {
                                       field.onChange(e.target.files[0]);
                                     }}
                                   />
-                                    {field.value && <p>Выбран файл: {field.value.name}</p>}
+                                  {field.value && <p>Выбран файл: {field.value.name}</p>}
                                 </div>
                               )}
                             />
                           </div>
-                            <div className={styles.form__item}>
-                              <h3 className={styles.form__itemLabel}>Техзадание</h3>
-                                <Controller
-                                    name="image"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <div>
-                                            <input
-                                                type="file"
-                                                accept="image/*"
-                                                aria-label={"Изображение"}
-                                                onChange={(e) => {
-                                                    field.onChange(e.target.files[0]);
-                                                }}
-                                                alt={"Изображение"}
-                                            />
-                                            {field.value && (
-                                                <div>
-                                                    <p>Выбрано изображение:</p>
-                                                    <img src={URL.createObjectURL(field.value)} alt="Изображение" />
-                                                </div>
-                                            )}
-                                        </div>
-                                    )}
-                                />
-                            </div>
+                          <div className={styles.form__item}>
+                            <h3 className={styles.form__itemLabel}>Техзадание</h3>
+                            <Controller
+                              name="image"
+                              control={control}
+                              render={({ field }) => (
+                                <div>
+                                  <input
+                                    type="file"
+                                    multiple={true}
+                                    accept="image/*"
+                                    aria-label={"Изображение"}
+                                    onChange={(e) => {
+                                      field.onChange(e.target.files[0]);
+                                    }}
+                                    alt={"Изображение"}
+                                  />
+                                  {field.value && (
+                                    <div>
+                                      <p>Выбрано изображение:</p>
+                                      <img src={URL.createObjectURL(field.value)} alt="Изображение" />
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -246,23 +269,15 @@ const Contacts = () => {
                         <div className={styles.form__items}></div>
                       </div>
                     </div>
+                    <div className={styles.form__button}>
+                      <div className={styles.form__button}>
+                        <div className={styles.form__buttonBack}>Назад</div>
+                        <button type="submit">Вперед</button>
+                      </div>
+                    </div>
                   </form>
                 )}
               </div>
-            </div>
-          </div>
-          <div className={styles.form__button}>
-            <div className={styles.form__button}>
-              <div className={styles.form__buttonBack}>Назад</div>
-              <Link
-                onClick={() => {
-                  console.log(getValues())
-                  dispatch(purchaseSuccess());
-                }}
-                to="#"
-              >
-                Вперед
-              </Link>
             </div>
           </div>
         </div>
