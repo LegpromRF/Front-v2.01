@@ -113,7 +113,7 @@ const Contacts = () => {
                                 <div>
                                   <input
                                     type="file"
-                                    accept=".doc"
+                                    accept=".docx, .txt"
                                     placeholder={"Вставьте текстовый файл"}
                                     onChange={(e) => {
                                       field.onChange(e.target.files[0]);
@@ -132,7 +132,7 @@ const Contacts = () => {
                                         <div>
                                             <input
                                                 type="image"
-                                                accept=".doc"
+                                                accept="image/"
                                                 placeholder={"Вставьте изображение"}
                                                 onChange={(e) => {
                                                     field.onChange(e.target.files[0]);
