@@ -146,7 +146,7 @@ const Purchase = () => {
                                                             <span>Цена за шт.</span> <span className={styles.form__itemLabel_star}>*</span>
                                                         </h3>
                                                         <Controller
-                                                            name="count"
+                                                            name="price"
                                                             control={control}
                                                             rules={{
                                                                 required: {
