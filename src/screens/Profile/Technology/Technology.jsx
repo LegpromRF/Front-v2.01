@@ -76,7 +76,7 @@ const Technology = () => {
                                                                 <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
                                                             </h3>
                                                             {values.options && (
-                                                                <div>values.options</div>
+                                                                <div>{values.options}</div>
                                                             )}
                                                         </div>
                                                     ))}
