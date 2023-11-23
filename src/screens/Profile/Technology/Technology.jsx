@@ -108,35 +108,35 @@ const Technology = () => {
                                                                     )}
                                                                 />
                                                             )}
-                                                            <div className={styles.form__item}>
-                                                                <h3 className={styles.form__itemLabel}>
-                                                                    <span>Плотность ткани</span> <span className={styles.form__itemLabel_star}>*</span>
-                                                                </h3>
-                                                                <Controller
-                                                                    name="date"
-                                                                    control={control}
-                                                                    rules={{
-                                                                        required: {
-                                                                            value: true,
-                                                                            message: 'Это поле обязательно'
-                                                                        },
-
-                                                                    }}
-                                                                    render={({ field }) => (
-                                                                        <div>
-                                                                            <input type={"text"} {...field} placeholder="Введите плотность ткани" />
-                                                                        </div>
-                                                                    )}
-                                                                />
-                                                            </div>
                                                         </div>
                                                     ))}
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>
+                                                            <span>Плотность ткани</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                        </h3>
+                                                        <Controller
+                                                            name="date"
+                                                            control={control}
+                                                            rules={{
+                                                                required: {
+                                                                    value: true,
+                                                                    message: 'Это поле обязательно'
+                                                                },
+
+                                                            }}
+                                                            render={({ field }) => (
+                                                                <div>
+                                                                    <input type={"text"} {...field} placeholder="Введите плотность ткани" />
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </div>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>
                                                             <span>Заказчик предоставляет образец</span> <span className={styles.form__itemLabel_star}>*</span>
                                                         </h3>
                                                         <Controller
-                                                            name="date"
+                                                            name="example"
                                                             control={control}
                                                             rules={{
                                                                 required: {
