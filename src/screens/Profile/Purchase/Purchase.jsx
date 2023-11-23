@@ -118,14 +118,14 @@ const Purchase = () => {
                                                         <h3 className={styles.form__itemLabel}>
                                                             <span>Целое число</span> <span className={styles.form__itemLabel_star}>*</span>
                                                         </h3>
-                                                        <Controller
-                                                            name="count"
-                                                            render={({ field }) => (
-                                                                <div>
-                                                                    <input type={"number"} {...field} placeholder="Введите целое число" />
-                                                                </div>
-                                                            )}
-                                                        />
+                                                        {/*<Controller*/}
+                                                        {/*    name="count"*/}
+                                                        {/*    render={({ field }) => (*/}
+                                                        {/*        <div>*/}
+                                                        {/*            <input type={"number"} {...field} placeholder="Введите целое число" />*/}
+                                                        {/*        </div>*/}
+                                                        {/*    )}*/}
+                                                        {/*/>*/}
                                                     </div>
                                                 </div>
                                             </div>
