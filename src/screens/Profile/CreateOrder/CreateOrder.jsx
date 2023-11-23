@@ -168,11 +168,11 @@ const CreateOrder = () => {
         <TitleProfile>Техническое задание</TitleProfile>
 
         <div className={styles.createOrder__header}>
-            <HeaderProfile title="Изделие" number="1" href='/profile/createorder/' active={true}/>
-            <HeaderProfile title="Закупка" number="2" href='/profile/purchase' active={false}/>
-            <HeaderProfile title="Технология" number="3" href='/profile/technology' active={false}/>
-            <HeaderProfile title="Условия" number="4" href='/profile/conditions' active={false}/>
-            <HeaderProfile title="Контакты" number="5" href='/profile/contacts' active={false}/>
+            <HeaderProfile title="Изделие" number="1" href='/profile/order/createorder/' active={true}/>
+            <HeaderProfile title="Закупка" number="2" href='/profile/order/purchase' active={false}/>
+            <HeaderProfile title="Технология" number="3" href='/profile/order/technology' active={false}/>
+            <HeaderProfile title="Условия" number="4" href='/profile/order/conditions' active={false}/>
+            <HeaderProfile title="Контакты" number="5" href='/profile/order/contacts' active={false}/>
         </div>
 
         <div className={styles.createOrder__order}>
