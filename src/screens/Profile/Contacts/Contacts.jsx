@@ -110,6 +110,30 @@ const Purchase = () => {
                                                     ))}
                                                 </div>
                                             </div>
+                                            <div className={styles.form__row}>
+                                                <div className={styles.form__items}>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>
+                                                            {/*<span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>*/}
+                                                        </h3>
+                                                        <Controller
+                                                            name='task'
+                                                            control={control}
+                                                            render={({ field }) => (
+                                                                <div>
+                                                                    <input
+                                                                        type={'file'}
+                                                                        accept={'.doc'}
+                                                                        onChange={(e) => {
+                                                                            field.onChange(e.target.files[0])
+                                                                        }}
+                                                                    />
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className={styles.form__content}>
                                             <div className={styles.form__row}>
