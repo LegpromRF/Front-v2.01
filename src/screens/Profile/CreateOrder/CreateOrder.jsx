@@ -12,7 +12,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 const CreateOrder = () => {
     const navigate = useNavigate()
-    const { control, getValues, handleSubmit } = useForm()
+    const { control, getValues, formState: {isValid}, handleSubmit } = useForm()
     const [formOptions, setFormOptions] = useState([])
 
     const [visibleControlImage, setVisibleControlImage] = useState(false)
@@ -157,6 +157,9 @@ const CreateOrder = () => {
                                                     <Controller
                                                         name={`productData[${index}]`}
                                                         control={control}
+                                                        rulse={{
+                                                            required: 'Обязательное поле'
+                                                        }}
                                                         render={({ field }) => (
                                                             <Select
                                                                 {...field}
@@ -331,7 +334,7 @@ const CreateOrder = () => {
                   onClick={() => {
                       console.log(getValues("productData"))
                   }}
-
+                    className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
               >
                   Вперед
               </Link>

@@ -51,7 +51,7 @@ const Purchase = () => {
 
     const firstFieldValue = watch('quantity') || 0;
     const secondFieldValue = watch('price') || 0;
-    const sum = parseFloat(firstFieldValue) + parseFloat(secondFieldValue)
+    const sum = parseFloat(firstFieldValue) * parseFloat(secondFieldValue)
 
     return (
         <>
@@ -119,6 +119,34 @@ const Purchase = () => {
                                                 <div className={styles.form__items}>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>
+                                                            <span>Взять в производство не позднее</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                        </h3>
+                                                        <Controller
+                                                            name="date"
+                                                            control={control}
+                                                            rules={{
+                                                                required: {
+                                                                    value: true,
+                                                                    message: 'Это поле обязательно'
+                                                                },
+                                                                pattern: {
+                                                                    value: /^[0-9]*$/,
+                                                                    message: 'Введите целое число'
+                                                                }
+                                                            }}
+                                                            render={({ field }) => (
+                                                                <div>
+                                                                    <input type={"number"} {...field} placeholder="Введите целое число" />
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className={styles.form__row}>
+                                                <div className={styles.form__items}>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>
                                                             <span>Количество</span> <span className={styles.form__itemLabel_star}>*</span>
                                                         </h3>
                                                         <Controller
@@ -168,7 +196,7 @@ const Purchase = () => {
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>
                                                             <span>Общий бюджет:</span> <span className={styles.form__itemLabel_star}>*</span>
-                                                            <div>{sum}</div>
+                                                            <div>{sum} руб.</div>
                                                         </h3>
                                                     </div>
                                                 </div>

@@ -312,6 +312,10 @@
     padding: 17px 35px; 
     color: #FFF;
     font-size: 16px;
+
+    &_disabled {
+      pointer-events: none;
+    }
   }
 
   &__buttonForwardActive {

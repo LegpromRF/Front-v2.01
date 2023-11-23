@@ -8,7 +8,7 @@ export const formSlice = createSlice({
         technologyStep: false,
         conditionsStep: false,
         contactsStep: false,
-
+        formData: {}
     },
     reducers: {
         productSuccess: (state) => {
@@ -26,6 +26,9 @@ export const formSlice = createSlice({
         contactsSuccess: (state) => {
             state.contactsStep = true
         },
+        updateFormData: (state, payload) => {
+            state.formData = {...state.formData, ...payload}
+        }
     }
 })
 
