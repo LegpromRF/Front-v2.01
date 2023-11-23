@@ -8,7 +8,7 @@ import {useEffect, useState} from "react";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import Select from "react-select";
 import {useDispatch, useSelector} from "react-redux";
-import {conditionsSuccess, purchaseSuccess} from "@store/orderForm/form.slice.js";
+import {conditionsSuccess} from "@store/orderForm/form.slice.js";
 
 const Conditions = () => {
     const { control, handleSubmit, setValue } = useForm()

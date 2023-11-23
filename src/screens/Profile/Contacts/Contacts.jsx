@@ -70,6 +70,90 @@ const Contacts = () => {
                     <div className={styles.form__content}>
                       <div className={styles.form__row}>
                         <div className={styles.form__items}>
+                          <div className={styles.form__item}>
+                            <h3 className={styles.form__itemLabel}>
+                              <span>ФИО контактного лица</span> <span className={styles.form__itemLabel_star}>*</span>
+                            </h3>
+                            <Controller
+                                name="nameSurname"
+                                control={control}
+                                rules={{
+                                  required: {
+                                    value: true,
+                                    message: 'Это поле обязательно'
+                                  },
+
+                                }}
+                                render={({ field }) => (
+                                    <div>
+                                      <input type={"text"} {...field} placeholder="Введите ФИО" />
+                                    </div>
+                                )}
+                            />
+                          </div>
+                          <div className={styles.form__item}>
+                            <h3 className={styles.form__itemLabel}>
+                              <span>Телефон</span> <span className={styles.form__itemLabel_star}>*</span>
+                            </h3>
+                            <Controller
+                                name="date"
+                                control={control}
+                                rules={{
+                                  required: {
+                                    value: true,
+                                    message: 'Это поле обязательно'
+                                  },
+
+                                }}
+                                render={({ field }) => (
+                                    <div>
+                                      <input type={"tel"} {...field} placeholder="Введите номер телефона" />
+                                    </div>
+                                )}
+                            />
+                          </div>
+                          <div className={styles.form__item}>
+                            <h3 className={styles.form__itemLabel}>
+                              <span>Email</span> <span className={styles.form__itemLabel_star}>*</span>
+                            </h3>
+                            <Controller
+                                name="email"
+                                control={control}
+                                rules={{
+                                  required: {
+                                    value: true,
+                                    message: 'Это поле обязательно'
+                                  },
+
+                                }}
+                                render={({ field }) => (
+                                    <div>
+                                      <input type={"email"} {...field} placeholder="Введите email" />
+                                    </div>
+                                )}
+                            />
+                          </div>
+                          <div className={styles.form__item}>
+                            <h3 className={styles.form__itemLabel}>
+                              <span>Телеграм</span> <span className={styles.form__itemLabel_star}>*</span>
+                            </h3>
+                            <Controller
+                                name="telegram"
+                                control={control}
+                                rules={{
+                                  required: {
+                                    value: true,
+                                    message: 'Это поле обязательно'
+                                  },
+
+                                }}
+                                render={({ field }) => (
+                                    <div>
+                                      <input type={"text"} {...field} placeholder="Введите ссылку на Telegram" />
+                                    </div>
+                                )}
+                            />
+                          </div>
                           {formOptions.map((values, index) => (
                             <div key={index} className={styles.form__item}>
                               <h3 className={styles.form__itemLabel}>
@@ -105,7 +189,7 @@ const Contacts = () => {
                       <div className={styles.form__row}>
                         <div className={styles.form__items}>
                           <div className={styles.form__item}>
-                            <h3 className={styles.form__itemLabel}></h3>
+                            <h3 className={styles.form__itemLabel}>Техзадание</h3>
                             <Controller
                               name="task"
                               control={control}
@@ -113,7 +197,7 @@ const Contacts = () => {
                                 <div>
                                   <input
                                     type="file"
-                                    accept=".docx, .txt, .pdf"
+                                    accept=".docx, .xlsx, .pdf"
                                     aria-label={"Текстовый документ"}
                                     onChange={(e) => {
                                       field.onChange(e.target.files[0]);
@@ -125,7 +209,7 @@ const Contacts = () => {
                             />
                           </div>
                             <div className={styles.form__item}>
-                                <h3 className={styles.form__itemLabel}></h3>
+                              <h3 className={styles.form__itemLabel}>Техзадание</h3>
                                 <Controller
                                     name="image"
                                     control={control}
