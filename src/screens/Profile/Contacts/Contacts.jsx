@@ -154,35 +154,39 @@ const Contacts = () => {
                                 )}
                             />
                           </div>
+                        </div>
+                      </div>
+                      <div className={styles.form__row}>
+                        <div className={styles.form__items}>
                           {formOptions.map((values, index) => (
-                            <div key={index} className={styles.form__item}>
-                              <h3 className={styles.form__itemLabel}>
-                                <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
-                              </h3>
-                              {values.options && (
-                                <Controller
-                                  name={`productData[${index}]`}
-                                  control={control}
-                                  render={({ field }) => (
-                                    <Select
-                                      {...field}
-                                      options={Object.entries(values.options).map(([value, num]) => ({
-                                        value,
-                                        label: value,
-                                      }))}
-                                      styles={{
-                                        control: (provided) => ({
-                                          ...provided,
-                                          width: '100%',
-                                        }),
-                                      }}
-                                      placeholder="нажмите для выбора"
-                                      onChange={(selectedOption) => field.onChange(selectedOption)}
+                              <div key={index} className={styles.form__item}>
+                                <h3 className={styles.form__itemLabel}>
+                                  <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
+                                </h3>
+                                {values.options && (
+                                    <Controller
+                                        name={`productData[${index}]`}
+                                        control={control}
+                                        render={({ field }) => (
+                                            <Select
+                                                {...field}
+                                                options={Object.entries(values.options).map(([value, num]) => ({
+                                                  value,
+                                                  label: value,
+                                                }))}
+                                                styles={{
+                                                  control: (provided) => ({
+                                                    ...provided,
+                                                    width: '100%',
+                                                  }),
+                                                }}
+                                                placeholder="нажмите для выбора"
+                                                onChange={(selectedOption) => field.onChange(selectedOption)}
+                                            />
+                                        )}
                                     />
-                                  )}
-                                />
-                              )}
-                            </div>
+                                )}
+                              </div>
                           ))}
                         </div>
                       </div>
