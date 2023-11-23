@@ -27,7 +27,7 @@ const Purchase = () => {
             console.log(options);
             const labels = {
                 spr_price_nds: "Цена",
-                spr_regions: "Регион",
+                tz_reg_post: "Регион",
             };
 
             const updatedOptions = Object.entries(labels).map(([propName, label]) => {
