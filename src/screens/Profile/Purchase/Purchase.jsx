@@ -118,14 +118,25 @@ const Purchase = () => {
                                                         <h3 className={styles.form__itemLabel}>
                                                             <span>Целое число</span> <span className={styles.form__itemLabel_star}>*</span>
                                                         </h3>
-                                                        {/*<Controller*/}
-                                                        {/*    name="count"*/}
-                                                        {/*    render={({ field }) => (*/}
-                                                        {/*        <div>*/}
-                                                        {/*            <input type={"number"} {...field} placeholder="Введите целое число" />*/}
-                                                        {/*        </div>*/}
-                                                        {/*    )}*/}
-                                                        {/*/>*/}
+                                                        <Controller
+                                                            name="count"
+                                                            control={control}
+                                                            rules={{
+                                                                required: {
+                                                                    value: true,
+                                                                    message: 'Это поле обязательно'
+                                                                },
+                                                                pattern: {
+                                                                    value: /^[0-9]*$/,
+                                                                    message: 'Введите целое число'
+                                                                }
+                                                            }}
+                                                            render={({ field }) => (
+                                                                <div>
+                                                                    <input type={"text"} {...field} placeholder="Введите целое число" />
+                                                                </div>
+                                                            )}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>
