@@ -90,7 +90,7 @@ const CreateOrder = () => {
     }, []);
 
     async function submit() {
-        if (fileobj.files[0]) {
+        if (fileobj[0]) {
             let pushFiles = new FormData();
             for (const file of fileobj.files)
                 pushFiles.append('files', file);
@@ -118,9 +118,6 @@ const CreateOrder = () => {
 
   return (
     <>
-    {/*<Head>*/}
-    {/*  <title>Создать заказ - LegpromRF</title>*/}
-    {/*</Head>*/}
      <Layout>
       <div className={styles.createOrder}>
         <TitleProfile>Техническое задание</TitleProfile>
