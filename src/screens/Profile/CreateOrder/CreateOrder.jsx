@@ -95,6 +95,7 @@ const CreateOrder = () => {
             var formData = new FormData();
             for (const file of preview.files)
                 formData.append('files', file);
+            console.log(formData)
             axios({
                 method: 'post',
                 url: apiEndpoints.photos,
