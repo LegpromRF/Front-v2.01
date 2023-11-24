@@ -360,11 +360,11 @@ const Contacts = () => {
                   </form>
               </div>
             </div>
+          </div>
+          <div className={styles.form__button}>
             <div className={styles.form__button}>
-              <div className={styles.form__button}>
-                <div className={styles.form__buttonBack}>Назад</div>
-                <button type="submit">Вперед</button>
-              </div>
+              <div className={styles.form__buttonBack}>Назад</div>
+              <button type="submit">Вперед</button>
             </div>
           </div>
         </div>
