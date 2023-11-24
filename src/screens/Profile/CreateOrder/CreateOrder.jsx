@@ -167,8 +167,6 @@ const CreateOrder = () => {
                                                                     options={
                                                                         Object.entries(values.options).map(([value, num]) => (
                                                                             {
-                                                                                value,
-                                                                                label: value,
                                                                                 index: num,
                                                                                 tag: values.propName
                                                                     })
