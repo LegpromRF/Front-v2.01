@@ -56,11 +56,7 @@ const Contacts = () => {
       console.log(data);
       dispatch(purchaseSuccess());
     } catch (error) {
-      // if (error.response && error.response.data && error.response.data.errors) {
-      //   setFormErrors(error.response.data.errors);
-      // } else {
-      //   setFormErrors({ general: 'An error occurred. Please try again later.' });
-      // }
+      console.log(error)
     }
   };
 
@@ -83,9 +79,6 @@ const Contacts = () => {
           <div className={styles.createOrder__order}>
             <div className={styles.createOrder__content}>
               <div className={styles.createOrder__body}>
-                {loading ? (
-                  <div>Loading...</div>
-                ) : (
                   <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.form__content}>
                       <div className={styles.form__row}>
@@ -95,7 +88,7 @@ const Contacts = () => {
                               <span>ФИО контактного лица</span> <span className={styles.form__itemLabel_star}>*</span>
                             </h3>
                             <Controller
-                              name="nameSurname"
+                              name="tz_cl_fio"
                               control={control}
                               rules={{
                                 required: {
@@ -116,7 +109,7 @@ const Contacts = () => {
                               <span>Телефон</span> <span className={styles.form__itemLabel_star}>*</span>
                             </h3>
                             <Controller
-                              name="date"
+                              name="tz_cl_tel"
                               control={control}
                               rules={{
                                 required: {
@@ -137,7 +130,7 @@ const Contacts = () => {
                               <span>Email</span> <span className={styles.form__itemLabel_star}>*</span>
                             </h3>
                             <Controller
-                              name="email"
+                              name="tz_cl_email"
                               control={control}
                               rules={{
                                 required: {
@@ -158,7 +151,7 @@ const Contacts = () => {
                               <span>Телеграм</span> <span className={styles.form__itemLabel_star}>*</span>
                             </h3>
                             <Controller
-                              name="telegram"
+                              name="tz_cl_tlg"
                               control={control}
                               rules={{
                                 required: {
@@ -190,8 +183,8 @@ const Contacts = () => {
                                   render={({ field }) => (
                                     <Select
                                       {...field}
-                                      options={Object.entries(values.options).map(([value, num]) => ({
-                                        value,
+                                      options={Object.entries(values.options).map(([value, index]) => ({
+                                        value: index,
                                         label: value,
                                       }))}
                                       styles={{
@@ -275,7 +268,6 @@ const Contacts = () => {
                       </div>
                     </div>
                   </form>
-                )}
               </div>
             </div>
           </div>

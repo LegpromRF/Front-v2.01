@@ -4,14 +4,14 @@ import styles from './Conditions.module.scss'
 import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import Select from "react-select";
 import {useDispatch, useSelector} from "react-redux";
-import {conditionsSuccess} from "@store/orderForm/form.slice.js";
+import {conditionsSuccess, updateFormData} from "@store/orderForm/form.slice.js";
 
 const Conditions = () => {
-    const { control, handleSubmit, getValues, setValue } = useForm()
+    const { control, getValues} = useForm()
     const [formOptions, setFormOptions] = useState([])
 
     const purchase = useSelector((state) => state.form.purchaseStep)
@@ -20,8 +20,7 @@ const Conditions = () => {
     const contacts = useSelector((state) => state.form.contactsStep)
 
     const dispatch = useDispatch()
-
-    async function loadOptions() {
+    const loadOptions = useCallback( async () => {
         try {
             const options = await getPropObject('conditions');
             console.log(options);
@@ -50,7 +49,7 @@ const Conditions = () => {
         } catch (error) {
             console.log(error);
         }
-    }
+    }, [])
 
     useEffect(() => {
         loadOptions();
@@ -61,7 +60,6 @@ const Conditions = () => {
             <Layout>
                 <div className={styles.createOrder}>
                     <TitleProfile>Техническое задание</TitleProfile>
-
                     <div className={styles.createOrder__header}>
                         <HeaderProfile title="Изделие" number="1" href='/profile/order/createorder/' active={true}/>
                         <HeaderProfile title="Закупка" number="2" href='/profile/order/purchase' active={purchase}/>
@@ -85,14 +83,14 @@ const Conditions = () => {
                                                             </h3>
                                                             {values.options && (
                                                                 <Controller
-                                                                    name={`productData[${index}]`}
+                                                                    name={`${values.propName}`}
                                                                     control={control}
                                                                     render={({ field }) => (
                                                                         <Select
                                                                             {...field}
                                                                             options={
-                                                                                Object.entries(values.options).map(([value, num]) => ({
-                                                                                    value,
+                                                                                Object.entries(values.options).map(([value, index]) => ({
+                                                                                    value: index,
                                                                                     label: value,
                                                                                 }))
                                                                             }
@@ -127,11 +125,12 @@ const Conditions = () => {
                     <div className={styles.form__button}>
                         <div className={styles.form__buttonBack}>Назад</div>
                         <Link
-                            onClick={() => {
-                                console.log(getValues())
-                                dispatch(conditionsSuccess())
-                            }}
                             to="/profile/order/contacts"
+                            onClick={() => {
+                                dispatch(updateFormData(getValues()))
+                                console.log(getValues())
+                            }}
+                            className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
                         >
                             Вперед
                         </Link>

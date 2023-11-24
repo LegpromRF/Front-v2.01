@@ -5,7 +5,7 @@ import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
 import ModalLayout from '@layout/Modal/ModalLayout'
 import {useCallback, useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import {Controller, useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
@@ -24,7 +24,7 @@ const CreateOrder = () => {
     });
 
     const rawFormData = useSelector((state) => state.form.formData)
-
+    const navigate = useNavigate()
     const purchase = useSelector((state) => state.form.purchaseStep)
     const technology = useSelector((state) => state.form.technologyStep)
     const conditions = useSelector((state) => state.form.conditionsStep)
@@ -93,6 +93,13 @@ const CreateOrder = () => {
         loadOptions();
     }, []);
 
+    function onSubmit() {
+        dispatch(updateFormData(getValues()))
+        console.log(getValues())
+        console.log(rawFormData)
+        navigate('/profile/order/purchase')
+    }
+
   return (
     <>
     {/*<Head>*/}
@@ -140,7 +147,7 @@ const CreateOrder = () => {
                   {
                           <form
                               className={styles.form}
-                              // onSubmit={handleSubmit(onSubmit)}
+                              onSubmit={handleSubmit(onSubmit)}
 
                           >
                             <div className={styles.form__content}>
@@ -228,17 +235,9 @@ const CreateOrder = () => {
         </div>
           <div className={styles.form__button}>
               <div className={styles.form__buttonBack}>Назад</div>
-              <Link
-                  to="/profile/order/purchase"
-                  onClick={() => {
-                      dispatch(updateFormData(getValues()))
-                      console.log(getValues())
-                      console.log(rawFormData)
-                  }}
-                    className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
-              >
+              <button className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}>
                   Вперед
-              </Link>
+              </button>
           </div>
           {/*<ModalLayout active={modalState.modalActive} setActive={setModalState}>*/}
           {/*    <h3 className={styles.form__modalTitle}>Укажите свою почту</h3>*/}
