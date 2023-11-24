@@ -77,7 +77,7 @@ const CreateOrder = () => {
                         label,
                         options: options[propName]
                     }
-                })
+                });
                 console.log(updatedOptions)
                 setFormOptions(updatedOptions)
                 setLoading(false)
