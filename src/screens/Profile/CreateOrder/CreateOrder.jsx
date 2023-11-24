@@ -78,6 +78,7 @@ const CreateOrder = () => {
                         options: options[propName]
                     }
                 })
+                console.log(updatedOptions)
                 setFormOptions(updatedOptions)
                 setLoading(false)
             } catch (error) {
