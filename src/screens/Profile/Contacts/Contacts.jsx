@@ -147,7 +147,7 @@ const Contacts = () => {
       });
 
       await schema.validate(data);
-
+      console.log(formData)
       console.log(data);
       dispatch(purchaseSuccess());
       dispatch(updateFormData(getValues()))
