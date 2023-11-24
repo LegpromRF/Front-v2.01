@@ -91,15 +91,11 @@ const CreateOrder = () => {
 
     async function submit() {
         console.log(preview)
-        if (fileobj[0]) {
-            let pushFiles = new FormData();
-            for (const file of fileobj.files)
-                pushFiles.append('files', file);
-
+        if (preview) {
             axios({
                 method: 'post',
                 url: apiEndpoints.photos,
-                data: pushFiles,
+                data: preview,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'multipart/form-data'
