@@ -176,9 +176,8 @@
   }
 
   &__item {
-    margin-right: 50px;
     position: relative;
-    width: 200px;
+    min-width: 200px;
 
     @media (max-width: 900px) {
       margin-right: 0;
