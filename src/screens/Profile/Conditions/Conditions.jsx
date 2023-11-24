@@ -130,7 +130,7 @@ const Conditions = () => {
                                 dispatch(updateFormData(getValues()))
                                 console.log(getValues())
                             }}
-                            className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
+                            // className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
                         >
                             Вперед
                         </Link>
