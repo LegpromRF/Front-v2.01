@@ -93,8 +93,9 @@ const CreateOrder = () => {
         loadOptions();
     }, []);
 
-    function onSubmit() {
-        dispatch(updateFormData(getValues()))
+    function onSubmit(data) {
+        console.log(data)
+        dispatch(updateFormData(data))
         console.log(getValues())
         console.log(rawFormData)
         navigate('/profile/order/purchase')

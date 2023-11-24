@@ -12,7 +12,7 @@ import {purchaseSuccess} from "@store/orderForm/form.slice.js";
 import Select from "react-select";
 
 const Contacts = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm();
+  const { control, handleSubmit, formState: { errors }} = useForm();
   const [formOptions, setFormOptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
