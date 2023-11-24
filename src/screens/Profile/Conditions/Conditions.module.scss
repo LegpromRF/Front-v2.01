@@ -159,19 +159,20 @@
   &__items {
 
     @media (min-width: 900px) {
-      display: flex;
+      grid-template-columns: 1fr 1fr 1fr;
+      display: grid;
       row-gap: 16px;
-      flex-wrap: wrap;
+      column-gap: 48px;
     }
 
   }
 
   &__item {
-    margin-right: 50px;
     position: relative;
+    min-width: 200px;
 
     @media (max-width: 900px) {
-      margin-right: 0px;
+      margin-right: 0;
       margin-bottom: 30px;
     }
   }
