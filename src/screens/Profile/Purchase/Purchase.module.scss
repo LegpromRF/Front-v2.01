@@ -177,8 +177,8 @@
       margin-bottom: 30px;
     }
 
-    input[type="text"] {
-      background: #EDEDED;
+    input[type="text"], input[type="number"], input[type="date"] {
+      background: #FFF;
     }
   }
 

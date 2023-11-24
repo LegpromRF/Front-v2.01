@@ -73,10 +73,11 @@ const CreateOrder = () => {
 
                 const updatedOptions = Object.entries(labels).map(([propName, label]) => {
                     return {
+                        propName,
                         label,
                         options: options[propName]
-                    };
-                });
+                    }
+                })
                 setFormOptions(updatedOptions)
                 setLoading(false)
             } catch (error) {
@@ -144,55 +145,48 @@ const CreateOrder = () => {
                                 <div className={styles.form__row}>
                                     <div className={styles.form__title}>Основная информация</div>
                                     <div className={styles.form__items}>
-                                        {formOptions && formOptions.map((values, index) => (
-                                            <div key={index} className={styles.form__item}>
-                                                <h3 className={styles.form__itemLabel}>
-                                                    <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
-                                                </h3>
-                                                {values.options && (
-                                                    <Controller
-                                                        name={`productData[${index}]`}
-                                                        control={control}
-                                                        rulse={{
-                                                            required: 'Обязательное поле'
-                                                        }}
-                                                        render={({ field }) => (
-                                                            <Select
-                                                                {...field}
-                                                                required={true}
-                                                                isMulti={values.label === 'Пол и возраст'}
-                                                                options={
-                                                                Object.entries(values.options).map(([value, num]) => (
-                                                                    {
-                                                                    value,
-                                                                    label: value,
-                                                                })
-                                                                )
-                                                            }
-                                                                styles={{
-                                                                    control: (provided) => ({
-                                                                        ...provided,
-                                                                        width: 'auto', // Устанавливайте нужную вам ширину
-                                                                    }),
-                                                                }}
-                                                                placeholder="нажмите для выбора"
-                                                                onChange={(selectedOption) => field.onChange(selectedOption)}
-                                                            />
-                                                        )}
-                                                    />
-                                                )}
-                                                {/*<div*/}
-                                                {/*    onClick={() => setVisibleLists(prev => prev.map((value, i) => (i === index ? !value : value)))}*/}
-                                                {/*    className={inputValues[index] !== 'нажмите для выбора' ? [styles.form__control, styles.form__controlActiveBlue].join(' ') : styles.form__control}*/}
-                                                {/*>*/}
-                                                {/*    {inputValues[index]}*/}
-                                                {/*</div>*/}
-                                                {/*<div className={visibleLists[index] ? [styles.form__list, styles.form__list_active].join(' ') : styles.form__list}>*/}
-                                                {/*    */}
-                                                {/*</div>*/}
-
-                                            </div>
-                                        ))}
+                                        {
+                                            formOptions && formOptions.map((values, index) => (
+                                                <div key={index} className={styles.form__item}>
+                                                    <h3 className={styles.form__itemLabel}>
+                                                        <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                    </h3>
+                                                    {values.options && (
+                                                        <Controller
+                                                            name={`productData[${index}]`}
+                                                            control={control}
+                                                            rules={{
+                                                                required: 'Обязательное поле'
+                                                            }}
+                                                            render={({ field }) => (
+                                                                <Select
+                                                                    {...field}
+                                                                    required={true}
+                                                                    isMulti={values.label === 'Пол и возраст'}
+                                                                    options={
+                                                                        Object.entries(values.options).map(([value, num]) => (
+                                                                            {
+                                                                                value,
+                                                                                label: value,
+                                                                                tag: values.propName
+                                                                    })
+                                                                    )
+                                                                }
+                                                                    styles={{
+                                                                        control: (provided) => ({
+                                                                            ...provided,
+                                                                            width: 'auto', // Устанавливайте нужную вам ширину
+                                                                        }),
+                                                                    }}
+                                                                    placeholder="нажмите для выбора"
+                                                                    onChange={(selectedOption) => field.onChange(selectedOption)}
+                                                                />
+                                                            )}
+                                                        />
+                                                    )}
+                                                </div>
+                                            ))
+                                        }
                                     </div>
                                 </div>
                               <div className={styles.form__row}>
