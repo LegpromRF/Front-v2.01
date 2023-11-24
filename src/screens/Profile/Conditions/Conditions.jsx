@@ -37,6 +37,7 @@ const Conditions = () => {
 
             const updatedOptions = Object.entries(labels).map(([propName, label]) => {
                 return {
+                    propName,
                     label,
                     options: options[propName]
                 };
@@ -83,7 +84,7 @@ const Conditions = () => {
                                                             </h3>
                                                             {values.options && (
                                                                 <Controller
-                                                                    name={`${values.propName}`}
+                                                                    name={values.propName}
                                                                     control={control}
                                                                     render={({ field }) => (
                                                                         <Select
