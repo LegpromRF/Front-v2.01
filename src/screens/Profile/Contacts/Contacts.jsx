@@ -178,7 +178,7 @@ const Contacts = () => {
                               </h3>
                               {values.options && (
                                 <Controller
-                                  name={`productData[${index}]`}
+                                  name={`${values.propName}`}
                                   control={control}
                                   render={({ field }) => (
                                     <Select

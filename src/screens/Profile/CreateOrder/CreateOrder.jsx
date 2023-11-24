@@ -12,19 +12,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {updateFormData} from "@store/orderForm/form.slice.js";
 
 const CreateOrder = () => {
-    const { control, getValues, formState: {isValid}, handleSubmit } = useForm()
+    const { control, getValues, formState: { isValid}, handleSubmit } = useForm()
     const [formOptions, setFormOptions] = useState([])
     const [loading, setLoading] = useState(true);
     const [visibleControlImage, setVisibleControlImage] = useState(false)
     const [preview, setPreview] = useState([]);
-    const [modalState, setModalState] = useState({
-        modalActive: false,
-        modalActive2: false,
-        modalActive3: false
-    });
 
     const rawFormData = useSelector((state) => state.form.formData)
-
     const purchase = useSelector((state) => state.form.purchaseStep)
     const technology = useSelector((state) => state.form.technologyStep)
     const conditions = useSelector((state) => state.form.conditionsStep)
@@ -94,14 +88,6 @@ const CreateOrder = () => {
         loadOptions();
     }, []);
 
-    function onSubmit(data) {
-        console.log(data)
-        dispatch(updateFormData(data))
-        console.log(getValues())
-        console.log(rawFormData)
-        navigate('/profile/order/purchase')
-    }
-
   return (
     <>
     {/*<Head>*/}
@@ -123,11 +109,7 @@ const CreateOrder = () => {
             <div className={styles.createOrder__content}>
               <div className={styles.createOrder__body}>
                   {
-                          <form
-                              className={styles.form}
-                              onSubmit={handleSubmit(onSubmit)}
-
-                          >
+                          <form className={styles.form}>
                             <div className={styles.form__content}>
                                 <div className={styles.form__row}>
                                     <div className={styles.form__title}>Основная информация</div>
@@ -140,7 +122,7 @@ const CreateOrder = () => {
                                                     </h3>
                                                     {values.options && (
                                                         <Controller
-                                                            name={`${values.propName}`}
+                                                            name={values.propName}
                                                             control={control}
                                                             rules={{
                                                                 required: 'Обязательное поле'
@@ -213,9 +195,16 @@ const CreateOrder = () => {
         </div>
           <div className={styles.form__button}>
               <div className={styles.form__buttonBack}>Назад</div>
-              <button type={"submit"} className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}>
+              <Link
+                  to="/profile/order/purchase"
+                  onClick={() => {
+                      dispatch(updateFormData(getValues()))
+                      console.log(getValues())
+                  }}
+                  className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
+              >
                   Вперед
-              </button>
+              </Link>
           </div>
           {/*<ModalLayout active={modalState.modalActive3} setActive={setModalState} height="1000">*/}
           {/*    <h3 className={styles.form__modalTitle}>Выберите тариф</h3>*/}
