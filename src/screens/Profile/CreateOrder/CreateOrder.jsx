@@ -24,12 +24,13 @@ const CreateOrder = () => {
     });
 
     const rawFormData = useSelector((state) => state.form.formData)
-    const navigate = useNavigate()
+
     const purchase = useSelector((state) => state.form.purchaseStep)
     const technology = useSelector((state) => state.form.technologyStep)
     const conditions = useSelector((state) => state.form.conditionsStep)
     const contacts = useSelector((state) => state.form.contactsStep)
 
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const fileobj= [];
@@ -119,30 +120,6 @@ const CreateOrder = () => {
           </div>
 
         <div className={styles.createOrder__order}>
-          {/*<div className={styles.createOrder__type}>*/}
-          {/*  <div className={styles.createOrder__typeTitle}>Вид продукции</div>*/}
-          {/*    {*/}
-          {/*        formInputs.vidProduct.options && Object.entries(formInputs.vidProduct.options).map(([value, num], index) => {*/}
-          {/*            return (*/}
-          {/*                <div*/}
-          {/*                    key={index}*/}
-          {/*                    onClick={() => handleTypeClick(index)}*/}
-          {/*                    className={typeActive === index ? [styles.createOrder__typeItem, styles.createOrder__typeItem_active].join(' ')*/}
-          {/*                        :*/}
-          {/*                        styles.createOrder__typeItem}*/}
-          {/*                >*/}
-          {/*                    {value}*/}
-          {/*                </div>*/}
-          {/*            )*/}
-          {/*        })*/}
-          {/*    }*/}
-          {/*  /!*{typeActive1 || typeActive2 *!/*/}
-          {/*  /!*  ?*!/*/}
-          {/*  /!*    <div className={styles.createOrder__typeWarning}>От вида продукции зависят остальные параметры заказа.</div>*!/*/}
-          {/*  /!*  :*!/*/}
-          {/*  /!*    null*!/*/}
-          {/*  /!*}*!/*/}
-          {/*</div>*/}
             <div className={styles.createOrder__content}>
               <div className={styles.createOrder__body}>
                   {
@@ -200,7 +177,7 @@ const CreateOrder = () => {
                                 </div>
                               <div className={styles.form__row}>
                                 <div className={styles.form__title}>Фото изделия</div>
-                                <form className={styles.form__imagesForm} method="post" encType="multipart/form-data">
+                                <div className={styles.form__imagesForm}>
                                   <div className={styles.form__imagesBlockPreview}>
                                     {(preview || []).map((url, index) => (
                                       <div className={styles.form__imageItem} key={index} onMouseEnter={() => setVisibleControlImage(true)} onMouseLeave={() => setVisibleControlImage(false)}>
@@ -226,7 +203,7 @@ const CreateOrder = () => {
                                     </div>
                                   </div>
                                 </div>
-                              </form>
+                              </div>
                               </div>
                             </div>
                           </form>
@@ -240,73 +217,37 @@ const CreateOrder = () => {
                   Вперед
               </button>
           </div>
-          {/*<ModalLayout active={modalState.modalActive} setActive={setModalState}>*/}
-          {/*    <h3 className={styles.form__modalTitle}>Укажите свою почту</h3>*/}
-          {/*    <p className={styles.form__modalSubTitle}>Для получения уведомлений о статусе вашего ТЗ и подтверждения вашего акаунта,  укажите свою электронную почту.</p>*/}
-          {/*    <input */}
-          {/*      className={ modalState.modalActive ? [styles.form__inputActive, styles.form__inputModal].join(' ') : styles.form__inputModal} */}
-          {/*      onChange={handleInputChange(3)}*/}
-          {/*      type="text" */}
-          {/*      placeholder="Ваша почта"*/}
-          {/*    />*/}
-          {/*    <button */}
-          {/*      onClick={() => {*/}
-          {/*        setModalState(prevState => ({...prevState, modalActive: false, modalActive2: true}))*/}
-          {/*      }} */}
-          {/*      className={modalState.modalActive ? [styles.form__buttonModal, styles.form__buttonModalActive].join(' ') : styles.form__buttonModal}>*/}
-          {/*        Далее*/}
-          {/*    </button>*/}
+          {/*<ModalLayout active={modalState.modalActive3} setActive={setModalState} height="1000">*/}
+          {/*    <h3 className={styles.form__modalTitle}>Выберите тариф</h3>*/}
+          {/*    <p className={styles.form__modalSubTitle}>*/}
+          {/*      Оплатите <span className={styles.form__modalProSpan}>PRO</span> и отправьте заявку сразу всем подходящим исполнителям! Также у вам будут*/}
+          {/*      доступны контакты всех исполнителей.*/}
+          {/*    </p>*/}
+          {/*    <div className={styles.form__buttomTarif}>*/}
+          {/*        <div className={[styles.form__buttonTarifItem, styles.form__buttonTarifItemPRO].join(' ')}>*/}
+          {/*          <Link to="/profile/selection">*/}
+          {/*            <div className={styles.form__tarifBody}>*/}
+          {/*              <h3 className={styles.form__tarifTitle}>PRO подписка</h3>*/}
+          {/*              <p className={styles.form__tarifSubTitle}>от 1440 ₽/Месяц</p>*/}
+          {/*            </div>*/}
+          {/*          </Link>*/}
+          {/*        </div>*/}
+          {/*        <div className={styles.form__buttonTarifItem}>*/}
+          {/*          <Link to="/profile/selection">*/}
+          {/*            <div className={styles.form__tarifBody}>*/}
+          {/*              <h3 className={styles.form__tarifTitle}>PRO на одно ТЗ</h3>*/}
+          {/*              <p className={styles.form__tarifSubTitle}>200 ₽</p>*/}
+          {/*            </div>*/}
+          {/*          </Link>*/}
+          {/*        </div>*/}
+          {/*    </div>*/}
+          {/*    <div className={styles.form__modalFree}><Link to="/profile/selection">Вы можете также продолжить работать <br /> <span>бесплатно с ограничениями</span></Link></div>*/}
           {/*</ModalLayout>*/}
-
-          {/*<ModalLayout active={modalState.modalActive2} setActive={setModalState}>*/}
-          {/*    <h3 className={styles.form__modalTitle}>Подтвердите свою почту</h3>*/}
-          {/*    <p className={styles.form__modalSubTitle}>На почту pav*******@mail.ru был отправлен код подтверждения. Введите его в поле ниже</p>*/}
-          {/*    <input */}
-          {/*      className={ modalState.modalActive2 ? [styles.form__inputActive, styles.form__inputModal].join(' ') : styles.form__inputModal} */}
-          {/*      onChange={handleInputChange(4)}*/}
-          {/*      type="text" */}
-          {/*      placeholder="Код из сообщения"*/}
-          {/*    />*/}
-          {/*    <button */}
-          {/*      onClick={() => {*/}
-          {/*        setModalState(prevState => ({...prevState, modalActive2: false, modalActive3: true}))*/}
-          {/*      }} */}
-          {/*      className={modalState.modalActive2 ? [styles.form__buttonModal, styles.form__buttonModalActive].join(' ') : styles.form__buttonModal}>*/}
-          {/*        Далее*/}
-          {/*    </button>*/}
-          {/*</ModalLayout>*/}
-
-          <ModalLayout active={modalState.modalActive3} setActive={setModalState} height="1000">
-              <h3 className={styles.form__modalTitle}>Выберите тариф</h3>
-              <p className={styles.form__modalSubTitle}>
-                Оплатите <span className={styles.form__modalProSpan}>PRO</span> и отправьте заявку сразу всем подходящим исполнителям! Также у вам будут
-                доступны контакты всех исполнителей.
-              </p>
-              <div className={styles.form__buttomTarif}>
-                  <div className={[styles.form__buttonTarifItem, styles.form__buttonTarifItemPRO].join(' ')}>
-                    <Link to="/profile/selection">
-                      <div className={styles.form__tarifBody}>
-                        <h3 className={styles.form__tarifTitle}>PRO подписка</h3>
-                        <p className={styles.form__tarifSubTitle}>от 1440 ₽/Месяц</p>
-                      </div>
-                    </Link>
-                  </div>
-                  <div className={styles.form__buttonTarifItem}>
-                    <Link to="/profile/selection">
-                      <div className={styles.form__tarifBody}>
-                        <h3 className={styles.form__tarifTitle}>PRO на одно ТЗ</h3>
-                        <p className={styles.form__tarifSubTitle}>200 ₽</p>
-                      </div>
-                    </Link>
-                  </div>
-              </div>
-              <div className={styles.form__modalFree}><Link to="/profile/selection">Вы можете также продолжить работать <br /> <span>бесплатно с ограничениями</span></Link></div>
-          </ModalLayout>
 
       </div>
     </Layout>
     </>
    );
 }
- 
+
 export default CreateOrder;
