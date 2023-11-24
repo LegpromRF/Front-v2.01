@@ -92,6 +92,9 @@ const CreateOrder = () => {
     async function submit() {
         console.log(preview)
         if (preview) {
+            var formData = new FormData();
+            for (const file of preview.files)
+                formData.append('files', file);
             axios({
                 method: 'post',
                 url: apiEndpoints.photos,
