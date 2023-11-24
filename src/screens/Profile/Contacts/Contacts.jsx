@@ -357,13 +357,13 @@ const Contacts = () => {
                         <div className={styles.form__items}></div>
                       </div>
                     </div>
-                    <div className={styles.form__button}>
-                      <div className={styles.form__button}>
-                        <div className={styles.form__buttonBack}>Назад</div>
-                        <button type="submit">Вперед</button>
-                      </div>
-                    </div>
                   </form>
+              </div>
+            </div>
+            <div className={styles.form__button}>
+              <div className={styles.form__button}>
+                <div className={styles.form__buttonBack}>Назад</div>
+                <button type="submit">Вперед</button>
               </div>
             </div>
           </div>
