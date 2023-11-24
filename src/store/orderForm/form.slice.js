@@ -32,5 +32,5 @@ export const formSlice = createSlice({
     }
 })
 
-export const { productSuccess, purchaseSuccess, technologySuccess, conditionsSuccess, contactsSuccess } = formSlice.actions
+export const { updateFormData, productSuccess, purchaseSuccess, technologySuccess, conditionsSuccess, contactsSuccess } = formSlice.actions
 export default formSlice.reducer

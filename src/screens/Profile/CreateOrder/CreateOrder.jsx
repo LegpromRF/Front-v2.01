@@ -9,6 +9,7 @@ import {Link} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import {Controller, useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
+import {updateFormData} from "@store/orderForm/form.slice.js";
 
 const CreateOrder = () => {
     const { control, getValues, formState: {isValid}, handleSubmit } = useForm()
@@ -237,6 +238,7 @@ const CreateOrder = () => {
               <Link
                   to="/profile/order/purchase"
                   onClick={() => {
+                      dispatch(updateFormData())
                       console.log(getValues())
                   }}
                     className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
