@@ -92,8 +92,8 @@ const CreateOrder = () => {
     async function submit() {
         console.log(preview)
         if (preview) {
-            var formData = new FormData();
-            formData.append('files', preview);
+            const formData = new FormData();
+            formData.append('file', preview)
             console.log(formData)
             axios({
                 method: 'post',
