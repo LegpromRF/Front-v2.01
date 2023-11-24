@@ -138,9 +138,21 @@ const Contacts = () => {
   }
 
   const onSubmit = async () => {
-      dispatch(updateFormData(getValues()))
-      console.log(formData)
-      dispatch(purchaseSuccess())
+    await dispatch(updateFormData(getValues()))
+    console.log(formData)
+    const inputObject = await formData
+
+    const outputObject = {};
+
+    for (const key in inputObject) {
+      if (Object.prototype.hasOwnProperty.call(formData, key)) {
+        const newKey = key.replace(/^spr_/, ''); // Remove "spr_" from the beginning of the key
+        outputObject[newKey] = inputObject[key];
+      }
+    }
+
+    console.log(outputObject)
+    dispatch(purchaseSuccess())
 
 
   };

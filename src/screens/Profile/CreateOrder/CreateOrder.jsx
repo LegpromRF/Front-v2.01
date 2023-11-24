@@ -159,11 +159,12 @@ const CreateOrder = () => {
                                                             isMulti={values.label === 'Пол и возраст'}
                                                             options={
                                                                 Object.entries(values.options).map(([value, index]) => (
-                                                                    {
-                                                                        value: index,
-                                                                        label: value,
-                                                            })
-                                                            )
+                                                                        {
+                                                                            value: index,
+                                                                            label: value,
+                                                                        }
+                                                                    )
+                                                                )
                                                         }
                                                             styles={{
                                                                 control: (provided) => ({
