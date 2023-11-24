@@ -8,10 +8,10 @@ import {useEffect, useState} from "react";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import Select from "react-select";
 import {useDispatch, useSelector} from "react-redux";
-import {technologySuccess} from "@store/orderForm/form.slice.js";
+import {technologySuccess, updateFormData} from "@store/orderForm/form.slice.js";
 
 const Technology = () => {
-    const { control, handleSubmit, getValues, setValue } = useForm()
+    const { control, formState: {isValid}, getValues} = useForm()
     const [formOptions, setFormOptions] = useState([])
 
     const purchase = useSelector((state) => state.form.purchaseStep)
@@ -171,11 +171,12 @@ const Technology = () => {
                     <div className={styles.form__button}>
                         <div className={styles.form__buttonBack}>Назад</div>
                         <Link
-                            onClick={() => {
-                                console.log(getValues())
-                                dispatch(technologySuccess())
-                            }}
                             to="/profile/order/conditions"
+                            onClick={() => {
+                                dispatch(updateFormData(getValues()))
+                                console.log(getValues())
+                            }}
+                            className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
                         >
                             Вперед
                         </Link>
