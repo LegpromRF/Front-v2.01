@@ -90,6 +90,7 @@ const CreateOrder = () => {
     }, []);
 
     async function submit() {
+        console.log(fileobj)
         const formData = new FormData();
 
         // Append images to formData
