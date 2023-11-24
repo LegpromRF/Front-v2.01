@@ -157,7 +157,7 @@ const CreateOrder = () => {
                                                     </h3>
                                                     {values.options && (
                                                         <Controller
-                                                            name={`productData[${index}]`}
+                                                            name={`${values.propName}`}
                                                             control={control}
                                                             rules={{
                                                                 required: 'Обязательное поле'
