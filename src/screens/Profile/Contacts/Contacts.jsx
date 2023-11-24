@@ -137,23 +137,12 @@ const Contacts = () => {
     })
   }
 
-  const onSubmit = async (data) => {
-    try {
-      const schema = yup.object().shape({
-        tz_cl_fio: yup.string().required('Это поле обязательно'),
-        tz_cl_tel: yup.string().required('Это поле обязательно'),
-        tz_cl_email: yup.string().required('Это поле обязательно'),
-        tz_cl_tlg: yup.string().required('Это поле обязательно'),
-      });
-
-      await schema.validate(data);
-      console.log(formData)
-      console.log(data);
-      dispatch(purchaseSuccess());
+  const onSubmit = async () => {
       dispatch(updateFormData(getValues()))
-    } catch (error) {
-      console.log(error)
-    }
+      console.log(formData)
+      dispatch(purchaseSuccess())
+
+
   };
 
   const { purchase, technology, conditions, contacts } = useSelector((state) => state.form);
@@ -364,7 +353,7 @@ const Contacts = () => {
           <div className={styles.form__button}>
             <div className={styles.form__button}>
               <div className={styles.form__buttonBack}>Назад</div>
-              <button type="submit">Вперед</button>
+              <a onClick={() => onSubmit()}>Вперед</a>
             </div>
           </div>
         </div>
