@@ -165,9 +165,10 @@ const CreateOrder = () => {
                                                                     required={true}
                                                                     isMulti={values.label === 'Пол и возраст'}
                                                                     options={
-                                                                        Object.entries(values.options).map(([value, num]) => (
+                                                                        Object.entries(values.options).map(([value, index]) => (
                                                                             {
-                                                                                index: num,
+                                                                                value: index,
+                                                                                label: value,
                                                                                 tag: values.propName
                                                                     })
                                                                     )
