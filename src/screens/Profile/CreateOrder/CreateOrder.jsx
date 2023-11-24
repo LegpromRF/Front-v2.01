@@ -234,7 +234,7 @@ const CreateOrder = () => {
               <Link
                   to="/profile/order/purchase"
                   onClick={() => {
-                      dispatch(updateFormData())
+                      dispatch(updateFormData(getValues()))
                       console.log(getValues())
                       console.log(rawFormData)
                   }}
