@@ -23,6 +23,8 @@ const CreateOrder = () => {
         modalActive3: false
     });
 
+    const rawFormData = useSelector((state) => state.form.formData)
+
     const purchase = useSelector((state) => state.form.purchaseStep)
     const technology = useSelector((state) => state.form.technologyStep)
     const conditions = useSelector((state) => state.form.conditionsStep)
@@ -224,12 +226,6 @@ const CreateOrder = () => {
                             </div>
                           </form>
                   }
-                {/*:*/}
-                {/*  <div className={styles.createOrder__noTypeActive}>*/}
-                {/*    <h2 className={styles.createOrder__warningTitle}>Выберите нужный вид пошива.</h2>*/}
-                {/*    <p className={styles.createOrder__warningsubTitle}>От этого будут зависить другие дополнительные <br /> характеристики вашего пошива.</p>*/}
-                {/*  </div>*/}
-                {/*}*/}
               </div>
             </div>
         </div>
@@ -240,6 +236,7 @@ const CreateOrder = () => {
                   onClick={() => {
                       dispatch(updateFormData())
                       console.log(getValues())
+                      console.log(rawFormData)
                   }}
                     className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
               >
