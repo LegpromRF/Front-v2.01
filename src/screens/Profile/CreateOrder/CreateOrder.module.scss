@@ -141,6 +141,10 @@
     color: rgba(0, 0, 0, 0)
   }
 
+  input {
+    width: 100%;
+  }
+
   ::-webkit-file-upload-button {
     display: none;
   }
@@ -167,10 +171,10 @@
   &__items {
 
     @media (min-width: 900px) {
-      display: flex;
+      grid-template-columns: 1fr 1fr 1fr;
+      display: grid;
       row-gap: 16px;
       column-gap: 48px;
-      flex-wrap: wrap;
     }
 
   }
