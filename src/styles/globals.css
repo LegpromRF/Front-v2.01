@@ -52,6 +52,7 @@ address {
 
 /* Form */
 input, textarea, button, select {
+  width: 100%;
   font-family: inherit;
   font-size: inherit;
   color: inherit;

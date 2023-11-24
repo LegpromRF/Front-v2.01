@@ -3,15 +3,12 @@ import styles from './CreateOrder.module.scss'
 import Select from 'react-select'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
-import ModalLayout from '@layout/Modal/ModalLayout'
 import {useCallback, useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import {Controller, useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
 import {updateFormData} from "@store/orderForm/form.slice.js";
-import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
-import axios from "axios"
 
 const CreateOrder = () => {
     const { control, getValues, formState: { isValid}} = useForm()
@@ -90,37 +87,9 @@ const CreateOrder = () => {
     }, []);
 
     async function submit() {
-        console.log(fileobj)
-        const formData = new FormData();
-
-        // Append images to formData
-        for (let i = 0; i < fileobj[0].length; i++) {
-            formData.append('images', fileobj[0][i]);
-        }
-
-        try {
-            axios.post(apiEndpoints.photos, formData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'Accept': 'application/json',
-                    },
-                    withCredentials: true
-                },
-            )
-                .then(response => {
-                    console.log(response);
-                    dispatch(updateFormData(getValues()))
-                    console.log(getValues())
-                    navigate("/profile/order/purchase")
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        } catch (error) {
-            console.log(error)
-        }
-
-
+        dispatch(updateFormData(getValues()))
+        console.log(getValues())
+        navigate("/profile/order/purchase")
     }
 
 
