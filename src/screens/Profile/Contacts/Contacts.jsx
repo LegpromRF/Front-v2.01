@@ -54,7 +54,7 @@ const Contacts = () => {
       "docs": [
         "string"
       ],
-      "name": formData.name.value,
+      "name": formData.name,
       "regular_zakaz": 0,
       "vid_postavki": 0,
       "vid_product": 0,

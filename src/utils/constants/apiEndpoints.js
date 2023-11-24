@@ -17,5 +17,6 @@ export const apiEndpoints = {
     technology: apiHOST + 'bid/technology',
     conditions: apiHOST + 'bid/conditions',
     contacts: apiHOST + 'bid/contacts',
-    create: apiHOST + 'bid/create'
+    create: apiHOST + 'bid/create',
+    photos: apiHOST + 'file_manager/photos'
 }
