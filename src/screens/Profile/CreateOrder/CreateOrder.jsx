@@ -169,6 +169,7 @@ const CreateOrder = () => {
                                                                             {
                                                                                 value,
                                                                                 label: value,
+                                                                                index: Object.values(values.options).map(([value, num]) => value),
                                                                                 tag: values.propName
                                                                     })
                                                                     )
