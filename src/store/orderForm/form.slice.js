@@ -27,7 +27,7 @@ export const formSlice = createSlice({
             state.contactsStep = true
         },
         updateFormData: (state, payload) => {
-            state.formData = {...payload}
+            state.formData = {...payload.payload}
         }
     }
 })
