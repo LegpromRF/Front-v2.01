@@ -3,7 +3,7 @@ import styles from './Purchase.module.scss'
 import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,7 +12,7 @@ import Select from "react-select";
 
 const Purchase = () => {
     const navigate = useNavigate()
-    const { control, handleSubmit, formState: {isValid}, watch, getValues, setValue } = useForm()
+    const { control, formState: {isValid}, watch, getValues } = useForm()
     const [formOptions, setFormOptions] = useState([])
     const purchase = useSelector((state) => state.form.purchaseStep)
     const technology = useSelector((state) => state.form.technologyStep)
@@ -21,7 +21,7 @@ const Purchase = () => {
 
     const dispatch = useDispatch()
 
-    async function loadOptions() {
+    const loadOptions = useCallback( async () => {
         try {
             const options = await getPropObject('purchase');
             console.log(options);
@@ -32,6 +32,7 @@ const Purchase = () => {
 
             const updatedOptions = Object.entries(labels).map(([propName, label]) => {
                 return {
+                    propName,
                     label,
                     options: options[propName]
                 };
@@ -43,7 +44,7 @@ const Purchase = () => {
         } catch (error) {
             console.log(error);
         }
-    }
+    }, [])
 
     useEffect(() => {
         loadOptions();
@@ -88,14 +89,14 @@ const Purchase = () => {
                                                             </h3>
                                                             {values.options && (
                                                                 <Controller
-                                                                    name={`productData[${index}]`}
+                                                                    name={`${values.propName}`}
                                                                     control={control}
                                                                     render={({ field }) => (
                                                                         <Select
                                                                             {...field}
                                                                             options={
-                                                                                Object.entries(values.options).map(([value, num]) => ({
-                                                                                    value,
+                                                                                Object.entries(values.options).map(([value, index]) => ({
+                                                                                    value: index,
                                                                                     label: value,
                                                                                 }))
                                                                             }
@@ -122,7 +123,7 @@ const Purchase = () => {
                                                             <span>Взять в производство не позднее</span> <span className={styles.form__itemLabel_star}>*</span>
                                                         </h3>
                                                         <Controller
-                                                            name="date"
+                                                            name="tz_data_start"
                                                             control={control}
                                                             rules={{
                                                                 required: {
@@ -146,7 +147,7 @@ const Purchase = () => {
                                                             <span>Срок исполнения заказа с момента получения аванса/сырья</span> <span className={styles.form__itemLabel_star}>*</span>
                                                         </h3>
                                                         <Controller
-                                                            name="srok"
+                                                            name="tz_sroki"
                                                             control={control}
                                                             rules={{
                                                                 required: {
@@ -171,7 +172,7 @@ const Purchase = () => {
                                                             <span>Количество</span> <span className={styles.form__itemLabel_star}>*</span>
                                                         </h3>
                                                         <Controller
-                                                            name="quantity"
+                                                            name="tz_count"
                                                             control={control}
                                                             rules={{
                                                                 required: {
@@ -195,7 +196,7 @@ const Purchase = () => {
                                                             <span>Цена за шт.</span> <span className={styles.form__itemLabel_star}>*</span>
                                                         </h3>
                                                         <Controller
-                                                            name="price"
+                                                            name="tz_price_one"
                                                             control={control}
                                                             rules={{
                                                                 required: {

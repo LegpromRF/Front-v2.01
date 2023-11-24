@@ -87,9 +87,7 @@ const CreateOrder = () => {
             } catch (error) {
                 console.log(error)
             }
-        },
-        [],
-    );
+        }, [])
 
     useEffect(() => {
         loadOptions();
@@ -172,7 +170,6 @@ const CreateOrder = () => {
                                                                             {
                                                                                 value: index,
                                                                                 label: value,
-                                                                                tag: values.propName
                                                                     })
                                                                     )
                                                                 }
