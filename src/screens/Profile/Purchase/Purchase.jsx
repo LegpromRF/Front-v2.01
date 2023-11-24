@@ -26,7 +26,7 @@ const Purchase = () => {
             const options = await getPropObject('purchase');
             console.log(options);
             const labels = {
-                spr_price_nds: "Цена",
+                spr_price_nds: "с/без НДС",
                 tz_reg_post: "Регион",
             };
 
@@ -146,7 +146,7 @@ const Purchase = () => {
                                                             <span>Срок исполнения заказа с момента получения аванса/сырья</span> <span className={styles.form__itemLabel_star}>*</span>
                                                         </h3>
                                                         <Controller
-                                                            name="telegram"
+                                                            name="srok"
                                                             control={control}
                                                             rules={{
                                                                 required: {
