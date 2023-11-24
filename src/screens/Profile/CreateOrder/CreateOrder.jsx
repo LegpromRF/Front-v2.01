@@ -235,7 +235,7 @@ const CreateOrder = () => {
         </div>
           <div className={styles.form__button}>
               <div className={styles.form__buttonBack}>Назад</div>
-              <button className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}>
+              <button type={"submit"} className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}>
                   Вперед
               </button>
           </div>
