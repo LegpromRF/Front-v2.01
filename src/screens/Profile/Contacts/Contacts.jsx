@@ -45,10 +45,10 @@ const Contacts = () => {
   const onSubmit = async (data) => {
     try {
       const schema = yup.object().shape({
-        nameSurname: yup.string().required('Это поле обязательно'),
-        date: yup.string().required('Это поле обязательно'),
-        email: yup.string().required('Это поле обязательно'),
-        telegram: yup.string().required('Это поле обязательно'),
+        tz_cl_fio: yup.string().required('Это поле обязательно'),
+        tz_cl_tel: yup.string().required('Это поле обязательно'),
+        tz_cl_email: yup.string().required('Это поле обязательно'),
+        tz_cl_tlg: yup.string().required('Это поле обязательно'),
       });
 
       await schema.validate(data);
