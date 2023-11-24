@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {conditionsSuccess, updateFormData} from "@store/orderForm/form.slice.js";
 
 const Conditions = () => {
-    const { control, getValues} = useForm()
+    const { control, getValues, formState: { isValid}} = useForm()
     const [formOptions, setFormOptions] = useState([])
 
     const purchase = useSelector((state) => state.form.purchaseStep)

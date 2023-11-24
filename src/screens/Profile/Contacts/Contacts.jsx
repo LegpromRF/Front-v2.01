@@ -10,12 +10,15 @@ import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import {useDispatch, useSelector} from "react-redux";
 import {purchaseSuccess} from "@store/orderForm/form.slice.js";
 import Select from "react-select";
+import axios from "axios";
+import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 
 const Contacts = () => {
   const { control, handleSubmit, formState: { errors }} = useForm();
   const [formOptions, setFormOptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const formData = useSelector((state) => state.form.formData)
 
   const loadOptions = useCallback(async () => {
     try {
@@ -40,7 +43,99 @@ const Contacts = () => {
 
   useEffect(() => {
     loadOptions();
-  }, [loadOptions]);
+  }, [loadOptions])
+
+  async function sendForm() {
+
+    const params = {
+      "photos": [
+        "string"
+      ],
+      "docs": [
+        "string"
+      ],
+      "name": formData.name.value,
+      "regular_zakaz": 0,
+      "vid_postavki": 0,
+      "vid_product": 0,
+      "tip_odejdy": 0,
+      "naznach": 0,
+      "vid_izdeliya": 0,
+      "pol": 0,
+      "sezon": 0,
+      "price_segment": [
+        0
+      ],
+      "count": 0,
+      "price_one": 0,
+      "price_part": 0,
+      "price_nds": 0,
+      "data_start": "2023-11-24T16:02:49.380Z",
+      "sroki": formData.tz_sroki,
+      "data_finish": "2023-11-24T16:02:49.380Z",
+      "reg_post": 0,
+      "reg_prod": [
+        0
+      ],
+      "min_part": 0,
+      "lekala": [
+        0
+      ],
+      "tehnolog": [
+        0
+      ],
+      "sirye": [
+        0
+      ],
+      "vid_tkani": [
+        0
+      ],
+      "plotnost_tkani": "string",
+      "nanesen": [
+        0
+      ],
+      "dop_uslugi": [
+        0
+      ],
+      "razm": "string",
+      "obraz_poshiv": 0,
+      "obraz_pay": 0,
+      "obraz_zak": true,
+      "dost_otk": 0,
+      "spsch": 0,
+      "count_pers": 0,
+      "prersonal": [
+        0
+      ],
+      "oborud": [
+        0
+      ],
+      "upakovka": [
+        0
+      ],
+      "markirovka": [
+        0
+      ],
+      "usl_pay": [
+        0
+      ],
+      "usl_priem": [
+        0
+      ],
+      "usl_dostav": [
+        0
+      ],
+      "dop_treb": "string",
+      "status": 0,
+      "fio": "string",
+      "tel": "string",
+      "email": "string",
+      "tlg": "string"
+    }
+    axios.post(apiEndpoints.create, {
+
+    })
+  }
 
   const onSubmit = async (data) => {
     try {
