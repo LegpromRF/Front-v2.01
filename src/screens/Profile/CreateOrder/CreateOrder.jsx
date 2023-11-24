@@ -90,31 +90,38 @@ const CreateOrder = () => {
     }, []);
 
     async function submit() {
-        console.log(preview)
-        if (preview) {
-            const formData = new FormData();
-            formData.append('file', preview)
-            console.log(formData)
-            axios({
-                method: 'post',
-                url: apiEndpoints.photos,
-                data: preview,
-                headers: {
-                    'Accept': 'application/json',
+        const formData = new FormData();
+
+        // Append images to formData
+        for (let i = 0; i < fileobj[0].length; i++) {
+            formData.append('images', fileobj[0][i]);
+        }
+
+        try {
+            axios.post(apiEndpoints.photos, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'Accept': 'application/json',
+                    },
+                    withCredentials: true
                 },
-                withCredentials: true
-            })
+            )
                 .then(response => {
                     console.log(response);
+                    dispatch(updateFormData(getValues()))
+                    console.log(getValues())
+                    navigate("/profile/order/purchase")
                 })
                 .catch(error => {
                     console.error(error);
                 });
+        } catch (error) {
+            console.log(error)
         }
-        dispatch(updateFormData(getValues()))
-        console.log(getValues())
-        navigate("/profile/order/purchase")
+
+
     }
+
 
   return (
     <>
