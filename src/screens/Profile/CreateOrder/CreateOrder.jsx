@@ -90,6 +90,7 @@ const CreateOrder = () => {
     }, []);
 
     async function submit() {
+        console.log(fileobj)
         if (fileobj[0]) {
             let pushFiles = new FormData();
             for (const file of fileobj.files)
