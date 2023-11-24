@@ -8,13 +8,13 @@ import {useCallback, useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import {useDispatch, useSelector} from "react-redux";
-import {purchaseSuccess} from "@store/orderForm/form.slice.js";
+import {purchaseSuccess, updateFormData} from "@store/orderForm/form.slice.js";
 import Select from "react-select";
 import axios from "axios";
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 
 const Contacts = () => {
-  const { control, handleSubmit, formState: { errors }} = useForm();
+  const { control, handleSubmit, getValues, formState: { errors }} = useForm();
   const [formOptions, setFormOptions] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -150,6 +150,7 @@ const Contacts = () => {
 
       console.log(data);
       dispatch(purchaseSuccess());
+      dispatch(updateFormData(getValues()))
     } catch (error) {
       console.log(error)
     }
