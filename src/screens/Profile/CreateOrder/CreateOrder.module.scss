@@ -178,10 +178,10 @@
   &__item {
     margin-right: 50px;
     position: relative;
-    max-width: 200px;
+    width: 200px;
 
     @media (max-width: 900px) {
-      margin-right: 0px;
+      margin-right: 0;
       margin-bottom: 30px;
     }
   }
