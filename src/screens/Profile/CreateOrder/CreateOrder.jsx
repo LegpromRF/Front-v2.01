@@ -99,7 +99,8 @@ const CreateOrder = () => {
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'multipart/form-data'
-                }
+                },
+                withCredentials: true
             })
                 .then(response => {
                     console.log(response);
