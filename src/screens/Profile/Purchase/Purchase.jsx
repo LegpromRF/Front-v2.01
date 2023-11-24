@@ -4,14 +4,13 @@ import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
 import {useCallback, useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import {useDispatch, useSelector} from "react-redux";
 import {purchaseSuccess, updateFormData} from "@store/orderForm/form.slice.js";
 import Select from "react-select";
 
 const Purchase = () => {
-    const navigate = useNavigate()
     const { control, formState: {isValid}, watch, getValues } = useForm()
     const [formOptions, setFormOptions] = useState([])
     const purchase = useSelector((state) => state.form.purchaseStep)
@@ -50,8 +49,8 @@ const Purchase = () => {
         loadOptions();
     }, []);
 
-    const firstFieldValue = watch('quantity') || 0;
-    const secondFieldValue = watch('price') || 0;
+    const firstFieldValue = watch('tz_count') || 0;
+    const secondFieldValue = watch('tz_price_one') || 0;
     const sum = parseFloat(firstFieldValue) * parseFloat(secondFieldValue)
 
     return (

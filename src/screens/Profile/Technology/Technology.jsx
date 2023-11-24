@@ -4,7 +4,7 @@ import styles from './Technology.module.scss'
 import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import Select from "react-select";
 import {useDispatch, useSelector} from "react-redux";
@@ -21,7 +21,7 @@ const Technology = () => {
 
     const dispatch = useDispatch()
 
-    async function loadOptions() {
+    const loadOptions = useCallback( async () => {
         try {
             const options = await getPropObject('technology');
             console.log(options);
@@ -38,19 +38,20 @@ const Technology = () => {
 
             const updatedOptions = Object.entries(labels).map(([propName, label]) => {
                 return {
+                    propName,
                     label,
                     options: options[propName]
                 };
             });
-            
+
             console.log(updatedOptions)
-            
+
             setFormOptions(updatedOptions)
 
         } catch (error) {
             console.log(error);
         }
-    }
+    }, [])
 
     useEffect(() => {
         loadOptions();
@@ -85,14 +86,14 @@ const Technology = () => {
                                                             </h3>
                                                             {values.options && (
                                                                 <Controller
-                                                                    name={`productData[${index}]`}
+                                                                    name={`${values.propName}`}
                                                                     control={control}
                                                                     render={({ field }) => (
                                                                         <Select
                                                                             {...field}
                                                                             options={
                                                                                 Object.entries(values.options).map(([value, num]) => ({
-                                                                                    value,
+                                                                                    value: num,
                                                                                     label: value,
                                                                                 }))
                                                                             }
@@ -115,7 +116,7 @@ const Technology = () => {
                                                             <span>Плотность ткани</span> <span className={styles.form__itemLabel_star}>*</span>
                                                         </h3>
                                                         <Controller
-                                                            name="date"
+                                                            name="tkan"
                                                             control={control}
                                                             rules={{
                                                                 required: {
@@ -136,7 +137,7 @@ const Technology = () => {
                                                             <span>Заказчик предоставляет образец</span> <span className={styles.form__itemLabel_star}>*</span>
                                                         </h3>
                                                         <Controller
-                                                            name="example"
+                                                            name="tz_obraz_zak"
                                                             control={control}
                                                             rules={{
                                                                 required: {
@@ -148,9 +149,9 @@ const Technology = () => {
                                                             render={({ field }) => (
                                                                 <div>
                                                                     <label>Да</label>
-                                                                    <input type="radio" {...field} value="yes" />
+                                                                    <input type="radio" {...field} value="1" />
                                                                     <label>Нет</label>
-                                                                    <input type="radio" {...field} value="no" />
+                                                                    <input type="radio" {...field} value="0" />
                                                                 </div>
                                                             )}
                                                         />
