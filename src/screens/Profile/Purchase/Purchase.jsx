@@ -66,17 +66,16 @@ const Purchase = () => {
         navigate("/profile/order/technology")
     }
 
-    const flattenOptions = (options, prefix = '') => {
-        let flattenedOptions = [];
-        for (const [key, value] of Object.entries(options)) {
-            const label = prefix ? `${prefix} - ${key}` : key;
-            if (typeof value === 'object') {
-                flattenedOptions.push({ label, options: flattenOptions(value, key) });
-            } else {
-                flattenedOptions.push({ label, value });
+    const createOptionsArray = (data) => {
+        let optionsArray = [];
+        for (const [header, values] of Object.entries(data)) {
+            let headerObject = { label: `${header} - ${values}`, options: [] };
+            for (const [value, index] of Object.entries(values)) {
+                headerObject.options.push({ label: value, value: index });
             }
+            optionsArray.push(headerObject);
         }
-        return flattenedOptions;
+        return optionsArray;
     }
 
     const renderSelect = (field, options) => (
@@ -132,8 +131,8 @@ const Purchase = () => {
                                                                     required={true}
                                                                     control={control}
                                                                     render={({ field }) => {
-                                                                        const flattenedOptions = flattenOptions(values.options);
-                                                                        return renderSelect(field, flattenedOptions);
+                                                                        const optionsArray = createOptionsArray(values.options);
+                                                                        return renderSelect(field, optionsArray);
                                                                     }}
                                                                 />
                                                             )}
