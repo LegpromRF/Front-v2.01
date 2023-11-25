@@ -140,9 +140,9 @@ const Contacts = () => {
   const onSubmit = async () => {
     try {
       await dispatch(updateFormData(getValues()))
-      const inputObject = await formData
+      const inputObject = formData
 
-      console.log(formData)
+      console.log(inputObject)
 
       const outputObject = {}
       for (const key in inputObject) {
