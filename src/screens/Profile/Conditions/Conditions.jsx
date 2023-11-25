@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
 import styles from './Conditions.module.scss'
 import { useForm, Controller } from 'react-hook-form'
@@ -64,6 +64,7 @@ const Conditions = () => {
 
     async function onSubmit() {
         dispatch(updateFormData(getValues()))
+        dispatch(conditionsSuccess())
         console.log(getValues())
         navigate("/profile/order/contacts")
     }
@@ -126,7 +127,12 @@ const Conditions = () => {
                                             </div>
                                         </div>
                                         <div className={styles.form__button}>
-                                            <div className={styles.form__buttonBack}>Назад</div>
+                                            <Link
+                                                to={"/profile/order/technology"}
+                                                className={styles.form__buttonBack}
+                                            >
+                                                Назад
+                                            </Link>
                                             <button
                                                 type={"submit"}
                                                 className={errors ? styles.form__buttonForward : styles.form__buttonForward_disabled}

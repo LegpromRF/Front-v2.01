@@ -263,7 +263,6 @@ const CreateOrder = () => {
                           )
                       }
                       <div className={styles.form__button}>
-                          <div className={styles.form__buttonBack}>Назад</div>
                           <button
                               type={"submit"}
                               className={errors ? styles.form__buttonForward : styles.form__buttonForward_disabled}

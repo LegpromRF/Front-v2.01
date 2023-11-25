@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
 import styles from './Technology.module.scss'
 import { useForm, Controller } from 'react-hook-form'
@@ -8,7 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
-import { updateFormData } from "@store/orderForm/form.slice.js";
+import {technologySuccess, updateFormData} from "@store/orderForm/form.slice.js";
 
 const Technology = () => {
     const {
@@ -64,6 +64,7 @@ const Technology = () => {
 
     async function onSubmit() {
         dispatch(updateFormData(getValues()))
+        dispatch(technologySuccess())
         console.log(getValues())
         navigate("/profile/order/conditions")
     }
@@ -185,7 +186,12 @@ const Technology = () => {
                                                 </div>
                                             </div>
                                             <div className={styles.form__button}>
-                                                <div className={styles.form__buttonBack}>Назад</div>
+                                                <Link
+                                                    to={"/profile/order/purchase"}
+                                                    className={styles.form__buttonBack}
+                                                >
+                                                    Назад
+                                                </Link>
                                                 <button
                                                     type={"submit"}
                                                     className={errors ? styles.form__buttonForward : styles.form__buttonForward_disabled}

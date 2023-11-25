@@ -8,7 +8,7 @@ import {useCallback, useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import {useDispatch, useSelector} from "react-redux";
-import {purchaseSuccess, updateFormData} from "@store/orderForm/form.slice.js";
+import {contactsSuccess, updateFormData} from "@store/orderForm/form.slice.js";
 import Select from "react-select";
 import axios from "axios";
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
@@ -148,18 +148,15 @@ const Contacts = () => {
   async function onSubmit() {
     try {
       dispatch(updateFormData(getValues()))
+      dispatch(contactsSuccess())
       console.log(getValues())
       const inputObject = formData
       let outputObject = {}
 
       for (const key in inputObject) {
         if (Object.prototype.hasOwnProperty.call(inputObject, key)) {
-          if (Array.isArray(inputObject[key])) {
-            outputObject[key] = inputObject[key].map(item => item && item.value);
-          } else {
-            const newKey = key.replace(/^(spr_|tz_|cl_)/, ''); // Remove "spr_", "tz_", or "cl_" from the beginning of the key
-            outputObject[newKey] = inputObject[key] && inputObject[key].value;
-          }
+          const newKey = key.replace(/^(spr_|tz_|cl_)/, ''); // Remove "spr_", "tz_", or "cl_" from the beginning of the key
+          outputObject[newKey] = inputObject[key] && inputObject[key].value;
         }
       }
 
@@ -295,7 +292,7 @@ const Contacts = () => {
                               {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                             </h3>
                             <Controller
-                                name="tz_cl_tlg"
+                                name="cl_tlg"
                                 control={control}
                                 rules={{
                                   required: {
@@ -403,7 +400,12 @@ const Contacts = () => {
                       </div>
                     </div>
                     <div className={styles.form__button}>
-                      <div className={styles.form__buttonBack}>Назад</div>
+                      <Link
+                          to={"/profile/order/conditions"}
+                          className={styles.form__buttonBack}
+                      >
+                        Назад
+                      </Link>
                       <button
                           type={"submit"}
                           className={errors ? styles.form__buttonForward : styles.form__buttonForward_disabled}

@@ -63,6 +63,7 @@ const Purchase = () => {
     async function onSubmit() {
         dispatch(updateFormData(getValues()))
         dispatch(updateFormData({price_part: { value: sum }}))
+        dispatch(purchaseSuccess())
         console.log(getValues())
         navigate("/profile/order/technology")
     }

@@ -294,7 +294,6 @@
     justify-content: flex-end;
     gap: 18px;
     margin-top: 10px;
-    margin-bottom: 100px;
 
 
   }
@@ -307,11 +306,13 @@
 
   }
   &__buttonForward {
+    width: auto;
     border-radius: 7px;
     background: #242424;
     padding: 17px 35px;
     color: #FFF;
     font-size: 16px;
+
   }
 
   &__buttonForwardActive {
