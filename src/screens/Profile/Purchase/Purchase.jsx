@@ -126,22 +126,14 @@ const Purchase = () => {
                                                             </h3>
                                                             {values.options && (
                                                                 <Controller
-                                                                    name="yourFieldName"
+                                                                    name={values.propName}
+                                                                    isClearable={true}
+                                                                    required={true}
                                                                     control={control}
-                                                                    defaultValue={null}
-                                                                    render={({ field }) => (
-                                                                        <select {...field}>
-                                                                            {Object.entries(values.options['РОССИЯ']).map(([group, options]) => (
-                                                                                <optgroup label={group} key={group}>
-                                                                                    {Object.entries(options).map(([label, value]) => (
-                                                                                        <option key={value} value={value}>
-                                                                                            {label}
-                                                                                        </option>
-                                                                                    ))}
-                                                                                </optgroup>
-                                                                            ))}
-                                                                        </select>
-                                                                    )}
+                                                                    render={({ field }) => {
+                                                                        const optionsArray = createOptionsArray(values.options);
+                                                                        return renderSelect(field, optionsArray);
+                                                                    }}
                                                                 />
                                                             )}
                                                         </div>
