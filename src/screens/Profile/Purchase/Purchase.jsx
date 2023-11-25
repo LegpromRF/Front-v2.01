@@ -126,14 +126,22 @@ const Purchase = () => {
                                                             </h3>
                                                             {values.options && (
                                                                 <Controller
-                                                                    name={values.propName}
-                                                                    isClearable={true}
-                                                                    required={true}
+                                                                    name="yourFieldName"
                                                                     control={control}
-                                                                    render={({ field }) => {
-                                                                        const optionsArray = createOptionsArray(values.options);
-                                                                        return renderSelect(field, optionsArray);
-                                                                    }}
+                                                                    defaultValue={null}
+                                                                    render={({ field }) => (
+                                                                        <select {...field}>
+                                                                            {Object.entries(values.options['РОССИЯ']).map(([group, options]) => (
+                                                                                <optgroup label={group} key={group}>
+                                                                                    {Object.entries(options).map(([label, value]) => (
+                                                                                        <option key={value} value={value}>
+                                                                                            {label}
+                                                                                        </option>
+                                                                                    ))}
+                                                                                </optgroup>
+                                                                            ))}
+                                                                        </select>
+                                                                    )}
                                                                 />
                                                             )}
                                                         </div>
