@@ -49,10 +49,10 @@ const Contacts = () => {
   async function sendForm(formData) {
     const params = {
       "photos": [
-        "string"
+        "foo"
       ],
       "docs": [
-        "string"
+        "foo"
       ],
       "name": formData.name,
       "regular_zakaz": formData.regular_zakaz.value,
@@ -77,7 +77,7 @@ const Contacts = () => {
       "reg_prod": [
         0
       ],
-      "min_part": 0,
+      "min_part": formData.min_part,
       "lekala": [
         0
       ],

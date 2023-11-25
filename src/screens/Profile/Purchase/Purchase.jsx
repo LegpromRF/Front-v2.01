@@ -266,6 +266,31 @@ const Purchase = () => {
                                                     </div>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>
+                                                            <span>Возможно взять заказ частично (от шт.).</span>
+                                                            {/*<span className={styles.form__itemLabel_star}>*</span>*/}
+                                                        </h3>
+                                                        <Controller
+                                                            name="min_part"
+                                                            control={control}
+                                                            rules={{
+                                                                required: {
+                                                                    value: true,
+                                                                    message: 'Это поле обязательно'
+                                                                },
+                                                                pattern: {
+                                                                    value: /^\d+(\.\d{1,2})?$/,
+                                                                    message: 'Введите число',
+                                                                }
+                                                            }}
+                                                            render={({ field }) => (
+                                                                <div>
+                                                                    <input type={"number"} {...field} placeholder="Введите количество" />
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>
                                                             <span>Общий бюджет:</span>
                                                             {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                             <div>{sum} руб.</div>
