@@ -139,6 +139,8 @@ const Purchase = () => {
                                                                             {...field}
                                                                             isClearable={true}
                                                                             required={true}
+                                                                            isMulti={values.label === 'Регион'}
+                                                                            closeMenuOnSelect={false}
                                                                             options={
                                                                                 Object.entries(values.options).map(([value, index]) => (
                                                                                         {

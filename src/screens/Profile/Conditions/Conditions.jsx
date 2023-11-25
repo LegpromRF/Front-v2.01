@@ -105,6 +105,17 @@ const Conditions = () => {
                                                                 render={({ field }) => (
                                                                     <Select
                                                                         {...field}
+                                                                        isClearable={true}
+                                                                        closeMenuOnSelect={false}
+                                                                        isMulti={
+                                                                            values.label === "Требования к персоналу" ||
+                                                                            values.label === "Требования к оборудованию" ||
+                                                                            values.label === "Требования к упаковке" ||
+                                                                            values.label === "Требования к маркировке" ||
+                                                                            values.label === "Условия оплаты" ||
+                                                                            values.label === "Условия приемки" ||
+                                                                            values.label === "Условия доставки"
+                                                                    }
                                                                         options={
                                                                             Object.entries(values.options).map(([value, index]) => ({
                                                                                 value: index,
@@ -124,6 +135,32 @@ const Conditions = () => {
                                                         )}
                                                     </div>
                                                 ))}
+                                            </div>
+                                        </div>
+                                        <div className={styles.form__row}>
+                                            <div className={styles.form__items}>
+                                                <div className={styles.form__item}>
+                                                    <h3 className={styles.form__itemLabel}>
+                                                        <span>Комментарии к заказу</span>
+                                                        {/*<span className={styles.form__itemLabel_star}>*</span>*/}
+                                                    </h3>
+                                                    <Controller
+                                                        name="dop_treb"
+                                                        control={control}
+                                                        rules={{
+                                                            required: {
+                                                                value: true,
+                                                                message: 'Это поле обязательно'
+                                                            },
+
+                                                        }}
+                                                        render={({ field }) => (
+                                                            <div>
+                                                                <input type={"text"} {...field} placeholder="Введите плотность ткани" />
+                                                            </div>
+                                                        )}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                         <div className={styles.form__button}>

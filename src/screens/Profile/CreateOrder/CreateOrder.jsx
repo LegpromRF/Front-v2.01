@@ -167,7 +167,7 @@ const CreateOrder = () => {
                                                             isClearable={true}
                                                             required={true}
                                                             isMulti={values.label === 'Пол и возраст' || values.label === 'Ценовой сегмент'}
-                                                            closeMenuOnSelect={values.label !== 'Пол и возраст' && values.label !== 'Ценовой сегмент'}
+                                                            closeMenuOnSelect={false}
                                                             options={
                                                                 Object.entries(values.options).map(([value, index]) => (
                                                                         {

@@ -108,6 +108,15 @@ const Technology = () => {
                                                                             {...field}
                                                                             isClearable={true}
                                                                             required={true}
+                                                                            closeMenuOnSelect={false}
+                                                                            isMulti={
+                                                                            values.label === "Конструкторская документация" ||
+                                                                                values.label === "Технологическая документация" ||
+                                                                                values.label === "Сырье" ||
+                                                                                values.label === "Вид сырья" ||
+                                                                                values.label === "Вид нанесения" ||
+                                                                                values.label === "Дополнительные услуги"
+                                                                        }
                                                                             options={
                                                                                 Object.entries(values.options).map(([value, num]) => ({
                                                                                     value: num,
