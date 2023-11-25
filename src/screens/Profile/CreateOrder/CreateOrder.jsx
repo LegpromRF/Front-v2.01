@@ -15,7 +15,7 @@ const CreateOrder = () => {
         control,
         handleSubmit,
         getValues,
-        formState: { isValid}
+        formState: { errors}
     } = useForm()
     const [formOptions, setFormOptions] = useState([])
     const [loading, setLoading] = useState(true);
@@ -248,11 +248,24 @@ const CreateOrder = () => {
                       </div>
                       </div>
                     </div>
+                      {
+                          Object.keys(errors).length > 0 && (
+                              <div>
+                                  {
+                                      Object.entries(errors).map(([fieldName, fieldError]) => (
+                                          <div key={fieldName}>
+                                              {`${fieldName}: ${fieldError.message}`}
+                                          </div>
+                                      ))
+                                  }
+                              </div>
+                          )
+                      }
                       <div className={styles.form__button}>
                           <div className={styles.form__buttonBack}>Назад</div>
                           <button
                               type={"submit"}
-                              className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
+                              className={errors ? styles.form__buttonForward : styles.form__buttonForward_disabled}
                           >
                               Вперед
                           </button>
