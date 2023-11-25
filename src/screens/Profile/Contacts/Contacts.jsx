@@ -181,7 +181,7 @@ const Contacts = () => {
         return processedObj;
       };
 
-      outputObject = processObject(inputObject)
+      outputObject = processObject(inputObject);
 
       console.log(outputObject)
 
