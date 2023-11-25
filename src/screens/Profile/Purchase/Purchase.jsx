@@ -156,10 +156,6 @@ const Purchase = () => {
                                                                 required: {
                                                                     value: true,
                                                                     message: 'Это поле обязательно'
-                                                                },
-                                                                pattern: {
-                                                                    value: /^[0-9]*$/,
-                                                                    message: 'Введите целое число'
                                                                 }
                                                             }}
                                                             render={({ field }) => (
