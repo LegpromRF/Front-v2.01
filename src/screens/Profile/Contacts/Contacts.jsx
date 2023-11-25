@@ -153,10 +153,10 @@ const Contacts = () => {
       const inputObject = formData
       let outputObject = {}
 
-      for (const key in inputObject) {
-        if (Object.prototype.hasOwnProperty.call(inputObject, key)) {
-          const newKey = key.replace(/^(spr_|tz_|cl_)/, ''); // Remove "spr_", "tz_", or "cl_" from the beginning of the key
-          outputObject[newKey] = inputObject[key] && inputObject[key].value;
+      for (const key in formData) {
+        if (Object.prototype.hasOwnProperty.call(formData, key)) {
+          const newKey = key.replace(/^(spr_|tz_|cl_)/, ''); // Remove "spr_" from the beginning of the key
+          outputObject[newKey] = inputObject[key];
         }
       }
 
