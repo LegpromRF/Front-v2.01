@@ -385,7 +385,7 @@ const Contacts = () => {
               <div className={styles.form__button}>
                 <div className={styles.form__button}>
                   <div className={styles.form__buttonBack}>Назад</div>
-                  <a onClick={() => onSubmit()}>Вперед</a>
+                  <a onClick={onSubmit}>Вперед</a>
                 </div>
               </div>
             </div>
