@@ -113,13 +113,12 @@ const CreateOrder = () => {
           </div>
 
         <div className={styles.createOrder__order}>
-            <div
-                className={styles.createOrder__content}
-                onSubmit={handleSubmit(onSubmit)}
-
-            >
+            <div className={styles.createOrder__content}>
               <div className={styles.createOrder__body}>
-                  <form className={styles.form}>
+                  <form
+                      className={styles.form}
+                      onSubmit={handleSubmit(onSubmit)}
+                  >
                     <div className={styles.form__content}>
                         <div className={styles.form__row}>
                             <div className={styles.form__items}>

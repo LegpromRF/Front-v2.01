@@ -4,21 +4,28 @@ import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
 import {useCallback, useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import {useDispatch, useSelector} from "react-redux";
 import {purchaseSuccess, updateFormData} from "@store/orderForm/form.slice.js";
 import Select from "react-select";
 
 const Purchase = () => {
-    const { control, formState: {isValid}, watch, getValues } = useForm()
+    const {
+        control,
+        handleSubmit,
+        getValues,
+        watch,
+        formState: { errors}
+    } = useForm()
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [formOptions, setFormOptions] = useState([])
+
     const purchase = useSelector((state) => state.form.purchaseStep)
     const technology = useSelector((state) => state.form.technologyStep)
     const conditions = useSelector((state) => state.form.conditionsStep)
     const contacts = useSelector((state) => state.form.contactsStep)
-
-    const dispatch = useDispatch()
 
     const loadOptions = useCallback( async () => {
         try {
@@ -53,11 +60,14 @@ const Purchase = () => {
     const secondFieldValue = watch('tz_price_one') || 0;
     const sum = parseFloat(firstFieldValue) * parseFloat(secondFieldValue)
 
+    async function onSubmit() {
+        dispatch(updateFormData(getValues()))
+        console.log(getValues())
+        navigate("/profile/order/technology")
+    }
+
     return (
         <>
-            {/*<Head>*/}
-            {/*  <title>Создать заказ - LegpromRF</title>*/}
-            {/*</Head>*/}
             <Layout>
                 <div className={styles.createOrder}>
                     <TitleProfile>Техническое задание</TitleProfile>
@@ -77,7 +87,11 @@ const Purchase = () => {
                         <div className={styles.createOrder__content}>
                             <div className={styles.createOrder__body}>
                                 {
-                                    <form className={styles.form}>
+                                    <form
+                                        className={styles.form}
+                                        onSubmit={handleSubmit(onSubmit)}
+
+                                    >
                                         <div className={styles.form__content}>
                                             <div className={styles.form__row}>
                                                 <div className={styles.form__items}>
@@ -223,30 +237,36 @@ const Purchase = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className={styles.form__content}>
-                                            <div className={styles.form__row}>
-                                                <div className={styles.form__items}>
+                                        {
+                                            Object.keys(errors).length > 0 && (
+                                                <div>
+                                                    {
+                                                        Object.entries(errors).map(([fieldName, fieldError]) => (
+                                                            <div key={fieldName}>
+                                                                {`${fieldName}: ${fieldError.message}`}
+                                                            </div>
+                                                        ))
+                                                    }
                                                 </div>
-                                            </div>
+                                            )
+                                        }
+                                        <div className={styles.form__button}>
+                                            <Link
+                                                to={"/profile/order/createorder"}
+                                                className={styles.form__buttonBack}
+                                            >
+                                                Назад
+                                            </Link>
+                                            <button
+                                                type={"submit"}
+                                                className={errors ? styles.form__buttonForward : styles.form__buttonForward_disabled}
+                                            >
+                                                Вперед
+                                            </button>
                                         </div>
                                     </form>
                                 }
                             </div>
-                        </div>
-                    </div>
-                    <div className={styles.form__button}>
-                        <div className={styles.form__button}>
-                            <div className={styles.form__buttonBack}>Назад</div>
-                            <Link
-                                to="/profile/order/technology"
-                                onClick={() => {
-                                    dispatch(updateFormData(getValues()))
-                                    console.log(getValues())
-                                }}
-                                className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
-                            >
-                                Вперед
-                            </Link>
                         </div>
                     </div>
                 </div>
