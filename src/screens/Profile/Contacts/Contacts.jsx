@@ -29,8 +29,9 @@ const Contacts = () => {
 
       const updatedOptions = Object.entries(labels).map(([propName, label]) => {
         return {
+          propName,
           label,
-          options: options[propName],
+          options: options[propName]
         };
       });
 
@@ -138,32 +139,41 @@ const Contacts = () => {
   }
 
   async function setFinalData() {
-    try {
-      dispatch(updateFormData(getValues()))
-    } catch (error) {
-      console.log(error)
-    }
+    return new Promise((resolve, reject) => {
+      try {
+        dispatch(updateFormData(getValues()))
+        resolve()
+      } catch (error) {
+        console.log(error)
+        reject(error)
+      }
+    })
+
 
   }
 
   const onSubmit = async () => {
-    await new Promise(resolve => setTimeout(resolve, 0))
-    await setFinalData()
-    const inputObject = formData
+      try {
+        await setFinalData()
+        const inputObject = formData
 
-    console.log(inputObject)
+        console.log(inputObject)
 
-    const outputObject = {}
-    for (const key in inputObject) {
-      if (Object.prototype.hasOwnProperty.call(formData, key)) {
-        const newKey = key.replace(/^(spr_|tz_)/, ''); // Remove "spr_" from the beginning of the key
-        outputObject[newKey] = inputObject[key];
+        const outputObject = {}
+        for (const key in inputObject) {
+          if (Object.prototype.hasOwnProperty.call(formData, key)) {
+            const newKey = key.replace(/^(spr_|tz_)/, ''); // Remove "spr_" from the beginning of the key
+            outputObject[newKey] = inputObject[key];
+          }
+        }
+
+        console.log(outputObject)
+        dispatch(purchaseSuccess())
+      } catch (error) {
+        console.log(error)
       }
-    }
 
-      console.log(outputObject)
-      dispatch(purchaseSuccess())
-    }
+  }
 
     const {purchase, technology, conditions, contacts} = useSelector((state) => state.form);
 
@@ -285,7 +295,7 @@ const Contacts = () => {
                                   </h3>
                                   {values.options && (
                                       <Controller
-                                          name={`${values.propName}`}
+                                          name={values.propName}
                                           control={control}
                                           render={({field}) => (
                                               <Select
