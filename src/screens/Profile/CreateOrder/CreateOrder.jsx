@@ -11,7 +11,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {updateFormData} from "@store/orderForm/form.slice.js";
 
 const CreateOrder = () => {
-    const { control, getValues, formState: { isValid}} = useForm()
+    const {
+        control,
+        handleSubmit,
+        getValues,
+        formState: { isValid}
+    } = useForm()
     const [formOptions, setFormOptions] = useState([])
     const [loading, setLoading] = useState(true);
     const [visibleControlImage, setVisibleControlImage] = useState(false)
@@ -86,7 +91,7 @@ const CreateOrder = () => {
         loadOptions();
     }, []);
 
-    async function submit() {
+    async function onSubmit() {
         dispatch(updateFormData(getValues()))
         console.log(getValues())
         navigate("/profile/order/purchase")
@@ -108,7 +113,11 @@ const CreateOrder = () => {
           </div>
 
         <div className={styles.createOrder__order}>
-            <div className={styles.createOrder__content}>
+            <div
+                className={styles.createOrder__content}
+                onSubmit={handleSubmit(onSubmit)}
+
+            >
               <div className={styles.createOrder__body}>
                   <form className={styles.form}>
                     <div className={styles.form__content}>
@@ -239,21 +248,20 @@ const CreateOrder = () => {
                       </div>
                       </div>
                     </div>
+                      <div className={styles.form__button}>
+                          <div className={styles.form__buttonBack}>Назад</div>
+                          <button
+                              type={"submit"}
+                              className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
+                          >
+                              Вперед
+                          </button>
+                      </div>
                   </form>
               </div>
             </div>
         </div>
-          <div className={styles.form__button}>
-              <div className={styles.form__buttonBack}>Назад</div>
-              <button
-                  onClick={async () => {
-                      await submit()
-                  }}
-                  className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
-              >
-                  Вперед
-              </button>
-          </div>
+
           {/*<ModalLayout active={modalState.modalActive3} setActive={setModalState} height="1000">*/}
           {/*    <h3 className={styles.form__modalTitle}>Выберите тариф</h3>*/}
           {/*    <p className={styles.form__modalSubTitle}>*/}
