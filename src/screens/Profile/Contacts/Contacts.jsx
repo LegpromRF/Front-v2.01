@@ -164,8 +164,8 @@ const Contacts = () => {
           return processObject(value);
         }
 
-        // В противном случае, возвращаем значение как есть
-        return value;
+        // В противном случае, возвращаем значение, если оно имеет свойство "value"
+        return 'value' in value ? value.value : value;
       };
 
       const processObject = (obj) => {
@@ -181,7 +181,7 @@ const Contacts = () => {
         return processedObj;
       };
 
-      outputObject = processObject(inputObject);
+      outputObject = processObject(inputObject)
 
       console.log(outputObject)
 
