@@ -153,12 +153,35 @@ const Contacts = () => {
       const inputObject = formData
       let outputObject = {}
 
-      for (const key in formData) {
-        if (Object.prototype.hasOwnProperty.call(formData, key)) {
-          const newKey = key.replace(/^(spr_|tz_|cl_)/, ''); // Remove "spr_" from the beginning of the key
-          outputObject[newKey] = inputObject[key];
+      const processValue = (value) => {
+        // Если значение - массив, обрабатываем каждый элемент массива
+        if (Array.isArray(value)) {
+          return value.map((item) => ('value' in item ? item.value : item));
         }
-      }
+
+        // Если значение - объект, рекурсивно вызываем processObject
+        if (typeof value === 'object' && value !== null) {
+          return processObject(value);
+        }
+
+        // В противном случае, возвращаем значение как есть
+        return value;
+      };
+
+      const processObject = (obj) => {
+        let processedObj = {};
+
+        for (const key in obj) {
+          if (Object.prototype.hasOwnProperty.call(obj, key)) {
+            const newKey = key.replace(/^(spr_|tz_|cl_)/, ''); // Remove "spr_" from the beginning of the key
+            processedObj[newKey] = processValue(obj[key]);
+          }
+        }
+
+        return processedObj;
+      };
+
+      outputObject = processObject(inputObject)
 
       console.log(outputObject)
 

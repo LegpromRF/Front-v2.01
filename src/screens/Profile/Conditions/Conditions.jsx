@@ -156,7 +156,7 @@ const Conditions = () => {
                                                         }}
                                                         render={({ field }) => (
                                                             <div>
-                                                                <input type={"text"} {...field} placeholder="Введите плотность ткани" />
+                                                                <input type={"text"} {...field} placeholder="Введите комментарий к заказу" />
                                                             </div>
                                                         )}
                                                     />
