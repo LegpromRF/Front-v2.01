@@ -177,6 +177,11 @@
     }
   }
 
+  &__radio {
+    display: flex;
+    gap: 12px;
+  }
+
   &__itemLabel {
     font-weight: 300;
     display: flex;

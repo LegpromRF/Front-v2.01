@@ -148,10 +148,14 @@ const Technology = () => {
                                                             }}
                                                             render={({ field }) => (
                                                                 <div>
-                                                                    <label>Да</label>
-                                                                    <input type="radio" {...field} value="1" />
-                                                                    <label>Нет</label>
-                                                                    <input type="radio" {...field} value="0" />
+                                                                    <div className={styles.form__radio}>
+                                                                        <label>Да</label>
+                                                                        <input type="radio" {...field} value="1" />
+                                                                    </div>
+                                                                    <div className={styles.form__radio}>
+                                                                        <label>Нет</label>
+                                                                        <input type="radio" {...field} value="0" />
+                                                                    </div>
                                                                 </div>
                                                             )}
                                                         />
