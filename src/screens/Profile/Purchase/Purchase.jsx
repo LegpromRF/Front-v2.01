@@ -68,7 +68,7 @@ const Purchase = () => {
 
     const createOptionsArray = (data) => {
         let optionsArray = [];
-        for (const [header, values] of Object.entries(data)) {
+        for (const [header, values] of Object.entries(data['РОССИЯ'])) {
             let headerObject = { label: `${header} - ${values}`, options: [] };
             for (const [value, index] of Object.entries(values)) {
                 headerObject.options.push({ label: value, value: index });
