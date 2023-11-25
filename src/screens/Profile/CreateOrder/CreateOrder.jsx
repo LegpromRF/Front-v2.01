@@ -155,6 +155,7 @@ const CreateOrder = () => {
                                                     render={({ field }) => (
                                                         <Select
                                                             {...field}
+                                                            isClearable={true}
                                                             required={true}
                                                             isMulti={values.label === 'Пол и возраст'}
                                                             options={

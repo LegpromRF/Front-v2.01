@@ -46,8 +46,7 @@ const Contacts = () => {
     loadOptions();
   }, [loadOptions])
 
-  async function sendForm() {
-
+  async function sendForm(formData) {
     const params = {
       "photos": [
         "string"
@@ -67,12 +66,12 @@ const Contacts = () => {
       "price_segment": [
         0
       ],
-      "count": formData.tz_count.value,
-      "price_one": formData.tz_price_one.value,
+      "count": formData.count.value,
+      "price_one": formData.price_one.value,
       "price_part": 0,
-      "price_nds": 0,
+      "price_nds": formData.price_nds.value,
       "data_start": "2023-11-24T16:02:49.380Z",
-      "sroki": formData.tz_sroki,
+      "sroki": formData.sroki,
       "data_finish": "2023-11-24T16:02:49.380Z",
       "reg_post": 0,
       "reg_prod": [
@@ -127,13 +126,13 @@ const Contacts = () => {
         0
       ],
       "dop_treb": "string",
-      "status": 0,
-      "fio": "string",
-      "tel": "string",
-      "email": "string",
-      "tlg": "string"
+      "status": formData.status,
+      "fio": formData.fio,
+      "tel": formData.tel,
+      "email": formData.email,
+      "tlg": formData.tlg,
     }
-    axios.post(apiEndpoints.create, {
+    return axios.post(apiEndpoints.create, {
 
     })
   }
@@ -156,10 +155,14 @@ const Contacts = () => {
         const outputObject = {}
         for (const key in inputObject) {
           if (Object.prototype.hasOwnProperty.call(formData, key)) {
-            const newKey = key.replace(/^(spr_|tz_)/, ''); // Remove "spr_" from the beginning of the key
+            const newKey = key.replace(/^(spr_|tz_|cl_)/, ''); // Remove "spr_" from the beginning of the key
             outputObject[newKey] = inputObject[key];
           }
         }
+        if (outputObject) {
+          await sendForm(outputObject)
+        }
+
 
         console.log(outputObject)
       } catch (error) {
