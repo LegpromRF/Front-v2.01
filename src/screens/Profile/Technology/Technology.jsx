@@ -111,64 +111,59 @@ const Technology = () => {
                                                             )}
                                                         </div>
                                                     ))}
-                                                    <div className={styles.form__row}>
-                                                        <div className={styles.form__items}>
-                                                            <div className={styles.form__item}>
-                                                                <h3 className={styles.form__itemLabel}>
-                                                                    <span>Плотность ткани</span> <span className={styles.form__itemLabel_star}>*</span>
-                                                                </h3>
-                                                                <Controller
-                                                                    name="tkan"
-                                                                    control={control}
-                                                                    rules={{
-                                                                        required: {
-                                                                            value: true,
-                                                                            message: 'Это поле обязательно'
-                                                                        },
-
-                                                                    }}
-                                                                    render={({ field }) => (
-                                                                        <div>
-                                                                            <input type={"text"} {...field} placeholder="Введите плотность ткани" />
-                                                                        </div>
-                                                                    )}
-                                                                />
-                                                            </div>
-                                                            <div className={styles.form__item}>
-                                                                <h3 className={styles.form__itemLabel}>
-                                                                    <span>Заказчик предоставляет образец</span> <span className={styles.form__itemLabel_star}>*</span>
-                                                                </h3>
-                                                                <Controller
-                                                                    name="tz_obraz_zak"
-                                                                    control={control}
-                                                                    rules={{
-                                                                        required: {
-                                                                            value: true,
-                                                                            message: 'Это поле обязательно'
-                                                                        },
-
-                                                                    }}
-                                                                    render={({ field }) => (
-                                                                        <div className={styles.form__radioWrapper}>
-                                                                            <div className={styles.form__radio}>
-                                                                                <label>Да</label>
-                                                                                <input type="radio" {...field} value="1" />
-                                                                            </div>
-                                                                            <div className={styles.form__radio}>
-                                                                                <label>Нет</label>
-                                                                                <input type="radio" {...field} value="0" />
-                                                                            </div>
-                                                                        </div>
-                                                                    )}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div className={styles.form__row}>
                                                 <div className={styles.form__items}>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>
+                                                            <span>Плотность ткани</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                        </h3>
+                                                        <Controller
+                                                            name="tkan"
+                                                            control={control}
+                                                            rules={{
+                                                                required: {
+                                                                    value: true,
+                                                                    message: 'Это поле обязательно'
+                                                                },
 
+                                                            }}
+                                                            render={({ field }) => (
+                                                                <div>
+                                                                    <input type={"text"} {...field} placeholder="Введите плотность ткани" />
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>
+                                                            <span>Заказчик предоставляет образец</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                        </h3>
+                                                        <Controller
+                                                            name="tz_obraz_zak"
+                                                            control={control}
+                                                            rules={{
+                                                                required: {
+                                                                    value: true,
+                                                                    message: 'Это поле обязательно'
+                                                                },
+
+                                                            }}
+                                                            render={({ field }) => (
+                                                                <div className={styles.form__radioWrapper}>
+                                                                    <div className={styles.form__radio}>
+                                                                        <label>Да</label>
+                                                                        <input type="radio" {...field} value="1" />
+                                                                    </div>
+                                                                    <div className={styles.form__radio}>
+                                                                        <label>Нет</label>
+                                                                        <input type="radio" {...field} value="0" />
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
