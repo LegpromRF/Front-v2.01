@@ -164,6 +164,15 @@ const Contacts = () => {
       }
 
       console.log(outputObject)
+
+      // if (outputObject.task.value) {
+      //   const textFormData = new FormData()
+      //   textFormData.append('file', outputObject.task.value[0])
+      //   const textResponse = await axios.post('URL для текстовых документов', textFormData, {
+      //     headers: {
+      //       'Content-Type': 'multipart/form-data',
+      //     }
+      // }
     } catch (error) {
       console.log(error)
     }
