@@ -216,69 +216,87 @@ const Contacts = () => {
                                   )}
                               />
                             </div>
+                          </div>
+                        </div>
+                        <div className={styles.form__row}>
+                          <div className={styles.form__items}>
                             <div className={styles.form__item}>
-                              <h3 className={styles.form__itemLabel}>
-                                <span>Телефон</span> <span className={styles.form__itemLabel_star}>*</span>
-                              </h3>
-                              <Controller
-                                  name="tz_cl_tel"
-                                  control={control}
-                                  rules={{
-                                    required: {
-                                      value: true,
-                                      message: 'Это поле обязательно'
-                                    },
-                                  }}
-                                  render={({field}) => (
-                                      <div>
-                                        <input type={"tel"} {...field} placeholder="Введите номер телефона"/>
-                                        {errors.date && <p className={styles.form__error}>{errors.date.message}</p>}
-                                      </div>
-                                  )}
-                              />
+                              <div className={styles.form__item}>
+                                <h3 className={styles.form__itemLabel}>
+                                  <span>Телефон</span> <span className={styles.form__itemLabel_star}>*</span>
+                                </h3>
+                                <Controller
+                                    name="tz_cl_tel"
+                                    control={control}
+                                    rules={{
+                                      required: {
+                                        value: true,
+                                        message: 'Это поле обязательно'
+                                      },
+                                    }}
+                                    render={({field}) => (
+                                        <div>
+                                          <input type={"tel"} {...field} placeholder="Введите номер телефона"/>
+                                          {errors.date && <p className={styles.form__error}>{errors.date.message}</p>}
+                                        </div>
+                                    )}
+                                />
+                              </div>
                             </div>
+                          </div>
+                        </div>
+                        <div className={styles.form__row}>
+                          <div className={styles.form__items}>
                             <div className={styles.form__item}>
-                              <h3 className={styles.form__itemLabel}>
-                                <span>Email</span> <span className={styles.form__itemLabel_star}>*</span>
-                              </h3>
-                              <Controller
-                                  name="tz_cl_email"
-                                  control={control}
-                                  rules={{
-                                    required: {
-                                      value: true,
-                                      message: 'Это поле обязательно'
-                                    },
-                                  }}
-                                  render={({field}) => (
-                                      <div>
-                                        <input type={"email"} {...field} placeholder="Введите email"/>
-                                        {errors.email && <p className={styles.form__error}>{errors.email.message}</p>}
-                                      </div>
-                                  )}
-                              />
+                              <div className={styles.form__item}>
+                                <h3 className={styles.form__itemLabel}>
+                                  <span>Email</span> <span className={styles.form__itemLabel_star}>*</span>
+                                </h3>
+                                <Controller
+                                    name="tz_cl_email"
+                                    control={control}
+                                    rules={{
+                                      required: {
+                                        value: true,
+                                        message: 'Это поле обязательно'
+                                      },
+                                    }}
+                                    render={({field}) => (
+                                        <div>
+                                          <input type={"email"} {...field} placeholder="Введите email"/>
+                                          {errors.email && <p className={styles.form__error}>{errors.email.message}</p>}
+                                        </div>
+                                    )}
+                                />
+                              </div>
                             </div>
+                          </div>
+                        </div>
+                        <div className={styles.form__row}>
+                          <div className={styles.form__items}>
                             <div className={styles.form__item}>
-                              <h3 className={styles.form__itemLabel}>
-                                <span>Телеграм</span> <span className={styles.form__itemLabel_star}>*</span>
-                              </h3>
-                              <Controller
-                                  name="tz_cl_tlg"
-                                  control={control}
-                                  rules={{
-                                    required: {
-                                      value: true,
-                                      message: 'Это поле обязательно'
-                                    },
-                                  }}
-                                  render={({field}) => (
-                                      <div>
-                                        <input type={"text"} {...field} placeholder="Введите ссылку на TG"/>
-                                        {errors.telegram &&
-                                            <p className={styles.form__error}>{errors.telegram.message}</p>}
-                                      </div>
-                                  )}
-                              />
+                              <div className={styles.form__item}>
+                                <h3 className={styles.form__itemLabel}>
+                                  <span>Телеграм</span> <span className={styles.form__itemLabel_star}>*</span>
+                                </h3>
+                                <Controller
+                                    name="tz_cl_tlg"
+                                    control={control}
+                                    rules={{
+                                      required: {
+                                        value: true,
+                                        message: 'Это поле обязательно'
+                                      },
+                                    }}
+                                    render={({field}) => (
+                                        <div>
+                                          <input type={"text"} {...field} placeholder="Введите ссылку на TG"/>
+                                          {errors.telegram &&
+                                              <p className={styles.form__error}>{errors.telegram.message}</p>}
+                                        </div>
+                                    )}
+                                />
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -368,20 +386,15 @@ const Contacts = () => {
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div className={styles.form__content}>
-                        <div className={styles.form__row}>
-                          <div className={styles.form__items}></div>
+                        <div className={styles.form__button}>
+                          <div className={styles.form__button}>
+                            <div className={styles.form__buttonBack}>Назад</div>
+                            <a onClick={onSubmit}>Вперед</a>
+                          </div>
                         </div>
                       </div>
                     </form>
                   </div>
-                </div>
-              </div>
-              <div className={styles.form__button}>
-                <div className={styles.form__button}>
-                  <div className={styles.form__buttonBack}>Назад</div>
-                  <a onClick={onSubmit}>Вперед</a>
                 </div>
               </div>
             </div>
