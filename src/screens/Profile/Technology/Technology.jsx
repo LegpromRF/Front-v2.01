@@ -1,25 +1,30 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
 import styles from './Technology.module.scss'
 import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
-import {useCallback, useEffect, useState} from "react";
+import { useCallback, useEffect, useState } from "react";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import Select from "react-select";
-import {useDispatch, useSelector} from "react-redux";
-import {technologySuccess, updateFormData} from "@store/orderForm/form.slice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { updateFormData } from "@store/orderForm/form.slice.js";
 
 const Technology = () => {
-    const { control, formState: {isValid}, getValues} = useForm()
+    const {
+        control,
+        handleSubmit,
+        getValues,
+        formState: { errors}
+    } = useForm()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [formOptions, setFormOptions] = useState([])
 
     const purchase = useSelector((state) => state.form.purchaseStep)
     const technology = useSelector((state) => state.form.technologyStep)
     const conditions = useSelector((state) => state.form.conditionsStep)
     const contacts = useSelector((state) => state.form.contactsStep)
-
-    const dispatch = useDispatch()
 
     const loadOptions = useCallback( async () => {
         try {
@@ -57,6 +62,12 @@ const Technology = () => {
         loadOptions();
     }, []);
 
+    async function onSubmit() {
+        dispatch(updateFormData(getValues()))
+        console.log(getValues())
+        navigate("/profile/order/purchase")
+    }
+
     return (
         <>
             <Layout>
@@ -74,8 +85,10 @@ const Technology = () => {
                     <div className={styles.createOrder__order}>
                         <div className={styles.createOrder__content}>
                             <div className={styles.createOrder__body}>
-                                {
-                                    <form className={styles.form}>
+                                <form
+                                    className={styles.form}
+                                    onSubmit={handleSubmit(onSubmit)}
+                                >
                                         <div className={styles.form__content}>
                                             <div className={styles.form__row}>
                                                 <div className={styles.form__items}>
@@ -166,24 +179,19 @@ const Technology = () => {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div className={styles.form__button}>
+                                                <div className={styles.form__buttonBack}>Назад</div>
+                                                <button
+                                                    type={"submit"}
+                                                    className={errors ? styles.form__buttonForward : styles.form__buttonForward_disabled}
+                                                >
+                                                    Вперед
+                                                </button>
+                                            </div>
                                         </div>
                                     </form>
-                                }
                             </div>
                         </div>
-                    </div>
-                    <div className={styles.form__button}>
-                        <div className={styles.form__buttonBack}>Назад</div>
-                        <Link
-                            to="/profile/order/conditions"
-                            onClick={() => {
-                                dispatch(updateFormData(getValues()))
-                                console.log(getValues())
-                            }}
-                            className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
-                        >
-                            Вперед
-                        </Link>
                     </div>
                 </div>
             </Layout>
