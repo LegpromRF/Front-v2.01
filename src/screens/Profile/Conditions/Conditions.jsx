@@ -1,17 +1,24 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
 import styles from './Conditions.module.scss'
 import { useForm, Controller } from 'react-hook-form'
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import Layout from "@layout/Layout";
-import {useCallback, useEffect, useState} from "react";
+import { useCallback, useEffect, useState } from "react";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import Select from "react-select";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {conditionsSuccess, updateFormData} from "@store/orderForm/form.slice.js";
 
 const Conditions = () => {
-    const { control, getValues, formState: { isValid}} = useForm()
+    const {
+        control,
+        handleSubmit,
+        getValues,
+        formState: { errors}
+    } = useForm()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [formOptions, setFormOptions] = useState([])
 
     const purchase = useSelector((state) => state.form.purchaseStep)
@@ -19,7 +26,6 @@ const Conditions = () => {
     const conditions = useSelector((state) => state.form.conditionsStep)
     const contacts = useSelector((state) => state.form.contactsStep)
 
-    const dispatch = useDispatch()
     const loadOptions = useCallback( async () => {
         try {
             const options = await getPropObject('conditions');
@@ -56,6 +62,12 @@ const Conditions = () => {
         loadOptions();
     }, []);
 
+    async function onSubmit() {
+        dispatch(updateFormData(getValues()))
+        console.log(getValues())
+        navigate("/profile/order/contacts")
+    }
+
     return (
         <>
             <Layout>
@@ -72,69 +84,59 @@ const Conditions = () => {
                     <div className={styles.createOrder__order}>
                         <div className={styles.createOrder__content}>
                             <div className={styles.createOrder__body}>
-                                {
-                                    <form className={styles.form}>
-                                        <div className={styles.form__content}>
-                                            <div className={styles.form__row}>
-                                                <div className={styles.form__items}>
-                                                    {formOptions && formOptions.map((values, index) => (
-                                                        <div key={index} className={styles.form__item}>
-                                                            <h3 className={styles.form__itemLabel}>
-                                                                <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
-                                                            </h3>
-                                                            {values.options && (
-                                                                <Controller
-                                                                    name={values.propName}
-                                                                    control={control}
-                                                                    render={({ field }) => (
-                                                                        <Select
-                                                                            {...field}
-                                                                            options={
-                                                                                Object.entries(values.options).map(([value, index]) => ({
-                                                                                    value: index,
-                                                                                    label: value,
-                                                                                }))
-                                                                            }
-                                                                            styles={{
-                                                                                control: (provided) => ({
-                                                                                    ...provided,
-                                                                                    width: '100%', // Устанавливайте нужную вам ширину
-                                                                                }),
-                                                                            }}
-                                                                            placeholder="нажмите для выбора"
-                                                                            onChange={(selectedOption) => field.onChange(selectedOption)}                                                                        />
-                                                                    )}
-                                                                />
-                                                            )}
-                                                        </div>
-                                                    ))}
-                                                </div>
+                                <form
+                                    className={styles.form}
+                                    onSubmit={handleSubmit(onSubmit)}
+                                >
+                                    <div className={styles.form__content}>
+                                        <div className={styles.form__row}>
+                                            <div className={styles.form__items}>
+                                                {formOptions && formOptions.map((values, index) => (
+                                                    <div key={index} className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>
+                                                            <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                        </h3>
+                                                        {values.options && (
+                                                            <Controller
+                                                                name={values.propName}
+                                                                control={control}
+                                                                render={({ field }) => (
+                                                                    <Select
+                                                                        {...field}
+                                                                        options={
+                                                                            Object.entries(values.options).map(([value, index]) => ({
+                                                                                value: index,
+                                                                                label: value,
+                                                                            }))
+                                                                        }
+                                                                        styles={{
+                                                                            control: (provided) => ({
+                                                                                ...provided,
+                                                                                width: '100%', // Устанавливайте нужную вам ширину
+                                                                            }),
+                                                                        }}
+                                                                        placeholder="нажмите для выбора"
+                                                                        onChange={(selectedOption) => field.onChange(selectedOption)}                                                                        />
+                                                                )}
+                                                            />
+                                                        )}
+                                                    </div>
+                                                ))}
                                             </div>
                                         </div>
-                                        <div className={styles.form__content}>
-                                            <div className={styles.form__row}>
-                                                <div className={styles.form__items}>
-
-                                                </div>
-                                            </div>
+                                        <div className={styles.form__button}>
+                                            <div className={styles.form__buttonBack}>Назад</div>
+                                            <button
+                                                type={"submit"}
+                                                className={errors ? styles.form__buttonForward : styles.form__buttonForward_disabled}
+                                            >
+                                                Вперед
+                                            </button>
                                         </div>
-                                    </form>
-                                }
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                    </div>
-                    <div className={styles.form__button}>
-                        <div className={styles.form__buttonBack}>Назад</div>
-                        <Link
-                            to="/profile/order/contacts"
-                            onClick={() => {
-                                dispatch(updateFormData(getValues()))
-                                console.log(getValues())
-                            }}
-                            // className={isValid ? styles.form__buttonForward : styles.form__buttonForward_disabled}
-                        >
-                            Вперед
-                        </Link>
                     </div>
                 </div>
             </Layout>

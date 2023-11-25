@@ -22,7 +22,6 @@ const CreateOrder = () => {
     const [visibleControlImage, setVisibleControlImage] = useState(false)
     const [preview, setPreview] = useState([]);
 
-    const rawFormData = useSelector((state) => state.form.formData)
     const purchase = useSelector((state) => state.form.purchaseStep)
     const technology = useSelector((state) => state.form.technologyStep)
     const conditions = useSelector((state) => state.form.conditionsStep)

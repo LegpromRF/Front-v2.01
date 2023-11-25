@@ -65,7 +65,7 @@ const Technology = () => {
     async function onSubmit() {
         dispatch(updateFormData(getValues()))
         console.log(getValues())
-        navigate("/profile/order/purchase")
+        navigate("/profile/order/conditions")
     }
 
     return (
@@ -99,11 +99,13 @@ const Technology = () => {
                                                             </h3>
                                                             {values.options && (
                                                                 <Controller
-                                                                    name={`${values.propName}`}
+                                                                    name={values.propName}
                                                                     control={control}
                                                                     render={({ field }) => (
                                                                         <Select
                                                                             {...field}
+                                                                            isClearable={true}
+                                                                            required={true}
                                                                             options={
                                                                                 Object.entries(values.options).map(([value, num]) => ({
                                                                                     value: num,
