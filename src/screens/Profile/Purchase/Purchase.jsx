@@ -130,13 +130,34 @@ const Purchase = () => {
                                                             {values.options && (
                                                                 <Controller
                                                                     name={values.propName}
-                                                                    isClearable={true}
-                                                                    required={true}
                                                                     control={control}
-                                                                    render={({ field }) => {
-                                                                        const optionsArray = createOptionsArray(values.options);
-                                                                        return renderSelect(field, optionsArray);
+                                                                    rules={{
+                                                                        required: 'Обязательное поле'
                                                                     }}
+                                                                    render={({ field }) => (
+                                                                        <Select
+                                                                            {...field}
+                                                                            isClearable={true}
+                                                                            required={true}
+                                                                            options={
+                                                                                Object.entries(values.options).map(([value, index]) => (
+                                                                                        {
+                                                                                            value: index,
+                                                                                            label: value,
+                                                                                        }
+                                                                                    )
+                                                                                )
+                                                                            }
+                                                                            styles={{
+                                                                                control: (provided) => ({
+                                                                                    ...provided,
+                                                                                    width: 'auto', // Устанавливайте нужную вам ширину
+                                                                                }),
+                                                                            }}
+                                                                            placeholder="нажмите для выбора"
+                                                                            onChange={(selectedOption) => field.onChange(selectedOption)}
+                                                                        />
+                                                                    )}
                                                                 />
                                                             )}
                                                         </div>

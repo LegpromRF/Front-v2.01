@@ -176,7 +176,7 @@ const CreateOrder = () => {
                                                                         }
                                                                     )
                                                                 )
-                                                        }
+                                                            }
                                                             styles={{
                                                                 control: (provided) => ({
                                                                     ...provided,
