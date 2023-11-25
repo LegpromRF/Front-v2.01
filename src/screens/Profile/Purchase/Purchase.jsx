@@ -62,6 +62,7 @@ const Purchase = () => {
 
     async function onSubmit() {
         dispatch(updateFormData(getValues()))
+        dispatch(updateFormData({price_part: { value: sum }}))
         console.log(getValues())
         navigate("/profile/order/technology")
     }
@@ -185,7 +186,7 @@ const Purchase = () => {
                                                             }}
                                                             render={({ field }) => (
                                                                 <div>
-                                                                    <input type={"text"} {...field} placeholder="Введите ссылку на TG" />
+                                                                    <input type={"text"} {...field} placeholder="Например: 2 недели" />
                                                                 </div>
                                                             )}
                                                         />
