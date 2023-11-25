@@ -56,8 +56,8 @@ const Purchase = () => {
         loadOptions();
     }, []);
 
-    const firstFieldValue = watch('tz_count') || 0;
-    const secondFieldValue = watch('tz_price_one') || 0;
+    const firstFieldValue = watch('count') || 0;
+    const secondFieldValue = watch('price_one') || 0;
     const sum = parseFloat(firstFieldValue) * parseFloat(secondFieldValue)
 
     async function onSubmit() {
