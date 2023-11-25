@@ -94,7 +94,8 @@ const Conditions = () => {
                                                 {formOptions && formOptions.map((values, index) => (
                                                     <div key={index} className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>
-                                                            <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                            <span>{values.label}</span>
+                                                            {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                         </h3>
                                                         {values.options && (
                                                             <Controller

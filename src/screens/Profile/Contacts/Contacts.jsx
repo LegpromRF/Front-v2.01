@@ -196,7 +196,8 @@ const Contacts = () => {
                           <div className={styles.form__items}>
                             <div className={styles.form__item}>
                               <h3 className={styles.form__itemLabel}>
-                                <span>ФИО контактного лица</span> <span className={styles.form__itemLabel_star}>*</span>
+                                <span>ФИО контактного лица</span>
+                                {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                               </h3>
                               <Controller
                                   name="tz_cl_fio"
@@ -223,7 +224,8 @@ const Contacts = () => {
                             <div className={styles.form__item}>
                               <div className={styles.form__item}>
                                 <h3 className={styles.form__itemLabel}>
-                                  <span>Телефон</span> <span className={styles.form__itemLabel_star}>*</span>
+                                  <span>Телефон</span>
+                                  {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                 </h3>
                                 <Controller
                                     name="tz_cl_tel"
@@ -250,7 +252,8 @@ const Contacts = () => {
                             <div className={styles.form__item}>
                               <div className={styles.form__item}>
                                 <h3 className={styles.form__itemLabel}>
-                                  <span>Email</span> <span className={styles.form__itemLabel_star}>*</span>
+                                  <span>Email</span>
+                                  {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                 </h3>
                                 <Controller
                                     name="tz_cl_email"
@@ -277,7 +280,8 @@ const Contacts = () => {
                             <div className={styles.form__item}>
                               <div className={styles.form__item}>
                                 <h3 className={styles.form__itemLabel}>
-                                  <span>Телеграм</span> <span className={styles.form__itemLabel_star}>*</span>
+                                  <span>Телеграм</span>
+                                  {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                 </h3>
                                 <Controller
                                     name="tz_cl_tlg"
@@ -305,7 +309,8 @@ const Contacts = () => {
                             {formOptions.map((values, index) => (
                                 <div key={index} className={styles.form__item}>
                                   <h3 className={styles.form__itemLabel}>
-                                    <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
+                                    <span>{values.label}</span>
+                                    {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                   </h3>
                                   {values.options && (
                                       <Controller

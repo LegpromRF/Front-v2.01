@@ -122,7 +122,8 @@ const Purchase = () => {
                                                     {formOptions && formOptions.map((values, index) => (
                                                         <div key={index} className={styles.form__item}>
                                                             <h3 className={styles.form__itemLabel}>
-                                                                <span>{values.label}</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                                <span>{values.label}</span>
+                                                                {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                             </h3>
                                                             {values.options && (
                                                                 <Controller
@@ -144,7 +145,8 @@ const Purchase = () => {
                                                 <div className={styles.form__items}>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>
-                                                            <span>Взять в производство не позднее</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                            <span>Взять в производство не позднее</span>
+                                                            {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                         </h3>
                                                         <Controller
                                                             name="tz_data_start"
@@ -168,7 +170,8 @@ const Purchase = () => {
                                                     </div>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>
-                                                            <span>Срок исполнения заказа с момента получения аванса/сырья</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                            <span>Срок исполнения заказа с момента получения аванса/сырья</span>
+                                                            {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                         </h3>
                                                         <Controller
                                                             name="tz_sroki"
@@ -193,7 +196,8 @@ const Purchase = () => {
                                                 <div className={styles.form__items}>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>
-                                                            <span>Количество</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                            <span>Количество</span>
+                                                            {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                         </h3>
                                                         <Controller
                                                             name="tz_count"
@@ -217,7 +221,8 @@ const Purchase = () => {
                                                     </div>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>
-                                                            <span>Цена за шт.</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                            <span>Цена за шт.</span>
+                                                            {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                         </h3>
                                                         <Controller
                                                             name="tz_price_one"
@@ -241,7 +246,8 @@ const Purchase = () => {
                                                     </div>
                                                     <div className={styles.form__item}>
                                                         <h3 className={styles.form__itemLabel}>
-                                                            <span>Общий бюджет:</span> <span className={styles.form__itemLabel_star}>*</span>
+                                                            <span>Общий бюджет:</span>
+                                                            {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                             <div>{sum} руб.</div>
                                                         </h3>
                                                     </div>
