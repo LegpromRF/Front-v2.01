@@ -182,6 +182,12 @@
     gap: 12px;
   }
 
+  &__radioWrapper {
+    display: flex;
+    justify-content: start;
+    gap: 24px;
+  }
+
   &__itemLabel {
     font-weight: 300;
     display: flex;

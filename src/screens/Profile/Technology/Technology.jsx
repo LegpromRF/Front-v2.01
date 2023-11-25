@@ -147,7 +147,7 @@ const Technology = () => {
 
                                                             }}
                                                             render={({ field }) => (
-                                                                <div>
+                                                                <div className={styles.form__radioWrapper}>
                                                                     <div className={styles.form__radio}>
                                                                         <label>Да</label>
                                                                         <input type="radio" {...field} value="1" />
