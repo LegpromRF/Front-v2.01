@@ -55,19 +55,19 @@ const Contacts = () => {
         "string"
       ],
       "name": formData.name,
-      "regular_zakaz": 0,
-      "vid_postavki": 0,
+      "regular_zakaz": formData.regular_zakaz.value,
+      "vid_postavki": 1,
       "vid_product": 0,
-      "tip_odejdy": 0,
+      "tip_odejdy": formData.tip_odejdy.value,
       "naznach": 0,
       "vid_izdeliya": 0,
       "pol": 0,
-      "sezon": 0,
+      "sezon": formData.sezons.value,
       "price_segment": [
         0
       ],
-      "count": 0,
-      "price_one": 0,
+      "count": formData.tz_count.value,
+      "price_one": formData.tz_price_one.value,
       "price_part": 0,
       "price_nds": 0,
       "data_start": "2023-11-24T16:02:49.380Z",
@@ -138,24 +138,26 @@ const Contacts = () => {
   }
 
   const onSubmit = async () => {
-    await dispatch(updateFormData(getValues()))
-    console.log(formData)
-    const inputObject = await formData
+    try {
+      await dispatch(updateFormData(getValues()))
+      const inputObject = await formData
 
-    const outputObject = {};
+      console.log(formData)
 
-    for (const key in inputObject) {
-      if (Object.prototype.hasOwnProperty.call(formData, key)) {
-        const newKey = key.replace(/^spr_/, ''); // Remove "spr_" from the beginning of the key
-        outputObject[newKey] = inputObject[key];
+      const outputObject = {}
+      for (const key in inputObject) {
+        if (Object.prototype.hasOwnProperty.call(formData, key)) {
+          const newKey = key.replace(/^(spr_|tz_)/, ''); // Remove "spr_" from the beginning of the key
+          outputObject[newKey] = inputObject[key];
+        }
       }
+
+      console.log(outputObject)
+      dispatch(purchaseSuccess())
+    } catch (error) {
+      console.log(error)
     }
-
-    console.log(outputObject)
-    dispatch(purchaseSuccess())
-
-
-  };
+  }
 
   const { purchase, technology, conditions, contacts } = useSelector((state) => state.form);
 
