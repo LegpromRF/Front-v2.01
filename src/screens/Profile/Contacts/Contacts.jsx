@@ -139,17 +139,11 @@ const Contacts = () => {
   }
 
   async function setFinalData() {
-    return new Promise((resolve, reject) => {
       try {
-        dispatch(updateFormData(getValues()))
-        resolve()
+        return dispatch(updateFormData(getValues()))
       } catch (error) {
         console.log(error)
-        reject(error)
       }
-    })
-
-
   }
 
   const onSubmit = async () => {
@@ -168,7 +162,6 @@ const Contacts = () => {
         }
 
         console.log(outputObject)
-        dispatch(purchaseSuccess())
       } catch (error) {
         console.log(error)
       }
