@@ -149,7 +149,7 @@ const Purchase = () => {
                                                             {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                         </h3>
                                                         <Controller
-                                                            name="tz_data_start"
+                                                            name="data_start"
                                                             control={control}
                                                             rules={{
                                                                 required: {
@@ -174,7 +174,7 @@ const Purchase = () => {
                                                             {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                         </h3>
                                                         <Controller
-                                                            name="tz_sroki"
+                                                            name="sroki"
                                                             control={control}
                                                             rules={{
                                                                 required: {
@@ -190,6 +190,28 @@ const Purchase = () => {
                                                             )}
                                                         />
                                                     </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>
+                                                            <span>Срок поставки не позднее</span>
+                                                            {/*<span className={styles.form__itemLabel_star}>*</span>*/}
+                                                        </h3>
+                                                        <Controller
+                                                            name="data_finish"
+                                                            control={control}
+                                                            rules={{
+                                                                required: {
+                                                                    value: true,
+                                                                    message: 'Это поле обязательно'
+                                                                },
+
+                                                            }}
+                                                            render={({ field }) => (
+                                                                <div>
+                                                                    <input type={"date"} {...field} placeholder="Введите ссылку на TG" />
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div className={styles.form__row}>
@@ -200,7 +222,7 @@ const Purchase = () => {
                                                             {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                         </h3>
                                                         <Controller
-                                                            name="tz_count"
+                                                            name="count"
                                                             control={control}
                                                             rules={{
                                                                 required: {
@@ -225,7 +247,7 @@ const Purchase = () => {
                                                             {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                         </h3>
                                                         <Controller
-                                                            name="tz_price_one"
+                                                            name="price_one"
                                                             control={control}
                                                             rules={{
                                                                 required: {
