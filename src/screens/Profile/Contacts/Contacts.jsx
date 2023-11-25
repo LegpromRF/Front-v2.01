@@ -145,31 +145,24 @@ const Contacts = () => {
       }
   }
 
-  // const onSubmit = async () => {
-  //     try {
-  //       await setFinalData()
-  //       const inputObject = formData
-  //       console.log(inputObject)
-  //       const outputObject = {}
-  //       for (const key in inputObject) {
-  //         if (Object.prototype.hasOwnProperty.call(formData, key)) {
-  //           const newKey = key.replace(/^(spr_|tz_|cl_)/, ''); // Remove "spr_" from the beginning of the key
-  //           outputObject[newKey] = inputObject[key];
-  //         }
-  //       }
-  //       if (outputObject) {
-  //         await sendForm(outputObject)
-  //       }
-  //       console.log(outputObject)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  // }
-
   async function onSubmit() {
-    dispatch(updateFormData(getValues()))
-    console.log(getValues())
-    navigate("/profile/order/purchase")
+    try {
+      dispatch(updateFormData(getValues()))
+      console.log(getValues())
+      const inputObject = formData
+      let outputObject = {}
+      for (const key in formData) {
+        if (Object.prototype.hasOwnProperty.call(formData, key)) {
+          const newKey = key.replace(/^(spr_|tz_|cl_)/, ''); // Remove "spr_" from the beginning of the key
+          outputObject[newKey] = inputObject[key];
+        }
+      }
+
+      console.log(outputObject)
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
   const {purchase, technology, conditions, contacts} = useSelector((state) => state.form);
@@ -191,7 +184,10 @@ const Contacts = () => {
           <div className={styles.createOrder__order}>
             <div className={styles.createOrder__content}>
               <div className={styles.createOrder__body}>
-                <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                <form
+                    className={styles.form}
+                    onSubmit={handleSubmit(onSubmit)}
+                >
                   <div className={styles.form__content}>
                     <div className={styles.form__row}>
                       <div className={styles.form__items}>
