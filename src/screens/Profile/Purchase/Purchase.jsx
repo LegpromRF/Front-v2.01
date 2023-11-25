@@ -66,6 +66,34 @@ const Purchase = () => {
         navigate("/profile/order/technology")
     }
 
+    const flattenOptions = (options, prefix = '') => {
+        let flattenedOptions = [];
+        for (const [key, value] of Object.entries(options)) {
+            const label = prefix ? `${prefix} - ${key}` : key;
+            if (typeof value === 'object') {
+                flattenedOptions.push({ label, options: flattenOptions(value, key) });
+            } else {
+                flattenedOptions.push({ label, value });
+            }
+        }
+        return flattenedOptions;
+    }
+
+    const renderSelect = (field, options) => (
+        <Select
+            {...field}
+            options={options}
+            styles={{
+                control: (provided) => ({
+                    ...provided,
+                    width: '100%',
+                }),
+            }}
+            placeholder="Нажмите для выбора"
+            onChange={(selectedOption) => field.onChange(selectedOption)}
+        />
+    )
+
     return (
         <>
             <Layout>
@@ -81,9 +109,6 @@ const Purchase = () => {
                     </div>
 
                     <div className={styles.createOrder__order}>
-                        {/*<div className={styles.createOrder__type}>*/}
-                        {/*    <div className={styles.createOrder__typeTitle}>Вид продукции</div>*/}
-                        {/*</div>*/}
                         <div className={styles.createOrder__content}>
                             <div className={styles.createOrder__body}>
                                 {
@@ -102,27 +127,14 @@ const Purchase = () => {
                                                             </h3>
                                                             {values.options && (
                                                                 <Controller
-                                                                    name={`${values.propName}`}
+                                                                    name={values.propName}
+                                                                    isClearable={true}
+                                                                    required={true}
                                                                     control={control}
-                                                                    render={({ field }) => (
-                                                                        <Select
-                                                                            {...field}
-                                                                            options={
-                                                                                Object.entries(values.options).map(([value, index]) => ({
-                                                                                    value: index,
-                                                                                    label: value,
-                                                                                }))
-                                                                            }
-                                                                            styles={{
-                                                                                control: (provided) => ({
-                                                                                    ...provided,
-                                                                                    width: '100%', // Устанавливайте нужную вам ширину
-                                                                                }),
-                                                                            }}
-                                                                            placeholder="нажмите для выбора"
-                                                                            onChange={(selectedOption) => field.onChange(selectedOption)}
-                                                                        />
-                                                                    )}
+                                                                    render={({ field }) => {
+                                                                        const flattenedOptions = flattenOptions(values.options);
+                                                                        return renderSelect(field, flattenedOptions);
+                                                                    }}
                                                                 />
                                                             )}
                                                         </div>
