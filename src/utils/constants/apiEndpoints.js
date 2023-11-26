@@ -21,7 +21,7 @@ export const apiEndpoints = {
     bid: apiHOST + 'bid/'
 }
 
-const aiHOST = '185.204.3.62:8726/'
+const aiHOST = 'http://185.204.3.62:8726/'
 export const aiEndpoints = {
     rank: `${aiHOST}rank/companies`
 }
