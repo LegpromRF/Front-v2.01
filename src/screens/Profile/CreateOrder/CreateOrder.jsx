@@ -155,25 +155,25 @@ const CreateOrder = () => {
                                     loading ?
                                         <>
                                             <div className={styles.form__item}>
-                                                <Skeleton/>
+                                                <Skeleton height={"35px"}/>
                                             </div>
                                             <div className={styles.form__item}>
-                                                <Skeleton/>
+                                                <Skeleton height={"35px"}/>
                                             </div>
                                             <div className={styles.form__item}>
-                                                <Skeleton/>
+                                                <Skeleton height={"35px"}/>
                                             </div>
                                             <div className={styles.form__item}>
-                                                <Skeleton/>
+                                                <Skeleton height={"35px"}/>
                                             </div>
                                             <div className={styles.form__item}>
-                                                <Skeleton/>
+                                                <Skeleton height={"35px"}/>
                                             </div>
                                             <div className={styles.form__item}>
-                                                <Skeleton/>
+                                                <Skeleton height={"35px"}/>
                                             </div>
                                             <div className={styles.form__item}>
-                                                <Skeleton/>
+                                                <Skeleton height={"35px"}/>
                                             </div>
                                         </> :
                                         formOptions && formOptions.map((values, index) => (
