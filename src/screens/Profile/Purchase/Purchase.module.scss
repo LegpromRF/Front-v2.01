@@ -175,12 +175,6 @@
       margin-right: 0;
       margin-bottom: 30px;
     }
-
-    input[type="text"], input[type="number"], input[type="date"] {
-      background: #FFF;
-      padding: 8px 12px;
-      border-radius: 4px;
-    }
   }
 
 
@@ -367,6 +361,7 @@
 
   &__inputImages {
     position: relative;
+
     input {
       position: absolute;
       width: 153px;
