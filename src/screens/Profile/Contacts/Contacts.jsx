@@ -107,7 +107,9 @@ const Contacts = () => {
       "email": formData.email,
       "tlg": formData.tlg,
     }
-    return axios.post(apiEndpoints.create, params)
+    return axios.post(apiEndpoints.create, params, {
+      withCredentials: true
+    })
         .then((response) => {
           console.log(params)
           console.log(response)
