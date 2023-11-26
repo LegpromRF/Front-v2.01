@@ -152,49 +152,54 @@ const CreateOrder = () => {
                             <div className={styles.form__title}>Основная информация</div>
                             <div className={styles.form__items}>
                                 {
-                                    formOptions && formOptions.map((values, index) => (
-                                        <div key={index} className={styles.form__item}>
-                                            <h3 className={styles.form__itemLabel}>
-                                                <span>{values.label}</span>
-                                                {/*<span className={styles.form__itemLabel_star}>*</span>*/}
-                                            </h3>
-                                            {values.options && (
-                                                <Controller
-                                                    name={values.propName}
-                                                    control={control}
-                                                    rules={{
-                                                        required: 'Обязательное поле'
-                                                    }}
-                                                    render={({ field }) => (
-                                                        <Select
-                                                            {...field}
-                                                            isClearable={true}
-                                                            required={true}
-                                                            isMulti={values.label === 'Пол и возраст' || values.label === 'Ценовой сегмент'}
-                                                            closeMenuOnSelect={false}
-                                                            options={
-                                                                Object.entries(values.options).map(([value, index]) => (
-                                                                        {
-                                                                            value: index,
-                                                                            label: value,
-                                                                        }
-                                                                    )
-                                                                )
-                                                            }
-                                                            styles={{
-                                                                control: (provided) => ({
-                                                                    ...provided,
-                                                                    width: 'auto', // Устанавливайте нужную вам ширину
-                                                                }),
-                                                            }}
-                                                            placeholder="нажмите для выбора"
-                                                            onChange={(selectedOption) => field.onChange(selectedOption)}
-                                                        />
-                                                    )}
-                                                />
-                                            )}
-                                        </div>
-                                    ))
+                                        formOptions && formOptions.map((values, index) => (
+                                            <div key={index} className={styles.form__item}>
+                                                {
+                                                    loading ? <Skeleton /> :
+                                                        <>
+                                                            <h3 className={styles.form__itemLabel}>
+                                                                <span>{values.label}</span>
+                                                                {/*<span className={styles.form__itemLabel_star}>*</span>*/}
+                                                            </h3>
+                                                            {values.options && (
+                                                                <Controller
+                                                                    name={values.propName}
+                                                                    control={control}
+                                                                    rules={{
+                                                                        required: 'Обязательное поле'
+                                                                    }}
+                                                                    render={({ field }) => (
+                                                                        <Select
+                                                                            {...field}
+                                                                            isClearable={true}
+                                                                            required={true}
+                                                                            isMulti={values.label === 'Пол и возраст' || values.label === 'Ценовой сегмент'}
+                                                                            closeMenuOnSelect={false}
+                                                                            options={
+                                                                                Object.entries(values.options).map(([value, index]) => (
+                                                                                        {
+                                                                                            value: index,
+                                                                                            label: value,
+                                                                                        }
+                                                                                    )
+                                                                                )
+                                                                            }
+                                                                            styles={{
+                                                                                control: (provided) => ({
+                                                                                    ...provided,
+                                                                                    width: 'auto', // Устанавливайте нужную вам ширину
+                                                                                }),
+                                                                            }}
+                                                                            placeholder="нажмите для выбора"
+                                                                            onChange={(selectedOption) => field.onChange(selectedOption)}
+                                                                        />
+                                                                    )}
+                                                                />
+                                                            )}
+                                                        </>
+                                                }
+                                            </div>
+                                        ))
                                 }
                             </div>
                         </div>
