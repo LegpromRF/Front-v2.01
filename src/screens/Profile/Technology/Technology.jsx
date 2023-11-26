@@ -147,7 +147,29 @@ const Technology = () => {
                                                             {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                         </h3>
                                                         <Controller
-                                                            name="tkan"
+                                                            name="plotnost_tkani"
+                                                            control={control}
+                                                            rules={{
+                                                                required: {
+                                                                    value: true,
+                                                                    message: 'Это поле обязательно'
+                                                                },
+
+                                                            }}
+                                                            render={({ field }) => (
+                                                                <div className={styles.form__textField}>
+                                                                    <input type={"text"} {...field} placeholder="Введите плотность ткани" />
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </div>
+                                                    <div className={styles.form__item}>
+                                                        <h3 className={styles.form__itemLabel}>
+                                                            <span>Размеры: сколько разных размеров/ростовок</span>
+                                                            {/*<span className={styles.form__itemLabel_star}>*</span>*/}
+                                                        </h3>
+                                                        <Controller
+                                                            name="razm"
                                                             control={control}
                                                             rules={{
                                                                 required: {
@@ -169,7 +191,7 @@ const Technology = () => {
                                                             {/*<span className={styles.form__itemLabel_star}>*</span>*/}
                                                         </h3>
                                                         <Controller
-                                                            name="tz_obraz_zak"
+                                                            name="obraz_zak"
                                                             control={control}
                                                             rules={{
                                                                 required: {
@@ -182,11 +204,11 @@ const Technology = () => {
                                                                 <div className={styles.form__radioWrapper}>
                                                                     <div className={styles.form__radio}>
                                                                         <label>Да</label>
-                                                                        <input type="radio" {...field} value="1" />
+                                                                        <input type="radio" {...field} value={true} />
                                                                     </div>
                                                                     <div className={styles.form__radio}>
                                                                         <label>Нет</label>
-                                                                        <input type="radio" {...field} value="0" />
+                                                                        <input type="radio" {...field} value={false} />
                                                                     </div>
                                                                 </div>
                                                             )}

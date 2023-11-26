@@ -20,6 +20,11 @@ const Contacts = () => {
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.form.formData)
 
+  const purchase = useSelector((state) => state.form.purchaseStep)
+  const technology = useSelector((state) => state.form.technologyStep)
+  const conditions = useSelector((state) => state.form.conditionsStep)
+  const contacts = useSelector((state) => state.form.contactsStep)
+
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject('contacts');
@@ -55,86 +60,59 @@ const Contacts = () => {
         "foo"
       ],
       "name": formData.name,
-      "regular_zakaz": formData.regular_zakaz.value,
+      "regular_zakaz": formData.regular_zakaz,
       "vid_postavki": 1,
       "vid_product": 0,
-      "tip_odejdy": formData.tip_odejdy.value,
-      "naznach": 0,
+      "tip_odejdy": formData.tip_odejdy,
+      "naznach": formData.sfera_prim,
       "vid_izdeliya": 0,
-      "pol": 0,
-      "sezon": formData.sezons.value,
-      "price_segment": [
-        0
-      ],
-      "count": formData.count.value,
+      "pol": formData.pol,
+      "sezon": formData.sezons,
+      "price_segment": formData.price_segment,
+      "count": formData.count,
       "price_one": formData.price_one.value,
-      "price_part": 0,
+      "price_part": formData.price_part,
       "price_nds": formData.price_nds.value,
-      "data_start": "2023-11-24T16:02:49.380Z",
+      "data_start": formData.data_start,
       "sroki": formData.sroki,
-      "data_finish": "2023-11-24T16:02:49.380Z",
-      "reg_post": 0,
-      "reg_prod": [
-        0
-      ],
+      "data_finish": formData.data_finish,
+      "reg_post": formData.reg_post,
+      "reg_prod": formData.reg_prod,
       "min_part": formData.min_part,
-      "lekala": [
-        0
-      ],
-      "tehnolog": [
-        0
-      ],
-      "sirye": [
-        0
-      ],
-      "vid_tkani": [
-        0
-      ],
-      "plotnost_tkani": "string",
-      "nanesen": [
-        0
-      ],
-      "dop_uslugi": [
-        0
-      ],
-      "razm": "string",
-      "obraz_poshiv": 0,
-      "obraz_pay": 0,
-      "obraz_zak": true,
-      "dost_otk": 0,
-      "spsch": 0,
-      "count_pers": 0,
-      "prersonal": [
-        0
-      ],
-      "oborud": [
-        0
-      ],
-      "upakovka": [
-        0
-      ],
-      "markirovka": [
-        0
-      ],
-      "usl_pay": [
-        0
-      ],
-      "usl_priem": [
-        0
-      ],
-      "usl_dostav": [
-        0
-      ],
-      "dop_treb": "string",
+      "lekala": formData.tz_lekala,
+      "tehnolog": formData.tz_tehnolog,
+      "sirye": formData.tz_sirye,
+      "vid_tkani": formData.vid_tkani,
+      "plotnost_tkani": formData.plotnost_tkani,
+      "nanesen": formData.vid_uslug,
+      "dop_uslugi": formData.dop_uslugi,
+      "razm": formData.razm,
+      "obraz_poshiv": formData.obraz_poshiv,
+      "obraz_pay": formData.obraz_pay,
+      "obraz_zak": formData.obraz_zak,
+      "dost_otk": formData['3variants'],
+      "spsch": formData['3variants'],
+      "count_pers": formData.count_pers,
+      "prersonal": formData.prersonal,
+      "oborud": formData.oborud,
+      "upakovka": formData.upakovka,
+      "markirovka": formData.markirovka,
+      "usl_pay": formData.usl_pay,
+      "usl_priem": formData.usl_priem,
+      "usl_dostav": formData.usl_dostav,
+      "dop_treb": formData.dop_treb,
       "status": formData.status,
       "fio": formData.fio,
       "tel": formData.tel,
       "email": formData.email,
       "tlg": formData.tlg,
     }
-    return axios.post(apiEndpoints.create, {
-
-    })
+    return axios.post(apiEndpoints.create, params)
+        .then((response) => {
+          console.log(params)
+          console.log(response)
+        })
+        .catch((err) => console.log(err))
   }
 
   async function setFinalData() {
@@ -147,6 +125,7 @@ const Contacts = () => {
 
   async function onSubmit() {
     try {
+      await setFinalData()
       dispatch(updateFormData(getValues()))
       dispatch(contactsSuccess())
       console.log(getValues())
@@ -184,6 +163,8 @@ const Contacts = () => {
       console.log(inputObject)
       console.log(outputObject)
 
+      await sendForm(outputObject)
+
       // if (outputObject.task.value) {
       //   const textFormData = new FormData()
       //   textFormData.append('file', outputObject.task.value[0])
@@ -197,8 +178,6 @@ const Contacts = () => {
     }
 
   }
-
-  const {purchase, technology, conditions, contacts} = useSelector((state) => state.form);
 
   return (
     <>

@@ -133,7 +133,30 @@ const Conditions = () => {
                                                             />
                                                         )}
                                                     </div>
+
                                                 ))}
+                                                <div className={styles.form__item}>
+                                                    <h3 className={styles.form__itemLabel}>
+                                                        <span>Количество швей, шт.</span>
+                                                        {/*<span className={styles.form__itemLabel_star}>*</span>*/}
+                                                    </h3>
+                                                    <Controller
+                                                        name="count_pers"
+                                                        control={control}
+                                                        rules={{
+                                                            required: {
+                                                                value: true,
+                                                                message: 'Это поле обязательно'
+                                                            },
+
+                                                        }}
+                                                        render={({ field }) => (
+                                                            <div className={styles.form__textField}>
+                                                                <input type={"number"} {...field} placeholder="Введите количество швей" />
+                                                            </div>
+                                                        )}
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                         <div className={styles.form__row}>
