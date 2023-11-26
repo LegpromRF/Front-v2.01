@@ -22,6 +22,6 @@ export const apiEndpoints = {
 }
 
 const aiHOST = '185.204.3.62:8726/'
-export const aiEndPoints = {
+export const aiEndpoints = {
     rank: aiHOST + 'rank/companies'
 }

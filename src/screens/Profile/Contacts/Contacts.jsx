@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {contactsSuccess, updateFormData} from "@store/orderForm/form.slice.js";
 import Select from "react-select";
 import axios from "axios";
-import {aiEndPoints, apiEndpoints} from "@/utils/constants/apiEndpoints.js";
+import {aiEndpoints, aiEndPoints, apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 
 const Contacts = () => {
   const { control, handleSubmit, getValues, formState: { errors }} = useForm();
@@ -115,9 +115,7 @@ const Contacts = () => {
           console.log(response)
           const bidId = response.data.data
           return axios
-              .get(aiEndPoints.rank, { params: {bid_id: bidId} }, {
-                withCredentials: true
-              })
+              .get(aiEndpoints.rank, { params: {bid_id: bidId}})
               .then((response) => {
                 console.log(response)
               })
