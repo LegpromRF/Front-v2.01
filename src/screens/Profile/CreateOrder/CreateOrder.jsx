@@ -135,7 +135,7 @@ const CreateOrder = () => {
                                             },
                                         }}
                                         render={({ field }) => (
-                                            <div>
+                                            <div className={styles.form__textField}>
                                                 <input type={"text"} {...field} placeholder="Введите название заказа" />
                                             </div>
                                         )}
