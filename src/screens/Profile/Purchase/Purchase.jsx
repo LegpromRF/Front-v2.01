@@ -58,7 +58,7 @@ const Purchase = () => {
 
     const firstFieldValue = watch('count') || 0;
     const secondFieldValue = watch('price_one') || 0;
-    const sum = parseFloat(firstFieldValue) * parseFloat(secondFieldValue)
+    const sum = (parseFloat(firstFieldValue) * parseFloat(secondFieldValue)).toFixed(2)
 
     async function onSubmit() {
         dispatch(updateFormData(getValues()))
