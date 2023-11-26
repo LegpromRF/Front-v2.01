@@ -94,6 +94,13 @@ const CreateOrder = () => {
         navigate("/profile/order/purchase")
     }, [dispatch, getValues, navigate]);
 
+    const SkeletonItem = () => (
+        <>
+            <Skeleton width={"50%"}/>
+            <Skeleton height={"35px"} />
+        </>
+    )
+
     return (
         <>
             <Layout>
@@ -119,7 +126,7 @@ const CreateOrder = () => {
                                         <div className={styles.form__row}>
                                             <div className={styles.form__items}>
                                                 {
-                                                    loading ? <Skeleton height={"35px"}/> :
+                                                    loading ? <SkeletonItem /> :
                                                         <div className={styles.form__item}>
                                                             <h3 className={styles.form__itemLabel}>
                                                                 <span>Название заказа</span>
@@ -148,29 +155,12 @@ const CreateOrder = () => {
                                             <div className={styles.form__items}>
                                                 {
                                                     loading ?
-                                                        <>
-                                                            <div className={styles.form__item}>
-                                                                <Skeleton height={"35px"}/>
+                                                        Array.from({length: 7}, (_, index) => (
+                                                            <div key={index} className={styles.form__item}>
+                                                                <SkeletonItem />
                                                             </div>
-                                                            <div className={styles.form__item}>
-                                                                <Skeleton height={"35px"}/>
-                                                            </div>
-                                                            <div className={styles.form__item}>
-                                                                <Skeleton height={"35px"}/>
-                                                            </div>
-                                                            <div className={styles.form__item}>
-                                                                <Skeleton height={"35px"}/>
-                                                            </div>
-                                                            <div className={styles.form__item}>
-                                                                <Skeleton height={"35px"}/>
-                                                            </div>
-                                                            <div className={styles.form__item}>
-                                                                <Skeleton height={"35px"}/>
-                                                            </div>
-                                                            <div className={styles.form__item}>
-                                                                <Skeleton height={"35px"}/>
-                                                            </div>
-                                                        </> :
+                                                        ))
+                                                        :
                                                         formOptions && formOptions.map((values, index) => (
                                                             <div key={index} className={styles.form__item}>
                                                                 <h3 className={styles.form__itemLabel}>
