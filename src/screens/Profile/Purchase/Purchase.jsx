@@ -21,7 +21,7 @@ const Purchase = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [formOptions, setFormOptions] = useState([])
-
+    const [loading, setLoading] = useState(true)
     const purchase = useSelector((state) => state.form.purchaseStep)
     const technology = useSelector((state) => state.form.technologyStep)
     const conditions = useSelector((state) => state.form.conditionsStep)
@@ -45,12 +45,12 @@ const Purchase = () => {
             });
 
             console.log(updatedOptions)
-
+            setLoading(false)
             setFormOptions(updatedOptions)
         } catch (error) {
             console.log(error);
         }
-    }, [])
+    }, [getPropObject])
 
     useEffect(() => {
         loadOptions();
@@ -62,7 +62,7 @@ const Purchase = () => {
 
     async function onSubmit() {
         dispatch(updateFormData(getValues()))
-        dispatch(updateFormData({price_part: { value: sum }}))
+        dispatch(updateFormData({price_part: sum }))
         dispatch(purchaseSuccess())
         console.log(getValues())
         navigate("/profile/order/technology")

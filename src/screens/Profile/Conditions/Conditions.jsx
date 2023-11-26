@@ -20,7 +20,7 @@ const Conditions = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [formOptions, setFormOptions] = useState([])
-
+    const [loading, setLoading] = useState(true)
     const purchase = useSelector((state) => state.form.purchaseStep)
     const technology = useSelector((state) => state.form.technologyStep)
     const conditions = useSelector((state) => state.form.conditionsStep)
@@ -49,14 +49,13 @@ const Conditions = () => {
                 };
             });
 
-            console.log(updatedOptions)
-
+            setLoading(false)
             setFormOptions(updatedOptions)
 
         } catch (error) {
             console.log(error);
         }
-    }, [])
+    }, [getPropObject])
 
     useEffect(() => {
         loadOptions();

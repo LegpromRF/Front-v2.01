@@ -41,7 +41,6 @@ const CreateOrder = () => {
             reader.readAsDataURL(fileobj[0][i]);
             reader.onload = e => {
             preview.push(e.target.result);   // обновить массив вместо замены всего значения превью
-
             setPreview([...new Set(preview)]); // spread into a new array to trigger rerender
             }
         }
@@ -84,7 +83,7 @@ const CreateOrder = () => {
             } catch (error) {
                 console.log(error)
             }
-        }, [])
+        }, [getPropObject])
 
     useEffect(() => {
         loadOptions();

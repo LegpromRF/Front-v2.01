@@ -16,7 +16,7 @@ import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 const Contacts = () => {
   const { control, handleSubmit, getValues, formState: { errors }} = useForm();
   const [formOptions, setFormOptions] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
   const dispatch = useDispatch();
   const formData = useSelector((state) => state.form.formData)
 
@@ -35,10 +35,10 @@ const Contacts = () => {
         };
       });
 
-      setFormOptions(updatedOptions);
-      setLoading(false);
+      setFormOptions(updatedOptions)
+      setLoading(false)
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }, [getPropObject]);
 
@@ -163,9 +163,6 @@ const Contacts = () => {
         if (typeof value === 'object' && value !== null) {
           return processObject(value);
         }
-
-        // В противном случае, возвращаем значение, если оно имеет свойство "value"
-        return 'value' in value ? value.value : value;
       };
 
       const processObject = (obj) => {
