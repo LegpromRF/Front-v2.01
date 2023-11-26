@@ -161,9 +161,11 @@ const Contacts = () => {
 
         // Если значение - объект, рекурсивно вызываем processObject
         if (typeof value === 'object' && value !== null) {
-          return value['value']
+          return value.value
         }
-      };
+
+        return value
+      }
 
       const processObject = (obj) => {
         let processedObj = {};
