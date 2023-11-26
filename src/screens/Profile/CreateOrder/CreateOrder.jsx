@@ -95,10 +95,10 @@ const CreateOrder = () => {
     }, [dispatch, getValues, navigate]);
 
     const SkeletonItem = () => (
-        <>
+        <div className={styles.form__skeleton}>
             <Skeleton width={"50%"}/>
             <Skeleton height={"35px"} />
-        </>
+        </div>
     )
 
     return (
@@ -126,7 +126,11 @@ const CreateOrder = () => {
                                         <div className={styles.form__row}>
                                             <div className={styles.form__items}>
                                                 {
-                                                    loading ? <SkeletonItem /> :
+                                                    loading ?
+                                                        <div className={styles.form__item}>
+                                                            <SkeletonItem />
+                                                        </div>
+                                                         :
                                                         <div className={styles.form__item}>
                                                             <h3 className={styles.form__itemLabel}>
                                                                 <span>Название заказа</span>

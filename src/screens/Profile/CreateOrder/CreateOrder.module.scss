@@ -137,6 +137,12 @@
 
 .form {
 
+  &__skeleton {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+  }
+
   input[type='file'] {
     color: rgba(0, 0, 0, 0)
   }
