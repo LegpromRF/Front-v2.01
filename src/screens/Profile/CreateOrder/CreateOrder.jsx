@@ -157,7 +157,7 @@ const CreateOrder = () => {
                                             <div className={styles.form__item}>
                                                 <Skeleton/>
                                             </div>
-                                            <div} className={styles.form__item}>
+                                            <div className={styles.form__item}>
                                                 <Skeleton/>
                                             </div>
                                             <div className={styles.form__item}>
