@@ -114,7 +114,9 @@ const Contacts = () => {
           console.log(params)
           console.log(response)
           const bidId = response.data.data
-          return axios.get(apiEndpoints.bid + bidId)
+          return axios.get(apiEndpoints.bid + bidId, {
+            withCredentials: true
+          })
               .then((response) => {
                 console.log(response)
               })
