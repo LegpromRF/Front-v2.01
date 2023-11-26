@@ -312,12 +312,19 @@ const Purchase = () => {
                                                             )}
                                                         />
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div className={styles.form__row}>
+                                                <div className={styles.form__items}>
                                                     <div className={styles.form__item}>
-                                                        <h3 className={styles.form__itemLabel}>
-                                                            <span>Общий бюджет:</span>
-                                                            {/*<span className={styles.form__itemLabel_star}>*</span>*/}
-                                                            <div>{sum} руб.</div>
-                                                        </h3>
+                                                        <div className={styles.form__sumWrapper}>
+                                                            <h3 className={styles.form__sumTitle}>
+                                                                <span>Общий бюджет:</span>
+                                                            </h3>
+                                                            <div className={styles.form__sum}>
+                                                                <span>{sum} руб.</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
