@@ -115,7 +115,7 @@ const Contacts = () => {
           console.log(response)
           const bidId = response.data.data
           axios
-              .get(aiEndpoints.rank + `?bid_id=${bidId}`)
+              .get(aiEndpoints.rank, { params: {bid_id: bidId}})
               .then((response) => {
                 console.log(aiEndpoints.rank)
                 console.log(response)
