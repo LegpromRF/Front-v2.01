@@ -1,7 +1,6 @@
 const test = 'justifyapi'
 const prod = 'api.legpromrf'
 
-
 export const apiHOST = `https://${prod}.ru/`
 export const apiEndpoints = {
     verification: apiHOST + 'auth/send_verification',
@@ -20,4 +19,9 @@ export const apiEndpoints = {
     create: apiHOST + 'bid/create',
     photos: apiHOST + 'file_manager/photos',
     bid: apiHOST + 'bid/'
+}
+
+const aiHOST = '185.204.3.62:8726/'
+export const aiEndPoints = {
+    rank: aiHOST + 'rank/companies'
 }
