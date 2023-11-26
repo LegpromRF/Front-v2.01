@@ -142,12 +142,13 @@
 
   &__sumWrapper {
     display: flex;
+    align-items: center;
     gap: 8px;
   }
 
   &__sumTitle {
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   &__sum {
