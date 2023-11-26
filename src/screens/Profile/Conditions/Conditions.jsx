@@ -105,6 +105,7 @@ const Conditions = () => {
                                                                     <Select
                                                                         {...field}
                                                                         isClearable={true}
+                                                                        required={true}
                                                                         closeMenuOnSelect={false}
                                                                         isMulti={
                                                                             values.label === "Требования к персоналу" ||
