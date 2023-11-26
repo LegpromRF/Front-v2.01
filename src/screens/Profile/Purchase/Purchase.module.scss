@@ -35,19 +35,7 @@
   }
 
 
-  &__sumWrapper {
-    display: flex;
-    gap: 8px;
-  }
 
-  &__sumTitle {
-    font-size: 20px;
-    font-weight: 400;
-  }
-
-  &__sum {
-    font-size: 24px;
-  }
 
   &__type {
 
@@ -151,6 +139,20 @@
 }
 
 .form {
+
+  &__sumWrapper {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__sumTitle {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  &__sum {
+    font-size: 24px;
+  }
 
   &__content {
     margin-top: 20px;
