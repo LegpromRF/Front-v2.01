@@ -19,5 +19,5 @@ export const apiEndpoints = {
     contacts: apiHOST + 'bid/contacts',
     create: apiHOST + 'bid/create',
     photos: apiHOST + 'file_manager/photos',
-    bid: apiHOST + 'bid'
+    bid: apiHOST + 'bid/'
 }
