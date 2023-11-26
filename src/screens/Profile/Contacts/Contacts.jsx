@@ -160,8 +160,8 @@ const Contacts = () => {
         }
 
         // Если значение - объект, рекурсивно вызываем processObject
-        if (typeof value === 'object' && value !== null) {
-          return value.value
+        if (typeof value === 'object' && value !== null && 'value' in value) {
+          return value.value;
         }
 
         return value
@@ -181,7 +181,7 @@ const Contacts = () => {
       };
 
       outputObject = processObject(inputObject)
-
+      console.log(inputObject)
       console.log(outputObject)
 
       // if (outputObject.task.value) {
