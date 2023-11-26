@@ -183,7 +183,7 @@ const Purchase = () => {
                                                                 }
                                                             }}
                                                             render={({ field }) => (
-                                                                <div>
+                                                                <div className={styles.form__textField}>
                                                                     <input type={"date"} {...field} placeholder="Введите целое число" />
                                                                 </div>
                                                             )}
@@ -205,7 +205,7 @@ const Purchase = () => {
 
                                                             }}
                                                             render={({ field }) => (
-                                                                <div>
+                                                                <div className={styles.form__textField}>
                                                                     <input type={"text"} {...field} placeholder="Например: 2 недели" />
                                                                 </div>
                                                             )}
@@ -227,7 +227,7 @@ const Purchase = () => {
 
                                                             }}
                                                             render={({ field }) => (
-                                                                <div>
+                                                                <div className={styles.form__textField}>
                                                                     <input type={"date"} {...field} placeholder="Введите ссылку на TG" />
                                                                 </div>
                                                             )}
@@ -256,7 +256,7 @@ const Purchase = () => {
                                                                 }
                                                             }}
                                                             render={({ field }) => (
-                                                                <div>
+                                                                <div className={styles.form__textField}>
                                                                     <input type={"number"} {...field} placeholder="Введите целое число" />
                                                                 </div>
                                                             )}
@@ -281,7 +281,7 @@ const Purchase = () => {
                                                                 }
                                                             }}
                                                             render={({ field }) => (
-                                                                <div>
+                                                                <div className={styles.form__textField}>
                                                                     <input type={"number"} step={0.01} {...field} placeholder="Введите цену" />
                                                                 </div>
                                                             )}
@@ -306,7 +306,7 @@ const Purchase = () => {
                                                                 }
                                                             }}
                                                             render={({ field }) => (
-                                                                <div>
+                                                                <div className={styles.form__textField}>
                                                                     <input type={"number"} {...field} placeholder="Введите количество" />
                                                                 </div>
                                                             )}

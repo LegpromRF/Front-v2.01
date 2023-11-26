@@ -154,7 +154,7 @@ const Conditions = () => {
 
                                                         }}
                                                         render={({ field }) => (
-                                                            <div>
+                                                            <div className={styles.form__textField}>
                                                                 <input type={"text"} {...field} placeholder="Введите комментарий к заказу" />
                                                             </div>
                                                         )}

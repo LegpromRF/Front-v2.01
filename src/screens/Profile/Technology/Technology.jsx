@@ -157,7 +157,7 @@ const Technology = () => {
 
                                                             }}
                                                             render={({ field }) => (
-                                                                <div>
+                                                                <div className={styles.form__textField}>
                                                                     <input type={"text"} {...field} placeholder="Введите плотность ткани" />
                                                                 </div>
                                                             )}

@@ -240,7 +240,7 @@ const Contacts = () => {
                               }}
                               render={({field}) => (
                                   <div>
-                                    <input type={"text"} {...field} placeholder="Введите ФИО"/>
+                                    <input type={"text"} {...field} placeholder="Введите ФИО" className={styles.form__textField} />
                                     {errors.nameSurname &&
                                         <p className={styles.form__error}>{errors.nameSurname.message}</p>}
                                   </div>
@@ -268,7 +268,7 @@ const Contacts = () => {
                                 }}
                                 render={({field}) => (
                                     <div>
-                                      <input type={"tel"} {...field} placeholder="Введите номер телефона"/>
+                                      <input type={"tel"} {...field} placeholder="Введите номер телефона" className={styles.form__textField} />
                                       {errors.date && <p className={styles.form__error}>{errors.date.message}</p>}
                                     </div>
                                 )}
@@ -296,7 +296,7 @@ const Contacts = () => {
                                 }}
                                 render={({field}) => (
                                     <div>
-                                      <input type={"email"} {...field} placeholder="Введите email"/>
+                                      <input type={"email"} {...field} placeholder="Введите email" className={styles.form__textField} />
                                       {errors.email && <p className={styles.form__error}>{errors.email.message}</p>}
                                     </div>
                                 )}
@@ -324,7 +324,7 @@ const Contacts = () => {
                                 }}
                                 render={({field}) => (
                                     <div>
-                                      <input type={"text"} {...field} placeholder="Введите ссылку на TG"/>
+                                      <input type={"text"} {...field} placeholder="Введите ссылку на TG" className={styles.form__textField} />
                                       {errors.telegram &&
                                           <p className={styles.form__error}>{errors.telegram.message}</p>}
                                     </div>

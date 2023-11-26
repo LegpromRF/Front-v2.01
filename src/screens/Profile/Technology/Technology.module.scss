@@ -322,6 +322,15 @@
     background-color: $blue;
   }
 
+  &__textField {
+    padding: 8px;
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(204, 204, 204);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+  }
+
   /*===========================================*/
 
   &__imagesForm {
