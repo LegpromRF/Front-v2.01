@@ -1,4 +1,4 @@
-import Layout from "@/src/layout/Layout";
+import Layout from "@layout/Layout";
 
 import styles from './CheckTz.module.scss'
 import icon from 'public/icon/iconTz.png'
@@ -8,10 +8,9 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import Images from "./dataImgSlider";
-
+import {Link} from "react-router-dom";
 import { useState, useEffect} from "react";
-import TitleProfile from "@/src/components/TitleProfile/TitleProfile";
-import Head from "next/head";
+import TitleProfile from "@components/TitleProfile/TitleProfile";
 
 const CheckTz = () => {
   const [nav1, setNav1] = useState(null);
@@ -80,15 +79,12 @@ const CheckTz = () => {
   
   return ( 
     <>
-    <Head>
-      <title>Просмотр технического задания - LegpromRF</title>
-    </Head>
     <Layout>
       <div className={styles.checktz}>
         <TitleProfile>Просмотр технического задания</TitleProfile>
         <div className={styles.checktz__head}>
           <div className={styles.checktz__ico}>
-              <Image 
+              <img
                 src={icon}
                 alt="Иконка"  
                 width={60} 

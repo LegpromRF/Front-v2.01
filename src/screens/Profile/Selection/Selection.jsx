@@ -1,14 +1,12 @@
-import Layout from "@/src/layout/Layout";
+import Layout from "@layout/Layout";
 
 import styles from './Selection.module.scss'
 
-import TitleProfile from "@/src/components/TitleProfile/TitleProfile";
-import HeaderProfile from "@/src/components/HeaderProfile/HeaderProfile";
-import SelectionCard from "@/src/components/SelectionCard/SelectionCard";
-
-import Head from 'next/head';
+import TitleProfile from "@components/TitleProfile/TitleProfile";
+import HeaderProfile from "@components/HeaderProfile/HeaderProfile";
+import SelectionCard from "@components/SelectionCard/SelectionCard";
+import {Link} from "react-router-dom";
 import { useState } from "react";
-import Link from "next/link";
 
 const Selection = () => {
 
@@ -17,10 +15,6 @@ const Selection = () => {
   return ( 
 
     <Layout>
-      <Head>
-        <title>Подбор исполнителя - LegpromRF</title>
-      </Head>
-
       <div className={styles.selection}>
         <TitleProfile>Подбор исполнителя</TitleProfile>
         <div className={styles.selection__header}>
@@ -36,7 +30,7 @@ const Selection = () => {
             <div className={styles.selection__control}>
               <div className={styles.selection__items}>
                 <div className={styles.selection__controlItem}>
-                  <Link href="/profile/checkTz/">
+                  <Link to="/profile/checkTz/">
                     <div className={styles.selection__controlTitle}>Просмотреть ТЗ</div>
                     <div className={styles.selection__controlIcon}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="14" viewBox="0 0 12 14" fill="none">
@@ -49,7 +43,7 @@ const Selection = () => {
                   </Link>
                 </div>
                 <div className={styles.selection__controlItem}>
-                  <Link href="/profile/createorder/">
+                  <Link to="/profile/order/createorder/">
                     <div className={styles.selection__controlTitle}>Редактировать ТЗ</div>
                     <div className={styles.selection__controlIcon}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">

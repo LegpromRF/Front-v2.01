@@ -9,6 +9,8 @@ import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import {Controller, useForm} from "react-hook-form";
 import {useDispatch, useSelector} from "react-redux";
 import {updateFormData} from "@store/orderForm/form.slice.js";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const CreateOrder = () => {
     const {
@@ -120,27 +122,30 @@ const CreateOrder = () => {
                     <div className={styles.form__content}>
                         <div className={styles.form__row}>
                             <div className={styles.form__items}>
-                                <div className={styles.form__item}>
-                                    <h3 className={styles.form__itemLabel}>
-                                        <span>Название заказа</span>
-                                        {/*<span className={styles.form__itemLabel_star}>*</span>*/}
-                                    </h3>
-                                    <Controller
-                                        name="name"
-                                        control={control}
-                                        rules={{
-                                            required: {
-                                                value: true,
-                                                message: 'Это поле обязательно'
-                                            },
-                                        }}
-                                        render={({ field }) => (
-                                            <div className={styles.form__textField}>
-                                                <input type={"text"} {...field} placeholder="Введите название заказа" />
-                                            </div>
-                                        )}
-                                    />
-                                </div>
+                                {
+                                    loading ? <Skeleton /> :
+                                        <div className={styles.form__item}>
+                                            <h3 className={styles.form__itemLabel}>
+                                                <span>Название заказа</span>
+                                                {/*<span className={styles.form__itemLabel_star}>*</span>*/}
+                                            </h3>
+                                            <Controller
+                                                name="name"
+                                                control={control}
+                                                rules={{
+                                                    required: {
+                                                        value: true,
+                                                        message: 'Это поле обязательно'
+                                                    },
+                                                }}
+                                                render={({ field }) => (
+                                                    <div className={styles.form__textField}>
+                                                        <input type={"text"} {...field} placeholder="Введите название заказа" />
+                                                    </div>
+                                                )}
+                                            />
+                                        </div>
+                                }
                             </div>
                         </div>
                         <div className={styles.form__row}>
