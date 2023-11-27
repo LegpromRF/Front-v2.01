@@ -27,17 +27,22 @@
   background: #242424;
   color: #FFF;
 }
+.header__item_active {
+  position: relative;
+}
 .header__item_active a {
   background: #242424;
   color: #FFF;
 }
 .header__item_active:after {
+  transform: translateX(-50%);
+  left: 50%;
+  display: inline-block;
   content: " ";
-  width: 100%;
+  width: 90%;
   height: 1px;
   position: absolute;
-  top: 0;
-  left: 0;
+  bottom: -4px;
   background-color: #1D1C1C;
 }
 .header__itemNumber {
