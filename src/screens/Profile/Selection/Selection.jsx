@@ -32,7 +32,7 @@ const Selection = () => {
   const getCompanyInfo = useCallback( async (id) => {
     try {
       return axios
-          .get(`${apiEndpoints.companyInfo}${id}/more_info`, {
+          .get(`${apiEndpoints.companyInfo}${id}/full_info`, {
             withCredentials: true
           })
           .then((response) => {
@@ -143,16 +143,21 @@ const Selection = () => {
             
           </div>
           <div className={styles.selection__cardList}>
-            <SelectionCard recommendation={true} choice={choice}/>
-            <SelectionCard recommendation={true} choice={choice}/>
-            <SelectionCard recommendation={true} choice={choice}/>
-            <SelectionCard choice={choice} />
-            <SelectionCard choice={choice}/>
-            <SelectionCard choice={choice}/>
-            <SelectionCard choice={choice}/>
-            <SelectionCard choice={choice}/>
-            <SelectionCard choice={choice}/>
-            <SelectionCard choice={choice}/>
+            {
+              Array.from(companiesInfo).map((company) => (
+                  <SelectionCard key={company} choice={choice} props={company}/>
+              ))
+            }
+            {/*<SelectionCard recommendation={true} choice={choice}/>*/}
+            {/*<SelectionCard recommendation={true} choice={choice}/>*/}
+            {/*<SelectionCard recommendation={true} choice={choice}/>*/}
+            {/*<SelectionCard choice={choice} />*/}
+            {/*<SelectionCard choice={choice}/>*/}
+            {/*<SelectionCard choice={choice}/>*/}
+            {/*<SelectionCard choice={choice}/>*/}
+            {/*<SelectionCard choice={choice}/>*/}
+            {/*<SelectionCard choice={choice}/>*/}
+            {/*<SelectionCard choice={choice}/>*/}
           </div>
       </div>
     </Layout>
