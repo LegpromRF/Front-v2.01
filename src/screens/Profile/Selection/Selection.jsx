@@ -17,7 +17,7 @@ const Selection = () => {
 
   const getCompanies = useCallback( async () => {
     try {
-      const companies = axios
+      const companies = await axios
           .get('https://api.legpromrf.ru/company/test')
           .then((response) => {
             console.log(response)
@@ -30,8 +30,21 @@ const Selection = () => {
       }, [])
 
   useEffect(() => {
-    getCompanies()
+    const fetchData = async () => {
+      try {
+        const data = await getCompanies()
+        setCompaniesID(data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetchData()
   }, [getCompanies]);
+
+  useEffect(() => {
+    console.log(companiesID)
+  }, [companiesID])
 
 
   return ( 
