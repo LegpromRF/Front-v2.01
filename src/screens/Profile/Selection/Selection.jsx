@@ -15,8 +15,6 @@ const Selection = () => {
   const [choice, setChoice] = useState(false)
   const [companiesID, setCompaniesID] = useState([])
   const [companiesInfo, setCompaniesInfo] = useState([])
-  const [companiesCount, setCompaniesCount] = useState(null)
-  // const companies = useSelector((state) => state.companies.companiesID)
 
   const getCompanies = useCallback( async () => {
     try {
@@ -29,7 +27,7 @@ const Selection = () => {
     } catch (error) {
       console.log(error)
     }
-      }, [])
+  }, [])
 
   const getCompanyInfo = useCallback( async (id) => {
     try {
@@ -54,7 +52,7 @@ const Selection = () => {
     } catch (error) {
       console.log(error)
     }
-  }, [getCompanyInfo])
+  }, [companiesID, getCompanyInfo])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,21 +68,15 @@ const Selection = () => {
   }, [getCompanies]);
 
   useEffect(() => {
-    console.log(companiesID)
-    setCompaniesCount(companiesID.length)
-  }, [companiesID])
-
-  useEffect(() => {
     fetchAllCompaniesInfo()
-  }, [companiesID]);
+  }, [companiesID, fetchAllCompaniesInfo]);
 
   useEffect(() => {
+    console.log(companiesID)
     console.log(companiesInfo)
-  }, [companiesInfo]);
-
+  }, [companiesID, companiesInfo])
 
   return ( 
-
     <Layout>
       <div className={styles.selection}>
         <TitleProfile>Подбор исполнителя</TitleProfile>
@@ -138,7 +130,7 @@ const Selection = () => {
             </div>
           </div>
           <div className={styles.selection__search}>
-            <span>Найдено {companiesCount} исполнителей согласно критериям:</span>
+            <span>Найдено {companiesID.length} исполнителей согласно критериям:</span>
             {
               choice 
               ?
