@@ -13,6 +13,7 @@ import axios from "axios"
 const Selection = () => {
   const [choice, setChoice] = useState(false)
   const [companiesID, setCompaniesID] = useState([])
+  const [companiesCount, setCompaniesCount] = useState(null)
   // const companies = useSelector((state) => state.companies.companiesID)
 
   const getCompanies = useCallback( async () => {
@@ -44,6 +45,7 @@ const Selection = () => {
 
   useEffect(() => {
     console.log(companiesID)
+    setCompaniesCount(companiesID.length)
   }, [companiesID])
 
 
@@ -102,7 +104,7 @@ const Selection = () => {
             </div>
           </div>
           <div className={styles.selection__search}>
-            <span>Найдено 56 исполнителей согласно критериям:</span>
+            <span>Найдено {companiesCount} исполнителей согласно критериям:</span>
             {
               choice 
               ?
