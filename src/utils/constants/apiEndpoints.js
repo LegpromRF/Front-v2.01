@@ -18,10 +18,11 @@ export const apiEndpoints = {
     contacts: apiHOST + 'bid/contacts',
     create: apiHOST + 'bid/create',
     photos: apiHOST + 'file_manager/photos',
-    bid: apiHOST + 'bid/'
+    bid: apiHOST + 'bid/',
+    companyInfo: apiHOST + 'company/'
 }
 
-const aiHOST = 'http://185.204.3.62:8726/'
+const aiHOST = 'https://ai.legpromrf.ru/'
 export const aiEndpoints = {
-    rank: `${aiHOST}rank/companies`
+    rank: aiHOST + `rank/companies`
 }

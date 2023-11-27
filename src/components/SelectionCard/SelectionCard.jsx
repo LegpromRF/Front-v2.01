@@ -2,9 +2,10 @@ import { useState } from 'react';
 import Raiting from '../Raiting/Raiting';
 import styles from './SelectionCard.module.scss'
 import {Link} from "react-router-dom"
+import PropTypes from 'prop-types';
 
 
-const SelectionCard = ({recommendation, choice}) => {
+const SelectionCard = ({recommendation, choice, props }) => {
 
 
     const [activeInfo, setActiveInfo] = useState(false)
@@ -256,6 +257,15 @@ const SelectionCard = ({recommendation, choice}) => {
       
     </div>
    );
+}
+
+SelectionCard.propTypes = {
+  logo: PropTypes.string,
+  brend_name: PropTypes.string,
+  region: PropTypes.string,
+  cut_name: PropTypes.string,
+  inn: PropTypes.string,
+  status: PropTypes.string
 }
  
 export default SelectionCard;

@@ -9,10 +9,12 @@ import {Link} from "react-router-dom";
 import {useCallback, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import axios from "axios"
+import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 
 const Selection = () => {
   const [choice, setChoice] = useState(false)
   const [companiesID, setCompaniesID] = useState([])
+  const [companiesInfo, setCompaniesInfo] = useState([])
   const [companiesCount, setCompaniesCount] = useState(null)
   // const companies = useSelector((state) => state.companies.companiesID)
 
@@ -26,9 +28,33 @@ const Selection = () => {
           })
     } catch (error) {
       console.log(error)
-      throw new error
     }
       }, [])
+
+  const getCompanyInfo = useCallback( async (id) => {
+    try {
+      return axios
+          .get(`${apiEndpoints.companyInfo}${id}/more_info`)
+          .then((response) => {
+            console.log(response)
+            return response.data
+          })
+    } catch (error) {
+      console.log(error)
+    }
+  }, [])
+
+  const fetchAllCompaniesInfo = useCallback( async () => {
+    try {
+      const promises = companiesID.map((id) => getCompanyInfo(id))
+
+      const data = await Promise.all(promises)
+
+      setCompaniesInfo(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }, [getCompanyInfo])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,6 +73,14 @@ const Selection = () => {
     console.log(companiesID)
     setCompaniesCount(companiesID.length)
   }, [companiesID])
+
+  useEffect(() => {
+    fetchAllCompaniesInfo()
+  }, [fetchAllCompaniesInfo]);
+
+  useEffect(() => {
+    console.log(companiesInfo)
+  }, [companiesInfo]);
 
 
   return ( 
@@ -118,7 +152,7 @@ const Selection = () => {
             <SelectionCard recommendation={true} choice={choice}/>
             <SelectionCard recommendation={true} choice={choice}/>
             <SelectionCard recommendation={true} choice={choice}/>
-            <SelectionCard choice={choice}/>
+            <SelectionCard choice={choice} props={}/>
             <SelectionCard choice={choice}/>
             <SelectionCard choice={choice}/>
             <SelectionCard choice={choice}/>
