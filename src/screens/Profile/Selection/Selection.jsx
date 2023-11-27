@@ -76,7 +76,7 @@ const Selection = () => {
 
   useEffect(() => {
     fetchAllCompaniesInfo()
-  }, [fetchAllCompaniesInfo]);
+  }, [companiesID]);
 
   useEffect(() => {
     console.log(companiesInfo)
