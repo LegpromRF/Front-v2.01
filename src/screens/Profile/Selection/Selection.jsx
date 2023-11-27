@@ -7,10 +7,11 @@ import HeaderProfile from "@components/HeaderProfile/HeaderProfile";
 import SelectionCard from "@components/SelectionCard/SelectionCard";
 import {Link} from "react-router-dom";
 import { useState } from "react";
+import {useSelector} from "react-redux";
 
 const Selection = () => {
-
   const [choice, setChoice] = useState(false);
+  const companies = useSelector((state) => state.companies.companiesID)
 
   return ( 
 

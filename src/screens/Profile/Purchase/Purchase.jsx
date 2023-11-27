@@ -9,6 +9,7 @@ import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
 import {useDispatch, useSelector} from "react-redux";
 import {purchaseSuccess, updateFormData} from "@store/orderForm/form.slice.js";
 import Select from "react-select";
+import Skeleton from "react-loading-skeleton";
 
 const Purchase = () => {
     const {
@@ -67,6 +68,13 @@ const Purchase = () => {
         console.log(getValues())
         navigate("/profile/order/technology")
     }
+
+    const SkeletonItem = () => (
+        <div className={styles.form__skeleton}>
+            <Skeleton width={"50%"}/>
+            <Skeleton height={"35px"} />
+        </div>
+    )
 
     return (
         <>
