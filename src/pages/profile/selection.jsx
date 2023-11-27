@@ -1,6 +1,6 @@
 import Selection from '@screens/Profile/Selection/Selection'
 
-export default function HomeProfile() {
+export default function SelectionPage() {
   return (
     <Selection />
   )
