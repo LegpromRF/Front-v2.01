@@ -32,7 +32,9 @@ const Selection = () => {
   const getCompanyInfo = useCallback( async (id) => {
     try {
       return axios
-          .get(`${apiEndpoints.companyInfo}${id}/more_info`)
+          .get(`${apiEndpoints.companyInfo}${id}/more_info`, {
+            withCredentials: true
+          })
           .then((response) => {
             console.log(response)
             return response.data
