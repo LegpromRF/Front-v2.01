@@ -152,7 +152,7 @@ const Selection = () => {
             <SelectionCard recommendation={true} choice={choice}/>
             <SelectionCard recommendation={true} choice={choice}/>
             <SelectionCard recommendation={true} choice={choice}/>
-            <SelectionCard choice={choice} props={}/>
+            <SelectionCard choice={choice} />
             <SelectionCard choice={choice}/>
             <SelectionCard choice={choice}/>
             <SelectionCard choice={choice}/>
