@@ -1,38 +1,49 @@
-import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
-import styles from './CreateOrder.module.scss'
-import Select from 'react-select'
-import TitleProfile from "@components/TitleProfile/TitleProfile";
+import { useCallback, useEffect, useState } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Select from "react-select";
+import Skeleton from "react-loading-skeleton";
+
 import Layout from "@layout/Layout";
-import {useCallback, useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import HeaderProfile from "@components/HeaderProfile/HeaderProfile";
+import TitleProfile from "@components/TitleProfile/TitleProfile";
+
+import styles from "./CreateOrder.module.scss";
+import { productSuccess, updateFormData } from "@store/orderForm/form.slice.js";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
-import {Controller, useForm} from "react-hook-form";
-import {useDispatch, useSelector} from "react-redux";
-import {updateFormData} from "@store/orderForm/form.slice.js";
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+
+import "react-loading-skeleton/dist/skeleton.css";
 
 const CreateOrder = () => {
+
+    // Хуки React-Hook-Form
     const {
         control,
         handleSubmit,
         getValues,
-        formState: { errors}
+        formState: { errors }
     } = useForm()
-    const [formOptions, setFormOptions] = useState([])
-    const [loading, setLoading] = useState(true);
-    const [visibleControlImage, setVisibleControlImage] = useState(false)
-    const [preview, setPreview] = useState([]);
 
+    // Хуки React
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    // Локальные состояния
+    const [formOptions, setFormOptions] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [visibleControlImage, setVisibleControlImage] = useState(false)
+    const [preview, setPreview] = useState([])
+
+    // Redux
+    const product = useSelector((state) => state.form.productStep)
     const purchase = useSelector((state) => state.form.purchaseStep)
     const technology = useSelector((state) => state.form.technologyStep)
     const conditions = useSelector((state) => state.form.conditionsStep)
     const contacts = useSelector((state) => state.form.contactsStep)
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
 
+    // Обработчик изменения файла
     const fileobj= [];
-
     const changedHandler = useCallback((e) => {
         let files = e.target.files;
         fileobj.push(files);
@@ -47,6 +58,7 @@ const CreateOrder = () => {
         }
     }, [fileobj, setPreview]);
 
+    // Обработчик удаления изображения
     const deleteImage = useCallback((e) => {
         const index = e.target.id;
         let newPreview = [...preview];
@@ -55,6 +67,7 @@ const CreateOrder = () => {
         setPreview(newPreview);
     }, [preview]);
 
+    // Загрузка опций для формы
     const loadOptions = useCallback(async () => {
         try {
             const options = await getPropObject('product');
@@ -84,16 +97,20 @@ const CreateOrder = () => {
         }
     }, [getPropObject]);
 
+    // Загрузка опций при монтировании компонента
     useEffect(() => {
         loadOptions();
     }, [loadOptions]);
 
+    // Обработчик отправки формы
     const onSubmit = useCallback(async () => {
         dispatch(updateFormData(getValues()))
+        dispatch(productSuccess())
         console.log(getValues())
         navigate("/profile/order/purchase")
     }, [dispatch, getValues, navigate]);
 
+    // Компонент-заглушка для скелета
     const SkeletonItem = () => (
         <div className={styles.form__skeleton}>
             <Skeleton width={"50%"}/>
@@ -106,15 +123,13 @@ const CreateOrder = () => {
             <Layout>
                 <div className={styles.createOrder}>
                     <TitleProfile>Техническое задание</TitleProfile>
-
                     <div className={styles.createOrder__header}>
-                        <HeaderProfile title="Изделие" number="1" href='/profile/order/createorder/' active={true}/>
+                        <HeaderProfile title="Изделие" number="1" href='/profile/order/createorder/' active={product}/>
                         <HeaderProfile title="Закупка" number="2" href='/profile/order/purchase' active={purchase}/>
                         <HeaderProfile title="Технология" number="3" href='/profile/order/technology' active={technology}/>
                         <HeaderProfile title="Условия" number="4" href='/profile/order/conditions' active={conditions}/>
                         <HeaderProfile title="Контакты" number="5" href='/profile/order/contacts' active={contacts}/>
                     </div>
-
                     <div className={styles.createOrder__order}>
                         <div className={styles.createOrder__content}>
                             <div className={styles.createOrder__body}>
