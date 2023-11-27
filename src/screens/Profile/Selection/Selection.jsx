@@ -50,7 +50,7 @@ const Selection = () => {
 
       const data = await Promise.all(promises)
 
-      setCompaniesInfo(data)
+      setCompaniesInfo(data.data)
     } catch (error) {
       console.log(error)
     }
