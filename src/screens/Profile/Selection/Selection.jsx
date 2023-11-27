@@ -17,7 +17,7 @@ const Selection = () => {
 
   const getCompanies = useCallback( async () => {
     try {
-      const companies = await axios
+      return axios
           .get('https://api.legpromrf.ru/company/test')
           .then((response) => {
             console.log(response)
