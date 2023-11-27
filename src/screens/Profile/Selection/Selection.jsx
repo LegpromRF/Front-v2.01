@@ -6,12 +6,33 @@ import TitleProfile from "@components/TitleProfile/TitleProfile";
 import HeaderProfile from "@components/HeaderProfile/HeaderProfile";
 import SelectionCard from "@components/SelectionCard/SelectionCard";
 import {Link} from "react-router-dom";
-import { useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
+import axios from "axios"
 
 const Selection = () => {
-  const [choice, setChoice] = useState(false);
-  const companies = useSelector((state) => state.companies.companiesID)
+  const [choice, setChoice] = useState(false)
+  const [companiesID, setCompaniesID] = useState([])
+  // const companies = useSelector((state) => state.companies.companiesID)
+
+  const getCompanies = useCallback( async () => {
+    try {
+      const companies = axios
+          .get('https://api.legpromrf.ru/company/test')
+          .then((response) => {
+            console.log(response)
+            return response.data
+          })
+    } catch (error) {
+      console.log(error)
+      throw new error
+    }
+      }, [])
+
+  useEffect(() => {
+    getCompanies()
+  }, [getCompanies]);
+
 
   return ( 
 
