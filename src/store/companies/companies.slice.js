@@ -12,5 +12,5 @@ export const companiesSlice = createSlice({
     }
 })
 
-export const { updateFormData, productSuccess, purchaseSuccess, technologySuccess, conditionsSuccess, contactsSuccess } = formSlice.actions
+export const { } = companiesSlice.actions
 export default companiesSlice.reducer
