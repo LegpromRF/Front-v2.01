@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Raiting from '../Raiting/Raiting';
 import styles from './SelectionCard.module.scss'
+import {Link} from "react-router-dom"
 
 
 const SelectionCard = ({recommendation, choice}) => {
