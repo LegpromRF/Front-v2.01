@@ -50,7 +50,7 @@ const Selection = () => {
 
       const data = await Promise.all(promises)
 
-      setCompaniesInfo(data.data)
+      setCompaniesInfo(data)
     } catch (error) {
       console.log(error)
     }
@@ -71,7 +71,7 @@ const Selection = () => {
 
   useEffect(() => {
     fetchAllCompaniesInfo()
-  }, [companiesID, fetchAllCompaniesInfo]);
+  }, [companiesID]);
 
   useEffect(() => {
     console.log(companiesID)
