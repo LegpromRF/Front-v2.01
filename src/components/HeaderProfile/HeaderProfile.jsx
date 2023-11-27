@@ -20,7 +20,7 @@ const HeaderProfile = ({title, href, number, active}) => {
                                 fill-rule="evenodd"
                                 className="fill-121313"/>
                         </svg> :
-                        {number}
+                        number
                 }
             </div>
           </Link>
