@@ -151,7 +151,12 @@ const Contacts = () => {
       const processValue = (value) => {
         // Если значение - массив, обрабатываем каждый элемент массива
         if (Array.isArray(value)) {
-          return value.map((item) => ('value' in item ? item.value : item));
+          return value.map((item) => {
+            if (typeof item === 'object' && 'value' in item) {
+              return item.value;
+            }
+            return item;
+          })
         }
 
         // Если значение - объект, рекурсивно вызываем processObject
@@ -411,7 +416,7 @@ const Contacts = () => {
                                     <input
                                         type="file"
                                         multiple={true}
-                                        accept=".docx, .xlsx, .pdf"
+                                        accept=".docx"
                                         aria-label={"Текстовый документ"}
                                         onChange={(e) => {
                                           handleTextFile(e, field)
