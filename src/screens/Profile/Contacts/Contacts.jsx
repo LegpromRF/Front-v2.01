@@ -64,9 +64,7 @@ const Contacts = () => {
       "photos": [
         "foo"
       ],
-      "docs": [
-        "foo"
-      ],
+      "docs": formData.docs,
       "name": formData.name,
       "regular_zakaz": formData.regular_zakaz,
       "vid_postavki": 5,
@@ -202,9 +200,11 @@ const Contacts = () => {
       const formData = new FormData()
 
       const fileLoaded = new Promise((resolve) => {
-        formData.append('files', e.target.files[0]);
+        for (let i = 0; i < e.target.files.length; i++) {
+          formData.append('files', e.target.files[i])
+        }
         console.log(formData)
-        console.log(e.target.files[0])
+        console.log(e.target.files)
         resolve();
       });
 
@@ -216,6 +216,7 @@ const Contacts = () => {
         })
             .then((response) => {
               console.log(response)
+              setValue("docs", response.data.data)
             })
         field.onChange(formData)
       }
