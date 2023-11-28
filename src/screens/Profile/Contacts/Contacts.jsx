@@ -12,6 +12,7 @@ import {contactsSuccess, updateFormData} from "@store/orderForm/form.slice.js";
 import Select from "react-select";
 import axios from "axios";
 import {aiEndpoints, aiEndPoints, apiEndpoints} from "@/utils/constants/apiEndpoints.js";
+import {setSpecification} from "@store/session/userdata.slice.js";
 
 const Contacts = () => {
   const { control, handleSubmit, getValues, formState: { errors }} = useForm();
@@ -115,10 +116,11 @@ const Contacts = () => {
           console.log(response)
           const bidId = response.data.data
           axios
-              .get(aiEndpoints.rank, { params: {bid_id: bidId}})
+              .post(aiEndpoints.rank, { params: {bid_id: bidId}})
               .then((response) => {
                 console.log(aiEndpoints.rank)
                 console.log(response)
+                dispatch(setSpecification(response.data))
               })
         })
         .catch((err) => console.log(err))
