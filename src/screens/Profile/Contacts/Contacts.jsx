@@ -203,6 +203,7 @@ const Contacts = () => {
 
       const fileLoaded = new Promise((resolve) => {
         formData.append('file', e.target.files[0]);
+        console.log(formData)
         resolve();
       });
 
