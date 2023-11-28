@@ -211,9 +211,6 @@ const Contacts = () => {
 
       console.log(formData)
       await axios.post(apiEndpoints.documents, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
         withCredentials: true
       })
           .then((response) => {
