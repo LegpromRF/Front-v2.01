@@ -210,9 +210,7 @@ const Contacts = () => {
           .then((response) => {
             console.log(response)
           })
-      console.log(formData)
       field.onChange(formData)
-      console.log(formData)
     } catch (error) {
       console.log(error)
     }
