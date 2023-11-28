@@ -200,6 +200,7 @@ const Contacts = () => {
   const handleTextFile = useCallback( async (e, field) => {
     const formData = new FormData()
     formData.append('file', e.target.files[0])
+    console.log(formData)
     await axios.post(apiEndpoints.documents, formData)
         .then((response) => {
           console.log(response)
