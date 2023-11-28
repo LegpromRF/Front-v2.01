@@ -202,7 +202,11 @@ const Contacts = () => {
       const formData = new FormData()
       formData.append('file', e.target.files[0])
       console.log(formData)
-      await axios.post(apiEndpoints.documents, formData)
+      await axios.post(apiEndpoints.documents, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
           .then((response) => {
             console.log(response)
           })
