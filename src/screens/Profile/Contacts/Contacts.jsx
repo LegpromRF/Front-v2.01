@@ -198,14 +198,21 @@ const Contacts = () => {
   }
 
   const handleTextFile = useCallback( async (e, field) => {
-    const formData = new FormData()
-    formData.append('file', e.target.files[0])
-    console.log(formData)
-    await axios.post(apiEndpoints.documents, formData)
-        .then((response) => {
-          console.log(response)
-        })
-    field.onChange(formData)
+    try {
+      const formData = new FormData()
+      formData.append('file', e.target.files[0])
+      console.log(formData)
+      await axios.post(apiEndpoints.documents, formData)
+          .then((response) => {
+            console.log(response)
+          })
+      console.log(formData)
+      field.onChange(formData)
+      console.log(formData)
+    } catch (error) {
+      console.log(error)
+    }
+
   }, [])
 
   return (
