@@ -201,6 +201,14 @@ const Contacts = () => {
     try {
       const formData = new FormData()
       formData.append('file', e.target.files[0])
+
+      const fileLoaded = new Promise((resolve) => {
+        formData.append('file', e.target.files[0]);
+        resolve();
+      });
+
+      await fileLoaded;
+
       console.log(formData)
       await axios.post(apiEndpoints.documents, formData, {
         headers: {
