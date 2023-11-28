@@ -15,7 +15,14 @@ import {aiEndpoints, aiEndPoints, apiEndpoints} from "@/utils/constants/apiEndpo
 import {setSpecification} from "@store/session/userdata.slice.js";
 
 const Contacts = () => {
-  const { control, handleSubmit, getValues, formState: { errors }} = useForm();
+  const {
+      control,
+      watch,
+      handleSubmit,
+      getValues,
+      setValue,
+      formState: { errors }
+  } = useForm();
   const [formOptions, setFormOptions] = useState([]);
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch();
@@ -189,6 +196,16 @@ const Contacts = () => {
     }
 
   }
+
+  const handleTextFile = useCallback( async (e, field) => {
+    const formData = new FormData()
+    formData.append('file', e.target.files[0])
+    await axios.post(apiEndpoints.documents, formData)
+        .then((response) => {
+          console.log(response)
+        })
+    field.onChange(formData)
+  }, [])
 
   return (
     <>
@@ -374,10 +391,12 @@ const Contacts = () => {
                                         accept=".docx, .xlsx, .pdf"
                                         aria-label={"Текстовый документ"}
                                         onChange={(e) => {
-                                          field.onChange(e.target.files[0]);
+                                          handleTextFile(e, field)
                                         }}
                                     />
-                                    {field.value && <p>Выбран файл: {field.value.name}</p>}
+                                    {
+                                      watch('task') && (field.value && <p>Выбран файл: {field.value.name}</p>)
+                                    }
                                   </div>
                               )}
                           />

@@ -1,4 +1,4 @@
-import Chat from '@/src/screens/Profile/Chat/Chat'
+import Chat from '@screens/Profile/Chat/Chat'
 
 export default function ChatProfile() {
   return (

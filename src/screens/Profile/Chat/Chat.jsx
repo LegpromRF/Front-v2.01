@@ -1,13 +1,9 @@
-import TitleProfile from "@/src/components/TitleProfile/TitleProfile";
-import Layout from "@/src/layout/Layout";
-import Head from "next/head";
+import TitleProfile from "@components/TitleProfile/TitleProfile";
+import Layout from "@layout/Layout";
 
 const Chat = () => {
   return ( 
     <>
-      <Head>
-        <title>Сообщения - LegpromRF</title>
-      </Head>
       <Layout>
         <div>
           <TitleProfile>Чат</TitleProfile>

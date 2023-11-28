@@ -1,4 +1,4 @@
-import Performers from '@/src/screens/Profile/Performers/Performers'
+import Performers from '@screens/Profile/Performers/Performers'
 
 export default function PerformersProfile() {
   return (
