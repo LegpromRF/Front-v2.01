@@ -202,7 +202,7 @@ const Contacts = () => {
       const formData = new FormData()
 
       const fileLoaded = new Promise((resolve) => {
-        formData.append('file', e.target.files[0]);
+        formData.append('files', e.target.files[0]);
         console.log(formData)
         console.log(e.target.files[0])
         resolve();
@@ -213,7 +213,6 @@ const Contacts = () => {
       if (fileLoaded) {
         await axios.post(apiEndpoints.documents, formData, {
           withCredentials: true,
-          body: formData
         })
             .then((response) => {
               console.log(response)
