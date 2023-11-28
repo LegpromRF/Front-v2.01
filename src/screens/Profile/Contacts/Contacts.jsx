@@ -209,15 +209,20 @@ const Contacts = () => {
 
       await fileLoaded;
 
+      if (fileLoaded) {
+        await axios.post(apiEndpoints.documents, formData, {
+          withCredentials: true,
+          body: formData
+        })
+            .then((response) => {
+              console.log(response)
+            })
+        field.onChange(formData)
+      }
+
       console.log(formData)
-      await axios.post(apiEndpoints.documents, formData, {
-        withCredentials: true,
-        body: formData
-      })
-          .then((response) => {
-            console.log(response)
-          })
-      field.onChange(formData)
+
+
     } catch (error) {
       console.log(error)
     }
