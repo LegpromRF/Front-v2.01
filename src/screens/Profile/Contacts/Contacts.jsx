@@ -116,11 +116,11 @@ const Contacts = () => {
           console.log(response)
           const bidId = response.data.data
           axios
-              .post(aiEndpoints.rank, { params: {bid_id: bidId}})
+              .post(`${aiEndpoints.rank}?bid_id=${bidId}`)
               .then((response) => {
                 console.log(aiEndpoints.rank)
                 console.log(response)
-                dispatch(setSpecification(response.data))
+                dispatch(setSpecification(response.data.data))
               })
         })
         .catch((err) => console.log(err))
