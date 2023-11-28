@@ -211,7 +211,8 @@ const Contacts = () => {
 
       console.log(formData)
       await axios.post(apiEndpoints.documents, formData, {
-        withCredentials: true
+        withCredentials: true,
+        body: formData
       })
           .then((response) => {
             console.log(response)
