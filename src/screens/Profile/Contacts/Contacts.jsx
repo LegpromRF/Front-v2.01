@@ -121,7 +121,9 @@ const Contacts = () => {
           console.log(response)
           const bidId = response.data.data
           axios
-              .post(`${aiEndpoints.rank}?bid_id=${bidId}`)
+              .post(`${aiEndpoints.rank}?bid_id=${bidId}`, {
+                timeout: 300000
+              })
               .then((response) => {
                 console.log(aiEndpoints.rank)
                 console.log(response)
