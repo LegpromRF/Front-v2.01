@@ -200,7 +200,6 @@ const Contacts = () => {
   const handleTextFile = useCallback( async (e, field) => {
     try {
       const formData = new FormData()
-      formData.append('file', e.target.files[0])
 
       const fileLoaded = new Promise((resolve) => {
         formData.append('file', e.target.files[0]);
