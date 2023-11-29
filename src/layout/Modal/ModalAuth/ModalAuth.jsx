@@ -252,7 +252,8 @@ const ModalAuth = () => {
                 verifying && (
                     <form className={styles.form}>
                         <div className={styles.form__header}>
-                            <div className={styles.form__title}>Подтвердите номер телефона</div>
+
+                            <div className={styles.form__title}>{authMethod === 'sms' ? "Подтвердите номер телефона" : "Подтвердите почту"}</div>
                         </div>
                         <div className={styles.form__inputs}>
                             <Controller
