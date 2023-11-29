@@ -59,7 +59,7 @@
   &__itemNumber {
     border-radius: 7px;
     background: #FDFDFD;
-    padding: 14px 18px;
+    padding: 8px 12px;
     color: #D8D8D8;
     transition: all .4s ease-in-out;
 
@@ -67,5 +67,9 @@
       background: #2C2C2C;
       color: #FFF;
     }
+  }
+
+  &__check {
+    width: 20px;
   }
 }

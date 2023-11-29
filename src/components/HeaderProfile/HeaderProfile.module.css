@@ -48,13 +48,16 @@
 .header__itemNumber {
   border-radius: 7px;
   background: #FDFDFD;
-  padding: 14px 18px;
+  padding: 8px 12px;
   color: #D8D8D8;
   transition: all 0.4s ease-in-out;
 }
 .header__itemNumber_active {
   background: #2C2C2C;
   color: #FFF;
+}
+.header__check {
+  width: 20px;
 }
 
 /*# sourceMappingURL=HeaderProfile.module.css.map */

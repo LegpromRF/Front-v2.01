@@ -10,7 +10,11 @@ const HeaderProfile = ({title, href, number, active}) => {
             <div className={active ? [styles.header__itemNumber, styles.header__itemNumber_active].join(' ') : styles.header__itemNumber}>
                 {
                     active ?
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" xml:space="preserve">
+                        <svg
+                            className={styles.header__check}
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 32 32"
+                            xml:space="preserve">
                             <path
                                 clip-rule="evenodd"
                                 d="M27.704 8.397a1.016 1.016 0 0 0-1.428 0L11.988
