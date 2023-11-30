@@ -22,7 +22,9 @@ const Selection = () => {
   const getCompanies = useCallback( async () => {
     try {
       return axios
-          .get(`${apiEndpoints.bid}${bidId}`)
+          .get(`${apiEndpoints.bid}${bidId}`, {
+            withCredentials: true
+          })
           .then((response) => {
             console.log(response)
             return response.data
