@@ -129,6 +129,12 @@ const Contacts = () => {
                 console.log(response.data.status)
                 dispatch(setSpecification(bidId))
                 localforage.setItem('bidId', bidId)
+                    .then(() => {
+                      console.log(`${bidId} успешно записан в localforage`)
+                    })
+                    .catch((err) => {
+                      console.log(err)
+                    })
                 navigate('profile/selection')
               })
         })

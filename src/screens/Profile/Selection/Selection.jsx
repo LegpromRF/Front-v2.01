@@ -16,7 +16,8 @@ const Selection = () => {
   const [choice, setChoice] = useState(false)
   const [companiesID, setCompaniesID] = useState([])
   const [companiesInfo, setCompaniesInfo] = useState([])
-  const bidId = localforage.getItem('bidId')
+
+  const bidId = 63
 
   const getCompanies = useCallback( async () => {
     try {
