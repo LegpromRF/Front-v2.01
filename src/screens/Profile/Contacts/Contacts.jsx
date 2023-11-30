@@ -13,6 +13,7 @@ import Select from "react-select";
 import axios from "axios";
 import {aiEndpoints, aiEndPoints, apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 import {setSpecification} from "@store/session/userdata.slice.js";
+import localforage from 'localforage'
 
 const Contacts = () => {
   const {
@@ -127,6 +128,7 @@ const Contacts = () => {
                 console.log(response)
                 console.log(response.data.status)
                 dispatch(setSpecification(bidId))
+                localforage.setItem('bidId', bidId)
                 navigate('profile/selection')
               })
         })

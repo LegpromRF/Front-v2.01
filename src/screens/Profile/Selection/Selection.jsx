@@ -10,12 +10,13 @@ import {useCallback, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import axios from "axios"
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
+import localforage from "localforage";
 
 const Selection = () => {
   const [choice, setChoice] = useState(false)
   const [companiesID, setCompaniesID] = useState([])
   const [companiesInfo, setCompaniesInfo] = useState([])
-  const bidId = useSelector((state) => state.userdata.specification)
+  const bidId = localforage.getItem('bidId')
 
   const getCompanies = useCallback( async () => {
     try {
