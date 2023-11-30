@@ -123,9 +123,9 @@ const Contacts = () => {
           axios
               .post(`${aiEndpoints.rank}?bid_id=${bidId}`)
               .then((response) => {
-                console.log(aiEndpoints.rank)
                 console.log(response)
-                if (response.data.status === 200) {
+                console.log(response.data.status)
+                if (response.data.status === 201) {
                   dispatch(setSpecification(bidId))
                 }
 
@@ -414,6 +414,9 @@ const Contacts = () => {
                           <Controller
                               name="task"
                               control={control}
+                              rules={{
+                                required: 'Обязательное поле'
+                              }}
                               render={({field}) => (
                                   <div>
                                     <input
