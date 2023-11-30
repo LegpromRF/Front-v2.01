@@ -125,7 +125,7 @@ const Contacts = () => {
               .then((response) => {
                 console.log(aiEndpoints.rank)
                 console.log(response)
-                if (response.data.data.status === 201) {
+                if (response.data.status === 200) {
                   dispatch(setSpecification(bidId))
                 }
 
