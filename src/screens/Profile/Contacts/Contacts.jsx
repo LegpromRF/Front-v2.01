@@ -125,10 +125,7 @@ const Contacts = () => {
               .then((response) => {
                 console.log(response)
                 console.log(response.data.status)
-                if (response.data.status === 201) {
-                  dispatch(setSpecification(bidId))
-                }
-
+                dispatch(setSpecification(bidId))
               })
         })
         .catch((err) => console.log(err))
