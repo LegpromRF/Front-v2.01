@@ -27,7 +27,7 @@ const Selection = () => {
           })
           .then((response) => {
             console.log(response)
-            return response.data
+            return response.data.top
           })
     } catch (error) {
       console.log(error)
