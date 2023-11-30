@@ -26,6 +26,7 @@ const Contacts = () => {
   const [formOptions, setFormOptions] = useState([]);
   const [loading, setLoading] = useState(true)
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const formData = useSelector((state) => state.form.formData)
 
   const purchase = useSelector((state) => state.form.purchaseStep)
@@ -126,6 +127,7 @@ const Contacts = () => {
                 console.log(response)
                 console.log(response.data.status)
                 dispatch(setSpecification(bidId))
+                navigate('profile/selection')
               })
         })
         .catch((err) => console.log(err))

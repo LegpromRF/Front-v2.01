@@ -19,7 +19,7 @@ export const apiEndpoints = {
     create: apiHOST + 'bid/create',
     photos: apiHOST + 'file_manager/photos',
     documents: apiHOST + 'file_manager/documents',
-    bid: apiHOST + 'bid/',
+    bid: apiHOST + 'bid',
     companyInfo: apiHOST + 'company/'
 }
 

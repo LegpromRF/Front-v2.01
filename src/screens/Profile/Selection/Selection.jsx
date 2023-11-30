@@ -15,11 +15,12 @@ const Selection = () => {
   const [choice, setChoice] = useState(false)
   const [companiesID, setCompaniesID] = useState([])
   const [companiesInfo, setCompaniesInfo] = useState([])
+  const bidId = useSelector((state) => state.userdata.specification)
 
   const getCompanies = useCallback( async () => {
     try {
       return axios
-          .get('https://api.legpromrf.ru/company/test')
+          .get(`${apiEndpoints.bid}?bid_id=${bidId}`)
           .then((response) => {
             console.log(response)
             return response.data
@@ -27,7 +28,7 @@ const Selection = () => {
     } catch (error) {
       console.log(error)
     }
-  }, [])
+  }, [bidId])
 
   const getCompanyInfo = useCallback( async (id) => {
     try {
