@@ -37,31 +37,31 @@ const router = createBrowserRouter([
                 index: true,
                 element: <HomeProfile/>
             },
-            {
-                path: "/profile/order/createorder",
-                element: <PrivateRoute><CreateOrderPage/></PrivateRoute>,
-            },
-            {
-                path: "/profile/order/purchase",
-                element: <PrivateRoute><PurchasePage/></PrivateRoute>,
-            },
-            {
-                path: "/profile/order/technology",
-                element: <PrivateRoute><TechnologyPage/></PrivateRoute>,
-            },
-            {
-                path: "/profile/order/conditions",
-                element: <PrivateRoute><ConditionsPage/></PrivateRoute>,
-            },
-            {
-                path: "/profile/order/contacts",
-                element: <PrivateRoute><ContactsPage/></PrivateRoute>,
-            },
-            {
-                path: "/profile/selection",
-                element: <PrivateRoute><SelectionPage/></PrivateRoute>,
-            },
         ]
+    },
+    {
+        path: "/profile/order/createorder",
+        element: <PrivateRoute><CreateOrderPage/></PrivateRoute>,
+    },
+    {
+        path: "/profile/order/purchase",
+        element: <PrivateRoute><PurchasePage/></PrivateRoute>,
+    },
+    {
+        path: "/profile/order/technology",
+        element: <PrivateRoute><TechnologyPage/></PrivateRoute>,
+    },
+    {
+        path: "/profile/order/conditions",
+        element: <PrivateRoute><ConditionsPage/></PrivateRoute>,
+    },
+    {
+        path: "/profile/order/contacts",
+        element: <PrivateRoute><ContactsPage/></PrivateRoute>,
+    },
+    {
+        path: "/profile/selection",
+        element: <PrivateRoute><SelectionPage/></PrivateRoute>,
     },
     {
         path: "/VKIDtokenpage",
