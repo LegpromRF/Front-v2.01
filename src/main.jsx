@@ -38,27 +38,27 @@ const router = createBrowserRouter([
                 element: <HomeProfile/>
             },
             {
-                path: "/order/createorder",
+                path: "order/createorder",
                 element: <PrivateRoute><CreateOrderPage/></PrivateRoute>,
             },
             {
-                path: "/order/purchase",
+                path: "order/purchase",
                 element: <PrivateRoute><PurchasePage/></PrivateRoute>,
             },
             {
-                path: "/order/technology",
+                path: "order/technology",
                 element: <PrivateRoute><TechnologyPage/></PrivateRoute>,
             },
             {
-                path: "/order/conditions",
+                path: "order/conditions",
                 element: <PrivateRoute><ConditionsPage/></PrivateRoute>,
             },
             {
-                path: "/order/contacts",
+                path: "order/contacts",
                 element: <PrivateRoute><ContactsPage/></PrivateRoute>,
             },
             {
-                path: "/selection",
+                path: "selection",
                 element: <PrivateRoute><SelectionPage/></PrivateRoute>,
             },
         ]
