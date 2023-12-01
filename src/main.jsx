@@ -31,37 +31,37 @@ const router = createBrowserRouter([
     },
     {
         path: "/profile",
-        element: <PrivateRoute><HomeProfile /></PrivateRoute>,
+        element: <PrivateRoute><HomeProfile/></PrivateRoute>,
         children: [
             {
                 index: true,
                 element: <HomeProfile/>
             },
+            {
+                path: "order/createorder",
+                element: <PrivateRoute><CreateOrderPage/></PrivateRoute>,
+            },
+            {
+                path: "order/purchase",
+                element: <PrivateRoute><PurchasePage/></PrivateRoute>,
+            },
+            {
+                path: "order/technology",
+                element: <PrivateRoute><TechnologyPage/></PrivateRoute>,
+            },
+            {
+                path: "order/conditions",
+                element: <PrivateRoute><ConditionsPage/></PrivateRoute>,
+            },
+            {
+                path: "order/contacts",
+                element: <PrivateRoute><ContactsPage/></PrivateRoute>,
+            },
+            {
+                path: "selection",
+                element: <PrivateRoute><SelectionPage/></PrivateRoute>,
+            },
         ]
-    },
-    {
-        path: "/profile/order/createorder",
-        element: <CreateOrderPage />
-    },
-    {
-        path: "/profile/order/purchase",
-        element: <PurchasePage />
-    },
-    {
-        path: "/profile/order/technology",
-        element: <TechnologyPage />
-    },
-    {
-        path: "/profile/order/conditions",
-        element: <ConditionsPage />
-    },
-    {
-        path: "/profile/order/contacts",
-        element: <ContactsPage />
-    },
-    {
-        path: "/profile/selection",
-        element: <SelectionPage />
     },
     {
         path: "/VKIDtokenpage",

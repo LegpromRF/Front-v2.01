@@ -10,10 +10,14 @@ function PrivateRoute({ children }) {
         JWTtoken = JWTcookie.split('=')[1].trim();
     }
 
-    return JWTtoken !== null ? children : <Navigate to={"/"}/>
+    if (JWTtoken === null) {
+        return <Navigate to="/" />;
+    }
+
+    return children
 }
 
 PrivateRoute.propTypes = {
     children: PropTypes.node
 }
-export default PrivateRoute
+export default PrivateRoute 
