@@ -31,7 +31,19 @@ export default async function vkAPI(data, authMode) {
         })
         .then((response) => {
             if (response.data.status === 204) {
-                return true
+                const cookies = document.cookie
+                const cookiesArray = cookies.split(';')
+                let JWTtoken = null
+                const JWTcookie = cookiesArray.find(cookie => cookie.trim().startsWith('legpromauth'))
+                console.log(JWTtoken)
+                if (JWTcookie) {
+                     JWTtoken = JWTcookie.split('=')[1].trim();
+                    return JWTtoken
+                } else {
+                    // Обработка ошибки: отсутствие куки
+                    throw new Error("JWT cookie not found");
+                }
+
             } else {
                 return response.data.details
             }
