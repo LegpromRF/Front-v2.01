@@ -28,10 +28,10 @@ export default function VkAuth() {
                 const token = await vkAPI(event, 'login')
                 dispatch(loginSuccess())
                 dispatch(setAuthToken(token))
-                navigate('/profile')
             } catch (error) {
                 console.error("Login error:", error);
             }
+            navigate('/profile')
         }
 
         const oneTapButton = Connect.buttonOneTapAuth({
