@@ -6,6 +6,7 @@ function PrivateRoute({ children }) {
     const cookiesArray = cookies.split(';')
     let JWTtoken = null
     const JWTcookie = cookiesArray.find(cookie => cookie.trim().startsWith('legpromauth'))
+    console.log(JWTtoken)
     if (JWTcookie) {
         JWTtoken = JWTcookie.split('=')[1].trim();
     }
@@ -14,7 +15,7 @@ function PrivateRoute({ children }) {
         return <Navigate to="/" />;
     }
 
-    console.log(JWTtoken)
+
 
     return children
 }
