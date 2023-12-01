@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 function PrivateRoute({ children }) {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
 
-    return isAuthenticated ? children : <Navigate to={"/"}/>
+    return isAuthenticated ? children : <Navigate to="/" replace={true}/>
 }
 
 PrivateRoute.propTypes = {
