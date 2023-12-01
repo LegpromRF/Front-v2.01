@@ -9,7 +9,14 @@ export const authSlice = createSlice({
     reducers: {
         loginSuccess: (state) => {
             state.isAuthenticated = true
-            state.authToken = state.payload
+            const cookies = document.cookie
+            const cookiesArray = cookies.split(';')
+            let JWTtoken = null
+            const JWTcookie = cookiesArray.find(cookie => cookie.trim().startsWith('legpromauth'))
+            console.log(JWTtoken)
+            if (JWTcookie) {
+                state.authToken = JWTcookie.split('=')[1].trim();
+            }
         },
         logout: (state) => {
             state.isAuthenticated = false

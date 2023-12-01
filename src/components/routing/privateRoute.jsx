@@ -1,23 +1,11 @@
 import {Navigate} from "react-router-dom";
 import PropTypes from "prop-types";
+import {useSelector} from "react-redux";
 
 function PrivateRoute({ children }) {
-    const cookies = document.cookie
-    const cookiesArray = cookies.split(';')
-    let JWTtoken = null
-    const JWTcookie = cookiesArray.find(cookie => cookie.trim().startsWith('legpromauth'))
-    console.log(JWTtoken)
-    if (JWTcookie) {
-        JWTtoken = JWTcookie.split('=')[1].trim();
-    }
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
 
-    if (JWTtoken === null) {
-        return <Navigate to="/" />;
-    }
-
-
-
-    return children
+    return isAuthenticated ? children : <Navigate to={"/"}/>
 }
 
 PrivateRoute.propTypes = {
