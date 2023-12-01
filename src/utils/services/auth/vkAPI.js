@@ -24,30 +24,30 @@ export default async function vkAPI(data, authMode) {
             break
     }
 
-    return axios
-        .post(redirectURI, params, {
+    try {
+        const response = await axios.post(redirectURI, params, {
             withCredentials: true,
             AccessControlAllowOrigin: true
         })
-        .then((response) => {
-            if (response.data.status === 204) {
-                const cookies = document.cookie
-                const cookiesArray = cookies.split(';')
-                console.log(cookiesArray)
-                let JWTtoken = null
-                const JWTcookie = cookiesArray.find(cookie => cookie.trim().startsWith('legpromauth'))
-                console.log(JWTcookie)
-                if (JWTcookie) {
-                     JWTtoken = JWTcookie.split('=')[1].trim();
-                    return JWTtoken
-                } else {
-                    // Обработка ошибки: отсутствие куки
-                    throw new Error("JWT cookie not found");
-                }
 
+        if (response.data.status === 204) {
+            const cookies = document.cookie
+            const cookiesArray = cookies.split(';')
+            console.log(cookiesArray)
+            let JWTtoken = null
+            const JWTcookie = cookiesArray.find(cookie => cookie.trim().startsWith('legpromauth'))
+            console.log(JWTcookie)
+            if (JWTcookie) {
+                JWTtoken = JWTcookie.split('=')[1].trim();
+                return JWTtoken
             } else {
-                return response.data.details
+                // Обработка ошибки: отсутствие куки
+                throw new Error("JWT cookie not found");
             }
-        })
-        .catch((error) => console.log(error, params, data))
+        } else {
+            return response.data.details
+        }
+    } catch (error) {
+        console.log(error)
+    }
 }
