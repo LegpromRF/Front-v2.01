@@ -49,12 +49,10 @@ export default async function vkAPI(data, authMode) {
         console.log(response)
 
         if (response.data.status === 204) {
-            const cookies = Cookies.get();
-            const cookiesArray = Object.entries(cookies);
-            console.log(cookiesArray);
-            let JWTtoken = null;
             const JWTcookie = Cookies.get('legpromauth');
+            // const cookiesArray = Object.entries(cookies);
             console.log(JWTcookie);
+            let JWTtoken = null;
             if (JWTcookie) {
                 JWTtoken = JWTcookie.trim();
                 return JWTtoken;
