@@ -1,26 +1,42 @@
+import Cookies from 'js-cookie';
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
 import axios from "axios";
+
+const API_VERSION = "5.207";
+
+
 
 export default async function vkAPI(data, authMode) {
     let redirectURI
     let params
 
-    switch (authMode) {
-        case "login":
-            redirectURI= apiEndpoints.vkLogin
-            params = {
-                "api_version": "5.207",
+    const authModes = {
+        login: {
+            redirectURI: apiEndpoints.vkLogin,
+            params: {
+                "api_version": API_VERSION,
                 "silent_token": data.payload.token,
                 "uuid": data.payload.uuid,
             }
-            break
-        case "register":
-            redirectURI= apiEndpoints.vkReg
-            params = {
-                "api_version": "5.207",
+        },
+        register: {
+            redirectURI: apiEndpoints.vkReg,
+            params: {
+                "api_version": API_VERSION,
                 "silent_token": data.silentToken,
                 "uuid": data.uuid
             }
+        }
+    };
+
+    switch (authMode) {
+        case "login":
+            redirectURI= authModes.login.redirectURI
+            params = authModes.login.params
+            break
+        case "register":
+            redirectURI= authModes.register.redirectURI
+            params = authModes.register.params
             break
     }
 
@@ -31,23 +47,23 @@ export default async function vkAPI(data, authMode) {
         })
 
         if (response.data.status === 204) {
-            const cookies = document.cookie
-            const cookiesArray = cookies.split(';')
-            console.log(cookiesArray)
-            let JWTtoken = null
-            const JWTcookie = cookiesArray.find(cookie => cookie.trim().startsWith('legpromauth'))
-            console.log(JWTcookie)
+            const cookies = Cookies.get();
+            const cookiesArray = Object.entries(cookies);
+            console.log(cookiesArray);
+            let JWTtoken = null;
+            const JWTcookie = Cookies.get('legpromauth');
+            console.log(JWTcookie);
             if (JWTcookie) {
-                JWTtoken = JWTcookie.split('=')[1].trim();
-                return JWTtoken
+                JWTtoken = JWTcookie.trim();
+                return JWTtoken;
             } else {
                 // Обработка ошибки: отсутствие куки
                 throw new Error("JWT cookie not found");
             }
         } else {
-            return response.data.details
+            return response.data.details;
         }
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
