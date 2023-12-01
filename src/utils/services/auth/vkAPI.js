@@ -46,6 +46,8 @@ export default async function vkAPI(data, authMode) {
             AccessControlAllowOrigin: true
         })
 
+        console.log(response)
+
         if (response.data.status === 204) {
             const cookies = Cookies.get();
             const cookiesArray = Object.entries(cookies);
