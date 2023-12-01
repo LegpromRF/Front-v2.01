@@ -14,6 +14,8 @@ function PrivateRoute({ children }) {
         return <Navigate to="/" />;
     }
 
+    console.log(JWTtoken)
+
     return children
 }
 
