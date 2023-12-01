@@ -1,4 +1,3 @@
-import * as yup from 'yup';
 import HeaderProfile from '@components/HeaderProfile/HeaderProfile';
 import styles from './Contacts.module.scss'
 import { useForm, Controller } from 'react-hook-form'
