@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import './ThirdChart.css';
-import chartImage from './third-chart-image.jpg';
+import axios from 'axios';
+import chartImage from './graph.png';
+import './modal.css';
 const ThirdChart = () => {
     const [fabricData, setFabricData] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
     useEffect(() => {
-      fetchFabricData();
+      axiosFabricData();
     }, []);
+    
     useEffect(() => {
         if (fabricData.length > 0 && modalVisible) {
           renderThirdChart();
           renderTopFabricsChart();
         }
       }, [fabricData, modalVisible]);
-    const fetchFabricData = async () => {
+
+    const axiosFabricData = async () => {
         try {
-          const response = await fetch('http://localhost:8000/fabric_companies_by_fabric');
-          const result = await response.json();
-          setFabricData(result.fabric_companies_data);
+          const response = await axios.get('http://localhost:8000/fabric_companies_by_fabric'); // Используем axios для GET-запроса
+          setFabricData(response.data.fabric_companies_data);
         } catch (error) {
           console.error('Ошибка при получении данных о компаниях по тканям:', error);
         }
@@ -137,9 +140,12 @@ const ThirdChart = () => {
       };
     
       return (
-        <div>
+        <div className = 'con'>
           <div className='third-chart-wrapper' onClick={openModal}>
+          <div class= 'img'>
             <img src={chartImage} alt="Chart Image" />
+            <p>Количество компаний по видам тканей</p>
+            </div>
           </div>
           {modalVisible && (
             <div className="modal">

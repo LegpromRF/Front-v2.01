@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
+import axios from 'axios';
 import './FabricChart.css';
-import chartImage from './second-chart-image.jpg';
-
+import chartImage from './graph.png';
+import './modal.css'
 const FabricChart = () => {
   const [productionData, setProductionData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
-    fetchProductionData();
+    axiosProductionData();
   }, []);
 
   useEffect(() => {
     if (productionData.length > 0 && modalVisible) {
-      renderSecondChart('modalChart'); // При открытии модального окна вызываем функцию рендера графика
+      renderSecondChart('modalChart'); 
     }
   }, [productionData, modalVisible]);
 
-  const fetchProductionData = async () => {
+  const axiosProductionData = async () => {
     try {
-      const response = await fetch('http://localhost:8000/get_production_status_by_region');
-      const result = await response.json();
-      setProductionData(result.production_status_by_region);
+      const response = await axios.get('http://localhost:8000/get_production_status_by_region'); 
+      setProductionData(response.data.production_status_by_region);
     } catch (error) {
       console.error('Ошибка при получении данных по производству:', error);
     }
@@ -143,7 +143,7 @@ const FabricChart = () => {
         }
     };
     const openModal = () => {
-        setModalVisible(true); // Вызываем функцию рендера графика при открытии модального окна
+        setModalVisible(true); 
         };
     
     const closeModal = () => {
@@ -151,9 +151,12 @@ const FabricChart = () => {
     };
     
       return (
-        <div>
+        <div className='con'> 
           <div className="second-chart-container" onClick={openModal}>
-            <img src={chartImage} alt="Chart Image" /> {/* Отображение изображения */}
+          <div className='img'>
+            <img src={chartImage} alt="Chart Image" /> 
+            <p>Статус производств по регионам</p>
+          </div>
           </div>
           {modalVisible && (
             <div className="modal">

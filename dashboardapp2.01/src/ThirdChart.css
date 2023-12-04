@@ -1,0 +1,39 @@
+
+.con{
+
+  width:85%;
+}
+.third-chart-container{
+  width:100%;
+  }
+  .third-chart-wrapper{
+    width:87%;
+    height: 50vh;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    transition: background-color 1s ease;
+  }
+
+  .img img{
+    margin:10% auto;
+    width:30%;
+    height:30%;
+  }
+  .third-chart-top{
+    height:40%;
+    width:40%;
+  }
+.third-chart-wrapper:hover {
+  background-color: rgb(183, 231, 233);
+  transition: background-color 0.3s ease;
+}
+
+.third-chart-wrapper p {
+  background-color: rgba(255, 255, 255, 0.8); 
+  padding: 8px 12px; 
+  border-radius: 4px; 
+  font-size: 20px; 
+  color: #333;
+}
+  

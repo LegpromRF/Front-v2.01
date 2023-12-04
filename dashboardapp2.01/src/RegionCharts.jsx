@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
-
+import axios from 'axios';
 const RegionCharts = () => {
   const [regionData, setRegionData] = useState({});
   const [selectedRegion, setSelectedRegion] = useState('moscow');
@@ -99,11 +99,10 @@ const RegionCharts = () => {
     
   ];
 
-  const fetchNaturalGrowthData = async (regionId) => {
+  const axiosNaturalGrowthData = async (regionId) => {
     try {
-      const response = await fetch(`http://localhost:8000/natural_growth_by_year_and_region/${regionId}`);
-      const result = await response.json();
-      return result.natural_growth_by_year_and_region;
+      const response = await axios.get(`http://localhost:8000/natural_growth_by_year_and_region/${regionId}`); 
+      return response.data.natural_growth_by_year_and_region;
     } catch (error) {
       console.error('Ошибка при получении данных о приросте:', error);
       return [];
@@ -111,15 +110,15 @@ const RegionCharts = () => {
   };
 
   useEffect(() => {
-    const fetchDataForRegions = async () => {
+    const axiosDataForRegions = async () => {
       const data = {};
       for (const region of regions) {
-        const regionData = await fetchNaturalGrowthData(region.regionId);
+        const regionData = await axiosNaturalGrowthData(region.regionId);
         data[region.id] = regionData;
       }
       setRegionData(data);
     };
-    fetchDataForRegions();
+    axiosDataForRegions();
   }, []);
 
   const renderChart = (data, chartId, regionName) => {

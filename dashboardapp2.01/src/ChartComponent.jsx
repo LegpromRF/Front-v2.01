@@ -5,28 +5,29 @@ import RegionCharts from './RegionCharts';
 import ProductionChart from './ProductionChart';
 import FabricChart from './FabricChart'
 import ThirdChart from './ThirdChart';
+import FabricLifespanChart from './FabricLifespanChart'
+import './ChartComponent.css'
+import axios from 'axios';
 function ChartComponent() {
   const [productionData, setProductionData] = useState([]);
   const [fabricData, setFabricData] = useState([]);
   useEffect(() => {
-    fetchProductionData();
-    fetchFabricData();
+    axiosProductionData();
+    axiosFabricData();
   }, []);
 
-  const fetchProductionData = async () => {
+  const axiosProductionData = async () => {
     try {
-      const response = await fetch('http://localhost:8000/get_production_status_by_region');
-      const result = await response.json();
-      setProductionData(result.production_status_by_region);
+      const response = await axios.get('http://localhost:8000/get_production_status_by_region'); 
+      setProductionData(response.data.production_status_by_region);
     } catch (error) {
       console.error('Ошибка при получении данных по производству:', error);
     }
   };
-  const fetchFabricData = async () => {
+  const axiosFabricData = async () => {
     try {
-      const response = await fetch('http://localhost:8000/fabric_companies_by_fabric');
-      const result = await response.json();
-      setFabricData(result.fabric_companies_data);
+      const response = await axios.get('http://localhost:8000/fabric_companies_by_fabric');
+      setFabricData(response.data.fabric_companies_data);
     } catch (error) {
       console.error('Ошибка при получении данных о компаниях по тканям:', error);
     }
@@ -41,9 +42,14 @@ function ChartComponent() {
 
   return (
     <div>
-      <ProductionChart />
-      <FabricChart/>
-      <ThirdChart/>
+      <div className="firstline">
+        <ProductionChart />
+        <FabricChart />
+      </div>
+      <div className="secondline">
+        <ThirdChart />
+        <FabricLifespanChart />
+      </div>
       <RegionCharts />
     </div>
   );
