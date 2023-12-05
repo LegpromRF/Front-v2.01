@@ -3,7 +3,6 @@ import {
   createMaterials,
   createDate,
 } from "../../../utils/helpers/procurementRegister";
-// import { createMaterials, createDate } from "../../utils";
 import LinkButton from "../buttons/LinkButton/LinkButton";
 import styles from "./Item.module.scss";
 
@@ -12,10 +11,7 @@ function Item(props) {
     <div className={styles.cards__item_container}>
       <div className={styles.cards__item}>
         <div className={styles.cards__item_img}>
-          <img
-            src="https://img.freepik.com/premium-photo/beautiful-fabric-taffeta-gently-folded-in-waves-crumpled-material-that-looks-like-silk-or-brocade-overflow-and-color-gradient-at-different-lighting-angles-fabric-for-sewing-clothes-and-curtains_565632-5306.jpg"
-            alt={props.clothes_type}
-          />
+          <img src={props.photo_urls} alt={props.clothes_type} />
         </div>
         <div className={styles.cards__item_type}>{props.clothes_type}</div>
         <div className={styles.cards__item_open}>
@@ -66,7 +62,7 @@ function Item(props) {
 Item.propTypes = {
   order_number: PropTypes.number,
   status: PropTypes.string,
-  img: PropTypes.string,
+  photo_urls: PropTypes.string,
   clothes_type: PropTypes.string,
   purpose: PropTypes.string,
   deadline: PropTypes.string,
