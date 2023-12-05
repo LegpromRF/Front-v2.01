@@ -3,12 +3,14 @@ import { clearQuery } from "../../utils/helpers/procurementRegister";
 import { QUERY_FILTERS } from "../../utils/constants/procurementRegister";
 
 export const getAllFilters = createAsyncThunk("users/getFilters", async () => {
-  const response = await fetch("http://127.0.0.1:8000/filters");
+  const response = await fetch("https://api.legpromrf.ru/filters");
   return await response.json();
 });
 
 export const getAllCards = createAsyncThunk("users/getCards", async (query) => {
-  const response = await fetch(`http://127.0.0.1:8000/order_cards?${query}`);
+  const response = await fetch(
+    `https://api.legpromrf.ru/order_cards/?${query}`
+  );
   return await response.json();
 });
 
