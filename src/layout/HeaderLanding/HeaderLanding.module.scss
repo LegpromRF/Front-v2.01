@@ -160,6 +160,7 @@
   }
 
   &__login {
+    white-space: nowrap;
     cursor: pointer;
     font-size: 16px;
     color: $colorText;

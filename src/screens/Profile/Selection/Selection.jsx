@@ -10,24 +10,29 @@ import {useCallback, useEffect, useState} from "react";
 import {useSelector} from "react-redux";
 import axios from "axios"
 import {apiEndpoints} from "@/utils/constants/apiEndpoints.js";
+import localforage from "localforage";
 
 const Selection = () => {
   const [choice, setChoice] = useState(false)
   const [companiesID, setCompaniesID] = useState([])
   const [companiesInfo, setCompaniesInfo] = useState([])
 
+  const bidId = 63
+
   const getCompanies = useCallback( async () => {
     try {
       return axios
-          .get('https://api.legpromrf.ru/company/test')
+          .get(`${apiEndpoints.bid}${bidId}`, {
+            withCredentials: true
+          })
           .then((response) => {
             console.log(response)
-            return response.data
+            return response.data.top
           })
     } catch (error) {
       console.log(error)
     }
-  }, [])
+  }, [bidId])
 
   const getCompanyInfo = useCallback( async (id) => {
     try {
