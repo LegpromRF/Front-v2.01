@@ -121,7 +121,7 @@ const HomePage = () => {
                   опубликованных заказчиками
                 </div>
                 <div className={styles.block__footer}>
-                  <div className={styles.block__btn}><Link to="/nolayout">Смотреть</Link></div>
+                  <div className={styles.block__btn}><Link to="//profile/registry">Смотреть</Link></div>
                   <Link className={styles.block__questio} to="/nolayout">
                     <p>Как это работает</p>
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
