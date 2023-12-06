@@ -4,6 +4,7 @@ import authModalSlice from "@store/auth/authModal.slice"
 import authSlice from "@store/auth/auth.slice";
 import userdataSlice from "@store/session/userdata.slice"
 import formSlice from "@store/orderForm/form.slice"
+import procRegisterSlice from '@store/procurementRegister/procRegister.slice'
 import companiesSlice from "@store/companies/companies.slice"
 
 const reducers = combineReducers({
@@ -13,6 +14,7 @@ const reducers = combineReducers({
     userdata: userdataSlice,
     form: formSlice,
     companies: companiesSlice,
+    procRegister: procRegisterSlice
 })
 
 export const store = configureStore({
