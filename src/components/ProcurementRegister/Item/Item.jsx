@@ -11,7 +11,7 @@ function Item(props) {
     <div className={styles.cards__item_container}>
       <div className={styles.cards__item}>
         <div className={styles.cards__item_img}>
-          <img src={props.photo_urls} alt={props.clothes_type} />
+          <img src={props.photo_urls !== null && props.photo_urls.split(",")[0]} alt={props.clothes_type} />
         </div>
         <div className={styles.cards__item_type}>{props.clothes_type}</div>
         <div className={styles.cards__item_open}>
@@ -24,18 +24,19 @@ function Item(props) {
           <div className={styles.cards__item_info_purpose}>
             Сфера применения<span>{props.purpose}</span>
           </div>
-          <div className={styles.cards__item_info_deadline}>
-            Срок готовности
-            <span>{createDate(props.deadline)}</span>
+          <div className={styles.cards__item_info_main}>
+            <div className={styles.cards__item_info_count}>
+              Объём<span>{props.count}</span>
+            </div>
+            <div className={styles.cards__item_info_price}>
+              Цена за ед.<span>{props.price_per_unit} ₽</span>
+            </div>
+            <div className={styles.cards__item_info_plan}>
+              Бюджет<span>{props.price_for_all} ₽</span>
+            </div>
           </div>
           <div className={styles.cards__item_info_location}>
             Регион доставки<span>{props.location}</span>
-          </div>
-          <div className={styles.cards__item_info_plan}>
-            Бюджет<span>{props.price_for_all} ₽</span>
-          </div>
-          <div className={styles.cards__item_info_count}>
-            Объём<span>{props.count}</span>
           </div>
           <div className={styles.cards__item_info_materials}>
             Сырьё
@@ -46,15 +47,16 @@ function Item(props) {
                 ))}
             </span>
           </div>
-          <div className={styles.cards__item_info_price}>
-            Цена за ед.<span>{props.price_per_unit} ₽</span>
-          </div>
           <div className={styles.cards__item_info_public}>
             Опубликовано<span>{createDate(props.created_at)}</span>
           </div>
+          <div className={styles.cards__item_info_deadline}>
+            Срок готовности
+            <span>{createDate(props.deadline)}</span>
+          </div>
         </div>
       </div>
-      <LinkButton />
+      <LinkButton id={props.order_number} />
     </div>
   );
 }
