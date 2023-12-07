@@ -21,7 +21,6 @@ function SelectItem({ filters, name, open, index, query }) {
     <div className={!open ? baseStyle : styles.filters__item}>
       <h2 className={styles.filters__item_title}>{name}</h2>
       <Select
-        isSearchable={false}
         classNamePrefix="custom__select"
         value={options.find(
           (item) => item.value === query[QUERY_FILTERS[name]]
