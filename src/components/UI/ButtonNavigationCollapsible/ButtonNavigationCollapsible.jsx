@@ -3,9 +3,8 @@ import {useState} from "react";
 import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 
-const ButtonNavigationCollapsible = ({children, title, stopPropagation, hide, active, activeLink, links}) => {
+const ButtonNavigationCollapsible = ({children, title, stopPropagation, hide, active, activeLink, links, href}) => {
     const [open, setOpen] = useState(false);
-
     function handleClick () {
         setOpen((prev) => !prev)
     }
