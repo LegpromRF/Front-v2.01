@@ -44,10 +44,7 @@ const ButtonNavigationCollapsible = ({children, title, stopPropagation, hide, ac
 }
 
 ButtonNavigationCollapsible.propTypes = {
-    links: {
-        link: PropTypes.string.isRequired,
-        icon: PropTypes.string
-    }
+    link: PropTypes.string
 }
 
 export default ButtonNavigationCollapsible;
