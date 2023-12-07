@@ -31,8 +31,8 @@ const NavigationClient = () => {
                         />
                     </Link>
                 </div>
-                <h2 className={styles.nav__title}>Кабинет</h2>
-                <HeaderNavigation active={isNavOpen} title="Global IT" mail="ekb-invest103@yandex.ru" tariff={tariff}/>
+                {/* <h2 className={styles.nav__title}>Кабинет</h2> */}
+                {/* <HeaderNavigation active={isNavOpen} title="Global IT" mail="ekb-invest103@yandex.ru" tariff={tariff}/> */}
             </div>
             <div className={styles.nav__buttons}>
                 <ButtonNavigation
@@ -52,7 +52,7 @@ const NavigationClient = () => {
                 </ButtonNavigation>
                 <ButtonNavigationCollapsible
                     title="Закупки"
-                    href="/nolayout"
+                    href="/noladadaayout"
                     active={isNavOpen}
                     links={
                         {
@@ -93,7 +93,7 @@ const NavigationClient = () => {
                                 icon : null
                             },
                             'Реестр закупок': {
-                                link : '/nolayout',
+                                link : '/profile/registry',
                                 icon : null
                             },
                             'Добавить товар/услугу': {
@@ -112,7 +112,7 @@ const NavigationClient = () => {
                         <path d="M8.5 5.5V9.5L12 11.5" stroke="#242424" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                 </ButtonNavigationCollapsible>
-                <ButtonNavigationCollapsible
+                {/* <ButtonNavigationCollapsible
                     title="Новости"
                     href="/nolayout"
                     active={isNavOpen}
@@ -139,7 +139,7 @@ const NavigationClient = () => {
                         <path d="M7.51862 5.44138H5.12427" stroke="#242424" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
                         <path fillRule="evenodd" clipRule="evenodd" d="M11.5667 1C11.5667 1 4.89465 1.00348 4.88422 1.00348C2.48552 1.01825 1.00024 2.59652 1.00024 5.00391V12.9961C1.00024 15.4156 2.49682 17 4.91638 17C4.91638 17 11.5875 16.9974 11.5988 16.9974C13.9975 16.9826 15.4837 15.4035 15.4837 12.9961V5.00391C15.4837 2.58436 13.9862 1 11.5667 1Z" stroke="#242424" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
-                </ButtonNavigationCollapsible>
+                </ButtonNavigationCollapsible> */}
                 <ButtonNavigationCollapsible
                     title="Настройки"
                     href="/nolayout"
