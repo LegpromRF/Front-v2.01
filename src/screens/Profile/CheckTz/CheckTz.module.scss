@@ -1,7 +1,9 @@
-@import '@/styles/_variables.scss';
+@import "@/styles/_variables.scss";
 
 .checktz {
-  
+  &__loading {
+    margin-top: 25%;
+  }
   &__head {
     @media (min-width: 1100px) {
       display: flex;
@@ -19,9 +21,8 @@
   }
 
   &__content {
-
     border-radius: 7px;
-    background: #FAFAFA;
+    background: #fafafa;
     padding: 15px;
     width: 100%;
     margin-left: 12px;
@@ -36,7 +37,6 @@
       align-items: center;
       justify-content: space-between;
     }
-
   }
 
   &__info {
@@ -53,14 +53,13 @@
     margin-right: 7px;
   }
 
- &__number {
-  color: #979797;
-  font-size: 12px;
-  font-weight: 300;
- }
+  &__number {
+    color: #979797;
+    font-size: 12px;
+    font-weight: 300;
+  }
 
   &__control {
-
     @media (min-width: 1100px) {
       display: flex;
       align-items: center;
@@ -78,7 +77,7 @@
     display: flex;
     align-items: center;
     border-radius: 5.077px;
-    background: #EDEDED;
+    background: #ededed;
     cursor: pointer;
 
     @media (max-width: 800px) {
@@ -90,15 +89,14 @@
     &:hover {
       background: #d8d8d8;
     }
-
   }
 
   &__controlTitle {
     font-size: 14px;
-    line-height: 19.038px; 
+    line-height: 19.038px;
     padding: 12px 33px 12px 12px;
     border-radius: 5.077px;
-    background: #F3F3F3;
+    background: #f3f3f3;
 
     &:hover {
       background: #ebebeb;
@@ -118,24 +116,24 @@
     @media (max-width: 1100px) {
       width: 100%;
     }
-   
+
     a {
       border-radius: 7px;
       background: $blue;
-      color: #F5F5F5;
+      color: #f5f5f5;
       text-align: center;
       font-size: 16px;
       font-weight: 500;
       padding: 20px 80px;
-      transition: all .4s ease;
+      transition: all 0.4s ease;
 
       @media (max-width: 1100px) {
-       display: flex;
-       flex: 1 1 100%;
-       text-align: center;
-       align-items: center;
-       justify-content: center;
-       margin-top: 20px;
+        display: flex;
+        flex: 1 1 100%;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
       }
 
       &:hover {
@@ -157,7 +155,7 @@
 
   &__dateInfo {
     @media (max-width: 500px) {
-     margin-bottom: 10px;
+      margin-bottom: 10px;
     }
   }
 
@@ -168,9 +166,8 @@
 
 .card {
   border-radius: 7px;
-  border: 0.8px solid #DADADA;
+  border: 0.8px solid #dadada;
   box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.03);
-
 
   &__body {
     padding: 25px;
@@ -186,9 +183,9 @@
   &__headItem {
     border-radius: 5px;
     border: 0.8px solid #242424;
-    background: #F5F5F5;
+    background: #f5f5f5;
     padding: 9px 15px;
-    transition: all .4s ease;
+    transition: all 0.4s ease;
     cursor: pointer;
 
     @media (max-width: 850px) {
@@ -205,17 +202,16 @@
 
     &_active {
       background: #242424;
-      color: #F5F5F5;
+      color: #f5f5f5;
     }
 
     &:hover {
       background: #242424;
-      color: #F5F5F5;
+      color: #f5f5f5;
     }
   }
-   
+
   &__content {
-    
     @media (min-width: 1440px) {
       display: flex;
     }
@@ -231,12 +227,12 @@
     width: 585px;
     order: 1;
     margin-right: 50px;
+    margin-left: 20px;
 
     @media (max-width: 1400px) {
       width: 100%;
       margin-bottom: 50px;
     }
-    
   }
 
   &__sliderImg {
@@ -244,21 +240,20 @@
     height: 390px;
     border-radius: 10px;
 
-  @media (max-width: 1400px) {
+    @media (max-width: 1400px) {
       width: 100%;
       height: 600px;
     }
 
-  @media (max-width: 700px) {
-    width: 100%;
-    height: 400px;
-  }
+    @media (max-width: 700px) {
+      width: 100%;
+      height: 400px;
+    }
 
-   @media (max-width: 500px) {
-    width: 100%;
-    height: 300px;
-  }
-  
+    @media (max-width: 500px) {
+      width: 100%;
+      height: 300px;
+    }
   }
 
   &__sladerFullImage {
@@ -271,7 +266,6 @@
       height: 50vh;
     }
   }
-
 
   &__info {
     margin-left: 30px;
@@ -318,7 +312,7 @@
 
   &__infoBlock {
     text-align: center;
-    color: #F5F5F5;
+    color: #f5f5f5;
     padding: 16px 22px;
     border-radius: 5px;
     background: #242424;
@@ -341,11 +335,11 @@
 
   &__row {
     display: flex;
+    gap: 10px;
     margin-bottom: 20px;
 
     @media (max-width: 784px) {
       flex-wrap: wrap;
-  
     }
 
     @media (max-width: 550px) {
@@ -365,7 +359,6 @@
       font-size: 16px;
       flex: 1 1 100%;
     }
-
   }
 
   &__title {
@@ -374,20 +367,20 @@
 
   &__subTitle {
     font-weight: 300;
-    line-height: 150%
+    line-height: 150%;
   }
 
   &__footer {
     display: flex;
     border-radius: 5px;
-    background: #FAFAFA;
+    background: #fafafa;
     padding: 28px 27px;
     flex-wrap: wrap;
 
     @media (max-width: 500px) {
-    margin-bottom: 80px;
+      margin-bottom: 80px;
     }
-  } 
+  }
 
   &__contact {
     flex: 0 0 33%;
@@ -411,10 +404,3 @@
     font-weight: 300;
   }
 }
-
-
-
-
-
-
-

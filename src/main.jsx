@@ -6,6 +6,7 @@ import Root from "./components/routing/root.jsx";
 import { Provider } from "react-redux";
 import { store } from "@store/store.js";
 import HomeProfile from "@/pages/profile/home.jsx";
+import ViewTzPage from "./pages/profile/order/viewtz.jsx";
 import NoLayout from "@/pages/nolayout.jsx";
 import VKIDtokenpage from "@/pages/VKIDtokenpage.jsx";
 import PrivateRoute from "@components/routing/privateRoute.jsx";
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
     path: "/profile/order/createorder",
     element: <CreateOrderPage />,
   },
+  { path: "/profile/order/view_tz/:itemId", element: <ViewTzPage /> },
   {
     path: "/profile/order/purchase",
     element: <PurchasePage />,

@@ -1,5 +1,21 @@
 .custom__select {
+  &__menu-notice {
+    color: white !important;
+    position: relative !important;
+    &::after {
+      content: "Совпадений нет" !important;
+      color: black !important;
+      font-size: 14px !important;
+      position: absolute !important;
+      display: block !important;
+      top: 0 !important;
+      margin-top: 8px;
+      font-family: "Roboto", sans-serif !important;
+      left: 10px !important;
+    }
+  }
   &__control {
+    cursor: text !important;
     min-height: 32px !important;
     height: 32px !important;
     font-family: "Roboto", sans-serif !important;

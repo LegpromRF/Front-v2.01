@@ -11,7 +11,7 @@ const HomePage = () => {
         <div className={[styles.home__start, styles.block].join(' ')}>
           <div className={styles.block__title}>Управление закупками</div>
           <div className={styles.block__cards}>
-            <div className={styles.block__card}>
+            {/* <div className={styles.block__card}>
               <div className={styles.block__body}>
                 <div className={styles.block__cardTitle}>Каталог поставщиков</div>
                 <div className={styles.block__cardSubTitle}>
@@ -29,8 +29,8 @@ const HomePage = () => {
                   </Link>
                 </div>
               </div>
-            </div>
-            <div className={styles.block__card}>
+            </div> */}
+            {/* <div className={styles.block__card}>
               <div className={styles.block__body}>
                 <div className={styles.block__cardTitle}>Проверка контрагента</div>
                 <div className={styles.block__cardSubTitle}>
@@ -48,7 +48,7 @@ const HomePage = () => {
                   </Link>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className={styles.block__card}>
               <div className={styles.block__body}>
                 <div className={styles.block__cardTitle}>Новая заявка на пошив</div>
@@ -57,7 +57,7 @@ const HomePage = () => {
                   получить больше предложений от фабрик
                 </div>
                 <div className={styles.block__footer}>
-                  <div className={styles.block__btn}><Link to="/nolayout">Создать</Link></div>
+                  <div className={styles.block__btn}><Link to="/profile/order/createorder">Создать</Link></div>
                   <Link className={styles.block__questio} to="/nolayout">
                     <p>Как это работает</p>
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +68,7 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
-            <div className={styles.block__card}>
+            {/* <div className={styles.block__card}>
               <div className={styles.block__body}>
                 <div className={styles.block__cardTitle}>Новая заявка на ткани</div>
                 <div className={styles.block__cardSubTitle}>
@@ -87,8 +87,8 @@ const HomePage = () => {
                   </Link>
                 </div>
               </div>
-            </div>
-            <div className={styles.block__card}>
+            </div> */}
+            {/* <div className={styles.block__card}>
               <div className={styles.block__body}>
                 <div className={styles.block__cardTitle}>Персональный менеджер</div>
                 <div className={styles.block__cardSubTitle}>
@@ -107,7 +107,7 @@ const HomePage = () => {
                   </Link>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className={[styles.home__start, styles.block].join(' ')}>
@@ -121,7 +121,7 @@ const HomePage = () => {
                   опубликованных заказчиками
                 </div>
                 <div className={styles.block__footer}>
-                  <div className={styles.block__btn}><Link to="//profile/registry">Смотреть</Link></div>
+                  <div className={styles.block__btn}><Link to="/profile/registry">Смотреть</Link></div>
                   <Link className={styles.block__questio} to="/nolayout">
                     <p>Как это работает</p>
                     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -132,7 +132,7 @@ const HomePage = () => {
                 </div>
               </div>
             </div>
-            <div className={styles.block__card}>
+            {/* <div className={styles.block__card}>
               <div className={styles.block__body}>
                 <div className={styles.block__cardTitle}>Входящие заявки</div>
                 <div className={styles.block__cardSubTitle}>
@@ -151,8 +151,8 @@ const HomePage = () => {
                   </Link>
                 </div>
               </div>
-            </div>
-            <div className={styles.block__card}>
+            </div> */}
+            {/* <div className={styles.block__card}>
               <div className={styles.block__body}>
                 <div className={styles.block__cardTitle}>Мой Магазин</div>
                 <div className={styles.block__cardSubTitle}>
@@ -170,8 +170,8 @@ const HomePage = () => {
                   </Link>
                 </div>
               </div>
-            </div>
-            <div className={styles.block__card}>
+            </div> */}
+            {/* <div className={styles.block__card}>
               <div className={styles.block__body}>
                 <div className={styles.block__cardTitle}>Добавить товар/услугу</div>
                 <div className={styles.block__cardSubTitle}>
@@ -190,8 +190,8 @@ const HomePage = () => {
                   </Link>
                 </div>
               </div>
-            </div>
-            <div className={styles.block__card}>
+            </div> */}
+            {/* <div className={styles.block__card}>
               <div className={styles.block__body}>
                 <div className={styles.block__cardTitle}>Персональный менеджер</div>
                 <div className={styles.block__cardSubTitle}>
@@ -210,10 +210,10 @@ const HomePage = () => {
                   </Link>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
-        <div className={[styles.home__start, styles.block].join(' ')}>
+        {/* <div className={[styles.home__start, styles.block].join(' ')}>
           <div className={styles.block__title}>Новости</div>
           <div className={styles.block__cards}>
             <div className={styles.block__card}>
@@ -294,7 +294,7 @@ const HomePage = () => {
 
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </Layout>
     </>

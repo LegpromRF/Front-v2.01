@@ -8,9 +8,7 @@ export const getAllFilters = createAsyncThunk("users/getFilters", async () => {
 });
 
 export const getAllCards = createAsyncThunk("users/getCards", async (query) => {
-  const response = await fetch(
-    `https://api.legpromrf.ru/order_cards/?${query}`
-  );
+  const response = await fetch(`https://api.legpromrf.ru/order_cards?${query}`);
   return await response.json();
 });
 
@@ -21,6 +19,7 @@ export const procRegisterSlice = createSlice({
     filters: null,
     cards: [],
     loading: false,
+    pageNumber: 1,
     query: {
       clothes_type__name__in: "",
       location__name__in: "",
@@ -45,6 +44,9 @@ export const procRegisterSlice = createSlice({
     },
     clearFilters(state) {
       state.query = clearQuery(state.query);
+    },
+    changePage(state, action) {
+      state.pageNumber = action.payload;
     },
     changeQuantity(state, action) {
       if (action.payload.type === "min") {
@@ -94,5 +96,6 @@ export const {
   changeQuantity,
   changeBudget,
   changeDate,
+  changePage,
 } = procRegisterSlice.actions;
 export default procRegisterSlice.reducer;
