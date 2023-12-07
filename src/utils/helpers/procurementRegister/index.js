@@ -1,6 +1,11 @@
 export const createMaterials = (str) => str.split(",");
 
-export const createDate = (str) => str.split("T")[0];
+export const createDate = (str) => {
+  const day = str.split("T")[0].split("-")[2];
+  const month = str.split("T")[0].split("-")[1];
+  const year = str.split("T")[0].split("-")[0];
+  return `${day}.${month}.${year}`;
+};
 
 export const createFilters = (obj) => {
   const newArray = [];
@@ -32,4 +37,24 @@ export const clearQuery = (obj) => {
     newObj[key] = "";
   }
   return newObj;
+};
+
+export const countPages = (number) => {
+  return Math.ceil(number / 40);
+};
+
+export const getCardsByPage = (array, number) => {
+  if (array.length > 40) {
+    const startIndex = (number - 1) * 40;
+    const endIndex = number * 40;
+    return array.slice(startIndex, endIndex);
+  } else {
+    return array;
+  }
+};
+
+export const createImagesSlider = (str) => {
+  return str
+    .split(",")
+    .map((elem, i) => ({ id: i, src: elem, alt: "Фото ткани" }));
 };
