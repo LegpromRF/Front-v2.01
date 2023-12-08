@@ -20,7 +20,7 @@ const FabricChart = () => {
 
   const axiosProductionData = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/get_production_status_by_region'); 
+      const response = await axios.get('https://api.legpromrf.ru/dashboard/get_production_status_by_region'); 
       setProductionData(response.data.production_status_by_region);
     } catch (error) {
       console.error('Ошибка при получении данных по производству:', error);

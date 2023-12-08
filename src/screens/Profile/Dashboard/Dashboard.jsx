@@ -18,7 +18,7 @@ function Dashboard() {
 
   const axiosProductionData = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/get_production_status_by_region'); 
+      const response = await axios.get('https://api.legpromrf.ru/dashboard/get_production_status_by_region'); 
       setProductionData(response.data.production_status_by_region);
     } catch (error) {
       console.error('Ошибка при получении данных по производству:', error);
@@ -26,7 +26,7 @@ function Dashboard() {
   };
   const axiosFabricData = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/fabric_companies_by_fabric');
+      const response = await axios.get('https://api.legpromrf.ru/dashboard/fabric_companies_by_fabric');
       setFabricData(response.data.fabric_companies_data);
     } catch (error) {
       console.error('Ошибка при получении данных о компаниях по тканям:', error);

@@ -20,7 +20,7 @@ const ThirdChart = () => {
 
     const axiosFabricData = async () => {
         try {
-          const response = await axios.get('http://localhost:8000/fabric_companies_by_fabric'); // Используем axios для GET-запроса
+          const response = await axios.get('https://api.legpromrf.ru/dashboard/fabric_companies_by_fabric'); // Используем axios для GET-запроса
           setFabricData(response.data.fabric_companies_data);
         } catch (error) {
           console.error('Ошибка при получении данных о компаниях по тканям:', error);
