@@ -102,7 +102,7 @@ const RegionCharts = () => {
 
   const axiosNaturalGrowthData = async (regionId) => {
     try {
-      const response = await axios.get(`http://localhost:8000/natural_growth_by_year_and_region/${regionId}`); 
+      const response = await axios.get(`https://api.legpromrf.ru/dashboard/natural_growth_by_year_and_region/${regionId}`); 
       return response.data.natural_growth_by_year_and_region;
     } catch (error) {
       console.error('Ошибка при получении данных о приросте:', error);
