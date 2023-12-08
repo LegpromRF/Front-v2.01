@@ -23,9 +23,10 @@
     transition: background-color 0.3s ease;
 }
 .second-chart-container img{
-    margin:5% auto;
-    width:70%;
-    height:70%;
+  display: block; 
+  margin: 0 auto; 
+  width: 40%; 
+  height: 40%; 
 }
 
 .secondChartContainer{

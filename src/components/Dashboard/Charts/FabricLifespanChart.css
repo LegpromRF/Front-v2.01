@@ -18,15 +18,16 @@
   transition: background-color 0.3s ease;
 }
 .img img{
-  margin:10% auto;
-    width:30%;
-    height:30%;
+  display: block; 
+  margin: 0 auto; 
+  width: 40%; 
+  height: 40%; 
 }
 .fabriclifespan-chart-container p {
   background-color: rgba(255, 255, 255, 0.8); 
-  padding: 8px 12px;
+  padding: 8px 12px; 
   border-radius: 4px; 
-  font-size: 20px;
+  font-size: 20px; 
   color: #333;
 }
   

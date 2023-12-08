@@ -19,6 +19,7 @@ import TechnologyPage from "@/pages/profile/order/technology.jsx";
 import ConditionsPage from "@/pages/profile/order/conditions.jsx";
 import ContactsPage from "@/pages/profile/order/contacts.jsx";
 import SelectionPage from "@/pages/profile/selection.jsx";
+import DashboardPage from "@/pages/profile/dashboard.jsx";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
                 element: <HomeProfile/>
             },
         ]
+    },
+    {
+        path:"/profile/dashboard",
+        element:<DashboardPage />
     },
     {
         path: "/profile/order/createorder",
@@ -70,7 +75,8 @@ const router = createBrowserRouter([
     {
         path: "/Yatokenpage",
         element: <Yatokenpage />
-    }
+    },
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

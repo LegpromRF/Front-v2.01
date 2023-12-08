@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import axios from 'axios';
+import './RegionCharts.css';
 const RegionCharts = () => {
   const [regionData, setRegionData] = useState({});
   const [selectedRegion, setSelectedRegion] = useState('moscow');

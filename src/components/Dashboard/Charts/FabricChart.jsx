@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import axios from 'axios';
 import './FabricChart.css';
-import chartImage from './graph.png';
-import './modal.css'
+import chartImage from '../img/graph.png';
+import '../modal/modal.css';
 const FabricChart = () => {
   const [productionData, setProductionData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);

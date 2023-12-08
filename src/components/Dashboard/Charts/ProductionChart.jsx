@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import './ProductionChart.css';
-import chartImage from './graph.png';
+import chartImage from '../img/graph.png';
+import '../modal/modal.css';
 import axios from 'axios'; 
-import './modal.css';
+
 const ProductionChart = () => {
   const [productionData, setProductionData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);

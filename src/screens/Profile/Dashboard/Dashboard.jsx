@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
-import './App.css';
-import RegionCharts from './RegionCharts';
-import ProductionChart from './ProductionChart';
-import FabricChart from './FabricChart'
-import ThirdChart from './ThirdChart';
-import FabricLifespanChart from './FabricLifespanChart'
-import './ChartComponent.css'
+import HeaderLanding from '../../../layout/HeaderLanding/HeaderLanding.jsx';
+import RegionCharts from '../../../components/Dashboard/Charts/RegionCharts.jsx';
+import ProductionChart from '../../../components/Dashboard/Charts/ProductionChart.jsx';
+import FabricChart from '../../../components/Dashboard/Charts/FabricChart.jsx';
+import ThirdChart from '../../../components/Dashboard/Charts/ThirdChart.jsx';
+import FabricLifespanChart from '../../../components/Dashboard/Charts/FabricLifespanChart.jsx';
+import './Dashboard.css'
 import axios from 'axios';
-function ChartComponent() {
+function Dashboard() {
   const [productionData, setProductionData] = useState([]);
   const [fabricData, setFabricData] = useState([]);
   useEffect(() => {
@@ -42,6 +42,7 @@ function ChartComponent() {
 
   return (
     <div>
+      <HeaderLanding />
       <div className="firstline">
         <ProductionChart />
         <FabricChart />
@@ -55,4 +56,4 @@ function ChartComponent() {
   );
 }
 
-export default ChartComponent;
+export default Dashboard;

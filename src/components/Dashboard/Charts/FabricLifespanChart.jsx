@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import axios from 'axios';
-import chartImage from './graph.png';
+
+import chartImage from '../img/graph.png';
+import '../modal/modal.css';
 import './FabricLifespanChart.css';
-import './modal.css';
 const FabricLifespanChart = () => {
   const [fabricData, setFabricData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);

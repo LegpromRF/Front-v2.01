@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import './ThirdChart.css';
 import axios from 'axios';
-import chartImage from './graph.png';
-import './modal.css';
+import chartImage from '../img/graph.png';
+import '../modal/modal.css';
 const ThirdChart = () => {
     const [fabricData, setFabricData] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
