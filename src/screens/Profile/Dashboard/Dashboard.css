@@ -1,0 +1,14 @@
+.firstline {
+    display: flex;
+    margin: 1% auto; 
+    justify-content: space-between;
+    align-items: center;
+    width:80%;
+  }
+  .secondline {
+    display: flex; 
+    margin: 1% auto; 
+    justify-content: space-between; 
+    align-items: center;
+    width:80%;
+  }

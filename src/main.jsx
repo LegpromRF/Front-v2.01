@@ -18,7 +18,8 @@ import ConditionsPage from "@/pages/profile/order/conditions.jsx";
 import ContactsPage from "@/pages/profile/order/contacts.jsx";
 import SelectionPage from "@/pages/profile/selection.jsx";
 import ProcurementRegisterPage from "@/pages/profile/order/procurement.jsx";
-
+import DashboardPage from "@/pages/profile/dashboard.jsx";
+ 
 const router = createBrowserRouter([
   {
     path: "/",
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
         element: <HomeProfile />,
       },
     ],
+  },
+  {
+    path:"/profile/dashboard",
+    element:<DashboardPage />
   },
   {
     path: "/profile/order/createorder",
