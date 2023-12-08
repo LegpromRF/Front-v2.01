@@ -6,8 +6,8 @@ export const companiesSlice = createSlice({
         companiesID: []
     },
     reducers: {
-        setCompanies: (state, payload) => {
-            state.companiesID = payload
+        setCompanies: (state, action) => {
+            state.companiesID = action.payload
         }
     }
 })

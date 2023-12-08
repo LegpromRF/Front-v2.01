@@ -1,0 +1,19 @@
+.cards__item_footer_btn {
+  border-radius: 5px;
+  color: #fb8800;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  padding: 20px;
+  transition: all 0.2s;
+  background-color: inherit;
+  border: 1px solid #fb8800;
+  &:hover {
+    background-color: #fb8800;
+    color: white;
+  }
+}

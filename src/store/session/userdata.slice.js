@@ -11,6 +11,7 @@ export const userdataSlice = createSlice({
             state.username = action.payload
         },
         setSpecification: (state, action) => {
+            console.log(action.payload)
             state.specification = action.payload
         }
     }
