@@ -1,0 +1,10 @@
+.filters__item {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: "Roboto", sans-serif;
+  @media (max-width: 720px) {
+    width: 100%;
+  }
+}

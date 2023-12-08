@@ -1,0 +1,32 @@
+.cards {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: #f5f5f5;
+  gap: 15px;
+  padding: 0 20px;
+  padding-top: 20px;
+
+  &_open {
+    animation: veiw 0.3s;
+  }
+  @media (max-width: 1400px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 1020px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 720px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@keyframes veiw {
+  0% {
+    z-index: 200;
+  }
+  100% {
+    z-index: 1;
+  }
+}
