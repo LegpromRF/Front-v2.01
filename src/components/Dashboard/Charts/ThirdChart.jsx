@@ -32,97 +32,97 @@ const ThirdChart = () => {
         
         const remainingFabrics = fabricData.filter(item => !topThreeFabrics.includes(item));
         
-        const labels = remainingFabrics.map(item => item.fabric_type);
+        const labels = remainingFabrics.map(item => item.fabric_name);
         const companyCounts = remainingFabrics.map(item => item.company_count);
         
         const ctx = document.getElementById('thirdChart');
         destroyChart(ctx);
         new Chart(ctx, {
-        type: 'line',
-        data: {
+          type: 'line',
+          data: {
             labels: labels,
             datasets: [
-            {
+              {
                 label: 'Количество компаний',
                 data: companyCounts,
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 borderWidth: 1,
-            },
+              },
             ],
-        },
-        options: {
+          },
+          options: {
             plugins: {
-            legend: {
+              legend: {
                 display: false,
-            },
-            title: {
+              },
+              title: {
                 display: true,
                 text: 'Количество компаний по видам тканей (за исключением топ-3)',
-            },
+              },
             },
             scales: {
-            x: {
+              x: {
                 title: {
-                display: true,
-                text: 'Виды тканей',
+                  display: true,
+                  text: 'Виды тканей',
                 },
-            },
-            y: {
+              },
+              y: {
                 title: {
-                display: true,
-                text: 'Количество компаний',
+                  display: true,
+                  text: 'Количество компаний',
                 },
+              },
             },
-            },
-        },
+          },
         });
-    };
-    const renderTopFabricsChart = () => {
-        // Сортировка данных о тканях и выбор топ-3
-        const sortedFabricData = fabricData.slice().sort((a, b) => b[1] - a[1]);
-        const topThreeFabrics = sortedFabricData.slice(0, 3);
-
-        const topThreeLabels = topThreeFabrics.map(item => item[0]); // Названия тканей
-        const topThreeCompanyCounts = topThreeFabrics.map(item => item[1]); // Количество компаний
-
+      };
+      
+      const renderTopFabricsChart = () => {
+        const sortedFabricData = fabricData.slice().sort((a, b) => b.company_count - a.company_count);
+        const topThreeFabrics = sortedFabricData.slice(0, 3);    
+        const topThreeLabels = topThreeFabrics.map(item => item.fabric_name); // Названия тканей
+        const topThreeCompanyCounts = topThreeFabrics.map(item => item.company_count); // Количество компаний
+      
         const ctx = document.getElementById('topThreeFabricsChart');
         destroyChart(ctx);
         new Chart(ctx, {
-        type: 'bar',
-        data: {
+          type: 'bar',
+          data: {
             labels: topThreeLabels,
             datasets: [
-            {
+              {
                 label: 'Количество компаний',
                 data: topThreeCompanyCounts,
                 backgroundColor: [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-                'rgba(255, 206, 86, 0.5)',
+                  'rgba(255, 99, 132, 0.5)',
+                  'rgba(54, 162, 235, 0.5)',
+                  'rgba(255, 206, 86, 0.5)',
                 ],
                 borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
                 ],
                 borderWidth: 1,
-            },
+              },
             ],
-        },
-        options: {
+          },
+          options: {
             plugins: {
-            legend: {
+              legend: {
                 display: false,
-            },
-            title: {
+              },
+              title: {
                 display: true,
                 text: 'Топ-3 ткани по количеству компаний',
+              },
             },
-            },
-        },
+          },
         });
-    };
+      };
+      
     
     const destroyChart = (ctx) => {
         const chartInstance = Chart.getChart(ctx);
