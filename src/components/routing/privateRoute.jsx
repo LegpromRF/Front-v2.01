@@ -1,14 +1,14 @@
-import {Navigate} from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import {useSelector} from "react-redux";
+import Cookies from "js-cookie";
 
-function PrivateRoute({ children }) {
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated)
-
-    return isAuthenticated ? children : <Navigate to="/" replace={true}/>
+function PrivateRoute({ children, page }) {
+  const auth = Cookies.get("uuid_user");
+  return auth ? children : <Navigate to={`/${page}`} replace={true} />;
 }
 
 PrivateRoute.propTypes = {
-    children: PropTypes.node
-}
-export default PrivateRoute 
+  children: PropTypes.node,
+  page: PropTypes.string,
+};
+export default PrivateRoute;
