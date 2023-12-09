@@ -102,13 +102,18 @@ const RegionCharts = () => {
 
   const axiosNaturalGrowthData = async (regionId) => {
     try {
-      const response = await axios.get(`https://api.legpromrf.ru/dashboard/natural_growth_by_year_and_region/${regionId}`); 
+      const response = await axios.get('https://api.legpromrf.ru/dashboard/natural_growth_by_year_and_region', {
+        params: {
+          region_id: regionId
+        }
+      }); 
       return response.data.natural_growth_by_year_and_region;
     } catch (error) {
       console.error('Ошибка при получении данных о приросте:', error);
       return [];
     }
   };
+  
 
   useEffect(() => {
     const axiosDataForRegions = async () => {
