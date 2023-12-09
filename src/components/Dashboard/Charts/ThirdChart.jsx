@@ -26,15 +26,14 @@ const ThirdChart = () => {
           console.error('Ошибка при получении данных о компаниях по тканям:', error);
         }
       };
-    const renderThirdChart = () => {
-        // Находим топ-3 ткани по количеству компаний
-        const sortedFabrics = fabricData.slice().sort((a, b) => b[1] - a[1] );
-        const topThreeFabrics = sortedFabrics.slice(0, 3); // Топ-3 ткани
+      const renderThirdChart = () => {
+        const sortedFabrics = fabricData.slice().sort((a, b) => b.company_count - a.company_count);
+        const topThreeFabrics = sortedFabrics.slice(0, 3);
         
-        const remainingFabrics = fabricData.filter(item => !topThreeFabrics.includes(item)); // Исключаем топ-3 ткани из данных
+        const remainingFabrics = fabricData.filter(item => !topThreeFabrics.includes(item));
         
-        const labels = remainingFabrics.map(item => item[0] );
-        const companyCounts = remainingFabrics.map(item => item[1] );
+        const labels = remainingFabrics.map(item => item.fabric_type);
+        const companyCounts = remainingFabrics.map(item => item.company_count);
         
         const ctx = document.getElementById('thirdChart');
         destroyChart(ctx);

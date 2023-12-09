@@ -28,8 +28,8 @@ const FabricLifespanChart = () => {
   };
 
   const renderFabricChart = () => {
-    const fabricNames = fabricData.map(item => item[0]);
-    const avgLifespans = fabricData.map(item => item[1]);
+    const fabricNames = fabricData.map(item => item.fabric_type); 
+    const avgLifespans = fabricData.map(item => item.avg_lifespan_months); 
 
     const ctx = document.getElementById('fabricLifespan');
     destroyChart(ctx);

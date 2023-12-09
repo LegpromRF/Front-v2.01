@@ -129,12 +129,13 @@ const RegionCharts = () => {
 
   const renderChart = (data, chartId, regionName) => {
     const years = Array.from({ length: 22 }, (_, index) => 2002 + index);
+  
     const formattedData = years.map(year => {
-      const entry = data.find(item => item[1] === year);
+      const entry = data.find(item => item.registration_year === year); // Здесь изменения
       return {
         registration_year: year,
-        opened_count: entry ? entry[2] : 0,
-        closed_count: entry ? entry[3] : 0
+        opened_count: entry ? entry.opened_count : 0,
+        closed_count: entry ? entry.closed_count : 0,
       };
     });
 
