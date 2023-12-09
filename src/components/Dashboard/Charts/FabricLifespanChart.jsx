@@ -28,9 +28,9 @@ const FabricLifespanChart = () => {
   };
 
   const renderFabricChart = () => {
-    const fabricNames = fabricData.map(item => item.fabric_type); 
-    const avgLifespans = fabricData.map(item => item.avg_lifespan_months); 
-
+    const fabricNames = fabricData.map(item => item.fabric_name); 
+    const avgLifespans = fabricData.map(item => item.avg_lifespan); 
+  
     const ctx = document.getElementById('fabricLifespan');
     destroyChart(ctx);
     new Chart(ctx, {
@@ -61,6 +61,8 @@ const FabricLifespanChart = () => {
       },
     });
   };
+  
+  
 
   const destroyChart = (ctx) => {
     const chartInstance = Chart.getChart(ctx);
