@@ -1,0 +1,23 @@
+.footer__control_logout {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(244, 244, 244);
+  border-radius: 7px;
+  transition: all 0.25s;
+
+  &:hover {
+    background-color: #0036ff;
+  }
+  & img {
+    transition: all 0.25s;
+    position: absolute;
+    top: 6px;
+    right: 4px;
+    width: 80%;
+    height: 80%;
+    &:hover {
+      filter: invert(100%);
+    }
+  }
+}
