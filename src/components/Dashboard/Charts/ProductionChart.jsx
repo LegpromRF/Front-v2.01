@@ -29,9 +29,9 @@ const ProductionChart = () => {
   };
 
   const renderFirstChart = () => {
-    const labels = productionData.map(item => item[0]);
-    const openCounts = productionData.map(item => item[1]);
-    const closedCounts = productionData.map(item => item[2]);
+    const labels = productionData.map(item => item.region_name);
+    const openCounts = productionData.map(item => item.open_count);
+    const closedCounts = productionData.map(item => item.closed_count);
 
     const ctx = document.getElementById('firstChart');
     destroyChart(ctx);

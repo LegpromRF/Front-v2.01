@@ -27,8 +27,8 @@ const FabricChart = () => {
     }
   };
   const renderSecondChart = () => {
-    const labels = productionData.map(item => item[0]); // Названия регионов
-    const avgLifespan = productionData.map(item => item[3]); // Средний срок жизни
+    const labels = productionData.map(item => item.region_name); // Названия регионов
+    const avgLifespan = productionData.map(item => item.avg_lifespan); // Средний срок жизни в месяцах
   
     const ctx = document.getElementById('secondChart');
     destroyChart(ctx);
@@ -91,11 +91,11 @@ const FabricChart = () => {
     });
     const topThreeRegions = productionData
     .slice() // Создаем копию массива данных
-    .sort((a, b) => b[3] - a[3]) // Сортируем по столбцу с временем жизни в месяцах
+    .sort((a, b) => b.avg_lifespan - a.avg_lifespan) // Сортируем по столбцу с временем жизни в месяцах
     .slice(0, 3); // Выбираем топ-3 регионов
-  
-  const topThreeLabels = topThreeRegions.map(item => item[0]); // Названия регионов
-  const topThreeAvgLifespan = topThreeRegions.map(item => item[3]); // Время жизни в месяцах
+
+  const topThreeLabels = topThreeRegions.map(item => item.region_name); // Названия регионов
+  const topThreeAvgLifespan = topThreeRegions.map(item => item.avg_lifespan); // Время жизни в месяцах
 
   const topThreeCtx = document.getElementById('topThreeChart');
   destroyChart(topThreeCtx);
