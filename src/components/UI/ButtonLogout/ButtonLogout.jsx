@@ -12,7 +12,7 @@ function ButtonLogout() {
   const handleClick = () => {
     Cookies.set("uuid_user", "", { expires: 10000 });
     dispatch(logout());
-    navigate("/auth");
+    navigate("/");
   };
   return (
     <>
