@@ -1,3 +1,4 @@
+import classNames from "classnames/bind";
 import PropTypes from "prop-types";
 import {
   createMaterials,
@@ -11,14 +12,27 @@ function Item(props) {
     <div className={styles.cards__item_container}>
       <div className={styles.cards__item}>
         <div className={styles.cards__item_img}>
-          <img src={props.photo_urls !== null && props.photo_urls.split(",")[0]} alt={props.clothes_type} />
+          <img
+            src={props.photo_urls !== null && props.photo_urls.split(",")[0]}
+            alt={props.clothes_type}
+          />
         </div>
         <div className={styles.cards__item_type}>{props.clothes_type}</div>
         <div className={styles.cards__item_open}>
           <div className={styles.cards__item_open_id}>
             №{props.order_number}
           </div>
-          <div className={styles.cards__item_open_status}>{props.status}</div>
+          <div
+            className={
+              props.status === "Открыт"
+                ? classNames(styles.cards__item_open_status, styles.open_green)
+                : props.status === "Vip"
+                ? classNames(styles.cards__item_open_status, styles.open_blue)
+                : styles.cards__item_open_status
+            }
+          >
+            {props.status}
+          </div>
         </div>
         <div className={styles.cards__item_info}>
           <div className={styles.cards__item_info_purpose}>

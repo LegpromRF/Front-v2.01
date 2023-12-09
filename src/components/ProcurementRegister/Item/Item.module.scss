@@ -34,7 +34,7 @@
     display: flex;
     justify-content: space-between;
     &_status {
-      color: #00b334;
+      color: #fb8800;
     }
   }
   &_type {
@@ -87,4 +87,12 @@
   gap: 10px;
   width: 100%;
   flex-wrap: nowrap;
+}
+
+.open_green {
+  color: #00b334;
+}
+
+.open_blue {
+  color: rgb(0, 54, 255);
 }
