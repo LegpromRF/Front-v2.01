@@ -1,7 +1,9 @@
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { BeatLoader } from "react-spinners";
 import { Controller, useForm } from "react-hook-form";
 import InputMask from "react-input-mask";
+import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setAuthMethod,
@@ -23,6 +25,7 @@ const ModalAuth = () => {
   const [loginIssue, setLoginIssue] = useState("");
   const [regIssue, setRegIssue] = useState({ status: null, details: null });
   const [veriIssue, setVeriIssue] = useState({ status: null, details: null });
+  const [loader, setLoader] = useState(false);
 
   const selectAuthModal = (state) => state.authModal;
   const selectAuthModalData = createSelector(selectAuthModal, (authModal) => ({
@@ -31,7 +34,6 @@ const ModalAuth = () => {
     verifying: authModal.verifying,
   }));
   const { authMode, authMethod, verifying } = useSelector(selectAuthModalData);
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -45,6 +47,7 @@ const ModalAuth = () => {
   });
 
   const onSubmit = async () => {
+    setLoader(true);
     const data = getValues();
     let login = "";
     if (authMethod === "sms") {
@@ -75,26 +78,34 @@ const ModalAuth = () => {
           response.data.details === "Пользователь успешно создан"
         ) {
           dispatch(setVerifying(true));
-          dispatch(loginSuccess());
+          Cookies.set("uuid_user", "auth", {
+            expires: 10000,
+          });
           navigate("/profile");
         }
       })
       .catch((error) => {
         console.log("Error:", error);
-      });
+      })
+      .finally(() => setLoader(false));
   };
 
   async function processLogin(data, authMethod) {
+    setLoader(true);
     const result = await handleLogin(data, authMethod);
     if (result === true) {
       dispatch(loginSuccess());
+      setLoader(false);
       navigate("/profile");
     } else {
+      setLoader(false);
       setLoginIssue(result);
     }
   }
   const handleGetExist = async () => {
+    setLoader(true);
     const info = await handleVerification(authMethod, getValues());
+    setLoader(false);
     setRegIssue({ status: info.status, details: info.details });
     if (info.status !== "error") {
       dispatch(setVerifying(true));
@@ -144,7 +155,14 @@ const ModalAuth = () => {
                         name="email"
                         control={control}
                         render={({ field }) => (
-                          <input type="text" placeholder="Почта" {...field} />
+                          <input
+                            onInput={() =>
+                              setRegIssue({ status: null, details: null })
+                            }
+                            type="text"
+                            placeholder="Почта"
+                            {...field}
+                          />
                         )}
                       />
                       {errors.email && <p>{errors.email.message}</p>}
@@ -186,9 +204,9 @@ const ModalAuth = () => {
                       handleGetExist();
                     }}
                     type={"button"}
-                    disabled={Object.keys(errors).length > 0}
+                    disabled={Object.keys(errors).length > 0 || loader}
                   >
-                    Далее
+                    {loader ? <BeatLoader color="rgb(0,54,255)" /> : "Далее"}
                   </button>
                   <div className={styles.form__subtitle}>
                     {authMode === "register"
@@ -253,9 +271,9 @@ const ModalAuth = () => {
                       processLogin(getValues(), authMethod);
                     }}
                     type={"button"}
-                    disabled={Object.keys(errors).length > 0}
+                    disabled={Object.keys(errors).length > 0 || loader}
                   >
-                    Войти
+                    {loader ? <BeatLoader color="rgb(0,54,255)" /> : "Войти"}
                   </button>
                   <div className={styles.form__subtitle}>
                     {authMode === "register"
@@ -321,9 +339,13 @@ const ModalAuth = () => {
                 ].join(" ")}
                 type={"button"}
                 onClick={onSubmit}
-                disabled={Object.keys(errors).length > 0}
+                disabled={Object.keys(errors).length > 0 || loader}
               >
-                Зарегистрироваться
+                {loader ? (
+                  <BeatLoader color="rgb(0,54,255)" />
+                ) : (
+                  "Зарегистрироваться"
+                )}
               </button>
             </div>
           </div>

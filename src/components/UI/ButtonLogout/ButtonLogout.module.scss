@@ -12,10 +12,10 @@
   & img {
     transition: all 0.25s;
     position: absolute;
-    top: 6px;
-    right: 4px;
-    width: 80%;
-    height: 80%;
+    top: 14px;
+    right: 10px;
+    width: 50%;
+    height: 50%;
     &:hover {
       filter: invert(100%);
     }
