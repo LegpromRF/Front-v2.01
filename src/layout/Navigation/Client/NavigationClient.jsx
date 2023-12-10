@@ -142,7 +142,7 @@ const NavigationClient = () => {
                 </ButtonNavigationCollapsible> */}
 
                 <ButtonNavigationCollapsible
-                    title="BI:Аналитика"
+                    title="Аналитика"
                     href="/nolayout"
                     active={isNavOpen}
                     links={
