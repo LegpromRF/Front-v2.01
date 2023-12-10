@@ -1,7 +1,9 @@
 @import '@/styles/_variables.scss';
 
 .landing {
- 
+  font-family: "Roboto", sans-serif;
+
+
   &__wrapper {
     display: flex;
     margin-top: 32px;
@@ -20,11 +22,10 @@
   }
 
   &__right {
+
     @media (min-width: 1290px) {
       flex: 1 1 60%;
       overflow: hidden;
-      
-
     }
 
     @media (max-width: 700px) {
@@ -36,8 +37,8 @@
   }
 
   &__title {
-    font-size: 50px;
-    line-height: 80px;
+    font-size: 42px;
+    margin-bottom: 50px;
 
     @media (max-width: 1290px) {
       width: 100%;
@@ -45,26 +46,18 @@
     }
 
     @media (max-width: 700px) {
-      font-size: 40px;
+      font-size: 38px;
     }
 
     @media (max-width: 500px) {
       line-height: 60px;
-      font-size: 35px;
+      font-size: 30px;
     }
   }
 
-  &__three {
-    border: 4px solid black;
-    border-radius: 15px;
-    padding: 0 10px 7px 10px;
- 
-  }
-
-  &__subTitle {
-    margin-top: 36px;
-    font-size: 30px;
-    font-weight: 300;
+  &__subTitle1 {
+    font-size: 16px;
+    font-weight: lighter;
     line-height: 40px;
 
     @media (max-width: 1290px) {
@@ -74,14 +67,77 @@
     }
 
     @media (max-width: 500px) {
-      line-height: 60px;
       font-size: 25px;
       line-height: 32px;
     }
   }
+  &__subTitle2 {
+    margin-top: 36px;
+    font-size: 25px;
+    font-weight: lighter;
+    line-height: 40px;
 
-  &__star {
-    color: $blue;
+    @media (max-width: 1290px) {
+      max-width: none;
+      text-align: center;
+      margin-top: 36px;
+    }
+
+    @media (max-width: 500px) {
+      font-size: 25px;
+      line-height: 32px;
+    }
+  }
+  &__advantages1{
+    display: flex;
+    gap: 12px;
+    flex-direction: column;
+    margin-top: 40px;
+    font-weight: lighter;
+  }
+  &__advantages1__block{
+    background-color: #FAFAFA;
+    padding: 16px 10px;
+  }
+  &__advantages3,
+  &__advantages2{
+    display: flex;
+    gap: 30px;
+    margin-top: 36px;
+    margin-bottom: 23px ;
+    align-items: end;
+
+    @media (max-width: 1290px) {
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    @media (max-width: 700px) {
+      gap: 15px;
+
+    }
+
+  }
+  &__advantages3__block {
+    background-color: #FAFAFA;
+    width: 100%;
+    min-height: 130px;
+    padding: 10px 18px;
+    font-size: 16px;
+    font-weight: lighter;
+
+    @media (max-width: 1290px) {
+      min-height: 60px;
+    }
+
+    @media (max-width: 700px) {
+      width: 100%;
+      height: auto;
+    }
+    span{
+      display: inline-block;
+      margin-top: 10px ;
+    }
   }
 
   &__auth {
@@ -89,18 +145,24 @@
     cursor: pointer;
     
     button {
+      display: flex;
+      flex-direction: column;
       color: #fff;
-      font-size: 20px;
-      font-weight: 500;
+      font-size: 25px;
+      font-weight: 400;
       margin-top: 40px;
-      background-color: $blue;
-      padding: 30px 65px;
-      border-radius: 15px;
+      background-color: #FF7A00;
+      padding: 11px 131px;
+      border-radius: 7px;
       transition: all .4s ease-in;
     }
       & button:hover {
-        background-color: $blueHover;
+        background-color: #ffa600;
       }
+    span{
+      font-size: 20px;
+      font-weight: 200;
+    }
 
       @media (max-width: 1290px) {
         display: flex;
@@ -108,23 +170,21 @@
       }
 
       @media (max-width: 500px) {
-        font-size: 17px;
+        font-size: 10px;
         line-height: 170%;
         padding: 10px ;
         text-align: center;
-        margin-top: 0px;
+        margin-top: 0;
       }
   }
 
   &__text {
     display: flex;
-    max-width: 456px;
-    margin-top: 100px;
-
-    p{
-      font-size: 13px;
-      line-height: 20px;
-    }
+    max-width: content-box;
+    margin-top: 10px;
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    font-weight: lighter;
 
     @media (max-width: 1290px) {
       margin-top: 30px;
@@ -134,18 +194,27 @@
     }
   }
 
-  &__orders {
-    color: #000;
-    font-size: 50px;
-    font-weight: 200;
-    line-height: 72px;
-    margin-bottom: 30px;
+  &__advantages2__block{
 
-    @media (max-width: 1290px) {
-      text-align: center;
-      margin-top: 70px;
-    }
+      background-color: #FAFAFA;
+      width: 100%;
+      height: 110px;
+      padding: 10px 18px;
+      font-size: 16px;
+      font-weight: lighter;
 
+      @media (max-width: 1290px) {
+        height: 60px;
+      }
+
+      @media (max-width: 700px) {
+        width: 100%;
+        height: auto;
+      }
+      span{
+        display: inline-block;
+        margin-top: 10px ;
+      }
   }
 
   &__fullOrders {
@@ -164,12 +233,24 @@
       cursor: pointer;
     }
   }
+  &__textAll{
+    font-size: 16px;
+    font-weight: lighter;
+    display: flex;
+    justify-content: end;
+    margin-top: 50px;
+    @media (max-width: 1290px) {
+      justify-content: center;
+    }
+
+  }
 }
+
 
 .card {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 40px;
+  margin-top: 20px;
 
   @media (max-width: 700px) {
     display: flex;
@@ -204,7 +285,7 @@
     margin: 0 10px 20px 10px;
 
     &:not(:last-child) {
-      margin-right: 0px;
+      margin-right: 0;
     }
   }
   @media (max-width: 450px) {
