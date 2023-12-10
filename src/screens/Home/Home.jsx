@@ -8,7 +8,6 @@ import Img3 from '@public/Landing/card_img_3.png'
 // import LandingCarusel from '@/src/components/LandingCarusel/LandingCarusel';
 // import {useState} from "react";
 // import ModalAuth from "@/src/layout/Modal/ModalAuth/ModalAuth";
-import {toggleModal} from "@store/auth/authModal.slice.js";
 import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 
@@ -65,7 +64,7 @@ const Home = () => {
               <div className={styles.landing__content}>
                 <h1 className={styles.landing__title}>Пройдите регистрацию <br /> <span className={styles.landing__three}>в три</span> простых шага</h1>
                 <h4 className={styles.landing__subTitle}>и получите список <br /> подходящих вам фабрик <span className={styles.landing__star}>*</span></h4>
-                <div className={styles.landing__auth}><button onClick={() => dispatch(toggleModal())}>Зарегистрироваться бесплатно</button></div>
+                <div className={styles.landing__auth}><button>Зарегистрироваться бесплатно</button></div>
                 <div className={styles.landing__text}>
                   <span>*</span>
                   <p>

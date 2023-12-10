@@ -9,6 +9,7 @@ import HomeProfile from "@/pages/profile/home.jsx";
 import ViewTzPage from "./pages/profile/order/viewtz.jsx";
 import NoLayout from "@/pages/nolayout.jsx";
 import VKIDtokenpage from "@/pages/VKIDtokenpage.jsx";
+import AuthPage from "./pages/auth.jsx";
 import PrivateRoute from "@components/routing/privateRoute.jsx";
 import Yatokenpage from "@/pages/Yatokenpage.jsx";
 import CreateOrderPage from "@/pages/profile/order/createorder.jsx";
@@ -26,13 +27,17 @@ const router = createBrowserRouter([
     element: <Root />,
   },
   {
+    path: "/auth",
+    element: <AuthPage />,
+  },
+  {
     path: "/nolayout",
     element: <NoLayout />,
   },
   {
     path: "/profile",
     element: (
-      <PrivateRoute>
+      <PrivateRoute page="">
         <HomeProfile />
       </PrivateRoute>
     ),
@@ -49,7 +54,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/profile/order/createorder",
-    element: <CreateOrderPage />,
+    element: (
+      <PrivateRoute page="auth">
+        <CreateOrderPage />
+      </PrivateRoute>
+    ),
   },
   { path: "/profile/order/view_tz/:itemId", element: <ViewTzPage /> },
   {
