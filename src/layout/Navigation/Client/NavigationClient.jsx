@@ -221,6 +221,28 @@ const NavigationClient = () => {
                         <path fillRule="evenodd" clipRule="evenodd" d="M11.5667 1C11.5667 1 4.89465 1.00348 4.88422 1.00348C2.48552 1.01825 1.00024 2.59652 1.00024 5.00391V12.9961C1.00024 15.4156 2.49682 17 4.91638 17C4.91638 17 11.5875 16.9974 11.5988 16.9974C13.9975 16.9826 15.4837 15.4035 15.4837 12.9961V5.00391C15.4837 2.58436 13.9862 1 11.5667 1Z" stroke="#242424" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                 </ButtonNavigationCollapsible> */}
+
+                <ButtonNavigationCollapsible
+                    title="BI:Аналитика"
+                    href="/nolayout"
+                    active={isNavOpen}
+                    links={
+                        {
+                            'Дашборд': {
+                                link : '/profile/dashboard',
+                                icon : null
+                            },
+                        }
+                    }
+                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path d="M5.2974 7.56134V13.0494" stroke="#242424" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M9.03073 4.93524V13.0494" stroke="#242424" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M12.7035 10.4614V13.0494" stroke="#242424" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path fillRule="evenodd" clipRule="evenodd" d="M12.7488 1H5.25167C2.63834 1 1.00024 2.84967 1.00024 5.46813V12.5319C1.00024 15.1503 2.63072 17 5.25167 17H12.7488C15.3698 17 17.0002 15.1503 17.0002 12.5319V5.46813C17.0002 2.84967 15.3698 1 12.7488 1Z" stroke="#242424" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+
+                </ButtonNavigationCollapsible>
               <ButtonNavigationCollapsible
                 title="Настройки"
                 href="/nolayout"
