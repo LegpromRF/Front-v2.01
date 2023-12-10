@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
-import HeaderLanding from '../../../layout/HeaderLanding/HeaderLanding.jsx';
 import RegionCharts from '../../../components/Dashboard/Charts/RegionCharts.jsx';
 import ProductionChart from '../../../components/Dashboard/Charts/ProductionChart.jsx';
 import FabricChart from '../../../components/Dashboard/Charts/FabricChart.jsx';
 import ThirdChart from '../../../components/Dashboard/Charts/ThirdChart.jsx';
 import FabricLifespanChart from '../../../components/Dashboard/Charts/FabricLifespanChart.jsx';
+import Layout from "@layout/Layout";
 import './Dashboard.css'
 import axios from 'axios';
 function Dashboard() {
@@ -41,18 +41,15 @@ function Dashboard() {
   };
 
   return (
+    <Layout>
     <div>
-      <HeaderLanding />
       <div className="firstline">
         <ProductionChart />
         <FabricChart />
-      </div>
-      <div className="secondline">
-        <ThirdChart />
-        <FabricLifespanChart />
-      </div>
-      <RegionCharts />
+        <RegionCharts />
     </div>
+    </div>
+    </Layout>
   );
 }
 

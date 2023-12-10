@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import Chart from 'chart.js/auto';
+import chartImage from '../img/graph.png';
 import axios from 'axios';
+import Layout from "@layout/Layout";
+import '../modal/modal.css';
 import './RegionCharts.css';
 const RegionCharts = () => {
   const [regionData, setRegionData] = useState({});
   const [selectedRegion, setSelectedRegion] = useState('moscow');
+  const [modalVisible, setModalVisible] = useState(false);
   const [currentChart, setCurrentChart] = useState(null);
 
   const regions = [
@@ -113,7 +117,6 @@ const RegionCharts = () => {
       return [];
     }
   };
-  
 
   useEffect(() => {
     const axiosDataForRegions = async () => {
@@ -125,7 +128,18 @@ const RegionCharts = () => {
       setRegionData(data);
     };
     axiosDataForRegions();
-  }, []);
+
+    const axiosDataForMoscow = async () => {
+      const moscowData = await axiosNaturalGrowthData(77);
+      setRegionData(prevData => ({
+        ...prevData,
+        moscow: moscowData,
+      }));
+    
+    };
+    axiosDataForMoscow();
+  },  [modalVisible]);
+  
 
   const renderChart = (data, chartId, regionName) => {
     const years = Array.from({ length: 22 }, (_, index) => 2002 + index);
@@ -138,7 +152,6 @@ const RegionCharts = () => {
         closed_count: entry ? entry.closed_count : 0,
       };
     });
-
     const labels = formattedData.map(item => item.registration_year);
     const difference = formattedData.map(item => item.opened_count - item.closed_count);
 
@@ -186,6 +199,79 @@ const RegionCharts = () => {
 
     setCurrentChart(newChart);
   };
+  const renderMiniChart = (data, chartId, regionId) => {
+    const canvasRef = useRef(null);
+    const chartRef = useRef(null);
+  
+    const region = regions.find(region => region.id === regionId);
+    const regionName = region ? region.name : '';
+  
+    useEffect(() => {
+      if (data && canvasRef.current) {
+        const ctx = canvasRef.current.getContext('2d');
+  
+        if (chartRef.current) {
+          chartRef.current.destroy();
+        }
+  
+        const years = Array.from({ length: 22 }, (_, index) => 2002 + index);
+  
+        const formattedData = years.map(year => {
+          const entry = data.find(item => item.registration_year === year);
+          return {
+            registration_year: year,
+            opened_count: entry ? entry.opened_count : 0,
+            closed_count: entry ? entry.closed_count : 0,
+          };
+        });
+  
+        const labels = formattedData.map(item => item.registration_year);
+        const difference = formattedData.map(item => item.opened_count - item.closed_count);
+  
+        chartRef.current = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: 'Разница между открытыми и закрытыми компаниями',
+                data: difference,
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x:{
+                display:false,
+              },
+              y: {
+                ticks: {
+                  stepSize: 1,
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: true,
+                position: 'top',
+              },
+              title: {
+                display: true,
+                text: `Разница между открытыми и закрытыми компаниями в ${regionName} по годам`,
+              },
+            },
+          },
+        });
+      }
+    }, [data, regionName]);
+  
+    return <canvas ref={canvasRef}></canvas>;
+  };
+  
+  
   useEffect(() => {
     if (selectedRegion && regionData[selectedRegion]) {
       const { id, name } = regions.find(region => region.id === selectedRegion);
@@ -196,24 +282,42 @@ const RegionCharts = () => {
   const handleRegionChange = (event) => {
     setSelectedRegion(event.target.value);
   };
+  const openModal = () => {
+    setModalVisible(true);
+  };
 
+  const closeModal = () => {
+    setModalVisible(false);
+  };
   return (
-      <div className="chart-container">
-      <div>
-      <div className="chart-selection">
-        <select value={selectedRegion} onChange={handleRegionChange}>
-          {regions.map(region => (
-            <option key={region.id} value={region.id}>{region.name}</option>
-          ))}
-        </select>
-      </div>
-        {regions.map(region => (
-          <div key={region.id} className={`${region.id}-chart-container`} style={{ display: selectedRegion === region.id ? 'block' : 'none' } }>
-            <canvas id={`${region.id}Chart`}></canvas>
+    
+      <div className="pccon">
+        <div className="region-chart-container" onClick={openModal}>
+
+          <div className='rimg'>
+            {renderMiniChart(regionData[selectedRegion], `${selectedRegion}MiniChart`, selectedRegion)}
+            </div>
           </div>
-        ))}
+          
+        {modalVisible && (
+          <div className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={closeModal}>&times;</span>
+                <select value={selectedRegion} onChange={handleRegionChange}>
+                  {regions.map(region => (
+                    <option key={region.id} value={region.id}>{region.name}</option>
+                  ))}
+                </select>
+                {regions.map(region => (
+                  <div key={region.id} className={`${region.id}-chart-container`} style={{ display: selectedRegion === region.id ? 'block' : 'none' } }>
+                    <canvas id={`${region.id}Chart`}></canvas>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
+                  
       </div>
-    </div>
   );
 };
 
