@@ -41,15 +41,21 @@ function Dashboard() {
   };
 
   return (
-    <Layout>
-    <div>
-      <div className="firstline">
-        <ProductionChart />
-        <FabricChart />
-        <RegionCharts />
+<Layout>
+  <div className="charts-container">
+    <div className='chart-item'>
+      <ProductionChart />
     </div>
+    <div className='chart-item'>
+      <FabricChart />
     </div>
-    </Layout>
+    <div className='chart-item'>
+      <RegionCharts />
+    </div>
+  </div>
+</Layout>
+
+
   );
 }
 

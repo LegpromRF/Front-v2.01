@@ -42,7 +42,9 @@ const FabricChart = () => {
     );
 
     const labels = filteredData.map(item => item.region_name);
-    const avgLifespan = filteredData.map(item => item.avg_lifespan);
+    const avgLifespan = filteredData.map(item => {
+      return item.avg_lifespan != 0 ? Math.abs(item.avg_lifespan) : item.avg_lifespan;
+    });
   
     const ctx = document.getElementById('secondChart');
     destroyChart(ctx);
@@ -54,16 +56,10 @@ const FabricChart = () => {
           {
             label: 'Средний срок жизни (мес.)',
             data: avgLifespan,
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.5)',
-              'rgba(54, 162, 235, 0.5)',
-              'rgba(255, 206, 86, 0.5)',
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-            ],
+            backgroundColor: 
+            'rgba(244, 164, 96, 0.7)',
+            borderColor:
+              'rgba(244, 164, 96, 1)',
             borderWidth: 1,
           },
         ],
@@ -121,15 +117,11 @@ const FabricChart = () => {
         {
           data: topThreeAvgLifespan,
           backgroundColor: [
-            'rgba(255, 99, 132, 0.5)',
-            'rgba(54, 162, 235, 0.5)',
-            'rgba(255, 206, 86, 0.5)',
+            'rgba(244, 164, 96, 0.7)',
 
           ],
           borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
+            'rgba(244, 164, 96, 1)',
 
           ],
           borderWidth: 1,
@@ -155,7 +147,9 @@ const FabricChart = () => {
       item => !topLabels.includes(item.region_name)
     );
     const labels = filteredData.map(item => item.region_name); // Названия регионов
-    const avgLifespan = filteredData.map(item => item.avg_lifespan);
+    const avgLifespan = filteredData.map(item => {
+      return item.avg_lifespan != 0 ? Math.abs(item.avg_lifespan) : item.avg_lifespan;
+    });
   
     const ctx = thumbnailCanvasRef.current.getContext('2d');
     destroyChart(ctx);
@@ -167,16 +161,10 @@ const FabricChart = () => {
           {
             label: 'Средний срок жизни (мес.)',
             data: avgLifespan,
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.5)',
-              'rgba(54, 162, 235, 0.5)',
-              'rgba(255, 206, 86, 0.5)',
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-            ],
+            backgroundColor: 
+              'rgba(244, 164, 96, 0.7)',
+            borderColor:
+              'rgba(244, 164, 96, 1)',
             borderWidth: 1,
           },
         ],
@@ -240,7 +228,9 @@ const FabricChart = () => {
       <div className='con'>
         <div className="second-chart-container" onClick={openModal}>
           <div className='img'>
-            <canvas ref={thumbnailCanvasRef}></canvas>
+            <div className="canvas-container">
+              <canvas ref={thumbnailCanvasRef}></canvas>
+            </div>
           </div>
         </div>
         {modalVisible && (
@@ -255,6 +245,7 @@ const FabricChart = () => {
           </div>
         )}
       </div>
+
     );
     };
     

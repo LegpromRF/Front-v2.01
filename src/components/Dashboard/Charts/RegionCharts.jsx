@@ -5,6 +5,7 @@ import axios from 'axios';
 import Layout from "@layout/Layout";
 import '../modal/modal.css';
 import './RegionCharts.css';
+
 const RegionCharts = () => {
   const [regionData, setRegionData] = useState({});
   const [selectedRegion, setSelectedRegion] = useState('moscow');
@@ -291,34 +292,33 @@ const RegionCharts = () => {
   };
   return (
     
-      <div className="pccon">
-        <div className="region-chart-container" onClick={openModal}>
+    <div className="pccon">
+      <div className="region-chart-container" onClick={openModal}>
 
-          <div className='rimg'>
-            {renderMiniChart(regionData[selectedRegion], `${selectedRegion}MiniChart`, selectedRegion)}
-            </div>
+        <div className='rimg'>
+          {renderMiniChart(regionData[selectedRegion], `${selectedRegion}MiniChart`, selectedRegion)}
           </div>
-          
-        {modalVisible && (
-          <div className="modal">
-            <div className="modal-content">
-              <span className="close" onClick={closeModal}>&times;</span>
-                <select value={selectedRegion} onChange={handleRegionChange}>
-                  {regions.map(region => (
-                    <option key={region.id} value={region.id}>{region.name}</option>
-                  ))}
-                </select>
+        </div>
+        
+      {modalVisible && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
+              <select value={selectedRegion} onChange={handleRegionChange}>
                 {regions.map(region => (
-                  <div key={region.id} className={`${region.id}-chart-container`} style={{ display: selectedRegion === region.id ? 'block' : 'none' } }>
-                    <canvas id={`${region.id}Chart`}></canvas>
-                  </div>
+                  <option key={region.id} value={region.id}>{region.name}</option>
                 ))}
-            </div>
+              </select>
+              {regions.map(region => (
+                <div key={region.id} className={`${region.id}-chart-container`} style={{ display: selectedRegion === region.id ? 'block' : 'none' } }>
+                  <canvas id={`${region.id}Chart`}></canvas>
+                </div>
+              ))}
           </div>
-        )}
-                  
-      </div>
-  );
+        </div>
+      )}
+                
+    </div>
+);
 };
-
 export default RegionCharts;
