@@ -168,7 +168,7 @@ const RegionCharts = () => {
         labels: labels,
         datasets: [
           {
-            label: 'Разница между открытыми и закрытыми компаниями',
+            label: 'Естественный прирост производств по регионам',
             data: difference,
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
             borderColor: 'rgba(54, 162, 235, 1)',
@@ -191,7 +191,7 @@ const RegionCharts = () => {
           },
           title: {
             display: true,
-            text: `Разница между открытыми и закрытыми компаниями в ${regionName} по годам`,
+            text: `Естественный прирост производств в ${regionName} по годам`,
           },
         },
       },
@@ -234,7 +234,7 @@ const RegionCharts = () => {
             labels: labels,
             datasets: [
               {
-                label: 'Разница между открытыми и закрытыми компаниями',
+                label: 'Естественный прирост производств',
                 data: difference,
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 borderColor: 'rgba(54, 162, 235, 1)',
@@ -260,7 +260,7 @@ const RegionCharts = () => {
               },
               title: {
                 display: true,
-                text: `Разница между открытыми и закрытыми компаниями в ${regionName} по годам`,
+                text: `Естественный прирост производств в ${regionName} по годам`,
               },
             },
           },
