@@ -1,14 +1,8 @@
 .firstline {
     display: flex;
-    margin: 1% auto; 
+    margin: 0 auto; 
     justify-content: space-between;
     align-items: center;
-    width:80%;
-  }
-  .secondline {
-    display: flex; 
-    margin: 1% auto; 
-    justify-content: space-between; 
-    align-items: center;
-    width:80%;
+    width:100%;
+    gap: 20px;
   }
