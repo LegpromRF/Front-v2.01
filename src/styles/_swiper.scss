@@ -1,0 +1,20 @@
+.swiper-thumbs .swiper-slide {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.application-swiper,
+.application-swiper .swiper-wrapper,
+.application-swiper .swiper-wrapper .swiper-slide,
+.application-swiper .swiper-wrapper .swiper-slide img {
+  max-height: 400px;
+}
+
+.application-swiper .swiper-wrapper .swiper-slide img {
+  width: 100%;
+}
+
+.application-swiper .swiper-slide {
+  border-radius: 5px;
+  overflow: hidden;
+}

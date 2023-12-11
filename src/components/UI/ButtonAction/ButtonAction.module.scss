@@ -1,0 +1,31 @@
+@import "@styles/variables";
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 208px;
+  max-width: 250px;
+  background-color: $gray-2;
+  border-radius: 5px;
+  min-height: 34px;
+  overflow: hidden;
+}
+
+.titleBlock {
+  background-color: $gray-3;
+  min-height: 34px;
+  padding-left: 14px;
+  padding-right: 14px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 35px;
+  width: 35px;
+}

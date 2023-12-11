@@ -1,0 +1,12 @@
+@import "@/styles/variables";
+
+.item {
+  padding: 16px 36px;
+  background-color: $colorText;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $background;
+  width: 100%;
+}

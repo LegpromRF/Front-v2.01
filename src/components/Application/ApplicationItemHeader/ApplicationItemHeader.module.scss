@@ -1,0 +1,31 @@
+@import "@/styles/variables";
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  font-size: 16px;
+  padding: 14px 25px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 75px;
+}
+
+.text {
+  font-weight: 300;
+
+  span {
+    color: $gray-4;
+  }
+}
+
+.status {
+  span {
+    color: $green;
+    font-weight: 500;
+  }
+}
