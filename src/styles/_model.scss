@@ -65,6 +65,13 @@ body {
   height: 100%;
 }
 
+@media (max-width: 768px) {
+  .page.application {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
 @media (max-width: 750px) {
   [class*="__profileContainer"] {
     max-width: 1872px;

@@ -31,10 +31,11 @@ const HeaderApplication = () => {
             />
           }
         />
+      </div>
 
+      <div className={styles.btnBuyWrapper}>
         <ButtonBuySubscription
           price={4800}
-          style={{ maxWidth: "280px", width: "100%" }}
         />
       </div>
     </div>

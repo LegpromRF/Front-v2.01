@@ -4,12 +4,17 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-width: 208px;
-  max-width: 250px;
+  min-width: max-content;
+  max-width: 100%;
   background-color: $gray-2;
   border-radius: 5px;
   min-height: 34px;
   overflow: hidden;
+
+  @media (min-width: 1280px) {
+    min-width: 208px;
+    max-width: 208px;
+  }
 }
 
 .titleBlock {

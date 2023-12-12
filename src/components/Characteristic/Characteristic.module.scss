@@ -3,13 +3,26 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin: -6px;
+  line-height: normal;
 
   p {
     width: 50%;
+    padding: 6px;
   }
 
   span {
     font-weight: 300;
     width: 50%;
+    padding: 6px;
+  }
+}
+
+@media (max-width: 475px) {
+  .wrapper {
+    span {
+      margin-left: auto;
+      width: max-content;
+    }
   }
 }

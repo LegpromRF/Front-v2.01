@@ -10,10 +10,55 @@
   gap: 12px;
   font-size: 16px;
   width: 100%;
+
+  @media (max-width: 1405px) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  @media (max-width: 900px) {
+    gap: 16px;
+  }
 }
 
 .headerContent {
   display: flex;
   align-items: center;
   gap: 12px;
+  margin-left: auto;
+
+  @media (max-width: 1150px) {
+    margin-left: 0;
+  }
+
+  @media (max-width: 900px) {
+    flex-wrap: wrap;
+    width: 100%;
+
+    & > * {
+      flex: 1 1 0;
+    }
+
+    & > button {
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+    }
+  }
+}
+
+.btnBuyWrapper {
+  display: flex;
+  width: 100%;
+  max-width: 280px;
+  min-width: 280px;
+
+  @media (max-width: 1050px) {
+    min-width: auto;
+  }
+
+  @media (max-width: 900px) {
+    max-width: 100%;
+    min-width: 100%;
+  }
 }

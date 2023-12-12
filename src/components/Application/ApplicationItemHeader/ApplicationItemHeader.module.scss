@@ -4,15 +4,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   gap: 16px;
   font-size: 16px;
   padding: 14px 25px;
-}
+  column-gap: 75px;
 
-.left {
-  display: flex;
-  align-items: center;
-  gap: 75px;
+  @media (max-width: 768px) {
+    padding: 14px 0;
+  }
 }
 
 .text {
@@ -24,6 +24,8 @@
 }
 
 .status {
+  margin-right: auto;
+
   span {
     color: $green;
     font-weight: 500;

@@ -1,6 +1,23 @@
-.swiper-thumbs .swiper-slide {
-  border-radius: 5px;
-  overflow: hidden;
+@import "@/styles/variables";
+
+.swiper-thumbs {
+  .swiper-slide {
+    overflow: hidden;
+    padding: 5px;
+    cursor: pointer;
+
+    img {
+      border-radius: 5px;
+    }
+
+    &.swiper-slide-thumb-active img {
+      outline: 6px solid $blue;
+
+      @media (max-width: 768px) {
+        outline: 3px solid $blue;
+      }
+    }
+  }
 }
 
 .application-swiper,
@@ -17,4 +34,18 @@
 .application-swiper .swiper-slide {
   border-radius: 5px;
   overflow: hidden;
+}
+
+.thumbs-prev,
+.thumbs-next {
+  cursor: pointer;
+  min-width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 8px;
+    height: 28px;
+  }
 }
