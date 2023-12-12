@@ -36,3 +36,13 @@
   padding: 9px;
   width: 50%;
 }
+
+.characteristicsBlockList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.characteristicsBlockList > div {
+  flex: 1 1 0;
+}

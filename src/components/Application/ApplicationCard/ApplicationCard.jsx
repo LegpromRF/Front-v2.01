@@ -1,3 +1,4 @@
+import Characteristic from "../../Characteristic/Characteristic";
 import CharacteristicsList from "../../CharacteristicsList/CharacteristicsList";
 import styles from "./ApplicationCard.module.scss";
 import ApplicationMainContent from "./ApplicationMainContent/ApplicationMainContent";
@@ -144,6 +145,19 @@ const ApplicationCard = () => {
           </div>
           <div className="box">
             <CharacteristicsList list={secondCharacteristics} />
+          </div>
+
+          <div className={styles.characteristicsBlockList}>
+            <div>
+              <div className="box" style={{ padding: "10px 14px" }}>
+                <h2 className="characteristics-title center">Файлы</h2>
+              </div>
+            </div>
+            <div className="box">
+              <h2 className="characteristics-title">Размеры / ростовки</h2>
+
+              <Characteristic parameter="parameter" value="value" />
+            </div>
           </div>
         </div>
         <div className={styles.characteristicsBlock}>
