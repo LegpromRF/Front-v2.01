@@ -21,3 +21,18 @@
   width: 65%;
   padding: 14px;
 }
+
+.characteristics {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -9px;
+  margin-top: 18px;
+}
+
+.characteristicsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 9px;
+  width: 50%;
+}
