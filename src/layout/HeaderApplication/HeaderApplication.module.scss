@@ -11,6 +11,10 @@
   font-size: 16px;
   width: 100%;
 
+  @media (max-width: 1450px) {
+    padding: 15px;
+  }
+
   @media (max-width: 1405px) {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -21,13 +25,19 @@
   }
 }
 
+.title {
+  @media (max-width: 1450px) {
+    width: 100%;
+  }
+}
+
 .headerContent {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-left: auto;
 
-  @media (max-width: 1150px) {
+  @media(max-width: 1450px){ 
     margin-left: 0;
   }
 
@@ -49,9 +59,7 @@
 
 .btnBuyWrapper {
   display: flex;
-  width: 100%;
-  max-width: 280px;
-  min-width: 280px;
+  width: max-content;
 
   @media (max-width: 1050px) {
     min-width: auto;

@@ -9,4 +9,8 @@
   align-items: center;
   color: $background;
   width: 100%;
+
+  @media(max-width: 768px) {
+    padding: 12px 18px;
+  }
 }

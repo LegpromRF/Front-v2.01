@@ -1,7 +1,6 @@
 import ApplicationStats from "../ApplicationStats/ApplicationStats";
 import MainCharacteristics from "../MainCharacteristics/MainCharacteristics";
 import UnavailableСontacts from "../UnavailableСontacts/UnavailableСontacts";
-import styles from "./ApplicationMainContent.module.scss";
 
 const ApplicationMainContent = () => {
   return (

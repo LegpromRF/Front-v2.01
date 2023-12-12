@@ -5,7 +5,9 @@ import styles from "./HeaderApplication.module.scss";
 const HeaderApplication = () => {
   return (
     <div className={styles.header}>
-      <p>Заявка № ХХХХХХ Пошив платья для официантов</p>
+      <p className={styles.title}>
+        Заявка № ХХХХХХ Пошив платья для официантов
+      </p>
 
       <div className={styles.headerContent}>
         <ButtonAction
@@ -34,9 +36,7 @@ const HeaderApplication = () => {
       </div>
 
       <div className={styles.btnBuyWrapper}>
-        <ButtonBuySubscription
-          price={4800}
-        />
+        <ButtonBuySubscription price={4800} />
       </div>
     </div>
   );
