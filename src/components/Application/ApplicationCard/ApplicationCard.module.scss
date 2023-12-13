@@ -1,0 +1,85 @@
+@import "@/styles/variables";
+
+.wrapper {
+  padding: 30px 16px;
+  border: 1px solid $gray-5;
+  border-radius: 7px;
+
+  @media (max-width: 768px) {
+    padding: 22px;
+  }
+}
+
+.mainContentWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -14px;
+}
+
+.slider {
+  width: 35%;
+  padding: 14px;
+}
+
+.mainContent {
+  width: 65%;
+  padding: 14px;
+}
+
+.characteristics {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -9px;
+  margin-top: 18px;
+
+  @media (max-width: 768px) {
+    margin-top: 9px;
+  }
+}
+
+.characteristicsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 9px;
+  width: 50%;
+
+  @media (max-width: 768px) {
+    gap: 18px;
+  }
+}
+
+.characteristicsBlockList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.characteristicsBlockList > div {
+  flex: 1 1 0;
+}
+
+@media (max-width: 1450px) {
+  .slider,
+  .mainContent {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1150px) {
+  .slider,
+  .mainContent {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .slider,
+  .mainContent {
+    width: 100%;
+  }
+
+  .characteristicsBlock {
+    width: 100%;
+  }
+}

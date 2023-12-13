@@ -1,0 +1,9 @@
+@import "@/styles/variables";
+
+.btn {
+  padding: 8px 16px;
+  font-size: $fontSize;
+  border: 1px solid $gray-5;
+  border-radius: 5px;
+  width: max-content;
+}
