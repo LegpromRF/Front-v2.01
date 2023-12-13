@@ -1,0 +1,16 @@
+@import "@/styles/variables";
+
+.item {
+  padding: 16px 36px;
+  background-color: $colorText;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $background;
+  width: 100%;
+
+  @media(max-width: 768px) {
+    padding: 12px 18px;
+  }
+}

@@ -20,7 +20,8 @@ import ContactsPage from "@/pages/profile/order/contacts.jsx";
 import SelectionPage from "@/pages/profile/selection.jsx";
 import ProcurementRegisterPage from "@/pages/profile/order/procurement.jsx";
 import DashboardPage from "@/pages/profile/dashboard.jsx";
- 
+import ApplicationPage from "./pages/applicationPage.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,8 +50,8 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path:"/profile/dashboard",
-    element:<DashboardPage />
+    path: "/profile/dashboard",
+    element: <DashboardPage />,
   },
   {
     path: "/profile/order/createorder",
@@ -93,12 +94,14 @@ const router = createBrowserRouter([
     path: "/Yatokenpage",
     element: <Yatokenpage />,
   },
+  {
+    path: "/applicationpage",
+    element: <ApplicationPage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );

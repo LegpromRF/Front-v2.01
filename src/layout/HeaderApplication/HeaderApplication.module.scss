@@ -1,0 +1,72 @@
+.header {
+  padding: 0 15px;
+
+  background-color: #fff;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 16px;
+  width: 100%;
+
+  @media (max-width: 1450px) {
+    padding: 15px;
+  }
+
+  @media (max-width: 1405px) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  @media (max-width: 900px) {
+    gap: 16px;
+  }
+}
+
+.title {
+  @media (max-width: 1450px) {
+    width: 100%;
+  }
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+
+  @media(max-width: 1450px){ 
+    margin-left: 0;
+  }
+
+  @media (max-width: 900px) {
+    flex-wrap: wrap;
+    width: 100%;
+
+    & > * {
+      flex: 1 1 0;
+    }
+
+    & > button {
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+    }
+  }
+}
+
+.btnBuyWrapper {
+  display: flex;
+  width: max-content;
+
+  @media (max-width: 1050px) {
+    min-width: auto;
+  }
+
+  @media (max-width: 900px) {
+    max-width: 100%;
+    min-width: 100%;
+  }
+}

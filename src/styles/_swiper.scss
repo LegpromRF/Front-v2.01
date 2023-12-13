@@ -1,0 +1,51 @@
+@import "@/styles/variables";
+
+.swiper-thumbs {
+  .swiper-slide {
+    overflow: hidden;
+    padding: 5px;
+    cursor: pointer;
+
+    img {
+      border-radius: 5px;
+    }
+
+    &.swiper-slide-thumb-active img {
+      outline: 6px solid $blue;
+
+      @media (max-width: 768px) {
+        outline: 3px solid $blue;
+      }
+    }
+  }
+}
+
+.application-swiper,
+.application-swiper .swiper-wrapper,
+.application-swiper .swiper-wrapper .swiper-slide,
+.application-swiper .swiper-wrapper .swiper-slide img {
+  max-height: 400px;
+}
+
+.application-swiper .swiper-wrapper .swiper-slide img {
+  width: 100%;
+}
+
+.application-swiper .swiper-slide {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.thumbs-prev,
+.thumbs-next {
+  cursor: pointer;
+  min-width: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: 8px;
+    height: 28px;
+  }
+}
