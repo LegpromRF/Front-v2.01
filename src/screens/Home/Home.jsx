@@ -149,7 +149,7 @@ const Home = () => {
                             <div className={styles.landing__textAll}>
                                 <span >
                                     Сейчас открыто: <b>{countOpenedCards}</b> 
-                                    {[11, 12, 13, 14].includes(countOpenedCards) || [0, 5, 6, 7, 8, 9].includes(countOpenedCards % 10) ? ' заявок '
+                                    {[11, 12, 13, 14].includes(countOpenedCards % 100) || [0, 5, 6, 7, 8, 9].includes(countOpenedCards % 10) ? ' заявок '
                                     : countOpenedCards % 10 == 1 ? ' заявка ' : ' заявки '}
                                     на сумму <b>{sumOpenedCards} ₽</b>
                                 </span>
