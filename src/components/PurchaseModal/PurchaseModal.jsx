@@ -92,7 +92,7 @@ const PurchaseModalWrapper = ({ isOpen, close }) => {
    
    useEffect(() => {
       if (!isOpen || isOpenAccess) return
-      fetch('https://api.legpromrf.ru/subscriptions/create/').then(res => {
+      fetch('https://api.legpromrf.ru/lk/welcome').then(res => {
          const SERVER_DENIED = !res.ok //запрос на сервер
          if (SERVER_DENIED) {
             navigate('/auth')
