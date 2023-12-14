@@ -10,15 +10,20 @@ const PurchaseModal = ({ isOpen, close }) => {
    
    useEffect(() => {
       if (!isOpen || isOpenAccess) return
-      fetch(apiHOST+'lk/welcome').then(res => {
-         const SERVER_DENIED = !res.ok
-         if (SERVER_DENIED) {
-            navigate('/auth')
-            close()
-         } else {
-            setOpenAccess(true)
-         }
-      })
+
+      try {
+         fetch(apiHOST+'lk/welcome').then(res => {
+            const serverDenied = !res.ok
+            if (serverDenied) {
+               navigate('/auth')
+               close()
+            } else {
+               setOpenAccess(true)
+            }
+         })
+      } catch(e) {
+         console.error(e)
+      }
    }, [isOpen, isOpenAccess])
    
    return (isOpenAccess && isOpen) ? <PurchaseModalContent close={close} /> : ''
