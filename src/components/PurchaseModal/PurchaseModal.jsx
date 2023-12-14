@@ -5,7 +5,7 @@ import PurchaseModalContent from './PurchaseModalContent';
 
 //использую обертку для обработки сценария с неавторизованным пользователем или иным запретом доступа к покупке
 const PurchaseModal = ({ isOpen, close }) => {
-   const [isOpenAccess, setOpenAccess] = useState(true) 
+   const [isOpenAccess, setOpenAccess] = useState(false) 
    const navigate = useNavigate()
    
    useEffect(() => {
