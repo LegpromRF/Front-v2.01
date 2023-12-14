@@ -23,3 +23,4 @@ export const store = configureStore({
   reducer: reducers,
   devTools: true,
 });
+

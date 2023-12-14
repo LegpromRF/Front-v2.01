@@ -1,55 +1,60 @@
 import styles from './Home.module.scss'
+import { useState, useEffect, useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllCards } from "@store/procurementRegister/procRegister.slice";
 // import HeaderLanding from '@/layout/HeaderLanding/HeaderLanding';
 import HeaderLanding from '@/layout/HeaderLanding/HeaderLanding.jsx'
 import Img1 from '@public/Landing/card_img_1.png'
 import Img2 from '@public/Landing/card_img_2.png'
 import Img3 from '@public/Landing/card_img_3.png'
 
+import PurchaseModal from '@/components/PurchaseModal/PurchaseModal';
 // import LandingCarusel from '@/src/components/LandingCarusel/LandingCarusel';
-// import {useState} from "react";
 // import ModalAuth from "@/src/layout/Modal/ModalAuth/ModalAuth";
-import {useDispatch} from "react-redux";
 import {Link} from "react-router-dom";
 
 const Home = () => {
+    const [isPurchaseModalOpen, setPurchaseModalOpen] = useState(false)
     const dispatch = useDispatch()
-    const cards = [
+    const cards = useSelector((state) => state.procRegister.cards) 
+    useEffect(() => {
+        const query = ''
+        dispatch(getAllCards(query))
+    }, [])
 
-        {
-            img: Img1,
-            title: 'Пошив платья для официантов',
-            number: '№24500968',
-            circulation: '450',
-            datePublished: '21.03.2023',
-            budget: '700 000',
-            dateChange: '27.06.2023',
-            responses: '23',
-            views: '259',
-        },
-        {
-            img: Img2,
-            title: 'Пошив платья для официантов',
-            number: '№24500968',
-            circulation: '350',
-            datePublished: '25.03.2023',
-            budget: '600 000',
-            dateChange: '26.06.2023',
-            responses: '54',
-            views: '336',
-        },
-        {
-            img: Img3,
-            title: 'Пошив платья для официантов',
-            number: '№24500968',
-            circulation: '150',
-            datePublished: '30.03.2023',
-            budget: '200 000',
-            dateChange: '25.06.2023',
-            responses: '63',
-            views: '129',
+    const openPurchaseModal = () => setPurchaseModalOpen(true)
+    const closePurchaseModal = () => setPurchaseModalOpen(false)
+
+    const cardsToPreview = useMemo(() => {
+        const sortedCards = [...cards]
+        sortedCards.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        let currentCards = []
+
+        for (const card of sortedCards) {
+            if (card.photo_urls) currentCards.push(card)
+            if (currentCards.length == 3) break
         }
-    ]
 
+        currentCards = currentCards.map(card => ({
+            img: card.photo_urls.split(',')[0],
+            title: card.clothes_name,
+            number: '№'+card.order_number,
+            circulation: card.count,
+            datePublished: card.created_at.split('T')[0],
+            budget: card.price_for_all,
+            dateChange: card.deadline.split('T')[0],
+        }))
+
+        return currentCards
+    }, [cards.length])
+
+    const [sumOpenedCards, countOpenedCards] = useMemo(() => {
+        const currentCards = cards.filter(card => card.status == 'Открыт' && card.purchase_type == "Тендер")
+        const count = currentCards.length 
+        const sum = currentCards.reduce((acc, card) => acc + card.price_for_all, 0)
+        return [sum, count]
+    }, [cards.length])
+    
     return (
         <>
             {/*<Head>*/}
@@ -103,7 +108,7 @@ const Home = () => {
 
                                 </div>
                                 <div className={styles.landing__auth}>
-                                    <button>
+                                    <button onClick={openPurchaseModal}>
                                         Купить подписку
                                         <span>
                                             4 800 ₽/мес
@@ -143,11 +148,14 @@ const Home = () => {
                             </div>
                             <div className={styles.landing__textAll}>
                                 <span >
-                                    Сейчас открыто <b>X XXX</b> заявок на сумму <b>XXX XXX XXX ₽</b>
+                                    Сейчас открыто: <b>{countOpenedCards}</b> 
+                                    {[11, 12, 13, 14].includes(countOpenedCards) || [0, 5, 6, 7, 8, 9].includes(countOpenedCards % 10) ? ' заявок '
+                                    : countOpenedCards % 10 == 1 ? ' заявка ' : ' заявки '}
+                                    на сумму <b>{sumOpenedCards} ₽</b>
                                 </span>
                             </div>
                             <div className={styles.card}>
-                                {cards.map((card, index) => {
+                                {cardsToPreview.map((card, index) => {
                                     return (
                                         <div key={index} className={styles.card__item}>
                                             <div className={styles.card__body}>
@@ -221,6 +229,7 @@ const Home = () => {
 
 
                 </div>
+                <PurchaseModal isOpen={isPurchaseModalOpen} close={closePurchaseModal} />
             </main>
         </>
     );
