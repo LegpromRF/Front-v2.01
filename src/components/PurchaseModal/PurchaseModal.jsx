@@ -21,7 +21,7 @@ const PurchaseModal = ({ isOpen, close }) => {
       })
    }, [isOpen, isOpenAccess])
    
-   return (isOpenAccess && isOpen) ? <PurchaseModalContent isOpen={isOpen} close={close} /> : ''
+   return (isOpenAccess && isOpen) ? <PurchaseModalContent close={close} /> : ''
 }
 
 export default PurchaseModal
