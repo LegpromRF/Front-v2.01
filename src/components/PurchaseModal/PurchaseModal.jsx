@@ -5,6 +5,8 @@ import ImgClose from '../../../public/icon/close.svg'
 import { downloadPDFWithINN, purchaseTypes } from './constants'
 import PurchaseType from './stages/PurchaseType'
 import PurchaseInit from './stages/PurchaseInit'
+import { apiHOST } from "@/utils/constants/apiEndpoints.js";
+
 import styles from './PurchaseModal.module.scss'
 
 const modalPurchaseContainerID = 'modalPurchaseContainerID'
@@ -92,7 +94,7 @@ const PurchaseModalWrapper = ({ isOpen, close }) => {
    
    useEffect(() => {
       if (!isOpen || isOpenAccess) return
-      fetch('https://api.legpromrf.ru/lk/welcome').then(res => {
+      fetch(apiHOST+'lk/welcome').then(res => {
          const SERVER_DENIED = !res.ok
          if (SERVER_DENIED) {
             navigate('/auth')
