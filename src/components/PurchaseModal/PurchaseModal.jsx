@@ -87,7 +87,7 @@ const PurchaseModal = ({ close }) => {
 
 //использую wrapper для обработки сценария с неавторизованным пользователем или иным запретом доступа к покупке
 const PurchaseModalWrapper = ({ isOpen, close }) => {
-   const [isOpenAccess, setOpenAccess] = useState(true) //TODO
+   const [isOpenAccess, setOpenAccess] = useState(false) 
    const navigate = useNavigate()
    
    useEffect(() => {
