@@ -31,18 +31,12 @@ const PurchaseModalContent = ({ close }) => {
       if (id == purchaseTypes.CARD) setPurchaseType(purchaseTypes.CARD)
    }
 
-   const handleClose = () => {
-      setCurrentStage(1)
-      if (inputINNRef.current) inputINNRef.current.value = ''
-      close()
-   }
-
    const handlePurchase = useCallback(() => {
       if (purchaseType == purchaseTypes.ACCOUNT) {
          const inn = inputINNRef.current?.value ?? ''
          if (inn) downloadPDFWithINN(inn) //async
       }
-      handleClose()
+      close()
    }, [purchaseType])
    
    const handleNextStage = () => setCurrentStage(stage => {
@@ -73,7 +67,7 @@ const PurchaseModalContent = ({ close }) => {
                   {currentStage == 1 ? titlesByStage.typePurchase : ''}
                   {currentStage == 2 ? titlesByStage[purchaseType] : ''}
                </h2>
-               <button onClick={handleClose}><img src={ImgClose} alt="close" /></button>
+               <button onClick={close}><img src={ImgClose} alt="close" /></button>
             </div>
             {currentStage == 1 ? <PurchaseType type={purchaseType} handleChange={handleRadioChange} />: ''}
             {currentStage == 2 ? <PurchaseInit type={purchaseType} inputINNRef={inputINNRef} />: ''}
