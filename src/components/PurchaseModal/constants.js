@@ -13,7 +13,7 @@ export const downloadPDFWithINN = async (inn) => {
     const page = pdfDoc.getPage(0)
     page.drawText(inn, {
       x: 139,
-      y: 538,
+      y: 537,
       size: 12,
     })
     const pdfDataUri = await pdfDoc.saveAsBase64({ dataUri: true });
