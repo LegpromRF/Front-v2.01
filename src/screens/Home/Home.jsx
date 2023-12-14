@@ -126,22 +126,22 @@ const Home = () => {
                             <div className={styles.landing__advantages2}>
                                 <div className={styles.landing__advantages2__block}>
                                     <span>
-                                        Более 3000 000 000 ₽ объём заказов, размещённых за 2023 год
+                                        Более <b>3 000 000 000 ₽</b> объём заказов, размещённых за 2023 год
                                     </span>
                                 </div>
                                 <div className={styles.landing__advantages2__block}>
                                     <span>
-                                        Более 100 новых оптовых заявок на пошив ежедневно
+                                        Более <b>100</b> новых оптовых заявок на пошив ежедневно
                                     </span>
                                 </div>
                                 <div className={styles.landing__advantages2__block}>
                                     <span>
-                                        Суммарная потребность более 200 млн руб./мес
+                                        Суммарная потребность более <b>200</b> млн руб./мес
                                     </span>
                                 </div>
                                 <div className={styles.landing__advantages2__block}>
                                     <span>
-                                        Средняя сумма заказа 350 тыс. ₽ — 2,5 млн ₽
+                                        Средняя сумма заказа <b>350 тыс. ₽ — 2,5 млн ₽</b>
                                     </span>
                                 </div>
 

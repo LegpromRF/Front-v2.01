@@ -1,8 +1,17 @@
-.firstline {
-    display: flex;
-    margin: 0 auto; 
-    justify-content: space-between;
-    align-items: center;
-    width:100%;
-    gap: 20px;
+.charts-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.chart-item {
+  flex: 0 0 calc(50% - 20px); /* Элементы займут половину экрана с учетом отступов */
+  max-width: calc(50% - 20px); /* Максимальная ширина элемента, учитывая отступы */
+}
+
+@media screen and (max-width: 768px) {
+  .chart-item {
+    flex: 0 0 calc(100% - 20px); /* На мобильных устройствах элементы займут всю доступную ширину */
+    max-width: calc(100% - 20px); /* Максимальная ширина элемента, учитывая отступы */
   }
+}

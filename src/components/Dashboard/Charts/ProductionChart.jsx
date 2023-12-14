@@ -38,8 +38,8 @@ const ProductionChart = () => {
     );
 
     const labels = filteredData.map(item => item.region_name);
-    const openCounts = filteredData.map(item => item.open_count);
-    const closedCounts = filteredData.map(item => item.closed_count);
+    const closedCounts = filteredData.map(item => item.open_count);
+    const openCounts = filteredData.map(item => item.closed_count);
 
     const ctx = document.getElementById('firstChart');
     destroyChart(ctx);
@@ -49,17 +49,18 @@ const ProductionChart = () => {
         labels: labels,
         datasets: [
           {
-            label: 'Открыто',
-            data: openCounts,
-            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
-          },
-          {
+            
             label: 'Закрыто',
             data: closedCounts,
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
             borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1,
+          },
+          {
+            label: 'Открыто',
+            data: openCounts,
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
           },
         ],
@@ -92,17 +93,18 @@ const ProductionChart = () => {
         labels: labels,
         datasets: [
           {
-            label: 'Открыто',
+            
+            label: 'Закрыто',
             data: openCounts,
-            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1,
           },
           {
-            label: 'Закрыто',
+            label: 'Открыто',
             data: closedCounts,
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
           },
         ],
@@ -128,7 +130,7 @@ const ProductionChart = () => {
     );
 
     const labels = filteredData.map(item => item.region_name);
-    const openCounts = filteredData.map(item => item.open_count);
+    const openCounts= filteredData.map(item => item.open_count);
     const closedCounts = filteredData.map(item => item.closed_count);
   
     const ctx = thumbnailCanvasRef.current.getContext('2d');
@@ -138,15 +140,16 @@ const ProductionChart = () => {
         labels: labels,
         datasets: [
           {
+            
             label: 'Открыто',
-            data: openCounts,
+            data: closedCounts,
             backgroundColor: 'rgba(54, 162, 235, 0.5)',
             borderColor: 'rgba(54, 162, 235, 1)',
             borderWidth: 1,
           },
           {
             label: 'Закрыто',
-            data: closedCounts,
+            data: openCounts,
             backgroundColor: 'rgba(255, 99, 132, 0.5)',
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1,
@@ -171,7 +174,7 @@ const ProductionChart = () => {
           },
           title: {
             display: true,
-            text: 'Статус производства для топ регионов',
+            text: 'Статус производства по регионам',
           },
         },
       },
@@ -197,24 +200,27 @@ const ProductionChart = () => {
   };
 
   return (
-    <div className='con'>
-      <div className="first-chart-container" onClick={openModal}>
-        <div className='img'>
-          <canvas ref={thumbnailCanvasRef}></canvas>
+<div className='con'>
+  <div className="first-chart-container" onClick={openModal}>
+    <div className='img'>
+      <div className="canvas-container">
+        <canvas ref={thumbnailCanvasRef}></canvas>
+      </div>
+    </div>
+  </div>
+  {modalVisible && (
+    <div className="modal">
+      <div className="modal-content">
+        <span className="close" onClick={closeModal}>&times;</span>
+        <canvas id="firstChart"></canvas>
+        <div class="topChart_p">
+          <canvas id="regionChart"></canvas>
         </div>
       </div>
-      {modalVisible && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={closeModal}>&times;</span>
-            <canvas id="firstChart"></canvas>
-            <div class = "topChart_p">
-            <canvas id="regionChart"></canvas>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
+  )}
+</div>
+
   );
 };
 
