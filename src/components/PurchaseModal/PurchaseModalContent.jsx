@@ -14,7 +14,7 @@ const modalPurchaseContainerID = 'modalPurchaseContainerID'
 const titlesByStage = {
    typePurchase: 'Выберете способ оплаты',
    [purchaseTypes.ACCOUNT]: 'Введите ваш ИНН',
-   [purchaseTypes.CARD]: 'Введите данные вашей карты'
+   [purchaseTypes.CARD]: 'Оплата картой'
 }
 
 const stagesCount = 2 //две стадии оплаты
