@@ -1,31 +1,34 @@
 /*========== MAIN COLOR ==========*/
 
 $colorText: #242424;
-$background: #F5F5F5;
-$blue: #0036FF;
+$background: #f5f5f5;
+$blue: #0036ff;
 $blueHover: #1c41ca;
-$orange: #FF8A00;
-$gray: #D4D4D4;
-$red: #FF0A00;
+$orange: #ff8a00;
+$gray: #d4d4d4;
+$gray-2: #ededed;
+$gray-3: #f3f3f3;
+$gray-4: #979797;
+$gray-5: #dadada;
+$red: #ff0a00;
+$green: #04bb00;
 
 /*========== PAGE ==========*/
 
 $containerWidth: 1682px;
 $containerPadding: 30px;
 
-$fontFamily: 'Roboto', sans-serif;
+$fontFamily: "Roboto", sans-serif;
 $fontSize: 14px;
 
 /*========== BUTTON GRADIENT ==========*/
 
-@mixin buttonGradient () {
-  background: linear-gradient(135deg, #FF8A00 0%, #D47300 100%, #D47300 100%), #EDEDED;
+@mixin buttonGradient() {
+  background: linear-gradient(135deg, #ff8a00 0%, #d47300 100%, #d47300 100%),
+    #ededed;
 }
 
-@mixin colorGradient () {
-  color: linear-gradient(135deg, #FF8A00 0%, #D47300 100%, #D47300 100%), #EDEDED;
+@mixin colorGradient() {
+  color: linear-gradient(135deg, #ff8a00 0%, #d47300 100%, #d47300 100%),
+    #ededed;
 }
-
-
-
-
