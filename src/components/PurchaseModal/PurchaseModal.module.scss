@@ -1,0 +1,121 @@
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #918f8f6e;
+}
+
+.modal {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  &__title {
+    font-size: 24px;
+    @media (max-width: 425px) {
+      font-size: 20px;
+    }
+  }
+  
+  &__body {
+    margin-top: 30px;
+
+    & a {
+      font-size: 18px;
+      text-decoration: underline;
+      &:hover {
+        color: #ff7a00;
+      }
+    }
+  }
+  
+  &__label-radio {
+    display: flex;
+    font-size: 20px;
+    padding: 10px 5px;
+    border-radius: 4px;
+
+    &:first-child {
+      // border-bottom: 1px solid rgb(133, 133, 133);
+    }
+
+    &:hover {
+      background-color: #ececec;
+    }
+    
+    input[type=radio] {
+      width: 1.15em;
+      height: 1.15em;
+      color: #000;
+      border: 0.15em solid #000;
+      border-radius: 50%;
+      margin-right: 10px;
+      display: grid;
+      place-content: center;
+
+      &::before {
+        content: "";
+        width: 0.65em;
+        height: 0.65em;
+        border-radius: 50%;
+        transform: scale(0);
+        transition: 120ms transform ease-in-out;
+        box-shadow: inset 1em 1em #ff7a00;
+      }
+
+      &:checked::before {
+        transform: scale(1);
+      }
+    }
+  }
+  
+  &__footer {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  & button {
+    cursor: pointer;
+    width: auto;
+  }
+  &__btn-next {
+    padding: 8px 8px;
+    border-radius: 6px;
+    width: auto;
+    color: #fff;
+    background-color: #ff7a00;
+    transition: background-color .2s ease-in;
+
+    &:hover {
+      background-color: #ffa600;
+    }
+    &:disabled:hover {
+      background-color: #ff7a00;
+    }
+  }
+  input[type=text], input[type=number] {
+    border-bottom: 2px solid #777777;
+  }
+  button:disabled {
+    color: #929292bb;
+  }
+  button {
+    &:focus {
+      outline: 2px solid black;
+    }
+  }
+}

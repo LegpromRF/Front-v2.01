@@ -174,7 +174,7 @@
       background-color: #FF7A00;
       padding: 11px 20px;
       border-radius: 7px;
-      transition: all .4s ease-in;
+      transition: background-color .4s ease-in;
       @media (max-width: 1290px) {
         padding: 11px 15%;
         width: 100%;
@@ -188,9 +188,13 @@
 
       }
 
+      
     }
       & button:hover {
         background-color: #ffa600;
+      }
+      & button:focus {
+        outline: 2px solid black;
       }
     span{
       font-size: 20px;
@@ -312,6 +316,10 @@
   flex-wrap: wrap;
   margin-top: 20px;
 
+  img {
+    object-fit: cover;
+  }
+
   @media (max-width: 700px) {
     display: flex;
     flex-direction: column;
@@ -333,7 +341,7 @@
 
   &__item {
     flex: 1 0 13%;
-    flex-shrink: 0;  
+    flex-shrink: 0;
 
   &:not(:last-child) {
     margin-right: 14px;
@@ -358,6 +366,9 @@
     padding: 20px;
     border-radius: 6px;
     border: 0.8px solid #C8C8C8;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   &__title {
@@ -372,7 +383,9 @@
   }
 
   &__info {
-    margin-top: 13px;
+    margin-top: auto;
+    display: grid;
+    // grid-template-columns: repeat(2, 1fr);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -381,7 +394,7 @@
   &__infoItem {
     border-radius: 5px;
     background: #EDEDED;
-    padding: 13px;
+    padding: 11px;
     flex: 1 0 40%;
     margin: 7px 7px 7px 0;
 
@@ -400,7 +413,7 @@
   &__description {
     color: #000;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 13px;
   }
 
   &__footer {
