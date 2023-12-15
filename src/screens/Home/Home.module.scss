@@ -172,9 +172,11 @@
       font-weight: 400;
       margin-top: 40px;
       background-color: #FF7A00;
+      border: 2px solid transparent;
       padding: 11px 20px;
       border-radius: 7px;
-      transition: background-color .4s ease-in;
+      transition: all .3s ease-in;
+      transition: outline none;
       @media (max-width: 1290px) {
         padding: 11px 15%;
         width: 100%;
@@ -189,7 +191,9 @@
       }
     }
       & button:hover {
-        background-color: #ffa600;
+        background-color: transparent;
+        border: 2px solid #FF7A00;
+        color: #FF7A00;
       }
       & button:focus-visible {
         outline: 2px solid black;

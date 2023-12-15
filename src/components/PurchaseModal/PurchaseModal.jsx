@@ -11,22 +11,16 @@ const PurchaseModal = ({ isOpen, close }) => {
    
    useEffect(() => {
       if (!isOpen || isOpenAccess) return
-
-      try {
-         axios.get(`${apiHOST}lk/welcome`, {
-            withCredentials: true,
-         }).then(res => {
-            const serverDenied = !res.ok
-            if (serverDenied) {
-               navigate('/auth')
-               close()
-            } else {
-               setOpenAccess(true)
-            }
-         })
-      } catch(e) {
-         console.error(e)
+      const handleServerReject = () => {
+         navigate('/auth')
+         close()
       }
+      
+      axios.get(`${apiHOST}lk/welcome`, { withCredentials: true }).then(res => {
+         const isServerAccess = res.data.status === 200
+         if (isServerAccess) setOpenAccess(true) 
+         else handleServerReject()
+      }).catch(() => handleServerReject())
    }, [isOpen, isOpenAccess])
    
    return (isOpenAccess && isOpen) ? <PurchaseModalContent close={close} /> : ''
