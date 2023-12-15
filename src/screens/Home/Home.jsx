@@ -16,7 +16,7 @@ import {Link} from "react-router-dom";
 const Home = () => {
     const [isPurchaseModalOpen, setPurchaseModalOpen] = useState(false)
     const dispatch = useDispatch()
-    const cards = useSelector((state) => state.procRegister.cards) 
+    const cards = useSelector((state) => state.procRegister.cards) || [] 
     useEffect(() => {
         const query = ''
         dispatch(getAllCards(query))
@@ -41,7 +41,7 @@ const Home = () => {
             number: '№'+card.order_number,
             circulation: card.count,
             datePublished: card.created_at.split('T')[0],
-            budget: card.price_for_all,
+            budget: card.price_for_all?.toLocaleString(),
             dateChange: card.deadline.split('T')[0],
         }))
 
@@ -49,9 +49,9 @@ const Home = () => {
     }, [cards.length])
 
     const [sumOpenedCards, countOpenedCards] = useMemo(() => {
-        const currentCards = cards.filter(card => card.status == 'Открыт' && card.purchase_type == "Тендер")
+        const currentCards = cards.filter(card => card.status == 'Открыт')
         const count = currentCards.length 
-        const sum = currentCards.reduce((acc, card) => acc + card.price_for_all, 0)
+        const sum = currentCards.reduce((acc, card) => acc + card.price_for_all, 0).toLocaleString()
         return [sum, count]
     }, [cards.length])
     
@@ -151,7 +151,7 @@ const Home = () => {
                                     Сейчас открыто: <b>{countOpenedCards}</b> 
                                     {[11, 12, 13, 14].includes(countOpenedCards % 100) || [0, 5, 6, 7, 8, 9].includes(countOpenedCards % 10) ? ' заявок '
                                     : countOpenedCards % 10 == 1 ? ' заявка ' : ' заявки '}
-                                    на сумму <b>{sumOpenedCards} ₽</b>
+                                    на сумму <b>{sumOpenedCards} {sumOpenedCards || sumOpenedCards === 0 ? '₽' : ''}</b>
                                 </span>
                             </div>
                             <div className={styles.card}>
@@ -175,7 +175,7 @@ const Home = () => {
                                                     </div>
                                                     <div className={styles.card__infoItem}>
                                                         <div className={styles.card__label}>Бюджет</div>
-                                                        <div className={styles.card__description}>{card.budget} ₽</div>
+                                                        <div className={styles.card__description}>{card.budget} {card.budget || card.budget === 0 ? '₽' : ''}</div>
                                                     </div>
                                                     <div className={styles.card__infoItem}>
                                                         <div className={styles.card__label}>Сдача</div>
