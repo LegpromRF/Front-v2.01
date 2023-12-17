@@ -87,6 +87,9 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    & button:last-of-type {
+      margin-left: auto;
+    }
   }
   & button {
     cursor: pointer;

@@ -6,16 +6,19 @@ import Cookies from "js-cookie";
 
 //использую обертку для обработки сценария с неавторизованным пользователем или иным запретом доступа к покупке
 const PurchaseModal = ({ isOpen, close }) => {
+   const [isOpenAccess, setOpenAccess] = useState(false)
    const navigate = useNavigate()
    useEffect(() => {
       const auth = Cookies.get("uuid_user")
       if (isOpen && !auth) {
-         navigate('/auth')
+         navigate('/auth?fromHomePurchase=true')
          close()
+      } else if (auth && !isOpenAccess) {
+         setOpenAccess(true)
       }
-   }, [isOpen])
+   }, [isOpen, isOpenAccess])
    
-   return isOpen ? <PurchaseModalContent close={close} /> : ''
+   return (isOpen && isOpenAccess) ? <PurchaseModalContent close={close} /> : ''
 }
 
 export default PurchaseModal

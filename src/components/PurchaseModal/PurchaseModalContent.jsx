@@ -13,8 +13,7 @@ const modalPurchaseContainerID = 'modalPurchaseContainerID'
 
 const titlesByStage = {
    typePurchase: 'Выберете способ оплаты',
-   [purchaseTypes.ACCOUNT]: 'Введите ваш ИНН',
-   [purchaseTypes.CARD]: 'Оплата картой'
+   [purchaseTypes.ACCOUNT]: 'Введите ваш ИНН'
 }
 
 const stagesCount = 2 //две стадии оплаты
@@ -36,13 +35,25 @@ const PurchaseModalContent = ({ close }) => {
          const inn = inputINNRef.current?.value ?? ''
          if (inn) downloadPDFWithINN(inn) //async
       }
+      if (purchaseType == purchaseTypes.CARD) {
+         try {
+            fetch(apiHOST+'subscriptions/create').then(async (res) => {
+               if (res.ok) {
+                  const paymentUrl = await res.json()
+                  window.location.replace(paymentUrl)
+               }
+            })
+         } catch(e) {
+            console.error(e)
+         }
+      }
       close()
    }, [purchaseType])
    
-   const handleNextStage = () => setCurrentStage(stage => {
-      if (stage == stagesCount) handlePurchase()
-      return stage < stagesCount ? stage + 1 : stage
-   })
+   const handleNextStage = useCallback(() => {
+      if ((currentStage == 1 && purchaseType == purchaseTypes.CARD) || currentStage == stagesCount) handlePurchase()
+      setCurrentStage(stage => stage < stagesCount ? stage + 1 : stage)
+   }, [purchaseType, currentStage])
 
    const handlePrevStage = () => setCurrentStage(stage => stage > 1 ? stage - 1 : stage)
    
@@ -72,9 +83,8 @@ const PurchaseModalContent = ({ close }) => {
             {currentStage == 1 ? <PurchaseType type={purchaseType} handleChange={handleRadioChange} />: ''}
             {currentStage == 2 ? <PurchaseInit type={purchaseType} inputINNRef={inputINNRef} />: ''}
             <div className={styles.modal__footer}>
-               <button onClick={handlePrevStage} disabled={currentStage == 1}>Назад</button>
-               {currentStage == 2 && purchaseType == purchaseTypes.CARD ? '' : 
-               <button className={styles['modal__btn-next']} onClick={handleNextStage}>{currentStage == stagesCount ? 'Отправить' : 'Продолжить'}</button>}
+               {currentStage == 1 ? '' : <button onClick={handlePrevStage}>Назад</button>}
+               <button className={styles['modal__btn-next']} onClick={handleNextStage}>{currentStage == stagesCount ? 'Отправить' : 'Продолжить'}</button>
             </div>
          </div>
       </div>

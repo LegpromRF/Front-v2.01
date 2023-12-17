@@ -11,10 +11,12 @@ import Img3 from '@public/Landing/card_img_3.png'
 import PurchaseModal from '@/components/PurchaseModal/PurchaseModal';
 // import LandingCarusel from '@/src/components/LandingCarusel/LandingCarusel';
 // import ModalAuth from "@/src/layout/Modal/ModalAuth/ModalAuth";
-import {Link} from "react-router-dom";
+import {Link, useParams, useSearchParams} from "react-router-dom";
 
 const Home = () => {
-    const [isPurchaseModalOpen, setPurchaseModalOpen] = useState(false)
+    const [searchParams] = useSearchParams()
+    const isPurchase = searchParams.get('purchase') === 'true'
+    const [isPurchaseModalOpen, setPurchaseModalOpen] = useState(isPurchase)
     const dispatch = useDispatch()
     const cards = useSelector((state) => state.procRegister.cards) || [] 
     useEffect(() => {

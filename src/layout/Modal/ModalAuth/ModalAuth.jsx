@@ -13,12 +13,12 @@ import {
 import styles from "./ModalAuth.module.scss";
 import { createSelector } from "@reduxjs/toolkit";
 import { apiEndpoints } from "@/utils/constants/apiEndpoints.js";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import handleVerification from "@/utils/services/auth/handleVerification.js";
 import { validationSchema } from "@/utils/validation/validationSchema.js";
 import handleLogin from "@/utils/services/auth/handleLogin.js";
 import { loginSuccess } from "@store/auth/auth.slice.js";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import backGround from "../../../../public/Auth/auth_bg.jpg";
 
 const ModalAuth = () => {
@@ -26,6 +26,9 @@ const ModalAuth = () => {
   const [regIssue, setRegIssue] = useState({ status: null, details: null });
   const [veriIssue, setVeriIssue] = useState({ status: null, details: null });
   const [loader, setLoader] = useState(false);
+
+  const [searchParams] = useSearchParams()
+  const fromHomePurchase = searchParams.get('fromHomePurchase') === 'true'
 
   const selectAuthModal = (state) => state.authModal;
   const selectAuthModalData = createSelector(selectAuthModal, (authModal) => ({
@@ -46,7 +49,7 @@ const ModalAuth = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = async () => {
+  const onSubmit = useCallback(async () => {
     setLoader(true);
     const data = getValues();
     let login = "";
@@ -81,27 +84,27 @@ const ModalAuth = () => {
           Cookies.set("uuid_user", "auth", {
             expires: 10000,
           });
-          navigate("/profile");
+          navigate(fromHomePurchase ? "/?purchase=true" : "/profile");
         }
       })
       .catch((error) => {
         console.log("Error:", error);
       })
       .finally(() => setLoader(false));
-  };
+  }, [fromHomePurchase])
 
-  async function processLogin(data, authMethod) {
+  const processLogin = useCallback(async (data, authMethod) => {
     setLoader(true);
     const result = await handleLogin(data, authMethod);
     if (result === true) {
       dispatch(loginSuccess());
       setLoader(false);
-      navigate("/profile");
+      navigate(fromHomePurchase ? "/?purchase=true" : "/profile");
     } else {
       setLoader(false);
       setLoginIssue(result);
     }
-  }
+  }, [fromHomePurchase])
   const handleGetExist = async () => {
     setLoader(true);
     const info = await handleVerification(authMethod, getValues());
