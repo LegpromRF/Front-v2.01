@@ -83,3 +83,19 @@
     width: 100%;
   }
 }
+
+.filesList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.filesList a {
+  color: $blue;
+  transition: all 0.2s ease;
+}
+
+.filesList a:hover {
+  color: $blueHover;
+}

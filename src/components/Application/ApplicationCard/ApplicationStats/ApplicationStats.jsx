@@ -1,33 +1,41 @@
+import { useSelector } from "react-redux";
 import StatsItem from "../StatsItem/StatsItem";
 import styles from "./ApplicationStats.module.scss";
+import formatDate from "../../../../utils/helpers/formatDate";
 
 const ApplicationStats = () => {
+  const item = useSelector((state) => state.viewTz.item);
+
+  console.log(item);
+
   return (
     <div className={styles.list}>
       <div className={styles.label}>
         <p>Количество</p>
 
-        <StatsItem title="260 шт." />
+        <StatsItem title={`${item.count} шт.`} />
       </div>
       <div className={styles.label}>
-        <p>Количество</p>
+        <p>Цена за шт.</p>
 
-        <StatsItem title="до 960 000 ₽" />
+        <StatsItem title={`${item.price_per_unit || "-"} ₽`} />
       </div>
       <div className={styles.label}>
-        <p>Количество</p>
+        <p>Плановый бюджет</p>
 
-        <StatsItem title="до 960 000 ₽" />
+        <StatsItem title={`${item.price_for_all || "-"} ₽`} />
       </div>
       <div className={styles.label}>
-        <p>Количество</p>
+        <p>Срок поставки</p>
 
-        <StatsItem title="до 25.07.2023" />
+        <StatsItem
+          title={`до ${new Date(item.deadline).toLocaleDateString() || "-"}`}
+        />
       </div>
       <div className={styles.label}>
-        <p>Количество</p>
+        <p>Регион доставки</p>
 
-        <StatsItem title="Ярославская область" />
+        <StatsItem title={item.location} />
       </div>
     </div>
   );

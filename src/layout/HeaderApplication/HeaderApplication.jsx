@@ -1,12 +1,15 @@
+import { useSelector } from "react-redux";
 import ButtonAction from "../../components/UI/ButtonAction/ButtonAction";
 import ButtonBuySubscription from "../../components/UI/ButtonBuySubscription/ButtonBuySubscription";
 import styles from "./HeaderApplication.module.scss";
 
 const HeaderApplication = () => {
+  const item = useSelector((state) => state.viewTz.item);
+
   return (
     <div className={styles.header}>
       <p className={styles.title}>
-        Заявка № ХХХХХХ Пошив платья для официантов
+        Заявка № {item.order_number} {item.order_name || "-"}
       </p>
 
       <div className={styles.headerContent}>
