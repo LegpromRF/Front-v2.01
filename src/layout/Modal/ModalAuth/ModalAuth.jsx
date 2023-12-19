@@ -18,6 +18,7 @@ import handleVerification from "@/utils/services/auth/handleVerification.js";
 import { validationSchema } from "@/utils/validation/validationSchema.js";
 import handleLogin from "@/utils/services/auth/handleLogin.js";
 import { loginSuccess } from "@store/auth/auth.slice.js";
+import { handleRedirect } from "@store/auth/authModal.slice.js";
 import { useCallback, useState } from "react";
 import backGround from "../../../../public/Auth/auth_bg.jpg";
 
@@ -88,6 +89,7 @@ const ModalAuth = () => {
             expires: 10000,
           });
           navigate(redirectHref ? redirectHref : "/profile");
+          dispatch(handleRedirect(null))
         }
       })
       .catch((error) => {
@@ -103,6 +105,7 @@ const ModalAuth = () => {
       dispatch(loginSuccess());
       setLoader(false);
       navigate(redirectHref ? redirectHref : "/profile");
+      dispatch(handleRedirect(null))
     } else {
       setLoader(false);
       setLoginIssue(result);
