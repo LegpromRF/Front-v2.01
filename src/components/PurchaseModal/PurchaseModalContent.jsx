@@ -1,11 +1,10 @@
 import { useState, useCallback, useRef, useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux"
-import { useNavigate } from 'react-router-dom'
 import ImgClose from '../../../public/icon/close.svg'
 import { downloadPDFWithINN, purchaseTypes } from './constants'
 import PurchaseType from './stages/PurchaseType'
 import PurchaseInit from './stages/PurchaseInit'
 import { apiHOST } from "@/utils/constants/apiEndpoints.js";
+import axios from "axios"
 
 import styles from './PurchaseModal.module.scss'
 
@@ -37,7 +36,9 @@ const PurchaseModalContent = ({ close }) => {
       }
       if (purchaseType == purchaseTypes.CARD) {
          try {
-            fetch(apiHOST+'subscriptions/create').then(async (res) => {
+            axios.get(apiHOST+'subscriptions/create', {
+               withCredentials: true
+            }).then(async (res) => {
                if (res.ok) {
                   const paymentUrl = await res.json()
                   window.location.replace(paymentUrl)
