@@ -35,8 +35,11 @@ const ModalAuth = () => {
     authMode: authModal.authMode,
     authMethod: authModal.authMethod,
     verifying: authModal.verifying,
+    redirectHref: authModal.redirectHref
   }));
-  const { authMode, authMethod, verifying } = useSelector(selectAuthModalData);
+  const { authMode, authMethod, verifying, redirectHref } = useSelector(selectAuthModalData);
+
+  const filters = useSelector((state) => state.procRegister.filters);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -84,14 +87,14 @@ const ModalAuth = () => {
           Cookies.set("uuid_user", "auth", {
             expires: 10000,
           });
-          navigate(fromHomePurchase ? "/?purchase=true" : "/profile");
+          navigate(redirectHref ? redirectHref : "/profile");
         }
       })
       .catch((error) => {
         console.log("Error:", error);
       })
       .finally(() => setLoader(false));
-  }, [fromHomePurchase])
+  }, [redirectHref])
 
   const processLogin = useCallback(async (data, authMethod) => {
     setLoader(true);
@@ -99,12 +102,12 @@ const ModalAuth = () => {
     if (result === true) {
       dispatch(loginSuccess());
       setLoader(false);
-      navigate(fromHomePurchase ? "/?purchase=true" : "/profile");
+      navigate(redirectHref ? redirectHref : "/profile");
     } else {
       setLoader(false);
       setLoginIssue(result);
     }
-  }, [fromHomePurchase])
+  }, [redirectHref])
   const handleGetExist = async () => {
     setLoader(true);
     const info = await handleVerification(authMethod, getValues());

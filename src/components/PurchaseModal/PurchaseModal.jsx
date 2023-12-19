@@ -1,17 +1,24 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { apiHOST } from "@/utils/constants/apiEndpoints.js";
+import { handleRedirect } from "@store/auth/authModal.slice.js";
 import PurchaseModalContent from './PurchaseModalContent';
 import Cookies from "js-cookie";
+import { useDispatch } from 'react-redux';
 
 //использую обертку для обработки сценария с неавторизованным пользователем или иным запретом доступа к покупке
 const PurchaseModal = ({ isOpen, close }) => {
+   const [searchParams, setSearchParams] = useSearchParams()
    const [isOpenAccess, setOpenAccess] = useState(false)
    const navigate = useNavigate()
+   const dispatch = useDispatch()
+
+   
    useEffect(() => {
       const auth = Cookies.get("uuid_user")
       if (isOpen && !auth) {
-         navigate('/auth?fromHomePurchase=true')
+         dispatch(handleRedirect('/?purchase=true'))
+         navigate('/auth')
          close()
       } else if (auth && !isOpenAccess) {
          setOpenAccess(true)
