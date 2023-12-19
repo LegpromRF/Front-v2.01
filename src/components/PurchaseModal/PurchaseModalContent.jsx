@@ -39,8 +39,8 @@ const PurchaseModalContent = ({ close }) => {
             axios.get(apiHOST+'subscriptions/create', {
                withCredentials: true
             }).then(async (res) => {
-               if (res.ok) {
-                  const paymentUrl = await res.json()
+               if (res.status === 200) {
+                  const paymentUrl = res.data.payment_link
                   window.location.replace(paymentUrl)
                }
             })

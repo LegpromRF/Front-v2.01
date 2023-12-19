@@ -14,7 +14,7 @@ import PurchaseModal from '@/components/PurchaseModal/PurchaseModal';
 import {Link, useParams, useSearchParams} from "react-router-dom";
 
 const Home = () => {
-    const [searchParams] = useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams()
     const isPurchase = searchParams.get('purchase') === 'true'
     const [isPurchaseModalOpen, setPurchaseModalOpen] = useState(isPurchase)
     const dispatch = useDispatch()
@@ -23,9 +23,13 @@ const Home = () => {
         const query = ''
         dispatch(getAllCards(query))
     }, [])
-
+    
     const openPurchaseModal = () => setPurchaseModalOpen(true)
-    const closePurchaseModal = () => setPurchaseModalOpen(false)
+    const closePurchaseModal = () => {
+        searchParams.delete('purchase')
+        setSearchParams(searchParams)
+        setPurchaseModalOpen(false)
+    }
 
     const cardsToPreview = useMemo(() => {
         const sortedCards = [...cards]
