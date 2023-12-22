@@ -9,7 +9,9 @@ import { useEffect, useState } from "react";
 const ApplicationCard = () => {
   const { firstCharact, secondCharact, thirdCharact, fourthCharact } =
     useAppCharacteristics();
-  const { technology, files } = useSelector((state) => state.viewTz);
+  const { technology, files, other, filesError } = useSelector(
+    (state) => state.viewTz
+  );
   const [filesArr, setFilesArr] = useState([]);
 
   useEffect(() => {
@@ -54,25 +56,29 @@ const ApplicationCard = () => {
           )}
 
           <div className={styles.characteristicsBlockList}>
-            <div>
-              <div className="box" style={{ padding: "10px 14px" }}>
-                <h2 className="characteristics-title center">Файлы</h2>
+            {!filesError && (
+              <div>
+                <div className="box" style={{ padding: "10px 14px" }}>
+                  <h2 className="characteristics-title center">Файлы</h2>
+                </div>
+                <div className={styles.filesList}>
+                  {filesArr.map((el, idx) => {
+                    return (
+                      <a key={idx} href={el.url}>
+                        {el.name}
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
-              <div className={styles.filesList}>
-                {filesArr.map((el, idx) => {
-                  return (
-                    <a key={idx} href={el.url}>
-                      {el.name}
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="box">
-              <h2 className="characteristics-title">Размеры / ростовки</h2>
+            )}
+            {technology.sizes && (
+              <div className="box">
+                <h2 className="characteristics-title">Размеры / ростовки</h2>
 
-              <p>{technology.sizes}</p>
-            </div>
+                <p>{technology.sizes}</p>
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.characteristicsBlock}>
@@ -87,13 +93,13 @@ const ApplicationCard = () => {
             </div>
           )}
 
-          <div className="box">
-            <h2 className="characteristics-title">Комментарий к заказу</h2>
+          {other.comment && (
+            <div className="box">
+              <h2 className="characteristics-title">Комментарий к заказу</h2>
 
-            <CharacteristicsList
-              list={[{ parameter: "parameter", value: "value" }]}
-            />
-          </div>
+              <p>{other.comment}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

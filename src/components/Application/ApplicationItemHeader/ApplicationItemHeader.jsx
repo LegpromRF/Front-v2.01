@@ -4,13 +4,15 @@ import styles from "./ApplicationItemHeader.module.scss";
 import formatDate from "../../../utils/helpers/formatDate";
 
 const ApplicationItemHeader = () => {
-  const item = useSelector((state) => state.viewTz.item);
+  const { item, other } = useSelector((state) => state.viewTz);
 
   return (
     <div className={styles.wrapper}>
       <p className={styles.text}>
-        Опубликовано: {formatDate(new Date(item.start_date)) || "-"}{" "}
-        <span>(изменено 30 июня 2022 г.)</span>
+        Опубликовано: {formatDate(new Date(other.start_date)) || "-"}{" "}
+        {item.updated_at && (
+          <span>(изменено {formatDate(new Date(item.updated_at))}.)</span>
+        )}
       </p>
 
       <p className={styles.status}>

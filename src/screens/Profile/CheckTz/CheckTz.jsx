@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {
@@ -7,6 +7,8 @@ import {
   getRequirements,
   getTechnology,
   getFiles,
+  getCustomer,
+  getPaylink,
 } from "../../../store/viewTz/viewTz.slice";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -19,8 +21,9 @@ import ApplicationCard from "../../../components/Application/ApplicationCard/App
 const CheckTz = () => {
   const params = useParams();
   const dispatch = useDispatch();
-  const item = useSelector((state) => state.viewTz.item);
+  const { item, itemError } = useSelector((state) => state.viewTz);
   const loading = useSelector((state) => state.viewTz.loading);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getCard(params.itemId));
@@ -28,7 +31,15 @@ const CheckTz = () => {
     dispatch(getOther(params.itemId));
     dispatch(getRequirements(params.itemId));
     dispatch(getFiles(params.itemId));
+    dispatch(getCustomer(params.itemId));
+    dispatch(getPaylink(params.itemId));
   }, [dispatch, params.itemId]);
+
+  useEffect(() => {
+    if (!itemError) return;
+
+    navigate("/not-found");
+  }, [itemError, navigate]);
 
   return (
     <div>

@@ -1,12 +1,9 @@
 import { useSelector } from "react-redux";
 import StatsItem from "../StatsItem/StatsItem";
 import styles from "./ApplicationStats.module.scss";
-import formatDate from "../../../../utils/helpers/formatDate";
 
 const ApplicationStats = () => {
   const item = useSelector((state) => state.viewTz.item);
-
-  console.log(item);
 
   return (
     <div className={styles.list}>

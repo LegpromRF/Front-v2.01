@@ -57,7 +57,7 @@ export const useAppCharacteristics = () => {
       },
       {
         parameter: "Состав ткани",
-        value: undefined,
+        value: technology.material_structure || undefined,
       },
       {
         parameter: "Плотность ткани",
@@ -72,16 +72,18 @@ export const useAppCharacteristics = () => {
     setThirdCharact([
       {
         parameter: "Взять в производство не позднее",
-        value: other.start_date || undefined,
+        value: new Date(other.start_date).toLocaleDateString() || undefined,
       },
       {
         parameter: "Срок поставки не позднее",
-        value:
-          new Date(other.order_lead_time).toLocaleDateString() || undefined,
+        value: undefined,
       },
       {
         parameter: "Срок исполнения заказа с момента поставки сырья",
-        value: undefined,
+        value:
+          other.order_lead_time !== "Invalid Date"
+            ? new Date(other.order_lead_time).toLocaleDateString()
+            : "Нет сроков",
       },
       {
         parameter: "Возможность взять заказ частично от (штук)",
