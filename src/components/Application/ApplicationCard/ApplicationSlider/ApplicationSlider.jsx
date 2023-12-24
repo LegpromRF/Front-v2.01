@@ -8,10 +8,20 @@ import "swiper/css/thumbs";
 import styles from "./ApplicationSlider.module.scss";
 
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { createImagesSlider } from "../../../../utils/helpers/procurementRegister";
 
 const ApplicationSlider = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const item = useSelector((state) => state.viewTz.item);
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    if (item.photo_urls) {
+      setImages(createImagesSlider(item.photo_urls));
+    }
+  }, [item]);
 
   return (
     <div className={styles.wrapper}>
@@ -26,36 +36,13 @@ const ApplicationSlider = () => {
           modules={[FreeMode, Navigation, Thumbs]}
           className="application-swiper"
         >
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
+          {images.map((el) => {
+            return (
+              <SwiperSlide key={el.id}>
+                <img src={el.src} alt={el.alt} />
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
 
@@ -80,54 +67,23 @@ const ApplicationSlider = () => {
         <Swiper
           onSwiper={setThumbsSwiper}
           spaceBetween={0}
-          slidesPerView={3}
+          slidesPerView={"auto"}
           watchSlidesProgress={true}
           navigation={{
             prevEl: ".thumbs-prev",
             nextEl: ".thumbs-next",
           }}
           modules={[FreeMode, Navigation, Thumbs]}
-          breakpoints={{
-            400: {
-              slidesPerView: 4,
-            },
-
-            475: {
-              slidesPerView: 5,
-            },
-          }}
           className="swiper-thumbs"
+          freeMode={true}
         >
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="/Application/slide-example.png" />
-          </SwiperSlide>
+          {images.map((el) => {
+            return (
+              <SwiperSlide key={el.id}>
+                <img src={el.src} alt={el.alt} />
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
 
         <div className="thumbs-next">

@@ -1,0 +1,33 @@
+@import "@/styles/variables";
+
+.wrapper {
+  padding: 25px 32px;
+  padding-bottom: 18px;
+  border-radius: 5px;
+  background-color: #fafafa;
+  display: flex;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  .item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-basis: 25%;
+    flex-grow: 1;
+    flex: 1 1 0;
+
+    @media (max-width: 400px) {
+      flex-basis: 50%;
+    }
+  }
+
+  .itemLabel {
+    font-size: $fontSize;
+  }
+
+  .itemValue {
+    font-weight: 300;
+  }
+}
