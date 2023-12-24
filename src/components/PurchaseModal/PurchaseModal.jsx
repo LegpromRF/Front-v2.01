@@ -1,27 +1,31 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { apiHOST } from "@/utils/constants/apiEndpoints.js";
+import { handleRedirect } from "@store/auth/authModal.slice.js";
 import PurchaseModalContent from './PurchaseModalContent';
+import Cookies from "js-cookie";
+import { useDispatch } from 'react-redux';
 
 //использую обертку для обработки сценария с неавторизованным пользователем или иным запретом доступа к покупке
 const PurchaseModal = ({ isOpen, close }) => {
-   const [isOpenAccess, setOpenAccess] = useState(true) 
+   const [searchParams, setSearchParams] = useSearchParams()
+   const [isOpenAccess, setOpenAccess] = useState(false)
    const navigate = useNavigate()
+   const dispatch = useDispatch()
+
    
    useEffect(() => {
-      if (!isOpen || isOpenAccess) return
-      fetch(apiHOST+'lk/welcome').then(res => {
-         const SERVER_DENIED = !res.ok
-         if (SERVER_DENIED) {
-            navigate('/auth')
-            close()
-         } else {
-            setOpenAccess(true)
-         }
-      })
+      const auth = Cookies.get("uuid_user")
+      if (isOpen && !auth) {
+         dispatch(handleRedirect('/?purchase=true'))
+         navigate('/auth')
+         close()
+      } else if (auth && !isOpenAccess) {
+         setOpenAccess(true)
+      }
    }, [isOpen, isOpenAccess])
    
-   return (isOpenAccess && isOpen) ? <PurchaseModalContent close={close} /> : ''
+   return (isOpen && isOpenAccess) ? <PurchaseModalContent close={close} /> : ''
 }
 
 export default PurchaseModal

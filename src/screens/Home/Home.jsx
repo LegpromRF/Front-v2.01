@@ -11,19 +11,25 @@ import Img3 from '@public/Landing/card_img_3.png'
 import PurchaseModal from '@/components/PurchaseModal/PurchaseModal';
 // import LandingCarusel from '@/src/components/LandingCarusel/LandingCarusel';
 // import ModalAuth from "@/src/layout/Modal/ModalAuth/ModalAuth";
-import {Link} from "react-router-dom";
+import {Link, useParams, useSearchParams} from "react-router-dom";
 
 const Home = () => {
-    const [isPurchaseModalOpen, setPurchaseModalOpen] = useState(false)
+    const [searchParams, setSearchParams] = useSearchParams()
+    const isPurchase = searchParams.get('purchase') === 'true'
+    const [isPurchaseModalOpen, setPurchaseModalOpen] = useState(isPurchase)
     const dispatch = useDispatch()
-    const cards = useSelector((state) => state.procRegister.cards) 
+    const cards = useSelector((state) => state.procRegister.cards) || [] 
     useEffect(() => {
         const query = ''
         dispatch(getAllCards(query))
     }, [])
-
+    
     const openPurchaseModal = () => setPurchaseModalOpen(true)
-    const closePurchaseModal = () => setPurchaseModalOpen(false)
+    const closePurchaseModal = () => {
+        searchParams.delete('purchase')
+        setSearchParams(searchParams)
+        setPurchaseModalOpen(false)
+    }
 
     const cardsToPreview = useMemo(() => {
         const sortedCards = [...cards]
@@ -41,7 +47,7 @@ const Home = () => {
             number: '№'+card.order_number,
             circulation: card.count,
             datePublished: card.created_at.split('T')[0],
-            budget: card.price_for_all,
+            budget: card.price_for_all?.toLocaleString(),
             dateChange: card.deadline.split('T')[0],
         }))
 
@@ -49,9 +55,9 @@ const Home = () => {
     }, [cards.length])
 
     const [sumOpenedCards, countOpenedCards] = useMemo(() => {
-        const currentCards = cards.filter(card => card.status == 'Открыт' && card.purchase_type == "Тендер")
+        const currentCards = cards.filter(card => card.status == 'Открыт')
         const count = currentCards.length 
-        const sum = currentCards.reduce((acc, card) => acc + card.price_for_all, 0)
+        const sum = currentCards.reduce((acc, card) => acc + card.price_for_all, 0).toLocaleString()
         return [sum, count]
     }, [cards.length])
     
@@ -151,7 +157,7 @@ const Home = () => {
                                     Сейчас открыто: <b>{countOpenedCards}</b> 
                                     {[11, 12, 13, 14].includes(countOpenedCards % 100) || [0, 5, 6, 7, 8, 9].includes(countOpenedCards % 10) ? ' заявок '
                                     : countOpenedCards % 10 == 1 ? ' заявка ' : ' заявки '}
-                                    на сумму <b>{sumOpenedCards} ₽</b>
+                                    на сумму <b>{sumOpenedCards} {sumOpenedCards || sumOpenedCards === 0 ? '₽' : ''}</b>
                                 </span>
                             </div>
                             <div className={styles.card}>
@@ -164,23 +170,23 @@ const Home = () => {
                                                 <p className={styles.card__number}>{card.number}</p>
                                                 <div className={styles.card__info}>
                                                     <div className={styles.card__infoItem}>
-                                                        <div className={styles.card__label}>Тираж</div>
+                                                        <div className={styles.card__label}>Количество</div>
                                                         <div
                                                             className={styles.card__description}>{card.circulation}</div>
+                                                    </div>
+                                                    <div className={styles.card__infoItem}>
+                                                        <div className={styles.card__label}>Бюджет</div>
+                                                        <div className={styles.card__description}>{card.budget} {card.budget || card.budget === 0 ? '₽' : ''}</div>
+                                                    </div>
+                                                    <div className={styles.card__infoItem}>
+                                                        <div className={styles.card__label}>Срок поставки</div>
+                                                        <div
+                                                            className={styles.card__description}>{card.dateChange}</div>
                                                     </div>
                                                     <div className={styles.card__infoItem}>
                                                         <div className={styles.card__label}>Опубликовано</div>
                                                         <div
                                                             className={styles.card__description}>{card.datePublished}</div>
-                                                    </div>
-                                                    <div className={styles.card__infoItem}>
-                                                        <div className={styles.card__label}>Бюджет</div>
-                                                        <div className={styles.card__description}>{card.budget} ₽</div>
-                                                    </div>
-                                                    <div className={styles.card__infoItem}>
-                                                        <div className={styles.card__label}>Сдача</div>
-                                                        <div
-                                                            className={styles.card__description}>{card.dateChange}</div>
                                                     </div>
                                                 </div>
                                             </div>
