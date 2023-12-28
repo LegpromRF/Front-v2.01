@@ -32,6 +32,10 @@ const ApplicationSlider = () => {
             "--swiper-pagination-color": "#fff",
           }}
           spaceBetween={10}
+          navigation={{
+            prevEl: ".thumbs-prev",
+            nextEl: ".thumbs-next",
+          }}
           thumbs={{ swiper: thumbsSwiper }}
           modules={[FreeMode, Navigation, Thumbs]}
           className="application-swiper"
