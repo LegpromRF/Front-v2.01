@@ -35,7 +35,7 @@ const MainCharacteristics = () => {
       />
       <Characteristic
         parameter="Рассмотрят поставщиков из регионов "
-        value={supplierRegions.join(", ") || "-"}
+        value={supplierRegions?.join(", ") || "-"}
       />
     </div>
   );

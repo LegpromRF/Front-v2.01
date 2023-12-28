@@ -17,6 +17,7 @@ import styles from "./CheckTz.module.scss";
 import HeaderApplication from "../../../layout/HeaderApplication/HeaderApplication";
 import ApplicationItemHeader from "../../../components/Application/ApplicationItemHeader/ApplicationItemHeader";
 import ApplicationCard from "../../../components/Application/ApplicationCard/ApplicationCard";
+import { getAdminRole } from "../../../store/user/user.slice";
 
 const CheckTz = () => {
   const params = useParams();
@@ -34,6 +35,10 @@ const CheckTz = () => {
     dispatch(getCustomer(params.itemId));
     dispatch(getPaylink(params.itemId));
   }, [dispatch, params.itemId]);
+
+  useEffect(() => {
+    dispatch(getAdminRole());
+  }, [dispatch]);
 
   useEffect(() => {
     if (!itemError) return;
