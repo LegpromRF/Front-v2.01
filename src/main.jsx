@@ -21,6 +21,7 @@ import SelectionPage from "@/pages/profile/selection.jsx";
 import ProcurementRegisterPage from "@/pages/profile/order/procurement.jsx";
 import DashboardPage from "@/pages/profile/dashboard.jsx";
 import ApplicationPage from "./pages/applicationPage.jsx";
+import SubscriptionsPage from "./pages/profile/subscriptions.jsx";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,22 @@ const router = createBrowserRouter([
   {
     path: "/profile/dashboard",
     element: <DashboardPage />,
+  },
+  {
+    path: "/profile/subscriptions",
+    element: (
+      <PrivateRoute page="">
+        <SubscriptionsPage forAdmin={false} />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/profile/admin/subscriptions",
+    element: (
+      <PrivateRoute page="">
+        <SubscriptionsPage forAdmin={true} />
+      </PrivateRoute>
+    ),
   },
   {
     path: "/profile/order/createorder",

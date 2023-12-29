@@ -24,7 +24,8 @@
     "react-loading-skeleton": "^3.3.1",
     "react-select": "^5.8.0",
     "react-spinners": "^0.13.8",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "to-array-buffer": "^3.2.0"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.3.2",

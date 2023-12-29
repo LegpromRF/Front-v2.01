@@ -28,25 +28,34 @@ const PurchaseModalContent = ({ close }) => {
       if (id == purchaseTypes.ACCOUNT) setPurchaseType(purchaseTypes.ACCOUNT)
       if (id == purchaseTypes.CARD) setPurchaseType(purchaseTypes.CARD)
    }
-
+   
    const handlePurchase = useCallback(() => {
-      if (purchaseType == purchaseTypes.ACCOUNT) {
+      try {
          const inn = inputINNRef.current?.value ?? ''
-         if (inn) downloadPDFWithINN(inn) //async
-      }
-      if (purchaseType == purchaseTypes.CARD) {
-         try {
-            axios.get(apiHOST+'subscriptions/create', {
+         if (purchaseType == purchaseTypes.ACCOUNT && inn) {
+            axios.get(apiHOST+'subscriptions/pay_by_invoice/?inn='+inn, {
+               withCredentials: true,
+               responseType: 'arraybuffer'
+               // type
+            }).then(async (res) => {
+               console.log(res);
+               if (res.status === 200) {
+                  downloadPDFWithINN(inn, res.data) //async
+               }
+            })
+         }
+         if (purchaseType == purchaseTypes.CARD) {
+            axios.get(apiHOST+'subscriptions/pay_by_card/', {
                withCredentials: true
             }).then(async (res) => {
                if (res.status === 200) {
                   const paymentUrl = res.data.payment_link
                   window.location.replace(paymentUrl)
                }
-            })
-         } catch(e) {
-            console.error(e)
+            })  
          }
+      } catch(e) {
+         console.error(e)
       }
       close()
    }, [purchaseType])
@@ -66,8 +75,8 @@ const PurchaseModalContent = ({ close }) => {
       document.addEventListener('click', clickHandler)
       document.addEventListener('keydown', keyHandler)
       return () => {
-         window.removeEventListener('click', clickHandler)
-         window.removeEventListener('keydown', keyHandler)
+         document.removeEventListener('click', clickHandler)
+         document.removeEventListener('keydown', keyHandler)
       }
    }, [])
 

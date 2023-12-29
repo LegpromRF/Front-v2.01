@@ -8,9 +8,12 @@ import { toggleNav, setNav } from "@store/navigation/navigation.slice";
 import Logo from "@public/Logo/logo.png";
 import styles from "./NavigationClient.module.scss";
 
+export const navbarBgId = "NAVBAR_BG";
+
 const NavigationClient = () => {
-  const isNavOpen = useSelector((state) => state.navigation.isNavOpen);
   const dispatch = useDispatch();
+  const isNavOpen = useSelector((state) => state.navigation.isNavOpen);
+  const isAdmin = useSelector((state) => state.admindata.isAdmin);
 
   const tariff = "Pro";
 
@@ -23,6 +26,7 @@ const NavigationClient = () => {
             ? [styles.nav__bg, styles.nav__bg_active].join(" ")
             : styles.nav__bg
         }
+        id={navbarBgId}
       >
         <nav
           onClick={(e) => e.stopPropagation()}
@@ -33,7 +37,7 @@ const NavigationClient = () => {
           <div className={styles.nav__content}>
             <div className={styles.nav__head}>
               <div className={styles.nav__logo}>
-                <Link to="/">
+                <Link to="/" tabIndex={isNavOpen ? 0 : -1}>
                   <img src={Logo} alt="LegpromRF" width={135} height={35} />
                 </Link>
               </div>
@@ -193,6 +197,63 @@ const NavigationClient = () => {
                   />
                 </svg>
               </ButtonNavigationCollapsible>
+              {isAdmin ? (
+                <ButtonNavigationCollapsible
+                  title="Подписки"
+                  // href="/profile/subscriptions"
+                  active={isNavOpen}
+                  links={{
+                    "Ваши данные": {
+                      link: "/profile/subscriptions",
+                      icon: null,
+                    },
+                    "Редактирование счетов": {
+                      link: "/profile/admin/subscriptions/",
+                      icon: null,
+                    },
+            
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    width={18}
+                    height={18}
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z"
+                    />
+                  </svg>
+                </ButtonNavigationCollapsible>
+              ) : (
+                <ButtonNavigation
+                  title="Подписки"
+                  href="/profile/subscriptions"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    width={18}
+                    height={18}
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z"
+                    />
+                  </svg>
+                </ButtonNavigation>
+              )}
               {/* <ButtonNavigationCollapsible
                     title="Новости"
                     href="/nolayout"
@@ -222,32 +283,61 @@ const NavigationClient = () => {
                     </svg>
                 </ButtonNavigationCollapsible> */}
 
-                <ButtonNavigationCollapsible
-                    title="Аналитика"
-                    href="/nolayout"
-                    active={isNavOpen}
-                    links={
-                        {
-                            'Дашборд': {
-                                link : '/profile/dashboard',
-                                icon : null
-                            },
-                        }
-                    }
-                    >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                        <path d="M5.2974 7.56134V13.0494" stroke="#242424" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M9.03073 4.93524V13.0494" stroke="#242424" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M12.7035 10.4614V13.0494" stroke="#242424" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path fillRule="evenodd" clipRule="evenodd" d="M12.7488 1H5.25167C2.63834 1 1.00024 2.84967 1.00024 5.46813V12.5319C1.00024 15.1503 2.63072 17 5.25167 17H12.7488C15.3698 17 17.0002 15.1503 17.0002 12.5319V5.46813C17.0002 2.84967 15.3698 1 12.7488 1Z" stroke="#242424" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-
-                </ButtonNavigationCollapsible>
               <ButtonNavigationCollapsible
+                title="Аналитика"
+                href="/nolayout"
+                active={isNavOpen}
+                links={{
+                  Дашборд: {
+                    link: "/profile/dashboard",
+                    icon: null,
+                  },
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                >
+                  <path
+                    d="M5.2974 7.56134V13.0494"
+                    stroke="#242424"
+                    strokeWidth="1.3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M9.03073 4.93524V13.0494"
+                    stroke="#242424"
+                    strokeWidth="1.3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M12.7035 10.4614V13.0494"
+                    stroke="#242424"
+                    strokeWidth="1.3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M12.7488 1H5.25167C2.63834 1 1.00024 2.84967 1.00024 5.46813V12.5319C1.00024 15.1503 2.63072 17 5.25167 17H12.7488C15.3698 17 17.0002 15.1503 17.0002 12.5319V5.46813C17.0002 2.84967 15.3698 1 12.7488 1Z"
+                    stroke="#242424"
+                    strokeWidth="1.3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </ButtonNavigationCollapsible>
+              {/* <ButtonNavigationCollapsible
                 title="Настройки"
                 href="/nolayout"
                 active={isNavOpen}
-                hide={true}
+                // hide={true}
                 links={{
                   "Профиль компании": {
                     link: "/nolayout",
@@ -293,7 +383,7 @@ const NavigationClient = () => {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </ButtonNavigationCollapsible>
+              </ButtonNavigationCollapsible> */}
               {/*<ButtonNavigation*/}
               {/*    title="Продажи"*/}
               {/*    href="/nolayout"*/}
@@ -410,16 +500,17 @@ const NavigationClient = () => {
 
               <div className={styles.nav__wrapper}>
                 <div className={styles.footer__control}>
-                  <div
+                  <button
                     title="Меню"
                     onClick={() => dispatch(toggleNav())}
                     className={[
                       styles.footer__contolButton,
                       styles.footer__contolButton_collapse,
                     ].join(" ")}
+                    tabIndex={0}
                   >
                     {isNavOpen ? "«" : "»"}
-                  </div>
+                  </button>
                   <ButtonLogout />
                 </div>
               </div>

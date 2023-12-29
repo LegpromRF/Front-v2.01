@@ -7,12 +7,14 @@ import formSlice from "@store/orderForm/form.slice";
 import procRegisterSlice from "@store/procurementRegister/procRegister.slice";
 import viewTzSlice from "@store/viewTz/viewTz.slice";
 import companiesSlice from "@store/companies/companies.slice";
+import admindataSlice from "./session/admindata.slice";
 
 const reducers = combineReducers({
   navigation: navigationSlice,
   authModal: authModalSlice,
   auth: authSlice,
   userdata: userdataSlice,
+  admindata: admindataSlice,
   form: formSlice,
   companies: companiesSlice,
   procRegister: procRegisterSlice,

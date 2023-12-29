@@ -9,10 +9,24 @@ import { isMobile } from "react-device-detect";
 import { Link } from "react-router-dom";
 import getUserName from "@/utils/services/profileData/getUserName.js";
 import { setUserName } from "@store/session/userdata.slice.js";
+import { toggleNav } from "@store/navigation/navigation.slice";
+import { navbarBgId } from "./Navigation/Client/NavigationClient";
+import getAdmin from "../utils/services/profileData/getAdmin";
+import { setAdmin } from "../store/session/admindata.slice";
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const username = useSelector((state) => state.userdata.username);
+  const isAdmin = useSelector((state) => state.admindata.isAdmin);
+
+  useEffect(() => {
+    async function fetchAdmin() {
+      const isAdmin = await getAdmin();
+      dispatch(setAdmin(isAdmin));
+    }
+
+    fetchAdmin();
+  }, [isAdmin]);
 
   useEffect(() => {
     async function fetchUser() {
@@ -30,6 +44,23 @@ const Layout = ({ children }) => {
   });
   const isNavOpen = useSelector((state) => state.navigation.isNavOpen);
 
+  const handleNav = () => {
+    dispatch(toggleNav())
+    setActiveHeader(prev => !prev)
+  }
+
+  useEffect(() => {
+    const clickHandler = (event) => event.target.id == navbarBgId ? dispatch(toggleNav()) : null
+    const keyHandler = (event) => event.code == 'Escape' ? dispatch(toggleNav()) : null
+    
+    document.addEventListener('click', clickHandler)
+    document.addEventListener('keydown', keyHandler)
+    return () => {
+       document.removeEventListener('click', clickHandler)
+       document.removeEventListener('keydown', keyHandler)
+    }
+ }, [])
+
   return (
     <>
       <header>
@@ -46,18 +77,13 @@ const Layout = ({ children }) => {
                   />
                 </Link>
               </div>
-              <div
-                onClick={() => setActiveHeader(!activeHeader)}
-                className={
-                  activeHeader
-                    ? [styles.header__menuActive, styles.header__burger].join(
-                        " "
-                      )
-                    : styles.header__burger
-                }
+              <button
+                onClick={handleNav}
+                className={styles.header__burger}
+                tabIndex={0}
               >
                 <span></span>
-              </div>
+              </button>
             </div>
           </div>
         </div>
