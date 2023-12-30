@@ -9,6 +9,7 @@ import {
   getFiles,
   getCustomer,
   getPaylink,
+  getSource,
 } from "../../../store/viewTz/viewTz.slice";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -24,6 +25,7 @@ const CheckTz = () => {
   const dispatch = useDispatch();
   const { item, itemError } = useSelector((state) => state.viewTz);
   const loading = useSelector((state) => state.viewTz.loading);
+  const { isAdmin } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,11 +36,14 @@ const CheckTz = () => {
     dispatch(getFiles(params.itemId));
     dispatch(getCustomer(params.itemId));
     dispatch(getPaylink(params.itemId));
+    dispatch(getAdminRole());
   }, [dispatch, params.itemId]);
 
   useEffect(() => {
-    dispatch(getAdminRole());
-  }, [dispatch]);
+    if (isAdmin) {
+      dispatch(getSource(params.itemId));
+    }
+  }, [dispatch, isAdmin, params.itemId]);
 
   useEffect(() => {
     if (!itemError) return;

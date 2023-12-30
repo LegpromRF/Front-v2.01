@@ -5,7 +5,9 @@ import formatDate from "../../../utils/helpers/formatDate";
 import { user } from "../../../store/user/user.slice";
 
 const ApplicationItemHeader = () => {
-  const { item, other } = useSelector((state) => state.viewTz);
+  const { item, other, source, sourceError } = useSelector(
+    (state) => state.viewTz
+  );
   const { isAdmin } = useSelector(user);
 
   return (
@@ -29,7 +31,14 @@ const ApplicationItemHeader = () => {
       )}
 
       {isAdmin && (
-        <ButtonOutline title="Донор" onClick={() => console.log("click")} />
+        <ButtonOutline
+          title="Донор"
+          onClick={() => {
+            if (!sourceError) {
+              document.location.href = source.source_url;
+            }
+          }}
+        />
       )}
     </div>
   );
