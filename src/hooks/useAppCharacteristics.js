@@ -80,10 +80,7 @@ export const useAppCharacteristics = () => {
       },
       {
         parameter: "Срок исполнения заказа с момента поставки сырья",
-        value:
-          other.order_lead_time !== "Invalid Date"
-            ? new Date(other.order_lead_time).toLocaleDateString()
-            : "Нет сроков",
+        value: other.order_lead_time || undefined,
       },
       {
         parameter: "Возможность взять заказ частично от (штук)",

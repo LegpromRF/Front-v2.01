@@ -104,6 +104,21 @@ export const getPaylink = createAsyncThunk("users/paylink", async (id) => {
   return await response.json();
 });
 
+export const getSource = createAsyncThunk("users/source", async (id) => {
+  const response = await fetch(
+    `https://api.legpromrf.ru/order_cards/${id}/source`,
+    {
+      credentials: "include",
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(`Request failed with status: ${response.status}`);
+  }
+
+  return await response.json();
+});
+
 export const viewTzSlice = createSlice({
   name: "viewTz",
   initialState: {
@@ -117,6 +132,8 @@ export const viewTzSlice = createSlice({
     customerLoading: false,
     customerError: false,
     paylinkLoading: false,
+
+    sourceError: false,
     item: {},
     technology: {},
     other: {},
@@ -124,6 +141,7 @@ export const viewTzSlice = createSlice({
     files: {},
     customer: {},
     paylink: {},
+    source: {},
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -202,6 +220,14 @@ export const viewTzSlice = createSlice({
       .addCase(getPaylink.fulfilled, (state, action) => {
         state.paylink = action.payload;
         state.paylinkLoading = false;
+      });
+
+    builder
+      .addCase(getSource.fulfilled, (state, action) => {
+        state.source = action.payload;
+      })
+      .addCase(getSource.rejected, (state) => {
+        state.sourceError = true;
       });
   },
 });
