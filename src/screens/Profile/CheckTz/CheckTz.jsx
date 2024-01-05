@@ -19,6 +19,7 @@ import HeaderApplication from "../../../layout/HeaderApplication/HeaderApplicati
 import ApplicationItemHeader from "../../../components/Application/ApplicationItemHeader/ApplicationItemHeader";
 import ApplicationCard from "../../../components/Application/ApplicationCard/ApplicationCard";
 import { getAdminRole } from "../../../store/user/user.slice";
+import Layout from "../../../layout/Layout";
 
 const CheckTz = () => {
   const params = useParams();
@@ -52,22 +53,24 @@ const CheckTz = () => {
   }, [itemError, navigate]);
 
   return (
-    <div>
-      {loading && item && (
-        <div className={styles.checktz__loading}>
-          <Loading />
-        </div>
-      )}
-      {!loading && (
-        <div className="page application application__container">
-          <HeaderApplication />
+    <Layout>
+      <div>
+        {loading && item && (
+          <div className={styles.checktz__loading}>
+            <Loading />
+          </div>
+        )}
+        {!loading && (
+          <div className="page application application__container">
+            <HeaderApplication />
 
-          <ApplicationItemHeader />
+            <ApplicationItemHeader />
 
-          <ApplicationCard />
-        </div>
-      )}
-    </div>
+            <ApplicationCard />
+          </div>
+        )}
+      </div>
+    </Layout>
   );
 };
 
