@@ -1,0 +1,44 @@
+.table__filters__control {
+  min-height: 30px !important;
+}
+.table__filters__value-container {
+  padding-right: 0 !important;
+}
+.table__filters__indicator {
+  padding: 0 4px !important;
+}
+
+.table__MuiSelect-select {
+  width: 100%;
+  min-width: 119px;
+  font-size: 18px !important;
+
+  @media (max-width: 768px) {
+    font-size: 16px !important;
+    min-width: 106px;
+  }
+  div {
+    padding: 0 3px !important;
+    text-align: left;
+    
+  }
+
+  svg {
+    right: -2px !important;
+  }
+
+  input {
+  }
+
+  &_succeeded {
+    color: #20a846 !important;
+  }
+  &_pending {
+    color: #a31919 !important;
+  }
+}
+
+.table__MuiSelect-menu-item {
+  min-height: 30px !important;
+  padding: 0 8px !important;
+}

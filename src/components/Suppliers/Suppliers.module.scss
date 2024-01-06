@@ -1,0 +1,25 @@
+.container {
+  max-height: 100vh;
+}
+
+.body {
+  position: relative;
+  background-color: #f5f5f5;
+  // display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  z-index: 30;
+  height: calc(100vh - (97px + 80px));
+  // box-sizing: border-box;
+  // overflow: hidden;
+  // order: 1;
+  @media (max-width: 1280px) {
+    // grid-auto-flow: dense;
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  button:focus-visible {
+    outline: 2px solid black !important;
+  }
+}

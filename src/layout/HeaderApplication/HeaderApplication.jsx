@@ -1,15 +1,23 @@
-import ButtonAction from "../../components/UI/ButtonAction/ButtonAction";
+import { useSelector } from "react-redux";
 import ButtonBuySubscription from "../../components/UI/ButtonBuySubscription/ButtonBuySubscription";
 import styles from "./HeaderApplication.module.scss";
+import PurchaseModal from "@/components/PurchaseModal/PurchaseModal";
+import { useState } from "react";
 
 const HeaderApplication = () => {
+  const [isPurchaseModalOpen, setPurchaseModalOpen] = useState(false);
+  const item = useSelector((state) => state.viewTz.item);
+
+  const openPurchaseModal = () => setPurchaseModalOpen(true);
+  const closePurchaseModal = () => setPurchaseModalOpen(false);
+
   return (
     <div className={styles.header}>
       <p className={styles.title}>
-        Заявка № ХХХХХХ Пошив платья для официантов
+        Заявка № {item.order_number} {item.order_name || "-"}
       </p>
 
-      <div className={styles.headerContent}>
+      {/* <div className={styles.headerContent}>
         <ButtonAction
           title="Редактировать"
           icon={
@@ -33,11 +41,13 @@ const HeaderApplication = () => {
             />
           }
         />
-      </div>
+      </div> */}
 
       <div className={styles.btnBuyWrapper}>
-        <ButtonBuySubscription price={4800} />
+        <ButtonBuySubscription price={4800} onClick={openPurchaseModal} />
       </div>
+
+      <PurchaseModal isOpen={isPurchaseModalOpen} close={closePurchaseModal} />
     </div>
   );
 };

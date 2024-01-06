@@ -1,0 +1,52 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+  &-main-wrapper {
+    
+    grid-row: 3;
+    padding: 0 0 10px 0;
+    @media (min-width: 1280px) {
+      display: none;
+    }
+  }
+
+  &-map-wrapper {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    height: 40px;
+    right: 0;
+    left: 0;
+    padding: 0 10px;
+
+    @media (max-width: 1280px) {
+      display: none;
+    }
+
+    footer {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 1280px) {
+    padding: 0 20px;
+  }
+  
+  &__title {
+  }
+
+  &__links {
+    display: flex;
+    gap: 20px;
+
+    text-decoration: underline;
+    color: blue;
+    a:visited {
+      color: purple;
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import toArrayBuffer from 'to-array-buffer'
 import { PDFDocument, PDFFont } from "pdf-lib"
 
 export const purchaseTypes = {
@@ -5,11 +6,9 @@ export const purchaseTypes = {
   CARD: 'карта',
 }
 
-export const downloadPDFWithINN = async (inn) => {
+export const downloadPDFWithINN = async (inn, pdfBytes) => {
   try {
-    const url = 'https://api.legpromrf.ru/file_manager/get_payment_form/'
-    const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer()) //!error with mode: 'no-cors'
-    const pdfDoc = await PDFDocument.load(existingPdfBytes)
+    const pdfDoc = await PDFDocument.load(pdfBytes)
     const page = pdfDoc.getPage(0)
     page.drawText(inn, {
       x: 139,
@@ -18,10 +17,10 @@ export const downloadPDFWithINN = async (inn) => {
     })
     const pdfDataUri = await pdfDoc.saveAsBase64({ dataUri: true });
     console.log(pdfDataUri);
-    let a = document.createElement("a"); //Create <a>
+    let a = document.createElement("a"); 
     a.href = pdfDataUri
-    a.download = "file"; //File name Here
-    a.click(); //Downloaded file
+    a.download = "schet"; //Filename
+    a.click(); //Download
     a.remove()
   } catch(e) {
     console.error(e)
