@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "@styles/globals.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -19,6 +18,8 @@ import DashboardPage from "@/pages/profile/dashboard.jsx";
 import ApplicationPage from "./pages/applicationPage.jsx";
 import SubscriptionsPage from "./pages/profile/subscriptions.jsx";
 import SuppliersPage from "./pages/suppliers.jsx";
+import Error404 from "./pages/404.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -99,6 +100,10 @@ const router = createBrowserRouter([
   {
     path: "/applicationpage",
     element: <ApplicationPage />,
+  },
+  {
+    path: "/not-found",
+    element: <Error404 />,
   },
 ]);
 

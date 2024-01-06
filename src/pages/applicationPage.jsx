@@ -1,7 +1,7 @@
-import Application from "../screens/Application/Application";
+import CheckTz from "../screens/Profile/CheckTz/CheckTz";
 
 const ApplicationPage = () => {
-  return <Application />;
+  return <CheckTz />;
 };
 
 export default ApplicationPage;
