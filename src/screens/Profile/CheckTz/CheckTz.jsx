@@ -47,7 +47,6 @@ const CheckTz = () => {
 
   useEffect(() => {
     if (!itemError) return;
-
     navigate("/not-found");
   }, [itemError, navigate]);
 

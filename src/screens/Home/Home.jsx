@@ -114,7 +114,11 @@ const Home = () => {
 
                                 </div>
                                 <div className={styles.landing__auth}>
-                                    <button onClick={openPurchaseModal}>
+                                    <button
+                                        onClick={openPurchaseModal}
+                                        aria-label='Модальное окно оплаты'
+                                        aria-expanded={isPurchaseModalOpen}
+                                    >
                                         Купить подписку
                                         <span>
                                             4 800 ₽/мес

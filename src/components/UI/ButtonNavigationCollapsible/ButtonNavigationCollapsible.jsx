@@ -1,13 +1,21 @@
 import styles from './ButtonNavigationCollapsible.module.scss'
 import {useState} from "react";
 import {Link} from "react-router-dom";
+import { setNav } from "@store/navigation/navigation.slice";
 import PropTypes from "prop-types";
+import { useDispatch } from 'react-redux';
 
 const ButtonNavigationCollapsible = ({children, title, stopPropagation, hide, active, activeLink, links, href}) => {
     const [open, setOpen] = useState(false);
-    function handleClick () {
+    const dispatch = useDispatch();
+    const handleLinkWrapperClick = () => {
+        dispatch(setNav(true))
         setOpen((prev) => !prev)
     }
+    const handleLinkClick = () => {
+        dispatch(setNav(false))
+    }
+
     return (
 
         /*onClick={(e) => stopPropagation == 'true' ? e.stopPropagation() : null*/
@@ -20,7 +28,7 @@ const ButtonNavigationCollapsible = ({children, title, stopPropagation, hide, ac
                         {children}
                     </div>
                     :
-                    <Link className={activeLink ? [styles.button__link, styles.button__linkActiveMenuBase].join(' ') : styles.button__link} to={""} onClick={() => handleClick()}>
+                    <Link className={activeLink ? [styles.button__link, styles.button__linkActiveMenuBase].join(' ') : styles.button__link} to={""} onClick={handleLinkWrapperClick}>
                         <span className={styles.button__title}>{title}</span>
                         {children}
                     </Link>
@@ -30,7 +38,7 @@ const ButtonNavigationCollapsible = ({children, title, stopPropagation, hide, ac
                     {
                         open && (
                             Object.entries(links).map(([title, props], index) => (
-                                <Link key={index} className={activeLink ? [styles.button__link, styles.button__linkActiveMenuBase].join(' ') : styles.button__link} to={props.link}>
+                                <Link key={index} className={activeLink ? [styles.button__link, styles.button__linkActiveMenuBase].join(' ') : styles.button__link} to={props.link} onClick={handleLinkClick}>
                                     <span>{title}</span>
                                     {props.icon}
                                 </Link>

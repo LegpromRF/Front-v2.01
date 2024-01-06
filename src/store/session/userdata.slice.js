@@ -5,6 +5,8 @@ export const userdataSlice = createSlice({
   initialState: {
     username: "",
     specification: null,
+    userOrders: null, //выставленные счета
+    userSubscriprions: null, //выставленные счета
   },
   reducers: {
     setUserName: (state, action) => {
@@ -13,8 +15,14 @@ export const userdataSlice = createSlice({
     setSpecification: (state, action) => {
       state.specification = action.payload;
     },
+    setUserOrders: (state, action) => {
+      state.userOrders = action.payload
+    },
+    setUserSubscriprions: (state, action) => {
+      state.userSubscriprions = action.payload
+    }
   },
 });
 
-export const { setUserName, setSpecification } = userdataSlice.actions;
+export const { setUserName, setSpecification, setUserOrders, setUserSubscriprions } = userdataSlice.actions;
 export default userdataSlice.reducer;
