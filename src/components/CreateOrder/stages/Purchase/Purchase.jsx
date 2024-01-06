@@ -105,7 +105,7 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
                 value: /^\d+(\.\d{1,2})?$/,
                 message: "Введите число",
               }}
-              // required
+              
             />
           </div>
           <div className={`${styles.form__block} ${styles['form__block-border-top']}`}>
@@ -129,7 +129,7 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
               title="Цена"
               propName="price_nds"
               loading={loading}
-              // required
+              
             />
           </div>
         </div>
@@ -140,14 +140,14 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
             title="Взять в производство не позднее"
             propName="start_date"
             type={"date"}
-            // required
+            
           />
           <TextItem
             control={control}
             title="Срок исполнения заказа с момента получения аванса/сырья"
             propName="order_lead_time"
             placeholder="Например: 2 недели"
-            // required
+            
           />
           <TextItem
             control={control}
@@ -176,115 +176,9 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
             title="Возможные регионы производства"
             propName="supplier_regions"
             loading={loading}
-            // required
+            
           />
         </div>
-        {/* <div className={styles.form__row}>
-          <div className={styles.form__items}>
-          <div className={styles.form__title}>Количество</div>
-          <div className={styles.form__title}>Сроки</div>
-          <div className={styles.form__title}>Регионы поставки</div>
-          </div>
-        </div> */}
-        {/* <div className={styles.form__row}>
-          <div className={styles.form__items}>
-            <TextItem
-              control={control}
-              title="Количество"
-              propName="count"
-              type="number"
-              placeholder={"Введите целое число"}
-              pattern={{
-                value: /^[0-9]*$/,
-                message: "Введите целое число",
-              }}
-              required
-            />
-            <TextItem
-              control={control}
-              title="Взять в производство не позднее"
-              propName="start_date"
-              type={"date"}
-              required
-            />
-            <SelectItem
-              control={control}
-              formOptions={formOptions ?? []}
-              title="Регион"
-              propName="location"
-              loading={loading}
-              required
-            />
-          </div>
-        </div>
-        <div className={styles.form__row}>
-          <div className={styles.form__items}>
-            <TextItem
-              control={control}
-              title="Возможно взять заказ частично (от шт.)."
-              propName="minimum_quantity"
-              type="number"
-              placeholder="Введите количество"
-              pattern={{
-                value: /^\d+(\.\d{1,2})?$/,
-                message: "Введите число",
-              }}
-              required
-            />
-            <TextItem
-              control={control}
-              title="Срок исполнения заказа с момента получения аванса/сырья"
-              propName="order_lead_time"
-              placeholder="Например: 2 недели"
-              required
-            />
-            <SelectItem
-              control={control}
-              formOptions={formOptions ?? []}
-              title="Возможные регионы производства"
-              propName="supplier_regions"
-              loading={loading}
-              required
-            />
-          </div>
-        </div>
-        <div className={styles.form__row}>
-          <div className={styles.form__items}>
-            <TextItem
-              control={control}
-              title="Цена за шт."
-              propName="price_per_unit"
-              type="number"
-              step={0.01}
-              placeholder={"Введите цену"}
-              pattern={{
-                value: /^\d+(\.\d{1,2})?$/,
-                message: "Введите число с двумя знаками после запятой",
-              }}
-              required
-            />
-            <TextItem
-              control={control}
-              title="Срок поставки не позднее"
-              propName="deadline"
-              type={"date"}
-              required
-            />
-          </div>
-        </div>
-        <div className={styles.form__row}>
-          <div className={styles.form__items}>
-            <SelectItem
-              control={control}
-              formOptions={formOptions ?? []}
-              title="Цена"
-              propName="price_nds"
-              loading={loading}
-              required
-            />
-            <TotalSum sum={sum} />
-          </div>
-        </div> */}
       </div>
       {Object.keys(errors).length > 0 && (
         <div>Не все обязательные поля заполнены!</div>

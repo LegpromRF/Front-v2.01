@@ -12,6 +12,7 @@ import styles from "../../CreateOrder.module.scss";
 
 const Contacts = ({ handlePrevStage, handleNextStage }) => {
   const stage = useSelector((state) => state.form.currentStage);
+  console.log(stage);
   const isHide = stage != 5
   
   const {

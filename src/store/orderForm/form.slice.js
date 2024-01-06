@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { convertInputDateToIso, transformDataToServer } from "./services";
 import { apiEndpoints } from "../../utils/constants/apiEndpoints";
-import { transformDataToServer } from "../../utils/services/createOrder/transformDataToServer";
 
 export const stagesCount = 6
 
@@ -10,7 +10,7 @@ export const formSlice = createSlice({
   name: "form",
   initialState: {
     currentStage: 1,
-    availableStages: 1, // стадии, на которые можно перейти (чтобы пользователь переходил только на прошлые, уже заполненные стадии) 
+    availableStages: 6, // стадии, на которые можно перейти (чтобы пользователь переходил только на прошлые, уже заполненные стадии) 
     formData: {},
     mediateData: {
       doc_urls: null,
@@ -45,6 +45,9 @@ export const formSlice = createSlice({
       console.log(state.formData);
       const formDataToSubmit = {...state.formData}
 
+      formDataToSubmit.deadline = convertInputDateToIso(formDataToSubmit.deadline)
+      formDataToSubmit.start_date = convertInputDateToIso(formDataToSubmit.start_date)
+      
       transformDataToServer(formDataToSubmit) // mutate formDataToSubmit
       console.log('submit', formDataToSubmit);
       // const test = {
@@ -72,10 +75,17 @@ export const formSlice = createSlice({
       // }
       
       try {
-        const res = await axios.post(apiEndpoints.bidOther, formDataToSubmit, { withCredentials: true })
-        // const id = res.data.bid_id
-        // const res = await axios.post(apiEndpoints.bidCreate, test, { withCredentials: true })
-        // formDataToSubmit.id = id
+        const res = await axios.post(apiEndpoints.bidCreate, formDataToSubmit, { withCredentials: true })
+        if (res.status == 201) {
+          const id = res.data.bid_id
+          formDataToSubmit.id = id
+          const resOther = await axios.post(apiEndpoints.bidOther, formDataToSubmit, { withCredentials: true })
+          console.log('resOther: ', resOther);
+          const resRequirements = await axios.post(apiEndpoints.bidRequirements, formDataToSubmit, { withCredentials: true })
+          console.log('resRequirements: ', resRequirements);
+          const resTechnology = await axios.post(apiEndpoints.bidTechnology, formDataToSubmit, { withCredentials: true })
+          console.log('resTechnology: ', resTechnology);
+        }
         console.log(res);
       } catch (e) {
         console.error(e);
