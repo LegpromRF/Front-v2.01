@@ -55,6 +55,6 @@ export const subsToDataList = (subs) => {
         date: convertDate(subs[subKey][funcKey].expired_date),
       })),
     });
-  } //TODO мб обрезать время в компоненте?
+  } 
   return list;
 };

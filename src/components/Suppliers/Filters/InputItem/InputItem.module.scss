@@ -1,0 +1,33 @@
+.filters__input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  & input[type="number"]::-webkit-inner-spin-button,
+  & input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  & input {
+    height: 32px;
+    border-radius: 4px;
+    padding: 0px 10px;
+    width: 280px;
+    background-color: white;
+    border: 1px solid rgb(200, 200, 200);
+    transition: all 0.2s;
+    &:focus {
+      border-color: #f18301 !important;
+      box-shadow: 0px 0px 0px 1px #f18301 !important;
+    }
+    @media (max-width: 720px) {
+      width: 100%;
+    }
+    :disabled {
+      border:1px solid #ff7a2a
+    }
+  }
+}
+
+.filters__input_open {
+  display: flex;
+}
