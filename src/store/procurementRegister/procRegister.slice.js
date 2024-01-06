@@ -9,7 +9,8 @@ export const getAllFilters = createAsyncThunk("users/getFilters", async () => {
 
 export const getAllCards = createAsyncThunk("users/getCards", async (query) => {
   const response = await fetch(`https://api.legpromrf.ru/order_cards?${query}`);
-  return await response.json();
+  const cards = await response.json() 
+  return cards || [];
 });
 
 export const procRegisterSlice = createSlice({
