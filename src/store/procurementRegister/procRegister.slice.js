@@ -9,8 +9,8 @@ export const getAllFilters = createAsyncThunk("users/getFilters", async () => {
 
 export const getAllCards = createAsyncThunk("users/getCards", async (query) => {
   const response = await fetch(`https://api.legpromrf.ru/order_cards?${query}`);
-  console.log(await response.json());
-  return await response.json() || [];
+  const cards = await response.json() 
+  return cards || [];
 });
 
 export const procRegisterSlice = createSlice({
@@ -84,6 +84,7 @@ export const procRegisterSlice = createSlice({
         state.loading = true;
       })
       .addCase(getAllCards.fulfilled, (state, action) => {
+        console.log(12, action.payload);
         state.cards = action.payload;
         state.loading = false;
       });
