@@ -19,8 +19,6 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
   const {
     control,
     handleSubmit,
-    watch,
-    setValue,
     formState: { errors },
     getValues,
   } = useForm();
@@ -82,7 +80,6 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
               title="Конструкторская документация"
               propName="pattern_doc"
               isMulti
-              // required
             />
             <SelectItem
               control={control}
@@ -90,7 +87,6 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
               title="Технологическая документация"
               propName="technological_doc"
               isMulti
-              // required
             />
             <TextItem
               control={control}
@@ -99,7 +95,6 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
               type="text"
               placeholder="Введите размер"
               isTextArea
-              // required
             />
           </div>
           <div
@@ -111,14 +106,14 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
               formOptions={formOptions ?? []}
               title="Дополнительные услуги"
               propName="additional_services"
-              // required
+              isMulti
             />
             <SelectItem
               control={control}
               formOptions={formOptions ?? []}
               title="Нанесение лого"
               propName="type_of_application"
-              // required
+              isMulti
             />
           </div>
         </div>
@@ -134,21 +129,18 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
               { label: "Да", value: true },
               { label: "Нет", value: false },
             ]}
-            // required
           />
           <SelectItem
             control={control}
             formOptions={formOptions ?? []}
             title="Пошив образца"
             propName="sewing_a_sample"
-            // required
           />
           <SelectItem
             control={control}
             formOptions={formOptions ?? []}
             title="Оплата пошива образца"
             propName="payment_for_a_sample"
-            // required
           />
           <FileItem
             control={control}
@@ -164,7 +156,7 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
             formOptions={formOptions ?? []}
             title="Вид ткани"
             propName="material_type"
-            // required
+            isMulti
           />
           <SelectItem
             control={control}
@@ -172,7 +164,6 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
             title="Сырье"
             propName="raw_materials"
             isMulti
-            // required
           />
           <TextItem
             control={control}
@@ -180,12 +171,13 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
             propName="fabric_density"
             type="text"
             placeholder="Введите плотность ткани"
-            // required
           />
         </div>
       </div>
       {Object.keys(errors).length > 0 && (
-        <div>Не все обязательные поля заполнены!</div>
+        <p className={styles.form__errorMess}>
+          Не все обязательные поля заполнены!
+        </p>
       )}
       <NavigateButtons
         errors={errors}
@@ -196,5 +188,3 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
   );
 };
 export default Technology;
-
-// поля done

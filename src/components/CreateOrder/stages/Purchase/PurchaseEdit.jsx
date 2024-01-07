@@ -10,7 +10,7 @@ import { updateFormData } from "@store/orderForm/form.slice";
 
 import styles from "../../CreateOrder.module.scss";
 
-const Purchase = ({ handlePrevStage, handleNextStage }) => {
+const PurchaseEdit = ({ handlePrevStage, handleNextStage }) => {
   const stage = useSelector((state) => state.form.currentStage);
   const isHide = stage != 2;
 
@@ -82,18 +82,6 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
             <div className={styles.form__title}>Количество</div>
             <TextItem
               control={control}
-              title="Количество"
-              propName="count"
-              type="number"
-              placeholder={"Введите целое число"}
-              pattern={{
-                value: /^[0-9]*$/,
-                message: "Введите целое число",
-              }}
-              required
-            />
-            <TextItem
-              control={control}
               title="Возможно взять заказ частично (от шт.)."
               propName="minimum_quantity"
               type="number"
@@ -108,19 +96,6 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
             className={`${styles.form__block} ${styles["form__block-border-top"]}`}
           >
             <div className={styles.form__title}>Стоимость</div>
-            <TextItem
-              control={control}
-              title="Цена за шт."
-              propName="price_per_unit"
-              type="number"
-              step={0.01}
-              placeholder={"Введите цену"}
-              pattern={{
-                value: /^\d+(\.\d{1,2})?$/,
-                message: "Введите число с двумя знаками после запятой",
-              }}
-              required
-            />
             <SelectItem
               control={control}
               formOptions={formOptions ?? []}
@@ -145,14 +120,6 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
             propName="order_lead_time"
             placeholder="Например: 2 недели"
           />
-          <TextItem
-            control={control}
-            title="Срок поставки не позднее"
-            propName="deadline"
-            type={"date"}
-            required
-          />
-          <TotalSum sum={sum} />
         </div>
         <div className={styles.form__block}>
           <div className={styles.form__title}>
@@ -161,23 +128,11 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
           <SelectItem
             control={control}
             formOptions={formOptions ?? []}
-            title="Регион"
-            propName="location"
-            required
-          />
-          <SelectItem
-            control={control}
-            formOptions={formOptions ?? []}
             title="Возможные регионы производства"
             propName="supplier_regions"
           />
         </div>
       </div>
-      {Object.keys(errors).length > 0 && (
-        <p className={styles.form__errorMess}>
-          Не все обязательные поля заполнены!
-        </p>
-      )}
       <NavigateButtons
         errors={errors}
         handlePrevStage={handlePrevStage}
@@ -186,4 +141,4 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
     </form>
   );
 };
-export default Purchase;
+export default PurchaseEdit;

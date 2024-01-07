@@ -26,6 +26,7 @@ const SelectItem = ({
     <div className={`${styles.form__item} ${extraClassName ? styles['form__item' + extraClassName] : ''}`}>
       <h3 className={styles.form__itemLabel}>
         <span>{title}</span>
+        {required ? <span className={styles.form__itemLabel_star}>*</span> : ""}
       </h3>
 
       <Controller

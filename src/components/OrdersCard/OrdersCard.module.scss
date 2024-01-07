@@ -42,10 +42,6 @@
     font-size: 16px;
     line-height: 20px; /* 125% */
     margin-bottom: 5px;
-
-    &:hover {
-      text-decoration: underline;
-    }
   }
 
   &__number {
@@ -96,7 +92,7 @@
 
   &__menu {
     position: absolute;
-    bottom: -170px;
+    bottom: -60px;
     right: 00px;
     z-index: 100;
     opacity: 0;

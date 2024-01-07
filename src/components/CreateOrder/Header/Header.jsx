@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
   const stage = useSelector(state => state.form.currentStage)
-  
+  if (stage == 6) return ''
   return (
     <div className={styles.createOrder__header}>
       <HeaderProfile title="Изделие" stage={1} done={stage > 1} active={stage == 1} />

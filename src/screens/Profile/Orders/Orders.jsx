@@ -8,6 +8,7 @@ import OrdersCard from "@components/OrdersCard/OrdersCard";
 import HeaderProfile from "@components/HeaderProfile/HeaderProfile";
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Orders = () => {
 
@@ -15,22 +16,18 @@ const Orders = () => {
 
   return ( 
    <>
-    <Head>
+    <h1>
       <title>Мои заказы - LegpromRF</title>
-    </Head>
+    </h1>
     <Layout>
       <div className={styles.orders}>
         <TitleProfile>Статусы заказов</TitleProfile>
         <div className={styles.orders__header}>
-          <div className={styles.orders__list}>
-            <HeaderProfile title="Все заказы" number="1" href='/profile/orders' active={true}/>
-            <HeaderProfile title="Архивные заказы" number="2" href='/profile/archive' active={false}/>
-          </div>
           <div className={styles.orders__status}><Status /></div>
         </div>
       </div>    
       <div className={styles.orders__cards}>
-      <Link href="/profile/createorder/" className={styles.orders__add}>
+      <Link to="/profile/order/createorder/" className={styles.orders__add}>
           <div className={styles.orders__addBody}>
             <h3 className={styles.orders__addTitle}>Создать новое ТЗ</h3>
             <p className={styles.orders__addSubTitle}>профессиональное техническое <br /> задание за 15 минут </p>

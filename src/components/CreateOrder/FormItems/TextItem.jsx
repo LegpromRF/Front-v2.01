@@ -14,7 +14,6 @@ const TextItem = ({
   isTextArea,
   required,
 }) => {
-  const inputRef = useRef(null);
 
   return (
     <div className={styles.form__item}>
@@ -46,7 +45,6 @@ const TextItem = ({
                 step={step ?? null}
                 {...field}
                 placeholder={placeholder ?? ""}
-                ref={inputRef}
               />}
             </div>
           );

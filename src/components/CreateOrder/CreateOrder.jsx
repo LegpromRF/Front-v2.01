@@ -6,12 +6,14 @@ import Technology from "./stages/Technology/Technology";
 import Conditions from "./stages/Conditions/Conditions";
 import Contacts from "./stages/Contacts/Contacts";
 import FinishMessage from "./stages/FinishMessage/FinishMessage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setNextStage, setPrevStage } from "@store/orderForm/form.slice";
 
 import styles from "./CreateOrder.module.scss";
+import { useEffect } from "react";
+import { setEditModeData } from "../../store/orderForm/form.slice";
 
-const CreateOrder = () => {
+const CreateOrder = ({ editMode, orderId }) => {
   const dispatch = useDispatch();
 
   const handleNextStage = () => {
@@ -22,6 +24,11 @@ const CreateOrder = () => {
     dispatch(setPrevStage());
   };
 
+  useEffect(() => {
+    dispatch(setEditModeData({ orderId, isEditMode: editMode }))
+  }, [editMode, orderId])
+
+  console.log(useSelector(state => state.form));
 
   return (
     <Layout>

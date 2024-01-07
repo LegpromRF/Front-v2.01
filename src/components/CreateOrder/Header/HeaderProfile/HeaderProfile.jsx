@@ -5,13 +5,12 @@ import { useCallback } from "react";
 
 const HeaderProfile = ({ title, stage, done, active }) => {
   const dispatch = useDispatch();
-  const availableStages = useSelector((store) => store.form.availableStages);
-  const isStageAvailable = +stage <= availableStages;
+  const currentStage = useSelector((store) => store.form.currentStage);
+  // const isStageAvailable = stage < currentStage; //todo
+  const isStageAvailable = true; 
   const handleClick = useCallback(() => {
     if (isStageAvailable) dispatch(setCurrentStage(stage));
   }, [isStageAvailable, stage]);
-
-  // const blockClassName = done ? [styles.header__itemNumber, styles.header__itemNumber_done].join(' ') : active ?
 
   const headerItemClassName =
     done || active

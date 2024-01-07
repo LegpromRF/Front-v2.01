@@ -102,6 +102,10 @@ const NavigationClient = () => {
                     link: "/profile/order/createorder",
                     icon: null,
                   },
+                  "Мои заявки": {
+                    link: "/profile/order/all",
+                    icon: null,
+                  },
                   // 'Мои заказы': {
                   //     link : '/nolayout',
                   //     icon : null

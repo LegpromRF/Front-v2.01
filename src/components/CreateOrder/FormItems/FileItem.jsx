@@ -16,7 +16,7 @@ const FileItem = ({ control, inputAccept, inputAreaLabel, propName }) => {
       withCredentials: true,
     });
 
-    dispatch(updateFormData({ [propName]: res.data[propName]}));
+    dispatch(updateFormData({ [propName]: res.data.docs})); //!только для docs - переделать!
     dispatch(updateMediateData({ [propName]: formData })); 
   }
 
