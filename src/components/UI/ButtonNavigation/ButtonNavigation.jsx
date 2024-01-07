@@ -1,7 +1,15 @@
 import styles from './ButtonNavigation.module.scss'
+import { setNav } from "@store/navigation/navigation.slice";
+import { useDispatch } from 'react-redux';
 import {Link} from "react-router-dom";
 
 const ButtonNavigation = ({children, href, title, stopPropagation, active, activeLink}) => {
+  const dispatch = useDispatch();
+  const handleLinkClick = () => {
+    const isNavOpen = false
+    dispatch(setNav(isNavOpen))
+  }
+  
   return ( 
 
     /*onClick={(e) => stopPropagation == 'true' ? e.stopPropagation() : null*/ 
@@ -14,7 +22,7 @@ const ButtonNavigation = ({children, href, title, stopPropagation, active, activ
           {children}
         </div>
       :
-        <Link className={activeLink ? [styles.button__link, styles.button__linkActiveMenuBase].join(' ') : styles.button__link} to={href} >
+        <Link className={activeLink ? [styles.button__link, styles.button__linkActiveMenuBase].join(' ') : styles.button__link} to={href} onClick={handleLinkClick} >
           <span className={styles.button__title}>{title}</span>
           {children}
         </Link>

@@ -12,15 +12,14 @@ import AuthPage from "./pages/auth.jsx";
 import PrivateRoute from "@components/routing/privateRoute.jsx";
 import Yatokenpage from "@/pages/Yatokenpage.jsx";
 import CreateOrderPage from "@/pages/profile/order/createorder.jsx";
-import PurchasePage from "@/pages/profile/order/purchase.jsx";
-import TechnologyPage from "@/pages/profile/order/technology.jsx";
-import ConditionsPage from "@/pages/profile/order/conditions.jsx";
-import ContactsPage from "@/pages/profile/order/contacts.jsx";
 import SelectionPage from "@/pages/profile/selection.jsx";
 import ProcurementRegisterPage from "@/pages/profile/order/procurement.jsx";
 import DashboardPage from "@/pages/profile/dashboard.jsx";
 import ApplicationPage from "./pages/applicationPage.jsx";
+import SubscriptionsPage from "./pages/profile/subscriptions.jsx";
+import SuppliersPage from "./pages/suppliers.jsx";
 import Error404 from "./pages/404.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -34,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/nolayout",
     element: <NoLayout />,
+  },
+  {
+    path: "/suppliers",
+    element: <SuppliersPage />,
   },
   {
     path: "/profile",
@@ -54,6 +57,22 @@ const router = createBrowserRouter([
     element: <DashboardPage />,
   },
   {
+    path: "/profile/subscriptions",
+    element: (
+      <PrivateRoute page="">
+        <SubscriptionsPage forAdmin={false} />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/profile/admin/subscriptions",
+    element: (
+      <PrivateRoute page="">
+        <SubscriptionsPage forAdmin={true} />
+      </PrivateRoute>
+    ),
+  },
+  {
     path: "/profile/order/createorder",
     element: (
       <PrivateRoute page="auth">
@@ -62,22 +81,6 @@ const router = createBrowserRouter([
     ),
   },
   { path: "/profile/order/view_tz/:itemId", element: <ViewTzPage /> },
-  {
-    path: "/profile/order/purchase",
-    element: <PurchasePage />,
-  },
-  {
-    path: "/profile/order/technology",
-    element: <TechnologyPage />,
-  },
-  {
-    path: "/profile/order/conditions",
-    element: <ConditionsPage />,
-  },
-  {
-    path: "/profile/order/contacts",
-    element: <ContactsPage />,
-  },
   {
     path: "/profile/selection",
     element: <SelectionPage />,

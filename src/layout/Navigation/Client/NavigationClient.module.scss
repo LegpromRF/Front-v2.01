@@ -10,6 +10,7 @@
   width: 300px;
   transition: all 0.3s ease-in;
   transform: translate(-234px);
+  overflow-y: auto;
 
   &__active {
     transform: translate(0%);
@@ -145,12 +146,16 @@
       font-size: 25px;
 
       @media (max-width: 1300px) {
-        display: none;
+        // display: none;
       }
     }
 
     & > *:not(:last-child) {
       margin-right: 20px;
+    }
+
+    &:focus-visible {
+      outline: auto;
     }
   }
 }

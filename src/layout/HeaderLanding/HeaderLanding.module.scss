@@ -37,13 +37,14 @@
     @media (max-width: 800px) {
       position: fixed;
       top: 0;
-      left: -100%;
+      left: calc(-100% - 8px);
       width: 100vw;
       height: 100vh;
       background-color: #f5f5f5;
       padding: 100px 30px 30px 30px;
       transition: left 0.3s ease 0s;
-      overflow: auto;
+      overflow-y: scroll;
+      overflow-x: hidden;
 
       display: flex;
       flex-direction: column;
@@ -53,11 +54,27 @@
       & > * {
         margin-bottom: 20px;
       }
+
+      
+    }
+
+    &_fullscreen {
+      display: none;
+      @media (max-width: 800px) {
+        display: flex;
+      }
+    }
+
+    &_builtin {
+      @media (max-width: 800px) {
+        display: none;
+      }
     }
   }
 
   &__menuActive {
-    left: 0%;
+    left: 0;
+    right: 0;
 
     &::before {
       content: "";
@@ -111,6 +128,20 @@
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  &__icon-link {
+    display: none;
+    // @media (max-width: 800px) {
+    //   display: block;
+    // }
+  }
+
+  &__text-link {
+    display: block;
+    @media (max-width: 800px) {
+      // display: none;
     }
   }
 
@@ -186,6 +217,7 @@
 
   &__burger {
     display: none;
+    overflow: visible;
 
     @media (max-width: 800px) {
       display: block;

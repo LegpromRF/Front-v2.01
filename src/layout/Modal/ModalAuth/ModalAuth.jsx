@@ -96,7 +96,7 @@ const ModalAuth = () => {
         console.log("Error:", error);
       })
       .finally(() => setLoader(false));
-  }, [redirectHref])
+  }, [redirectHref, authMethod])
 
   const processLogin = useCallback(async (data, authMethod) => {
     setLoader(true);
