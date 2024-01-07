@@ -30,7 +30,7 @@ const ApplicationItemHeader = () => {
         </p>
       )}
 
-      {isAdmin && (
+      {!isAdmin && (
         <ButtonOutline
           title="Донор"
           onClick={() => {

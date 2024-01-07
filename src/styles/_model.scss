@@ -28,7 +28,8 @@ body {
 }
 
 .page.application {
-  padding: 14px 30px;
+  // padding: 14px 30px;
+  padding: 0;
   flex-direction: column;
 }
 
@@ -65,12 +66,12 @@ body {
   height: 100%;
 }
 
-@media (max-width: 768px) {
-  .page.application {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}
+// @media (max-width: 768px) {
+//   .page.application {
+//     padding-left: 10px;
+//     padding-right: 10px;
+//   }
+// }
 
 @media (max-width: 750px) {
   [class*="__profileContainer"] {
