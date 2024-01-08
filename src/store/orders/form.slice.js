@@ -9,13 +9,11 @@ export const submitForm = createAsyncThunk('form/submitForm', async (_, thunkAPI
   thunkAPI.dispatch(setFormLoading(true))
   const state = thunkAPI.getState().form
   let formDataToSubmit = {...state.formData}
-  console.log('submit: ', formDataToSubmit);
-  console.log(thunkAPI);
+  // console.log('submit: ', formDataToSubmit);
   transformDataToServer(formDataToSubmit) // !mutate formDataToSubmit
   
   if (state.isEditMode) {
     formDataToSubmit.id = state.editModeData.orderId
-    console.log('fetchEditForm');
     const res = await fetchEditForm(formDataToSubmit)
     thunkAPI.dispatch(setFormLoading(false))
     return res.ok
@@ -30,18 +28,18 @@ export const loadFormForEdit = createAsyncThunk('form/loadFormForEdit', async (i
   try {
     let form = {}
     
-    let res = await axios.get(apiEndpoints.getBidCreate(id), { withCredentials: true })
+    let res = await axios.get(apiEndpoints.getBidCreate(id), { withCredentials: true, AccessControlAllowOrigin: true, })
     if (res.status == 200) form = {...form, ...res.data}
-    console.log(res);
-    res = await axios.get(apiEndpoints.getBidTechnology(id), { withCredentials: true })
+    // console.log(res);
+    res = await axios.get(apiEndpoints.getBidTechnology(id), { withCredentials: true, AccessControlAllowOrigin: true, })
     if (res.status == 200) form = {...form, ...res.data}
-    console.log(res);
-    res = await axios.get(apiEndpoints.getBidRequirements(id), { withCredentials: true })
+    // console.log(res);
+    res = await axios.get(apiEndpoints.getBidRequirements(id), { withCredentials: true, AccessControlAllowOrigin: true, })
     if (res.status == 200) form = {...form, ...res.data}
-    console.log(res);
-    res = await axios.get(apiEndpoints.getBidOther(id), { withCredentials: true })
+    // console.log(res);
+    res = await axios.get(apiEndpoints.getBidOther(id), { withCredentials: true, AccessControlAllowOrigin: true, })
     if (res.status == 200) form = {...form, ...res.data}
-    console.log(res);
+    // console.log(res);
 
     return form
   } catch(e) {
@@ -70,7 +68,7 @@ export const formSlice = createSlice({
   reducers: {
     setCurrentStage: (state, action) => {
       let newStage = action.payload;
-      // if (newStage > state.currentStage) return  //todo
+      if (newStage > state.currentStage) return 
 
       if (newStage >= stagesCount) newStage =  stagesCount;
       else if (newStage <= 1) newStage =  1;
@@ -97,7 +95,7 @@ export const formSlice = createSlice({
     },
     updateFormData: (state, action) => {
       state.formData = { ...state.formData, ...action.payload };
-      console.log(state.formData);
+      // console.log(state.formData);
     },
     updateMediateData: (state, action) => {
       state.mediateData = { ...state.mediateData, ...action.payload }

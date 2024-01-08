@@ -3,7 +3,6 @@ import styles from '../PurchaseModal.module.scss'
 
 const PurchaseType = ({ type, handleChange }) => {
   const handleLabelClick = (event) => {
-    console.log(event.code);
     if (event.code == 'Space') { //перехватываю нажатие Space по выделенному label
       const inputChild = event.target.querySelector("#" + purchaseTypes.CARD) || event.target.querySelector("#" + purchaseTypes.ACCOUNT)
       if (inputChild) inputChild.click() 

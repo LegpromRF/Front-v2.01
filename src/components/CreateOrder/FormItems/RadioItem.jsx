@@ -22,7 +22,6 @@ const RadioItem = ({ control, title, propName, options, required }) => {
         }}
         render={({ field }) => {
           const initialValue = getFormField(propName);
-          console.log(initialValue, field.value);
           if (field.value === undefined && (initialValue === true || initialValue === false))
             field.onChange(initialValue);
 

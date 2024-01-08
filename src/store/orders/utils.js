@@ -1,6 +1,4 @@
 export const transformDataToServer = (data) => {
-  console.log (data);
-  console.log(Object.values(data));
   data.customer_tg = data.customer_tg ? data.customer_phone : null
   data.customer_whatsapp = data.customer_whatsapp ? data.customer_phone : null
   data.doc_urls = null //TODO
@@ -21,7 +19,7 @@ export const transformDataToServer = (data) => {
     }
   })
 
-  data.supplier_regions = supplierRegionsForServer //TODO исправить на data.supplier_regions
+  data.supplier_regions = supplierRegionsForServer 
   
   Object.keys(data).forEach((key) => {
     const value = data[key]

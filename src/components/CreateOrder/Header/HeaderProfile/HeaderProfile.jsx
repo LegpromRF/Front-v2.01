@@ -6,8 +6,8 @@ import { useCallback } from "react";
 const HeaderProfile = ({ title, stage, done, active }) => {
   const dispatch = useDispatch();
   const currentStage = useSelector((store) => store.form.currentStage);
-  // const isStageAvailable = stage < currentStage; //todo
-  const isStageAvailable = true;
+  const isStageAvailable = stage < currentStage; 
+  
   const handleClick = useCallback(() => {
     if (isStageAvailable) dispatch(setCurrentStage(stage));
   }, [isStageAvailable, stage]);

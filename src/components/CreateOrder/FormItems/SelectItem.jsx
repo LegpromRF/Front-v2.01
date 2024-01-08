@@ -6,6 +6,7 @@ import Skeleton from "react-loading-skeleton";
 import { getFormField } from "../../../store/orders/form.slice";
 import { useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { transformFieldToInput } from "./utils";
 
 const SelectItem = ({
   control,
@@ -45,38 +46,16 @@ const SelectItem = ({
             : {},
         }}
         render={({ field }) => {
-          const isEdited = useRef(false)
+          const isFieldTransformed = useRef(false) //для случаев когда заявка редактируется и поля приходят в серверном виде
           
           let initialValue = getFormField(propName)
           initialValue = selectOptions.length ? initialValue : undefined;
 
-          if (propName == 'supplier_regions' && initialValue && !isEdited.current) {
-            console.log(initialValue, selectOptions);
-            isEdited.current = true
-            const result = []
-            Object.entries(initialValue).forEach(([country, regions]) => {
-              if (regions.length) {
-                regions.forEach(region => {
-                  const regionName = selectOptions.find(opt => opt.value.split('.').length == 2 && +opt.value.split('.')[1] == region).label.split('.')[1]
-                  const countryName = selectOptions.find(opt => +opt.value.split('.')[0] == country).label.split('.')[0]
-                  result.push({label: countryName+'.'+regionName, value: country+'.'+region})
-                })
-              }
-              else {
-                const countryName = selectOptions.find(opt => +opt.value == country)?.label
-                  result[countryName] = country
-                  result.push({label: countryName, value: country})
-              }
-            })
-            initialValue = result
-            console.log('new initialValue', initialValue);
+          if (initialValue && !isFieldTransformed.current) {
+            initialValue = transformFieldToInput(propName, initialValue, selectOptions)
+            isFieldTransformed.current = true
           }
 
-          if (typeof initialValue == 'number') initialValue = selectOptions.find(opt => opt.value == initialValue)
-
-          if (Array.isArray(initialValue) && typeof initialValue[0] == 'number') {
-            initialValue = initialValue.map(value => selectOptions.find(opt => opt.value == value))
-          }
           if (field.value === undefined && initialValue) {
             field.onChange(initialValue);
           }

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styles from "./OrdersCard.module.scss";
 import { useState } from "react";
 
-const id = 544 //TODO
+const id = 544 
 
 const OrdersCard = ({ title, number, status, href }) => {
   const [activeMenu, setActiveMenu] = useState(false);

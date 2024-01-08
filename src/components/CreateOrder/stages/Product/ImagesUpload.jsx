@@ -55,7 +55,6 @@ const ImagesUpload = ({ control }) => {
 
   const changedHandler = (e) => {
     let files = e.target.files;
-    console.log(Array.from(files));
     fileobjRef.current = [];
     Array.from(files).forEach((file) => fileobjRef.current.push(file));
     loadImages();
@@ -64,9 +63,7 @@ const ImagesUpload = ({ control }) => {
 
   const deleteImage = (e) => {
     const index = e.target.id;
-    console.log(fileobjRef.current, "fileobj before delete");
     fileobjRef.current = fileobjRef.current?.filter((_, ind) => ind != index)
-    console.log(fileobjRef.current, "fileobj after delete");
     loadImages();
     fetchFileobj();
   }
@@ -74,28 +71,6 @@ const ImagesUpload = ({ control }) => {
   useEffect(() => {
     loadImages()
   }, [])
-
-  // useEffect(() => {
-  //   const fetchImages = async () => {
-  //     console.log(initialSrcs, fileobjRef.current);
-  //     if (initialSrcs && fileobjRef.current == null) {
-  //       fileobjRef.current = []
-
-  //       // for (const img of initialSrcs) {
-  //       //   console.log(img);
-  //       //   const res = await fetch(img.src)
-  //       //   console.log(res);
-  //       //   const blob = await res.blob()
-  //       //   console.log(blob);
-  //       //   const file = new File([blob], "image", {...blob, type: 'image/webp'});
-  //       //   fileobjRef.current.push(file)
-  //       // }
-  //       // console.log(fileobjRef.current);
-  //       loadImages()
-  //     }
-  //   }
-  //   fetchImages()
-  // }, [initialSrcs]);
 
   return (
     <div className={styles.form__row}>
