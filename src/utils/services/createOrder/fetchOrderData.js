@@ -21,5 +21,6 @@ export default async function getPropObject(endpoint) {
     return props;
   } catch (error) {
     console.log(error);
+    return null
   }
 }

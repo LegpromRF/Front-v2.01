@@ -9,24 +9,32 @@ import RadioItem from "../../FormItems/RadioItem";
 import FileItem from "../../FormItems/FileItem";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFormData } from "@store/orders/form.slice";
+import { useNavigate } from "react-router-dom";
 
 const Technology = ({ handlePrevStage, handleNextStage }) => {
+  const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
   const stage = useSelector((state) => state.form.currentStage);
+  const isEditMode = useSelector((state) => state.form.isEditMode);
+  
   const isHide = stage != 3;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const {
     control,
     handleSubmit,
     formState: { errors },
     getValues,
+    reset
   } = useForm();
   const [formOptions, setFormOptions] = useState([]);
 
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject("technology");
+      if (!options) navigate('/404')
+
       const labels = {
         additional_services: "Дополнительные услуги",
         material_type: "Вид ткани",
@@ -60,6 +68,10 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
     handleNextStage();
     dispatch(updateFormData(getValues()));
   };
+
+  useEffect(() => {
+    reset()
+  }, [isFormFetchingSuccess])
 
   return (
     <form
@@ -142,12 +154,12 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
             title="Оплата пошива образца"
             propName="payment_for_a_sample"
           />
-          <FileItem
+          {isEditMode ? '' : <FileItem
             control={control}
             propName="doc_urls"
             inputAccept=".docx"
             inputAreaLabel="Текстовый документ"
-          />
+          />}
         </div>
         <div className={styles.form__block}>
           <div className={styles.form__title}>Сырье</div>

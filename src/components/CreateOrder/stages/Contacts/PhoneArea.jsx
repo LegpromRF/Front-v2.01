@@ -41,14 +41,16 @@ const PhoneArea = ({ control }) => {
           render={({ field }) => {
             const initialValue = getFormField("customer_tg");
             if (field.value === undefined && initialValue)
-              field.onChange(initialValue);
+              field.onChange(Boolean(initialValue));
 
             return (
               <div className={styles.form__checkField}>
-                <label htmlFor="customer_tg">Whatsapp</label>
+                <label htmlFor="customer_tg">Telegram</label>
                 <input
                   {...field}
                   tabIndex={0}
+                  checked={Boolean(field.value)}
+                  onChange={e => field.onChange(!Boolean(field.value))}
                   id="customer_tg"
                   name="customer_tg"
                   type={"checkbox"}
@@ -67,7 +69,7 @@ const PhoneArea = ({ control }) => {
 
             return (
               <div className={styles.form__checkField}>
-                <label htmlFor="customer_whatsapp">Telegram</label>
+                <label htmlFor="customer_whatsapp">Whatsapp</label>
                 <input
                   {...field}
                   tabIndex={0}

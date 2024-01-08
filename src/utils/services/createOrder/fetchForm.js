@@ -24,14 +24,14 @@ export const fetchForm = async (form) => {
 
 export const fetchEditForm = async (form) => {
   try {
-    const res = await axios.post(apiEndpoints.bidEditCreate(form.id), form, { withCredentials: true })
+    const res = await axios.post(apiEndpoints.bidEditCreate, form, { withCredentials: true, AccessControlAllowOrigin: true, })
     console.log('res', res);
     if (res.status == 201) {
-      const resOther = await axios.post(apiEndpoints.bidEditOther(form.id), form, { withCredentials: true })
+      const resOther = await axios.post(apiEndpoints.bidEditOther, form, { withCredentials: true })
       console.log('resOther: ', resOther);
-      const resRequirements = await axios.post(apiEndpoints.bidEditRequirements(form.id), form, { withCredentials: true })
+      const resRequirements = await axios.post(apiEndpoints.bidEditRequirements, form, { withCredentials: true })
       console.log('resRequirements: ', resRequirements);
-      const resTechnology = await axios.post(apiEndpoints.bidEditTechnology(form.id), form, { withCredentials: true })
+      const resTechnology = await axios.post(apiEndpoints.bidEditTechnology, form, { withCredentials: true })
       console.log('resTechnology: ', resTechnology);
     }
     return { ok: true }

@@ -78,8 +78,14 @@
     cursor: pointer;
     color: #454545;
 
+    svg {
+      transform: translateY(2px);
+      margin-right: 5px;
+    }
+    
     &:hover {
       text-decoration: underline;
+      color: #0036FF;
     }
   }
   

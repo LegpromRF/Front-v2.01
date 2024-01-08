@@ -25,6 +25,6 @@ const reducers = combineReducers({
 
 export const store = configureStore({
   reducer: reducers,
-  devTools: true,
+  devTools: true
 });
 

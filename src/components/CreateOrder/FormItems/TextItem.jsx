@@ -14,6 +14,8 @@ const TextItem = ({
   isTextArea,
   required,
 }) => {
+  
+
   return (
     <div className={styles.form__item}>
       <h3 className={styles.form__itemLabel}>
@@ -33,7 +35,8 @@ const TextItem = ({
           pattern: pattern ?? {},
         }}
         render={({ field }) => {
-          const initialValue = getFormField(propName);
+          let initialValue = getFormField(propName);
+          if (type == 'date' && initialValue) initialValue = initialValue.split('T')[0]
           if (field.value === undefined && initialValue)
             field.onChange(initialValue);
 

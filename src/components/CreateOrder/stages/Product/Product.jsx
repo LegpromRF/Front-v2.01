@@ -9,18 +9,26 @@ import ImagesUpload from "./ImagesUpload";
 import { updateFormData } from "@store/orders/form.slice";
 
 import styles from "../../CreateOrder.module.scss";
+import { useNavigate } from "react-router-dom";
+import { loadFormForEdit, submitForm } from "../../../../store/orders/form.slice";
 
 const Product = ({ handleNextStage }) => {
+  const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
   const stage = useSelector((state) => state.form.currentStage);
+  const isEditMode = useSelector((state) => state.form.isEditMode);
+  
+
   const isHide = stage != 1;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const {
     control,
     handleSubmit,
     formState: { errors },
     getValues,
+    reset
   } = useForm();
 
   const [formOptions, setFormOptions] = useState([]);
@@ -28,6 +36,7 @@ const Product = ({ handleNextStage }) => {
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject("product");
+      if (!options) navigate('/404')
 
       const labels = {
         clothes_type: "Тип одежды",
@@ -62,6 +71,10 @@ const Product = ({ handleNextStage }) => {
     handleNextStage();
     dispatch(updateFormData(getValues()));
   };
+
+  useEffect(() => {
+    reset()
+  }, [isFormFetchingSuccess])
 
   return (
     <form
@@ -160,7 +173,7 @@ const Product = ({ handleNextStage }) => {
             />
           </div>
         </div>
-        <ImagesUpload control={control} />
+        {isEditMode ? '' : <ImagesUpload control={control} />}
       </div>
       {Object.keys(errors).length > 0 && (
         <p className={styles.form__errorMess}>

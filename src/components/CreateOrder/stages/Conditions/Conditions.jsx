@@ -8,18 +8,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateFormData } from "@store/orders/form.slice";
 
 import styles from "../../CreateOrder.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const Conditions = ({ handleNextStage, handlePrevStage }) => {
+  const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
   const stage = useSelector((state) => state.form.currentStage);
   const isHide = stage != 4;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const {
     control,
     handleSubmit,
     formState: { errors },
     getValues,
+    reset
   } = useForm();
 
   const [formOptions, setFormOptions] = useState([]);
@@ -27,6 +31,7 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject("conditions");
+      if (!options) navigate('/404')
 
       const labels = {
         OTC_access: "Доступ на производство для ОТК заказчика",
@@ -62,6 +67,10 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
     handleNextStage();
     dispatch(updateFormData(getValues()));
   };
+
+  useEffect(() => {
+    reset()
+  }, [isFormFetchingSuccess])
 
   return (
     <form

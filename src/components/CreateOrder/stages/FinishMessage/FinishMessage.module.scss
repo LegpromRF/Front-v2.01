@@ -1,3 +1,38 @@
 .message {
-  font-size: 26px;
+
+  &__wrapper {
+
+  }
+
+  &__text {
+    font-size: 26px;
+  }
+
+  &__btn {
+    margin-top: 30px;
+    width: auto;
+   
+    a {
+      font-size: 14px;
+      border-radius: 5px;
+      background: #0036FF;
+      padding: 8px 18px;
+      color: #FFF;
+
+      @media (max-width: 1610px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1 1 100%;
+        padding: 10px 22px;
+      }
+
+      &:hover {
+        background: #486ef7;
+      }
+    }
+
+   
+
+  }
 } 

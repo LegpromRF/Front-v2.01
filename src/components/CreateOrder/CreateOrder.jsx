@@ -11,10 +11,21 @@ import { setNextStage, setPrevStage } from "@store/orders/form.slice";
 
 import styles from "./CreateOrder.module.scss";
 import { useEffect } from "react";
-import { loadFormForEdit, setEditModeData } from "../../store/orders/form.slice";
+import {
+  clearData,
+  loadFormForEdit,
+  setEditModeData,
+} from "../../store/orders/form.slice";
+import { CircularProgress } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const CreateOrder = ({ editMode, orderId }) => {
+  const isFormLoading = useSelector(
+    (store) => store.form.editModeData.isFormLoading
+  );
+  const stage = useSelector((state) => state.form.currentStage);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const handleNextStage = () => {
     dispatch(setNextStage());
@@ -25,41 +36,58 @@ const CreateOrder = ({ editMode, orderId }) => {
   };
 
   useEffect(() => {
-    dispatch(setEditModeData({ orderId, isEditMode: editMode }));
-    dispatch(loadFormForEdit(orderId))
+    dispatch(setEditModeData({ orderId, isEditMode: Boolean(editMode) }));
+    if (editMode) dispatch(loadFormForEdit(orderId));
   }, [editMode, orderId]);
 
-  console.log(useSelector((state) => state.form));
+  useEffect(() => {
+    dispatch(clearData())
+    // if (stage == 6) {
+    //   setTimeout(() => {
+    //     navigate('/profile/order/all')
+    //     dispatch(clearData())
+    //   }, [5000])
+    // }
+  }, [])
+  // }, [stage])
 
   return (
     <Layout>
       <div className={styles.createOrder}>
-        <h1 className={styles["createOrder__title"]}>Техническое задание</h1>
-        <Header />
-        <div className={styles.createOrder__order}>
-          <div className={styles.createOrder__content}>
-            <div className={styles.createOrder__body}>
-              <Product handleNextStage={handleNextStage} />
-              <Purchase
-                handlePrevStage={handlePrevStage}
-                handleNextStage={handleNextStage}
-              />
-              <Technology
-                handlePrevStage={handlePrevStage}
-                handleNextStage={handleNextStage}
-              />
-              <Conditions
-                handlePrevStage={handlePrevStage}
-                handleNextStage={handleNextStage}
-              />
-              <Contacts
-                handlePrevStage={handlePrevStage}
-                handleNextStage={handleNextStage}
-              />
-              <FinishMessage />
+        <h1 className={styles["createOrder__title"]}>{editMode ? 'Техническое задание: редактирование' : 'Техническое задание'}</h1>
+        {isFormLoading ? 
+           <div className={styles.createOrder__loader}>
+            <span>Загрузка формы...</span>
+            <CircularProgress size={50} />
+           </div> :
+          <>
+            <Header />
+            <div className={styles.createOrder__order}>
+              <div className={styles.createOrder__content}>
+                <div className={styles.createOrder__body}>
+                  <Product handleNextStage={handleNextStage} />
+                  <Purchase
+                    handlePrevStage={handlePrevStage}
+                    handleNextStage={handleNextStage}
+                  />
+                  <Technology
+                    handlePrevStage={handlePrevStage}
+                    handleNextStage={handleNextStage}
+                  />
+                  <Conditions
+                    handlePrevStage={handlePrevStage}
+                    handleNextStage={handleNextStage}
+                  />
+                  <Contacts
+                    handlePrevStage={handlePrevStage}
+                    handleNextStage={handleNextStage}
+                  />
+                  <FinishMessage />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          </>
+        }
       </div>
     </Layout>
   );

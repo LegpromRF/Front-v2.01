@@ -1,33 +1,30 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { apiEndpoints } from "@/utils/constants/apiEndpoints.js";
 import axios from "axios";
-import { updateFormData, getMediateField,
-  updateMediateData, } from "../../../../store/orders/form.slice";
+import {
+  updateFormData,
+  getMediateField,
+  updateMediateData,
+  getFormField,
+} from "../../../../store/orders/form.slice";
 
 import styles from "../../CreateOrder.module.scss";
 import { useDispatch } from "react-redux";
 import { Controller } from "react-hook-form";
 
-const ImagesUpload = ({control}) => {
+const ImagesUpload = ({ control }) => {
   const dispatch = useDispatch();
   const [visibleControlImage, setVisibleControlImage] = useState(false);
   const [preview, setPreview] = useState([]);
 
-  //const initialValue = getFormField("photo_urls"); через fetch(img.src)
-// .then(res => res.blob())
-// .then(blob => {
-//   const file = new File([blob], 'dot.png', blob)
-//   console.log(file)
-// })
-  const initialValue = getMediateField("photo_urls");
+  // const initialSrcs = getFormField("photo_urls");
+  const initialData = getMediateField("photo_urls");
 
-  let fileobj = useMemo(
-    () => (initialValue ? Array.from(initialValue) : []),
-    []
-  );
+  let fileobjRef = useRef(initialData || [])
 
-  const fetchFileobj = useCallback(async () => {
+  const fetchFileobj = async () => {
     try {
+      const fileobj = fileobjRef.current
       const formData = new FormData();
       console.log(fileobj, "fileobj in fetch");
       fileobj.forEach((file) => formData.append("files", file));
@@ -41,9 +38,10 @@ const ImagesUpload = ({control}) => {
     } catch (e) {
       console.error(e);
     }
-  }, [fileobj]);
+  }
 
-  const loadImages = useCallback(() => {
+  const loadImages = () => {
+    const fileobj = fileobjRef.current
     let reader;
     setPreview([]);
     for (let i = 0; i < fileobj.length; i++) {
@@ -53,38 +51,57 @@ const ImagesUpload = ({control}) => {
         setPreview((prev) => [...prev, e.target.result]);
       };
     }
-  }, [fileobj]);
+  }
 
-  const changedHandler = useCallback(
-    (e) => {
-      let files = e.target.files;
-      console.log(Array.from(files));
-      fileobj = [];
-      Array.from(files).forEach((file) => fileobj.push(file));
-      loadImages();
-      fetchFileobj();
-    },
-    [fileobj]
-  );
+  const changedHandler = (e) => {
+    let files = e.target.files;
+    console.log(Array.from(files));
+    fileobjRef.current = [];
+    Array.from(files).forEach((file) => fileobjRef.current.push(file));
+    loadImages();
+    fetchFileobj();
+  }
 
-  const deleteImage = useCallback(
-    (e) => {
-      const index = e.target.id;
-      console.log(fileobj, "fileobj before delete");
-      fileobj.splice(index, 1);
-      loadImages();
-      fetchFileobj();
-    },
-    [fileobj]
-  );
+  const deleteImage = (e) => {
+    const index = e.target.id;
+    console.log(fileobjRef.current, "fileobj before delete");
+    fileobjRef.current = fileobjRef.current?.filter((_, ind) => ind != index)
+    console.log(fileobjRef.current, "fileobj after delete");
+    loadImages();
+    fetchFileobj();
+  }
 
   useEffect(() => {
-    if (initialValue) loadImages();
-  }, []);
+    loadImages()
+  }, [])
+
+  // useEffect(() => {
+  //   const fetchImages = async () => {
+  //     console.log(initialSrcs, fileobjRef.current);
+  //     if (initialSrcs && fileobjRef.current == null) {
+  //       fileobjRef.current = []
+
+  //       // for (const img of initialSrcs) {
+  //       //   console.log(img);
+  //       //   const res = await fetch(img.src)
+  //       //   console.log(res);
+  //       //   const blob = await res.blob()
+  //       //   console.log(blob);
+  //       //   const file = new File([blob], "image", {...blob, type: 'image/webp'});
+  //       //   fileobjRef.current.push(file)
+  //       // }
+  //       // console.log(fileobjRef.current);
+  //       loadImages()
+  //     }
+  //   }
+  //   fetchImages()
+  // }, [initialSrcs]);
 
   return (
     <div className={styles.form__row}>
-      <div className={styles.form__title}>Фото изделия <span className={styles.form__itemLabel_star}>*</span></div>
+      <div className={styles.form__title}>
+        Фото изделия <span className={styles.form__itemLabel_star}>*</span>
+      </div>
       <div className={styles.form__imagesForm}>
         <div className={styles.form__imagesBlockPreview}>
           {(preview || []).map((url, index) => (
@@ -130,7 +147,7 @@ const ImagesUpload = ({control}) => {
                 name={"images"}
                 control={control}
                 rules={{
-                  required: false
+                  required: false,
                 }}
                 render={({ field }) => {
                   return (

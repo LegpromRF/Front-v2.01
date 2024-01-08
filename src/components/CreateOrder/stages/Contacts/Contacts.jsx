@@ -2,17 +2,18 @@ import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { apiEndpoints } from "@/utils/constants/apiEndpoints.js";
-import { updateAndSubmitFormData } from "@store/orders/form.slice";
 import { useForm } from "react-hook-form";
 import NavigateButtons from "../../NavigateButtons";
 import SelectItem from "../../FormItems/SelectItem";
 import TextItem from "../../FormItems/TextItem";
 
 import styles from "../../CreateOrder.module.scss";
-import { getFormField } from "../../../../store/orders/form.slice";
+import { clearData, getFormField, submitForm, updateFormData } from "../../../../store/orders/form.slice";
 import PhoneArea from "./PhoneArea";
+import { useNavigate } from "react-router-dom";
 
 const Contacts = ({ handlePrevStage }) => {
+  const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
   const stage = useSelector((state) => state.form.currentStage);
   const isHide = stage != 5;
   const isPhotoUrlsExist = Boolean(getFormField("photo_urls")?.length);
@@ -22,15 +23,22 @@ const Contacts = ({ handlePrevStage }) => {
     handleSubmit,
     getValues,
     formState: { errors },
+    reset
   } = useForm();
 
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const onSubmit = useCallback(() => {
     if (!isPhotoUrlsExist) return;
-    dispatch(updateAndSubmitFormData(getValues()));
+    dispatch(updateFormData(getValues()));
+    dispatch(submitForm());
   }, [isPhotoUrlsExist]);
 
+  useEffect(() => {
+    reset()
+  }, [isFormFetchingSuccess])
+  
   return (
     <form
       className={`${styles.form} ${isHide ? styles.form_hide : ""}`}

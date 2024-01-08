@@ -5,20 +5,41 @@ import { fetchEditForm, fetchForm } from "../../utils/services/createOrder/fetch
 import { apiEndpoints } from "../../utils/constants/apiEndpoints";
 import axios from "axios";
 
-export const loadFormForEdit = createAsyncThunk('form/loadFormForEdit', async (id) => {
+export const submitForm = createAsyncThunk('form/submitForm', async (_, thunkAPI) => {
+  thunkAPI.dispatch(setFormLoading(true))
+  const state = thunkAPI.getState().form
+  let formDataToSubmit = {...state.formData}
+  console.log('submit: ', formDataToSubmit);
+  console.log(thunkAPI);
+  transformDataToServer(formDataToSubmit) // !mutate formDataToSubmit
+  
+  if (state.isEditMode) {
+    formDataToSubmit.id = state.editModeData.orderId
+    console.log('fetchEditForm');
+    const res = await fetchEditForm(formDataToSubmit)
+    thunkAPI.dispatch(setFormLoading(false))
+    return res.ok
+  } else {
+    const res = await fetchForm(formDataToSubmit)
+    thunkAPI.dispatch(setFormLoading(false))
+    return res.ok
+  }
+})
+
+export const loadFormForEdit = createAsyncThunk('form/loadFormForEdit', async (id, thunkAPI) => {
   try {
     let form = {}
     
     let res = await axios.get(apiEndpoints.getBidCreate(id), { withCredentials: true })
     if (res.status == 200) form = {...form, ...res.data}
     console.log(res);
-    // res = await axios.get(apiEndpoints.orderCardsTechnology(id), { withCredentials: true })
-    // if (res.status == 200) form = {...form, ...res.data}
-    // console.log(res);
-    res = await axios.get(apiEndpoints.orderCardsRequirements(id), { withCredentials: true })
+    res = await axios.get(apiEndpoints.getBidTechnology(id), { withCredentials: true })
     if (res.status == 200) form = {...form, ...res.data}
     console.log(res);
-    res = await axios.get(apiEndpoints.orderCardsOther(id), { withCredentials: true })
+    res = await axios.get(apiEndpoints.getBidRequirements(id), { withCredentials: true })
+    if (res.status == 200) form = {...form, ...res.data}
+    console.log(res);
+    res = await axios.get(apiEndpoints.getBidOther(id), { withCredentials: true })
     if (res.status == 200) form = {...form, ...res.data}
     console.log(res);
 
@@ -36,8 +57,10 @@ export const formSlice = createSlice({
     currentStage: 1,
     isEditMode: false,
     editModeData: {
-      orderId: null
+      orderId: null,
+      isFormLoading: false
     },
+    isFormFetchingSuccess: false,
     formData: {},
     mediateData: {
       doc_urls: null,
@@ -69,30 +92,8 @@ export const formSlice = createSlice({
         else state.currentStage = newStage;
         
     },
-    updateAndSubmitFormData: (state, action) => {
-      
-      state.formData = { ...state.formData, ...action.payload };
-      let formDataToSubmit = {...state.formData}
-      console.log(formDataToSubmit);
-      transformDataToServer(formDataToSubmit) // !mutate formDataToSubmit
-      
-      if (state.isEditMode) {
-        formDataToSubmit.id = state.editModeData.orderId
-        fetchEditForm(formDataToSubmit).then(res => {
-          if (res.ok) { state.currentStage = 6
-          state.formData = {}
-          state.mediateData = {}
-        }
-        })
-      } else {
-        fetchForm(formDataToSubmit).then(res => {
-          if (res.ok) {
-            state.currentStage = 6
-          state.formData = {}
-          state.mediateData = {}
-          }
-        })
-      }
+    setFormLoading: (state, action) => {
+      state.editModeData.isFormLoading = action.payload
     },
     updateFormData: (state, action) => {
       state.formData = { ...state.formData, ...action.payload };
@@ -108,13 +109,30 @@ export const formSlice = createSlice({
       state.currentStage = 1
       state.isEditMode = action.payload.isEditMode
       state.editModeData.orderId = action.payload.orderId || null
+      state.editModeData.isFormLoading = action.payload.orderId || null
+    },
+    clearData: (state) => {
+      state.formData = {}
+      state.mediateData = {}
+      state.currentStage = 1
+      state.isFormFetchingSuccess = false
     }
   },
   extraReducers: (builder) => {
     builder
+    .addCase(submitForm.fulfilled, (state, action) => {
+      const isOk = action.payload
+      if (isOk) {
+        state.formData = {}
+        state.mediateData = {}
+        state.currentStage = 6
+      }
+    })
       .addCase(loadFormForEdit.fulfilled, (state, action) => {
         state.formData = action.payload
+        state.editModeData.isFormLoading = false
       })
+      
   },
 });
 
@@ -122,13 +140,14 @@ export const getFormField = (name) => useSelector(state => state?.form?.formData
 export const getMediateField = (name) => useSelector(state => state?.form?.mediateData?.[name])
 
 export const {
-  updateAndSubmitFormData,
   updateFormData,
   updateMediateData,
+  setFormLoading,
   setCurrentStage,
   setNextStage,
   setPrevStage,
-  setEditModeData
+  setEditModeData,
+  clearData
 } = formSlice.actions;
 
 export default formSlice.reducer;
