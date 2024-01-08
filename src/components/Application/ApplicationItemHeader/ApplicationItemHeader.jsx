@@ -2,13 +2,12 @@ import { useSelector } from "react-redux";
 import ButtonOutline from "../../UI/ButtonOutline/ButtonOutline";
 import styles from "./ApplicationItemHeader.module.scss";
 import formatDate from "../../../utils/helpers/formatDate";
-import { user } from "../../../store/user/user.slice";
 
 const ApplicationItemHeader = () => {
   const { item, other, source, sourceError } = useSelector(
     (state) => state.viewTz
   );
-  const { isAdmin } = useSelector(user);
+  const { isAdmin } = useSelector((state) => state.admindata);
 
   return (
     <div className={styles.wrapper}>
@@ -30,7 +29,7 @@ const ApplicationItemHeader = () => {
         </p>
       )}
 
-      {isAdmin && (
+      {!isAdmin && (
         <ButtonOutline
           title="Донор"
           onClick={() => {
