@@ -20,7 +20,7 @@ const HeaderApplication = () => {
       </p>
 
       <div className={styles.headerContent}>
-        {!isAdmin && (
+        {isAdmin && (
           <ButtonAction
             title="Редактировать"
             icon={
