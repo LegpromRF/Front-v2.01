@@ -11,7 +11,7 @@ const HeaderApplication = () => {
 
   const openPurchaseModal = () => setPurchaseModalOpen(true);
   const closePurchaseModal = () => setPurchaseModalOpen(false);
-  const { isAdmin } = useSelector((state) => state.user);
+  const { isAdmin } = useSelector((state) => state.admindata);
 
   return (
     <div className={styles.header}>
