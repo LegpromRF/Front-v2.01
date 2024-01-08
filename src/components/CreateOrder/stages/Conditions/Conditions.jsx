@@ -1,34 +1,38 @@
 import { useCallback, useEffect, useState } from "react";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
-import Select from "react-select";
-import { Controller, useForm } from "react-hook-form";
-
-import styles from "../../CreateOrder.module.scss";
+import { useForm } from "react-hook-form";
 import NavigateButtons from "../../NavigateButtons";
 import TextItem from "../../FormItems/TextItem";
 import SelectItem from "../../FormItems/SelectItem";
 import { useDispatch, useSelector } from "react-redux";
-import { updateFormData } from "@store/orderForm/form.slice";
+import { updateFormData } from "@store/orders/form.slice";
+
+import styles from "../../CreateOrder.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const Conditions = ({ handleNextStage, handlePrevStage }) => {
+  const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
   const stage = useSelector((state) => state.form.currentStage);
-  const isHide = stage != 4
+  const isHide = stage != 4;
 
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+
   const {
     control,
     handleSubmit,
     formState: { errors },
-    getValues
+    getValues,
+    reset
   } = useForm();
+
   const [formOptions, setFormOptions] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject("conditions");
-      
+      if (!options) navigate('/404')
+
       const labels = {
         OTC_access: "Доступ на производство для ОТК заказчика",
         personnel_requirement: "Требования к персоналу",
@@ -48,9 +52,8 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
           options: options[propName],
         };
       });
-      
+
       setFormOptions(updatedOptions);
-      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -65,6 +68,10 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
     dispatch(updateFormData(getValues()));
   };
 
+  useEffect(() => {
+    reset()
+  }, [isFormFetchingSuccess])
+
   return (
     <form
       className={`${styles.form} ${isHide ? styles.form_hide : ""}`}
@@ -78,8 +85,6 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
               formOptions={formOptions ?? []}
               title="Доступ на производство для ОТК заказчика"
               propName="OTC_access"
-              isMulti
-              // required
             />
             <SelectItem
               control={control}
@@ -87,7 +92,6 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
               title="Условия приемки"
               propName="acceptance_conditions"
               isMulti
-              // required
             />
             <SelectItem
               control={control}
@@ -95,7 +99,6 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
               title="Требования к оборудованию"
               propName="equipment_requirements"
               isMulti
-              // required
             />
           </div>
         </div>
@@ -107,7 +110,6 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
               title="Требования к упаковке"
               propName="packaging_requirements"
               isMulti
-              // required
             />
             <SelectItem
               control={control}
@@ -115,7 +117,6 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
               title="Условия оплаты"
               propName="payment_conditions"
               isMulti
-              // required
             />
             <SelectItem
               control={control}
@@ -123,7 +124,6 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
               title="Требования к персоналу"
               propName="personnel_requirement"
               isMulti
-              // required
             />
           </div>
         </div>
@@ -135,7 +135,6 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
               title="Требования к маркировке"
               propName="labeling_requirements"
               isMulti
-              // required
             />
 
             <SelectItem
@@ -144,7 +143,6 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
               title="Условия доставки"
               propName="delivery_conditions"
               isMulti
-              // required
             />
             <TextItem
               control={control}
@@ -152,7 +150,6 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
               propName="personnel_count"
               type="number"
               placeholder="Введите количество швей"
-              // required
             />
           </div>
         </div>
@@ -165,15 +162,21 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
               type="text"
               placeholder="Введите комментарий к заказу"
               isTextArea
-              // required
+            />
+            <TextItem
+              control={control}
+              title="Дополнительные требования"
+              propName="additional_requirements"
+              type="text"
+              placeholder="Введите ваши требования"
+              isTextArea
             />
             <SelectItem
               control={control}
               formOptions={formOptions ?? []}
               title="Наличие спец. счета"
               propName="special_account"
-              extraClassName='-start-content'
-              // required
+              extraClassName="-start-content"
             />
           </div>
         </div>
@@ -189,6 +192,5 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
     </form>
   );
 };
-export default Conditions;
 
-//поля done
+export default Conditions;

@@ -29,7 +29,6 @@ const ModalAuth = () => {
   const [loader, setLoader] = useState(false);
 
   const [searchParams] = useSearchParams()
-  const fromHomePurchase = searchParams.get('fromHomePurchase') === 'true'
 
   const selectAuthModal = (state) => state.authModal;
   const selectAuthModalData = createSelector(selectAuthModal, (authModal) => ({
@@ -72,9 +71,8 @@ const ModalAuth = () => {
         : "",
       password: data.regPassword,
     };
-
     axios
-      .post(apiURL, params)
+      .post(apiURL, params, { withCredentials: true })
       .then((response) => {
         setVeriIssue({
           status: response.data.status,

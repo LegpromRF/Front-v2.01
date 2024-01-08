@@ -1,23 +1,23 @@
 import { Controller, useForm } from "react-hook-form";
 import { useCallback, useEffect, useState } from "react";
-import Select from "react-select";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
-import Skeleton from "react-loading-skeleton";
-
-import styles from "../../CreateOrder.module.scss";
 import NavigateButtons from "../../NavigateButtons";
 import SelectItem from "../../FormItems/SelectItem";
 import TextItem from "../../FormItems/TextItem";
 import TotalSum from "./TotalSum";
 import { useDispatch, useSelector } from "react-redux";
-import { updateFormData } from "@store/orderForm/form.slice";
-import { getFormField } from "../../../../store/orderForm/form.slice";
+import { updateFormData } from "@store/orders/form.slice";
+
+import styles from "../../CreateOrder.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const Purchase = ({ handlePrevStage, handleNextStage }) => {
+  const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
   const stage = useSelector((state) => state.form.currentStage);
   const isHide = stage != 2;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const {
     control,
@@ -25,22 +25,43 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
     formState: { errors },
     handleSubmit,
     getValues,
-    setValue
+    setValue,
+    reset
   } = useForm();
 
   const [formOptions, setFormOptions] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject("purchase");
+
+      if (!options) navigate('/404')
+      
       const labels = {
-        // price_nds: "с/без НДС",
+        purchase_type: "Вид закупки",
         price_nds: "Цена",
         location: "Регион",
         supplier_regions: "Возможные регионы производства",
       };
-      console.log(options);
+      // console.log(options);
+      const transformedSupplierRegions = {};
+
+      Object.entries(options.supplier_regions).forEach(
+        ([firstKey, countryObj]) => {
+          const country = Object.entries(countryObj)[0][0];
+          const countryData = Object.entries(countryObj)[0][1];
+
+          if (Object.entries(countryData).length) {
+            Object.entries(countryData).forEach(([secondKey, region]) => {
+              transformedSupplierRegions[country + "." + region] =
+                firstKey + "." + secondKey;
+            });
+          } else {
+            transformedSupplierRegions[country] = String(firstKey);
+          }
+        }
+      );
+      options.supplier_regions = transformedSupplierRegions;
       const updatedOptions = Object.entries(labels).map(([propName, label]) => {
         return {
           propName,
@@ -49,7 +70,6 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
         };
       });
 
-      setLoading(false);
       setFormOptions(updatedOptions);
     } catch (error) {
       console.log(error);
@@ -59,18 +79,22 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
   useEffect(() => {
     loadOptions();
   }, []);
-  
+
   const firstFieldValue = watch("count") || 0;
   const secondFieldValue = watch("price_per_unit") || 0;
   const sum = (
     parseFloat(firstFieldValue) * parseFloat(secondFieldValue)
-    ).toFixed(2);
-    
+  ).toFixed(2);
+
   const onSubmit = useCallback(() => {
-    setValue("price_for_all", sum)
+    setValue("price_for_all", sum);
     handleNextStage();
     dispatch(updateFormData(getValues()));
   }, [sum]);
+
+  useEffect(() => {
+    reset()
+  }, [isFormFetchingSuccess])
 
   return (
     <form
@@ -80,9 +104,11 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
       <div
         className={`${styles.form__content} ${styles["form__content-blocks"]}`}
       >
-        <div className={`${styles.form__block} ${styles['form__block-multiblock']} ${styles['form__block-border-right']}`}>
+        <div
+          className={`${styles.form__block} ${styles["form__block-multiblock"]} ${styles["form__block-border-right"]}`}
+        >
           <div className={styles.form__block}>
-            <div className={styles.form__title}>Количество</div>
+            <div className={styles.form__title}>Количество и вид закупки</div>
             <TextItem
               control={control}
               title="Количество"
@@ -105,10 +131,18 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
                 value: /^\d+(\.\d{1,2})?$/,
                 message: "Введите число",
               }}
-              // required
+            />
+            <SelectItem
+              control={control}
+              formOptions={formOptions ?? []}
+              title="Вид закупки"
+              propName="purchase_type"
+              isMulti
             />
           </div>
-          <div className={`${styles.form__block} ${styles['form__block-border-top']}`}>
+          <div
+            className={`${styles.form__block} ${styles["form__block-border-top"]}`}
+          >
             <div className={styles.form__title}>Стоимость</div>
             <TextItem
               control={control}
@@ -128,26 +162,24 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
               formOptions={formOptions ?? []}
               title="Цена"
               propName="price_nds"
-              loading={loading}
-              // required
             />
           </div>
         </div>
-        <div className={`${styles.form__block} ${styles['form__block-border-right']}`}>
+        <div
+          className={`${styles.form__block} ${styles["form__block-border-right"]}`}
+        >
           <div className={styles.form__title}>Сроки</div>
           <TextItem
             control={control}
             title="Взять в производство не позднее"
             propName="start_date"
             type={"date"}
-            // required
           />
           <TextItem
             control={control}
             title="Срок исполнения заказа с момента получения аванса/сырья"
             propName="order_lead_time"
             placeholder="Например: 2 недели"
-            // required
           />
           <TextItem
             control={control}
@@ -167,7 +199,6 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
             formOptions={formOptions ?? []}
             title="Регион"
             propName="location"
-            loading={loading}
             required
           />
           <SelectItem
@@ -175,119 +206,14 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
             formOptions={formOptions ?? []}
             title="Возможные регионы производства"
             propName="supplier_regions"
-            loading={loading}
-            // required
+            isMulti
           />
         </div>
-        {/* <div className={styles.form__row}>
-          <div className={styles.form__items}>
-          <div className={styles.form__title}>Количество</div>
-          <div className={styles.form__title}>Сроки</div>
-          <div className={styles.form__title}>Регионы поставки</div>
-          </div>
-        </div> */}
-        {/* <div className={styles.form__row}>
-          <div className={styles.form__items}>
-            <TextItem
-              control={control}
-              title="Количество"
-              propName="count"
-              type="number"
-              placeholder={"Введите целое число"}
-              pattern={{
-                value: /^[0-9]*$/,
-                message: "Введите целое число",
-              }}
-              required
-            />
-            <TextItem
-              control={control}
-              title="Взять в производство не позднее"
-              propName="start_date"
-              type={"date"}
-              required
-            />
-            <SelectItem
-              control={control}
-              formOptions={formOptions ?? []}
-              title="Регион"
-              propName="location"
-              loading={loading}
-              required
-            />
-          </div>
-        </div>
-        <div className={styles.form__row}>
-          <div className={styles.form__items}>
-            <TextItem
-              control={control}
-              title="Возможно взять заказ частично (от шт.)."
-              propName="minimum_quantity"
-              type="number"
-              placeholder="Введите количество"
-              pattern={{
-                value: /^\d+(\.\d{1,2})?$/,
-                message: "Введите число",
-              }}
-              required
-            />
-            <TextItem
-              control={control}
-              title="Срок исполнения заказа с момента получения аванса/сырья"
-              propName="order_lead_time"
-              placeholder="Например: 2 недели"
-              required
-            />
-            <SelectItem
-              control={control}
-              formOptions={formOptions ?? []}
-              title="Возможные регионы производства"
-              propName="supplier_regions"
-              loading={loading}
-              required
-            />
-          </div>
-        </div>
-        <div className={styles.form__row}>
-          <div className={styles.form__items}>
-            <TextItem
-              control={control}
-              title="Цена за шт."
-              propName="price_per_unit"
-              type="number"
-              step={0.01}
-              placeholder={"Введите цену"}
-              pattern={{
-                value: /^\d+(\.\d{1,2})?$/,
-                message: "Введите число с двумя знаками после запятой",
-              }}
-              required
-            />
-            <TextItem
-              control={control}
-              title="Срок поставки не позднее"
-              propName="deadline"
-              type={"date"}
-              required
-            />
-          </div>
-        </div>
-        <div className={styles.form__row}>
-          <div className={styles.form__items}>
-            <SelectItem
-              control={control}
-              formOptions={formOptions ?? []}
-              title="Цена"
-              propName="price_nds"
-              loading={loading}
-              required
-            />
-            <TotalSum sum={sum} />
-          </div>
-        </div> */}
       </div>
       {Object.keys(errors).length > 0 && (
-        <div>Не все обязательные поля заполнены!</div>
+        <p className={styles.form__errorMess}>
+          Не все обязательные поля заполнены!
+        </p>
       )}
       <NavigateButtons
         errors={errors}
@@ -298,5 +224,3 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
   );
 };
 export default Purchase;
-
-//Поля done

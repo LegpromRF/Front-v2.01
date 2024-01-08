@@ -1,7 +1,7 @@
 import { Controller } from "react-hook-form";
 import styles from "../CreateOrder.module.scss";
 import { useRef } from "react";
-import { getFormField } from "@store/orderForm/form.slice";
+import { getFormField } from "@store/orders/form.slice";
 
 const TextItem = ({
   control,
@@ -14,7 +14,7 @@ const TextItem = ({
   isTextArea,
   required,
 }) => {
-  const inputRef = useRef(null);
+  
 
   return (
     <div className={styles.form__item}>
@@ -35,19 +35,23 @@ const TextItem = ({
           pattern: pattern ?? {},
         }}
         render={({ field }) => {
-          const initialValue = getFormField(propName);
+          let initialValue = getFormField(propName);
+          if (type == 'date' && initialValue) initialValue = initialValue.split('T')[0]
           if (field.value === undefined && initialValue)
             field.onChange(initialValue);
 
           return (
             <div className={styles.form__textField}>
-              {isTextArea ? <textarea cols="20" rows="10"></textarea>: <input
-                type={type}
-                step={step ?? null}
-                {...field}
-                placeholder={placeholder ?? ""}
-                ref={inputRef}
-              />}
+              {isTextArea ? (
+                <textarea cols="20" rows="10"></textarea>
+              ) : (
+                <input
+                  type={type}
+                  step={step ?? null}
+                  {...field}
+                  placeholder={placeholder ?? ""}
+                />
+              )}
             </div>
           );
         }}

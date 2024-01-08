@@ -18,6 +18,8 @@ import DashboardPage from "@/pages/profile/dashboard.jsx";
 import ApplicationPage from "./pages/applicationPage.jsx";
 import SubscriptionsPage from "./pages/profile/subscriptions.jsx";
 import SuppliersPage from "./pages/suppliers.jsx";
+import OrdersPage from "./pages/profile/order/orders.jsx";
+import EditOrderPage from "./pages/profile/order/edit/id.jsx";
 import Error404 from "./pages/404.jsx";
 
 
@@ -25,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+  },
+  {
+    path: "/404",
+    element: <Error404 />,
   },
   {
     path: "/auth",
@@ -77,6 +83,22 @@ const router = createBrowserRouter([
     element: (
       <PrivateRoute page="auth">
         <CreateOrderPage />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/profile/order/edit/:id",
+    element: (
+      <PrivateRoute page="auth">
+        <EditOrderPage />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/profile/order/all",
+    element: (
+      <PrivateRoute page="auth">
+        <OrdersPage />
       </PrivateRoute>
     ),
   },

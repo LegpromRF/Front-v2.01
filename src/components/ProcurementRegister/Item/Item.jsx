@@ -66,7 +66,7 @@ function Item(props) {
           </div>
           <div className={styles.cards__item_info_deadline}>
             Срок готовности
-            <span>{createDate(props.deadline)}</span>
+            <span>{props.deadline? createDate(props.deadline) : ''}</span>
           </div>
         </div>
       </div>

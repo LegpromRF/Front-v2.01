@@ -17,15 +17,26 @@ export const apiEndpoints = {
     conditions: apiHOST + 'bid/conditions',
     contacts: apiHOST + 'bid/contacts',
     create: apiHOST + 'bid/create',
+    bidAll: apiHOST + 'bid/all',
     bidCreate: apiHOST + 'bid/create',
-    bidTechnology: apiHOST + '/bid/add/technology',
-    bidRequirements: apiHOST + '/bid/add/requirements',
-    bidOther: apiHOST + '/bid/add/other',
+    bidTechnology: apiHOST + 'bid/add/technology',
+    bidRequirements: apiHOST + 'bid/add/requirements',
+    bidOther: apiHOST + 'bid/add/other',
+    getBidCreate: (id) => apiHOST + `bid/${id}`,
+    getBidTechnology: (id) => apiHOST + `bid/${id}/technology`,
+    getBidRequirements: (id) => apiHOST + `bid/${id}/requirements`,
+    getBidOther: (id) => apiHOST + `bid/${id}/other`,
+    bidEditCreate: apiHOST + `bid/edit/`,
+    bidEditTechnology: apiHOST + `bid/edit/technology/`,
+    bidEditRequirements: apiHOST + `bid/edit/requirements/`,
+    bidEditOther: apiHOST + `bid/edit/other/`,
     photos: apiHOST + 'file_manager/photos',
     documents: apiHOST + 'file_manager/documents',
     bid: apiHOST + 'bid/',
     companyInfo: apiHOST + 'company/'
 }
+
+
 
 const aiHOST = 'https://ai.legpromrf.ru/'
 export const aiEndpoints = {

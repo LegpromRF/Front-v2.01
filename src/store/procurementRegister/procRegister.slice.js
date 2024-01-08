@@ -7,11 +7,20 @@ export const getAllFilters = createAsyncThunk("users/getFilters", async () => {
   return await response.json();
 });
 
-export const getAllCards = createAsyncThunk("users/getCards", async (query) => {
-  const response = await fetch(`https://api.legpromrf.ru/order_cards?${query}`);
-  const cards = await response.json() 
-  return cards || [];
+export const getAllCards = createAsyncThunk("users/getCards", async (query, thunkAPI) => {
+  const size = 40
+  const page = thunkAPI.getState().procRegister.pageNumber
+  const response = await fetch(`https://api.legpromrf.ru/order_cards?${query}&page=${page}&size=${size}`);
+  const data = (await response.json())
+
+  const stateData = {
+    pageNumber: data.page,
+    countPages: data.pages,
+    cards: data.items ?? []
+  }
+  return stateData
 });
+
 
 export const procRegisterSlice = createSlice({
   name: "procRegister",
@@ -84,7 +93,11 @@ export const procRegisterSlice = createSlice({
         state.loading = true;
       })
       .addCase(getAllCards.fulfilled, (state, action) => {
-        state.cards = action.payload;
+        const { pageNumber, countPages, cards } = action.payload
+
+        state.cards = cards;
+        state.pageNumber = pageNumber;
+        state.countPages = countPages;
         state.loading = false;
       });
   },
