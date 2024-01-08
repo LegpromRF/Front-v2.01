@@ -21,15 +21,29 @@ export const getAllCards = createAsyncThunk("users/getCards", async (query, thun
   return stateData
 });
 
+export const getTotalCardsInfo = createAsyncThunk("users/getTotalCardsInfo", async (query, thunkAPI) => {
+  const response = await fetch(`https://api.legpromrf.ru/order_cards/order_count`);
+  const data = (await response.json())
+  console.log(data);
+  const stateData = {
+    totalCards: data.order_count,
+    totalSumCards: data.order_sum
+  }
+  return stateData
+})
+
 
 export const procRegisterSlice = createSlice({
   name: "procRegister",
   initialState: {
     open: false,
     filters: null,
-    cards: [],
+    cards: [], //на странице
+    totalCards: null,
+    totalSumCards: null,
     loading: false,
     pageNumber: 1,
+    countPages: null,
     query: {
       clothes_type__name__in: "",
       location__name__in: "",
@@ -99,6 +113,11 @@ export const procRegisterSlice = createSlice({
         state.pageNumber = pageNumber;
         state.countPages = countPages;
         state.loading = false;
+      })
+      .addCase(getTotalCardsInfo.fulfilled, (state, action) => {
+        const { totalCards, totalSumCards } = action.payload
+        state.totalCards = totalCards;
+        state.totalSumCards = totalSumCards;
       });
   },
 });

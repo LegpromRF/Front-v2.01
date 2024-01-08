@@ -19,7 +19,7 @@ export const ordersSlice = createSlice({
   name: "orders",
   initialState: {
     bids: [],
-    currentBid: null //for admins
+    currentBid: null //для админов, найденная в поиске заявка
   },
   reducers: {
   },

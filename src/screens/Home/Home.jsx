@@ -1,7 +1,7 @@
 import styles from "./Home.module.scss";
 import { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCards } from "@store/procurementRegister/procRegister.slice";
+import { getAllCards, getTotalCardsInfo } from "@store/procurementRegister/procRegister.slice";
 // import HeaderLanding from '@/layout/HeaderLanding/HeaderLanding';
 import HeaderLanding from "@/layout/HeaderLanding/HeaderLanding.jsx";
 import Img1 from "@public/Landing/card_img_1.png";
@@ -23,6 +23,7 @@ const Home = () => {
   useEffect(() => {
     const query = "";
     dispatch(getAllCards(query));
+    dispatch(getTotalCardsInfo());
   }, []);
 
   const openPurchaseModal = () => setPurchaseModalOpen(true);
@@ -55,14 +56,8 @@ const Home = () => {
     return currentCards;
   }, [cards.length]);
 
-  const [sumOpenedCards, countOpenedCards] = useMemo(() => {
-    const currentCards = cards.filter((card) => card.status == "Открыт");
-    const count = currentCards.length;
-    const sum = currentCards
-      .reduce((acc, card) => acc + card.price_for_all, 0)
-      .toLocaleString();
-    return [sum, count];
-  }, [cards.length]);
+  const countOpenedCards = useSelector(store => store.procRegister.totalCards) || 0
+  const sumOpenedCards = useSelector(store => store.procRegister.totalSumCards) || 0
 
   return (
     <>
@@ -126,7 +121,7 @@ const Home = () => {
                     aria-expanded={isPurchaseModalOpen}
                   >
                     Купить подписку
-                    <span>4 800 ₽/мес</span>
+                    <span>2 900 ₽/мес</span>
                   </button>
                 </div>
                 <div className={styles.landing__text}>
