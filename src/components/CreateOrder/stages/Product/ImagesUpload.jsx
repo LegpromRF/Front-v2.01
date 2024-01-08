@@ -1,19 +1,26 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { apiEndpoints } from "@/utils/constants/apiEndpoints.js";
 import axios from "axios";
-import { updateFormData } from "@store/orderForm/form.slice";
+import { updateFormData, getMediateField,
+  updateMediateData, } from "../../../../store/orders/form.slice";
 
 import styles from "../../CreateOrder.module.scss";
 import { useDispatch } from "react-redux";
-import { getMediateData, updateMediateData } from "@store/orderForm/form.slice";
 import { Controller } from "react-hook-form";
 
-const ImagesUpload = ({ control }) => {
+const ImagesUpload = ({control}) => {
   const dispatch = useDispatch();
   const [visibleControlImage, setVisibleControlImage] = useState(false);
   const [preview, setPreview] = useState([]);
 
-  const initialValue = getMediateData("photo_urls");
+  //const initialValue = getFormField("photo_urls"); через fetch(img.src)
+// .then(res => res.blob())
+// .then(blob => {
+//   const file = new File([blob], 'dot.png', blob)
+//   console.log(file)
+// })
+  const initialValue = getMediateField("photo_urls");
+
   let fileobj = useMemo(
     () => (initialValue ? Array.from(initialValue) : []),
     []
@@ -77,9 +84,7 @@ const ImagesUpload = ({ control }) => {
 
   return (
     <div className={styles.form__row}>
-      <div className={styles.form__title}>
-        Фото изделия <span className={styles.form__itemLabel_star}>*</span>
-      </div>
+      <div className={styles.form__title}>Фото изделия <span className={styles.form__itemLabel_star}>*</span></div>
       <div className={styles.form__imagesForm}>
         <div className={styles.form__imagesBlockPreview}>
           {(preview || []).map((url, index) => (
@@ -125,7 +130,7 @@ const ImagesUpload = ({ control }) => {
                 name={"images"}
                 control={control}
                 rules={{
-                  required: false,
+                  required: false
                 }}
                 render={({ field }) => {
                   return (

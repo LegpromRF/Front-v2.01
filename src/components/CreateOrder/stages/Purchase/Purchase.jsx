@@ -6,7 +6,7 @@ import SelectItem from "../../FormItems/SelectItem";
 import TextItem from "../../FormItems/TextItem";
 import TotalSum from "./TotalSum";
 import { useDispatch, useSelector } from "react-redux";
-import { updateFormData } from "@store/orderForm/form.slice";
+import { updateFormData } from "@store/orders/form.slice";
 
 import styles from "../../CreateOrder.module.scss";
 
@@ -31,12 +31,30 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
     try {
       const options = await getPropObject("purchase");
       const labels = {
-        //TODO purchase_type: "Вид закупки",
+        purchase_type: "Вид закупки",
         price_nds: "Цена",
         location: "Регион",
         supplier_regions: "Возможные регионы производства",
       };
+      // console.log(options);
+      const transformedSupplierRegions = {};
 
+      Object.entries(options.supplier_regions).forEach(
+        ([firstKey, countryObj]) => {
+          const country = Object.entries(countryObj)[0][0];
+          const countryData = Object.entries(countryObj)[0][1];
+
+          if (Object.entries(countryData).length) {
+            Object.entries(countryData).forEach(([secondKey, region]) => {
+              transformedSupplierRegions[country + "." + region] =
+                firstKey + "." + secondKey;
+            });
+          } else {
+            transformedSupplierRegions[country] = String(firstKey);
+          }
+        }
+      );
+      options.supplier_regions = transformedSupplierRegions;
       const updatedOptions = Object.entries(labels).map(([propName, label]) => {
         return {
           propName,
@@ -79,7 +97,7 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
           className={`${styles.form__block} ${styles["form__block-multiblock"]} ${styles["form__block-border-right"]}`}
         >
           <div className={styles.form__block}>
-            <div className={styles.form__title}>Количество</div>
+            <div className={styles.form__title}>Количество и вид закупки</div>
             <TextItem
               control={control}
               title="Количество"
@@ -102,6 +120,13 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
                 value: /^\d+(\.\d{1,2})?$/,
                 message: "Введите число",
               }}
+            />
+            <SelectItem
+              control={control}
+              formOptions={formOptions ?? []}
+              title="Вид закупки"
+              propName="purchase_type"
+              isMulti
             />
           </div>
           <div
@@ -170,6 +195,7 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
             formOptions={formOptions ?? []}
             title="Возможные регионы производства"
             propName="supplier_regions"
+            isMulti
           />
         </div>
       </div>

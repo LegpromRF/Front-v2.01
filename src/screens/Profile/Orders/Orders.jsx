@@ -1,49 +1,56 @@
 import Layout from "@layout/Layout";
 
-import styles from './Orders.module.scss'
+import styles from "./Orders.module.scss";
 
 import Status from "@components/Status/Status";
 import TitleProfile from "@components/TitleProfile/TitleProfile";
 import OrdersCard from "@components/OrdersCard/OrdersCard";
 import HeaderProfile from "@components/HeaderProfile/HeaderProfile";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getBids, handleBids } from "@store/orders/orders.slice";
+import { useDispatch } from "react-redux";
+import OrdersCardItem from "../../../components/CardItem/OrdersCardItem";
+import { convertInputDateToIso, convertIsoDateToInput } from "../../../store/orders/utils";
 
 const Orders = () => {
+  const dispatch = useDispatch();
+  const bids = getBids() || [];
 
-  const [activeOrder, setActiveOrder] = useState(true)
+  console.log(bids);
 
-  return ( 
-   <>
-    <h1>
-      <title>Мои заказы - LegpromRF</title>
-    </h1>
-    <Layout>
-      <div className={styles.orders}>
-        <TitleProfile>Статусы заказов</TitleProfile>
-        <div className={styles.orders__header}>
-          <div className={styles.orders__status}><Status /></div>
+  useEffect(() => {
+    dispatch(handleBids());
+  }, [bids.length]);
+
+  const [activeOrder, setActiveOrder] = useState(true);
+
+  return (
+    <>
+      <h1>
+        <title>Мои заказы - LegpromRF</title>
+      </h1>
+      <Layout>
+        <div className={styles.orders}>
+          <h1 className={styles.orders__title}>Ваши заявки</h1>
         </div>
-      </div>    
-      <div className={styles.orders__cards}>
-      <Link to="/profile/order/createorder/" className={styles.orders__add}>
-          <div className={styles.orders__addBody}>
-            <h3 className={styles.orders__addTitle}>Создать новое ТЗ</h3>
-            <p className={styles.orders__addSubTitle}>профессиональное техническое <br /> задание за 15 минут </p>
-            <div className={styles.orders__addStatus}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
-                <path d="M0 0H37C40.866 0 44 3.13401 44 7V44L0 0Z" fill="#EBEBEB"/>
-                <path d="M44 44H7C3.13401 44 0 40.866 0 37V0L44 44Z" fill="#DADADA"/>
-                <circle cx="21.5" cy="21.5" r="6.5" fill="white"/>
-                <path d="M0 0H37C40.866 0 44 3.13401 44 7V44L0 0Z" fill="#EBEBEB"/>
-                <path d="M44 44H7C3.13401 44 0 40.866 0 37V0L44 44Z" fill="#DADADA"/>
-                <circle cx="21.5" cy="21.5" r="6.5" fill="white"/>
-              </svg>
-            </div>
-          </div>
-        </Link>
-        <OrdersCard 
+        <div className={styles.orders__cards}>
+          {bids.map((bid, ind) => (
+            <OrdersCardItem
+              key={ind}
+              img={bid.photo_urls?.[0]}
+              title={bid.order_name}
+              type={bid.product_type}
+              budget={bid.price_for_all}
+              createDate={convertIsoDateToInput(bid.created_at)}
+              circulation={bid.count}
+              status={bid.status}
+              id={bid.id}
+            />
+          ))}
+
+          {/* <OrdersCard 
           title="Пошив платья для официантов" 
           number="№24500968" 
           href={activeOrder ? '/profile/performers' : '/profile/applications'}
@@ -66,11 +73,11 @@ const Orders = () => {
           number="№24500968" 
           href={activeOrder ? '/profile/performers' : '/profile/applications'}
           status="Закончен"
-        />  
-      </div> 
-    </Layout>
-   </>
-   );
-}
- 
+        />   */}
+        </div>
+      </Layout>
+    </>
+  );
+};
+
 export default Orders;

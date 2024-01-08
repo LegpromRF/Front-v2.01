@@ -2,23 +2,27 @@ import { Controller } from "react-hook-form";
 import { useCallback, useEffect, useRef } from "react";
 import axios from "axios";
 import { aiEndpoints, apiEndpoints } from "@/utils/constants/apiEndpoints.js";
-import { getFormField } from "@store/orderForm/form.slice";
+import { getFormField } from "@store/orders/form.slice";
 
 import styles from "../CreateOrder.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { updateFormData, updateMediateData, getMediateData } from "@store/orderForm/form.slice";
+import {
+  updateFormData,
+  updateMediateData,
+  getMediateField,
+} from "@store/orders/form.slice";
 
 const FileItem = ({ control, inputAccept, inputAreaLabel, propName }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const fetchDocs = async (formData) => {
     const res = await axios.post(apiEndpoints.documents, formData, {
       withCredentials: true,
     });
 
-    dispatch(updateFormData({ [propName]: res.data.docs})); //!только для docs - переделать!
-    dispatch(updateMediateData({ [propName]: formData })); 
-  }
+    dispatch(updateFormData({ [propName]: res.data.docs })); //!только для docs - переделать!
+    dispatch(updateMediateData({ [propName]: formData }));
+  };
 
   const handleTextFile = async (e, field) => {
     try {
@@ -36,8 +40,7 @@ const FileItem = ({ control, inputAccept, inputAreaLabel, propName }) => {
         formData.append("files", e.target.files[i]);
       }
       field.onChange(formData);
-      await fetchDocs(formData)
-      
+      await fetchDocs(formData);
 
       // const res = await axios
       //   .post(apiEndpoints.documents, formData, {
@@ -59,10 +62,10 @@ const FileItem = ({ control, inputAccept, inputAreaLabel, propName }) => {
     <div className={`${styles.form__item} ${styles["form__item-file-input"]}`}>
       <h3 className={styles.form__itemLabel}>Техзадание (Описание)</h3>
       <Controller
-        name={'file'}
+        name={"file"}
         control={control}
         render={({ field }) => {
-          const initialValue = getMediateData('doc_urls');
+          const initialValue = getMediateField("doc_urls");
           useEffect(() => {
             console.log(initialValue);
             if (field.value === undefined && initialValue) {

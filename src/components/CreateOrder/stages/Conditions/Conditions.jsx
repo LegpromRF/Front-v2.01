@@ -5,7 +5,7 @@ import NavigateButtons from "../../NavigateButtons";
 import TextItem from "../../FormItems/TextItem";
 import SelectItem from "../../FormItems/SelectItem";
 import { useDispatch, useSelector } from "react-redux";
-import { updateFormData } from "@store/orderForm/form.slice";
+import { updateFormData } from "@store/orders/form.slice";
 
 import styles from "../../CreateOrder.module.scss";
 

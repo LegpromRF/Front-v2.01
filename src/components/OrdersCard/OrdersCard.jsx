@@ -13,7 +13,7 @@ const OrdersCard = ({ title, number, status, href }) => {
         <div className={styles.card__title}>
           <h2>{title}</h2>
         </div>
-        <div className={styles.card__number}>{number}</div>
+        <div className={styles.card__number}>Брючная одежда </div>
         <div className={styles.card__footer}>
           <div className={styles.card__status}>
             {status == "В работе" ? (
@@ -99,7 +99,7 @@ const OrdersCard = ({ title, number, status, href }) => {
               </svg>
             )}
           </div>
-          <div className={styles.card__selection}>Подбор исполнителя</div>
+          <div className={styles.card__selection}>22.12.2024</div>
           {activeMenu ? (
             <div
               onClick={() => setActiveMenu(!activeMenu)}

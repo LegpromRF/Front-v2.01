@@ -7,11 +7,11 @@ import Conditions from "./stages/Conditions/Conditions";
 import Contacts from "./stages/Contacts/Contacts";
 import FinishMessage from "./stages/FinishMessage/FinishMessage";
 import { useDispatch, useSelector } from "react-redux";
-import { setNextStage, setPrevStage } from "@store/orderForm/form.slice";
+import { setNextStage, setPrevStage } from "@store/orders/form.slice";
 
 import styles from "./CreateOrder.module.scss";
 import { useEffect } from "react";
-import { setEditModeData } from "../../store/orderForm/form.slice";
+import { loadFormForEdit, setEditModeData } from "../../store/orders/form.slice";
 
 const CreateOrder = ({ editMode, orderId }) => {
   const dispatch = useDispatch();
@@ -25,10 +25,11 @@ const CreateOrder = ({ editMode, orderId }) => {
   };
 
   useEffect(() => {
-    dispatch(setEditModeData({ orderId, isEditMode: editMode }))
-  }, [editMode, orderId])
+    dispatch(setEditModeData({ orderId, isEditMode: editMode }));
+    dispatch(loadFormForEdit(orderId))
+  }, [editMode, orderId]);
 
-  console.log(useSelector(state => state.form));
+  console.log(useSelector((state) => state.form));
 
   return (
     <Layout>
@@ -51,7 +52,10 @@ const CreateOrder = ({ editMode, orderId }) => {
                 handlePrevStage={handlePrevStage}
                 handleNextStage={handleNextStage}
               />
-              <Contacts handlePrevStage={handlePrevStage} handleNextStage={handleNextStage} />
+              <Contacts
+                handlePrevStage={handlePrevStage}
+                handleNextStage={handleNextStage}
+              />
               <FinishMessage />
             </div>
           </div>

@@ -1,7 +1,7 @@
 import { Controller } from "react-hook-form";
 import styles from "../CreateOrder.module.scss";
 import { useRef } from "react";
-import { getFormField } from "@store/orderForm/form.slice";
+import { getFormField } from "@store/orders/form.slice";
 
 const TextItem = ({
   control,
@@ -14,7 +14,6 @@ const TextItem = ({
   isTextArea,
   required,
 }) => {
-
   return (
     <div className={styles.form__item}>
       <h3 className={styles.form__itemLabel}>
@@ -40,12 +39,16 @@ const TextItem = ({
 
           return (
             <div className={styles.form__textField}>
-              {isTextArea ? <textarea cols="20" rows="10"></textarea>: <input
-                type={type}
-                step={step ?? null}
-                {...field}
-                placeholder={placeholder ?? ""}
-              />}
+              {isTextArea ? (
+                <textarea cols="20" rows="10"></textarea>
+              ) : (
+                <input
+                  type={type}
+                  step={step ?? null}
+                  {...field}
+                  placeholder={placeholder ?? ""}
+                />
+              )}
             </div>
           );
         }}

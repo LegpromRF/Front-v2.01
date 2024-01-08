@@ -2,14 +2,14 @@ import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { apiEndpoints } from "@/utils/constants/apiEndpoints.js";
-import { updateAndSubmitFormData } from "@store/orderForm/form.slice";
+import { updateAndSubmitFormData } from "@store/orders/form.slice";
 import { useForm } from "react-hook-form";
 import NavigateButtons from "../../NavigateButtons";
 import SelectItem from "../../FormItems/SelectItem";
 import TextItem from "../../FormItems/TextItem";
 
 import styles from "../../CreateOrder.module.scss";
-import { getFormField } from "../../../../store/orderForm/form.slice";
+import { getFormField } from "../../../../store/orders/form.slice";
 import PhoneArea from "./PhoneArea";
 
 const Contacts = ({ handlePrevStage }) => {

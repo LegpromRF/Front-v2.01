@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentStage } from "../../../../store/orderForm/form.slice";
+import { setCurrentStage } from "../../../../store/orders/form.slice";
 import styles from "./HeaderProfile.module.scss";
 import { useCallback } from "react";
 
@@ -7,7 +7,7 @@ const HeaderProfile = ({ title, stage, done, active }) => {
   const dispatch = useDispatch();
   const currentStage = useSelector((store) => store.form.currentStage);
   // const isStageAvailable = stage < currentStage; //todo
-  const isStageAvailable = true; 
+  const isStageAvailable = true;
   const handleClick = useCallback(() => {
     if (isStageAvailable) dispatch(setCurrentStage(stage));
   }, [isStageAvailable, stage]);
@@ -23,7 +23,7 @@ const HeaderProfile = ({ title, stage, done, active }) => {
           styles.header__item,
           isStageAvailable ? styles["header__item_available"] : "",
         ].join(" ");
-        
+
   return (
     <div className={styles.header}>
       <div className={headerItemClassName}>

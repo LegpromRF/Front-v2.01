@@ -8,7 +8,7 @@ import SelectItem from "../../FormItems/SelectItem";
 import RadioItem from "../../FormItems/RadioItem";
 import FileItem from "../../FormItems/FileItem";
 import { useDispatch, useSelector } from "react-redux";
-import { updateFormData } from "@store/orderForm/form.slice";
+import { updateFormData } from "@store/orders/form.slice";
 
 const Technology = ({ handlePrevStage, handleNextStage }) => {
   const stage = useSelector((state) => state.form.currentStage);
@@ -157,6 +157,13 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
             title="Вид ткани"
             propName="material_type"
             isMulti
+          />
+          <TextItem
+            control={control}
+            title="Структура ткани"
+            propName="material_structure"
+            type="text"
+            placeholder="Введите тип структуры"
           />
           <SelectItem
             control={control}

@@ -1,14 +1,8 @@
 import { Controller } from "react-hook-form";
 import styles from "../CreateOrder.module.scss";
-import { getFormField } from "@store/orderForm/form.slice";
+import { getFormField } from "@store/orders/form.slice";
 
-const RadioItem = ({
-  control,
-  title,
-  propName,
-  options,
-  required,
-}) => {
+const RadioItem = ({ control, title, propName, options, required }) => {
   return (
     <div className={styles.form__item}>
       <h3 className={styles.form__itemLabel}>
@@ -30,17 +24,24 @@ const RadioItem = ({
           const initialValue = getFormField(propName);
           if (field.value === undefined && initialValue)
             field.onChange(initialValue);
-          
+
           return (
-          <div className={styles.form__radioWrapper}>
-            {options.map(({ value, label }, ind) => (
-              <div key={ind} className={styles.form__radio}>
-                <label>{label}</label>
-                <input type="radio" {...field} value={value} />
-              </div>
-            ))}
-          </div>
-        )}}
+            <div className={styles.form__radioWrapper}>
+              {options.map(({ value, label }, ind) => (
+                <div key={ind} className={styles.form__radio}>
+                  <label htmlFor={label}>{label}</label>
+                  <input
+                    type="radio"
+                    {...field}
+                    id={label}
+                    value={value}
+                    tabIndex="0"
+                  />
+                </div>
+              ))}
+            </div>
+          );
+        }}
       />
     </div>
   );

@@ -147,6 +147,10 @@
 
 .form {
 
+  input[type='radio']:focus-visible, input[type='checkbox']:focus-visible {
+    outline: 2px solid #000 !important;
+  }
+  
   &_hide {
     display: none;
   }
@@ -283,7 +287,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    // justify-content: space-between;
     min-width: 200px;
 
     @media (max-width: 900px) {
