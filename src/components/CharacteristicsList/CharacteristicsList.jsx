@@ -5,6 +5,10 @@ const CharacteristicsList = ({ list }) => {
   return (
     <div className={styles.list}>
       {list.map((el, idx) => {
+        if (!el.value) {
+          return;
+        }
+
         return (
           <Characteristic key={idx} parameter={el.parameter} value={el.value} />
         );

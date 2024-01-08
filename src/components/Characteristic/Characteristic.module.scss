@@ -20,9 +20,13 @@
 
 @media (max-width: 475px) {
   .wrapper {
+    margin: 0;
+    align-items: flex-start;
+
     span {
       margin-left: auto;
       width: max-content;
+      text-align: right;
     }
   }
 }

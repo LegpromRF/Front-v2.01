@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "@styles/globals.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -22,6 +21,7 @@ import SuppliersPage from "./pages/suppliers.jsx";
 import OrdersPage from "./pages/profile/order/orders.jsx";
 import EditOrderPage from "./pages/profile/order/edit/id.jsx";
 import Error404 from "./pages/404.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -122,6 +122,10 @@ const router = createBrowserRouter([
   {
     path: "/applicationpage",
     element: <ApplicationPage />,
+  },
+  {
+    path: "/not-found",
+    element: <Error404 />,
   },
 ]);
 

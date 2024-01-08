@@ -1,130 +1,34 @@
-import Characteristic from "../../Characteristic/Characteristic";
+import { useSelector } from "react-redux";
+import { useAppCharacteristics } from "../../../hooks/useAppCharacteristics";
 import CharacteristicsList from "../../CharacteristicsList/CharacteristicsList";
 import styles from "./ApplicationCard.module.scss";
 import ApplicationMainContent from "./ApplicationMainContent/ApplicationMainContent";
 import ApplicationSlider from "./ApplicationSlider/ApplicationSlider";
-
-const firstCharacteristics = [
-  {
-    parameter: "Заказчик предоставляет образец",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Требуется пошив образца",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Образец из материалоа заказчика",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Заказчик оплачивает пошив образца",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Конструкторская документация",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Технологическая документация",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Дополнительные услуги",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Нанесение лого / принта",
-    value: "<Значение>",
-  },
-];
-
-const secondCharacteristics = [
-  {
-    parameter: "Вид ткани",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Состав ткани",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Плотность ткани",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Комментарий по сырью",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Доступ на производство для ОТК заказчика",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Цена с НДС/Без НДС",
-    value: "<Значение>",
-  },
-];
-
-const thirdCharacteristics = [
-  {
-    parameter: "Взять в производство не позднее",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Срок поставки не позднее",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Срок исполнения заказа с момента поставки сырья",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Возможность взять заказ частично от (штук)",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Доступ на производство для ОТК заказчика",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Цена с НДС/Без НДС",
-    value: "<Значение>",
-  },
-];
-
-const fourthCharacteristics = [
-  {
-    parameter: "Условия оплаты",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Условия приемки",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Условия доставки",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Требования к упаковке",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Требования к маркировке",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Требования к персоналу",
-    value: "<Значение>",
-  },
-  {
-    parameter: "Требования к оборудованию",
-    value: "<Значение>",
-  },
-];
+import { useEffect, useState } from "react";
 
 const ApplicationCard = () => {
+  const { firstCharact, secondCharact, thirdCharact, fourthCharact } =
+    useAppCharacteristics();
+  const { technology, files, other, filesError } = useSelector(
+    (state) => state.viewTz
+  );
+  const [filesArr, setFilesArr] = useState([]);
+
+  useEffect(() => {
+    if (!files) return;
+
+    const filesArrFromAPI = Object.entries(files);
+
+    setFilesArr(
+      filesArrFromAPI.map((el) => {
+        return {
+          name: el[0],
+          url: el[1],
+        };
+      })
+    );
+  }, [files]);
+
   return (
     <div>
       <div className={styles.wrapper}>
@@ -140,41 +44,62 @@ const ApplicationCard = () => {
       </div>
       <div className={styles.characteristics}>
         <div className={styles.characteristicsBlock}>
-          <div className="box">
-            <CharacteristicsList list={firstCharacteristics} />
-          </div>
-          <div className="box">
-            <CharacteristicsList list={secondCharacteristics} />
-          </div>
+          {firstCharact.some((el) => Boolean(el.value)) && (
+            <div className="box">
+              <CharacteristicsList list={firstCharact} />
+            </div>
+          )}
+          {secondCharact.some((el) => Boolean(el.value)) && (
+            <div className="box">
+              <CharacteristicsList list={secondCharact} />
+            </div>
+          )}
 
           <div className={styles.characteristicsBlockList}>
-            <div>
-              <div className="box" style={{ padding: "10px 14px" }}>
-                <h2 className="characteristics-title center">Файлы</h2>
+            {!filesError && (
+              <div>
+                <div className="box" style={{ padding: "10px 14px" }}>
+                  <h2 className="characteristics-title center">Файлы</h2>
+                </div>
+                <div className={styles.filesList}>
+                  {filesArr.map((el, idx) => {
+                    return (
+                      <a key={idx} href={el.url}>
+                        {el.name}
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-            <div className="box">
-              <h2 className="characteristics-title">Размеры / ростовки</h2>
+            )}
+            {technology.sizes && (
+              <div className="box">
+                <h2 className="characteristics-title">Размеры / ростовки</h2>
 
-              <Characteristic parameter="parameter" value="value" />
-            </div>
+                <p>{technology.sizes}</p>
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.characteristicsBlock}>
-          <div className="box">
-            <CharacteristicsList list={thirdCharacteristics} />
-          </div>
-          <div className="box">
-            <CharacteristicsList list={fourthCharacteristics} />
-          </div>
+          {thirdCharact.some((el) => Boolean(el.value)) && (
+            <div className="box">
+              <CharacteristicsList list={thirdCharact} />
+            </div>
+          )}
+          {fourthCharact.some((el) => Boolean(el.value)) && (
+            <div className="box">
+              <CharacteristicsList list={fourthCharact} />
+            </div>
+          )}
 
-          <div className="box">
-            <h2 className="characteristics-title">Комментарий к заказу</h2>
+          {other.comment && (
+            <div className="box">
+              <h2 className="characteristics-title">Комментарий к заказу</h2>
 
-            <CharacteristicsList
-              list={[{ parameter: "parameter", value: "value" }]}
-            />
-          </div>
+              <p>{other.comment}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
