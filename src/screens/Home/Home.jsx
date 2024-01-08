@@ -42,13 +42,13 @@ const Home = () => {
         }
 
         currentCards = currentCards.map(card => ({
-            img: card.photo_urls.split(',')[0],
+            img: card.photo_urls?.split(',')[0],
             title: card.clothes_name,
             number: '№'+card.order_number,
             circulation: card.count,
-            datePublished: card.created_at.split('T')[0],
+            datePublished: card.created_at?.split('T')[0],
             budget: card.price_for_all?.toLocaleString(),
-            dateChange: card.deadline.split('T')[0],
+            dateChange: card.deadline?.split('T')[0],
         }))
 
         return currentCards
