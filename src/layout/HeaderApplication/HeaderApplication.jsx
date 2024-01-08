@@ -3,6 +3,7 @@ import ButtonBuySubscription from "../../components/UI/ButtonBuySubscription/But
 import styles from "./HeaderApplication.module.scss";
 import PurchaseModal from "@/components/PurchaseModal/PurchaseModal";
 import { useState } from "react";
+import ButtonAction from "../../components/UI/ButtonAction/ButtonAction";
 
 const HeaderApplication = () => {
   const [isPurchaseModalOpen, setPurchaseModalOpen] = useState(false);
@@ -10,6 +11,7 @@ const HeaderApplication = () => {
 
   const openPurchaseModal = () => setPurchaseModalOpen(true);
   const closePurchaseModal = () => setPurchaseModalOpen(false);
+  const { isAdmin } = useSelector((state) => state.admindata);
 
   return (
     <div className={styles.header}>
@@ -17,13 +19,20 @@ const HeaderApplication = () => {
         Заявка № {item.order_number} {item.order_name || "-"}
       </p>
 
-      {/* <div className={styles.headerContent}>
-        <ButtonAction
-          title="Редактировать"
-          icon={
-            <img src="/icon/edit-icon.svg" alt="edit" width={11} height={10} />
-          }
-        />
+      <div className={styles.headerContent}>
+        {isAdmin && (
+          <ButtonAction
+            title="Редактировать"
+            icon={
+              <img
+                src="/icon/edit-icon.svg"
+                alt="edit"
+                width={11}
+                height={10}
+              />
+            }
+          />
+        )}
         <ButtonAction
           title="Распечатать"
           icon={
@@ -41,7 +50,7 @@ const HeaderApplication = () => {
             />
           }
         />
-      </div> */}
+      </div>
 
       <div className={styles.btnBuyWrapper}>
         <ButtonBuySubscription price={4800} onClick={openPurchaseModal} />

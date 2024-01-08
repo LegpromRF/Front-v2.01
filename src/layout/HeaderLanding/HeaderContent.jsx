@@ -1,14 +1,20 @@
 import { links } from "./menu.data.js";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
-import styles from './HeaderLanding.module.scss'
+import styles from "./HeaderLanding.module.scss";
 
 const HeaderContent = ({ activeMenu, isFullscreen }) => {
   const auth = Cookies.get("uuid_user");
-  
+
   return (
     <div
-      className={`${styles.header__content} ${activeMenu ? styles.header__menuActive : ""} ${isFullscreen ? styles.header__content_fullscreen : styles.header__content_builtin}`}
+      className={`${styles.header__content} ${
+        activeMenu ? styles.header__menuActive : ""
+      } ${
+        isFullscreen
+          ? styles.header__content_fullscreen
+          : styles.header__content_builtin
+      }`}
     >
       <div className={styles.header__menu}>
         <nav className={styles.header__nav}>

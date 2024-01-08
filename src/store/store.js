@@ -22,7 +22,6 @@ const reducers = combineReducers({
   companies: companiesSlice,
   procRegister: procRegisterSlice,
   viewTz: viewTzSlice,
-  user: userSlice,
 });
 
 export const store = configureStore({
