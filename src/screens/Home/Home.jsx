@@ -32,6 +32,7 @@ const Home = () => {
     }
 
     const cardsToPreview = useMemo(() => {
+        if (!cards) return []
         const sortedCards = [...cards]
         sortedCards.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
         let currentCards = []
