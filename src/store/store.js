@@ -9,7 +9,7 @@ import viewTzSlice from "@store/viewTz/viewTz.slice";
 import companiesSlice from "@store/companies/companies.slice";
 import admindataSlice from "./session/admindata.slice";
 import ordersSlice from "./orders/orders.slice";
-import userSlice from "./user/user.slice";
+
 
 const reducers = combineReducers({
   navigation: navigationSlice,
