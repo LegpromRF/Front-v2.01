@@ -68,7 +68,7 @@ const Layout = ({ children }) => {
           <div className="header__profileContainer">
             <div className={styles.header__wrapper}>
               <div className={styles.header__logo}>
-                <Link to="/profile/home">
+                <Link to="/">
                   <img
                     src={LogoHeader}
                     alt="LegpromRF"

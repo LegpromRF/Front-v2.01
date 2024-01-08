@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
 import styles from "./OrdersCard.module.scss";
 import { useState } from "react";
+
+const id = 544 
 
 const OrdersCard = ({ title, number, status, href }) => {
   const [activeMenu, setActiveMenu] = useState(false);
@@ -8,9 +11,9 @@ const OrdersCard = ({ title, number, status, href }) => {
     <div className={styles.card}>
       <div className={styles.card__body}>
         <div className={styles.card__title}>
-          <Link href={href}>{title}</Link>
+          <h2>{title}</h2>
         </div>
-        <div className={styles.card__number}>{number}</div>
+        <div className={styles.card__number}>Брючная одежда </div>
         <div className={styles.card__footer}>
           <div className={styles.card__status}>
             {status == "В работе" ? (
@@ -36,7 +39,7 @@ const OrdersCard = ({ title, number, status, href }) => {
                 />
                 <path
                   d="M44 44H7C3.13401 44 0 40.866 0 37V0L44 44Z"
-                  ffill="#002BCD"
+                  fill="#002BCD"
                 />
                 <circle cx="21.5" cy="21.5" r="6.5" fill="white" />
               </svg>
@@ -96,7 +99,7 @@ const OrdersCard = ({ title, number, status, href }) => {
               </svg>
             )}
           </div>
-          <div className={styles.card__selection}>Подбор исполнителя</div>
+          <div className={styles.card__selection}>22.12.2024</div>
           {activeMenu ? (
             <div
               onClick={() => setActiveMenu(!activeMenu)}
@@ -177,7 +180,7 @@ const OrdersCard = ({ title, number, status, href }) => {
             }
           >
             <div className={styles.card__wrapperMenu}>
-              <Link href="/profile/checkTz" className={styles.card__itemMenu}>
+              <Link to={`/profile/order/edit/${id}`} className={styles.card__itemMenu}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="11"
@@ -216,124 +219,7 @@ const OrdersCard = ({ title, number, status, href }) => {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span>Отправить по своей базе</span>
-              </Link>
-              <Link href="/" className={styles.card__itemMenu}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="11"
-                  height="13"
-                  viewBox="0 0 11 13"
-                  fill="none"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M6.86072 1.22656H2.97776C1.77586 1.22656 0.739746 2.20081 0.739746 3.40329V9.73616C0.739746 11.0064 1.70757 11.9397 2.97776 11.9397H7.64059C8.84307 11.9397 9.81789 10.9386 9.81789 9.73616V4.30631L6.86072 1.22656Z"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M6.70691 1.21973V2.91779C6.70691 3.74669 7.37761 4.41914 8.20651 4.42089C8.97469 4.42265 9.76098 4.42323 9.8141 4.41973"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M6.60255 7.15319H3.7417"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M5.17199 8.58351V5.72266"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span>Дублировать ТЗ</span>
-              </Link>
-              <Link href="/" className={styles.card__itemMenu}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="12"
-                  height="13"
-                  viewBox="0 0 12 13"
-                  fill="none"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M8.39661 1.05957H10.1475C10.8719 1.05957 11.4596 1.65233 11.4596 2.38359V4.14913C11.4596 4.87983 10.8719 5.47315 10.1475 5.47315H8.39661C7.67164 5.47315 7.08398 4.87983 7.08398 4.14913V2.38359C7.08398 1.65233 7.67164 1.05957 8.39661 1.05957Z"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M2.05286 1.05957H3.8032C4.52816 1.05957 5.11582 1.65233 5.11582 2.38359V4.14913C5.11582 4.87983 4.52816 5.47315 3.8032 5.47315H2.05286C1.32789 5.47315 0.740234 4.87983 0.740234 4.14913V2.38359C0.740234 1.65233 1.32789 1.05957 2.05286 1.05957Z"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M2.05286 7.36523H3.8032C4.52816 7.36523 5.11582 7.958 5.11582 8.68981V10.4548C5.11582 11.1861 4.52816 11.7788 3.8032 11.7788H2.05286C1.32789 11.7788 0.740234 11.1861 0.740234 10.4548V8.68981C0.740234 7.958 1.32789 7.36523 2.05286 7.36523Z"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M8.39661 7.36523H10.1475C10.8719 7.36523 11.4596 7.958 11.4596 8.68981V10.4548C11.4596 11.1861 10.8719 11.7788 10.1475 11.7788H8.39661C7.67164 11.7788 7.08398 11.1861 7.08398 10.4548V8.68981C7.08398 7.958 7.67164 7.36523 8.39661 7.36523Z"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span>Опубликовать в реестр</span>
-              </Link>
-              <Link href="/" className={styles.card__itemMenu}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="10"
-                  height="13"
-                  viewBox="0 0 10 13"
-                  fill="none"
-                >
-                  <circle
-                    cx="5.30521"
-                    cy="3.564"
-                    r="2.66458"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M1.08009 9.9339C1.07937 9.74658 1.12126 9.56156 1.2026 9.39282C1.45782 8.88236 2.17757 8.61182 2.7748 8.48931C3.20553 8.39739 3.6422 8.33599 4.08157 8.30554C4.89503 8.23409 5.71319 8.23409 6.52665 8.30554C6.96599 8.33634 7.40264 8.39774 7.83342 8.48931C8.43066 8.61182 9.1504 8.85684 9.40563 9.39282C9.56919 9.73679 9.56919 10.1361 9.40563 10.4801C9.1504 11.0161 8.43066 11.2611 7.83342 11.3785C7.4032 11.4742 6.96637 11.5374 6.52665 11.5674C5.86456 11.6235 5.19938 11.6337 4.53588 11.598C4.38274 11.598 4.23471 11.598 4.08157 11.5674C3.6435 11.5377 3.20834 11.4746 2.77991 11.3785C2.17757 11.2611 1.46293 11.0161 1.2026 10.4801C1.12168 10.3094 1.07983 10.1228 1.08009 9.9339Z"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span>Подобрать исполнителя</span>
+                <span>Редактировать</span>
               </Link>
             </div>
           </div>
