@@ -18,7 +18,6 @@ import styles from "./CheckTz.module.scss";
 import HeaderApplication from "../../../layout/HeaderApplication/HeaderApplication";
 import ApplicationItemHeader from "../../../components/Application/ApplicationItemHeader/ApplicationItemHeader";
 import ApplicationCard from "../../../components/Application/ApplicationCard/ApplicationCard";
-import { getAdminRole } from "../../../store/user/user.slice";
 import Layout from "../../../layout/Layout";
 
 const CheckTz = () => {
@@ -26,7 +25,7 @@ const CheckTz = () => {
   const dispatch = useDispatch();
   const { item, itemError } = useSelector((state) => state.viewTz);
   const loading = useSelector((state) => state.viewTz.loading);
-  const { isAdmin } = useSelector((state) => state.user);
+  const { isAdmin } = useSelector((state) => state.admindata);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,7 +36,6 @@ const CheckTz = () => {
     dispatch(getFiles(params.itemId));
     dispatch(getCustomer(params.itemId));
     dispatch(getPaylink(params.itemId));
-    dispatch(getAdminRole());
   }, [dispatch, params.itemId]);
 
   useEffect(() => {
