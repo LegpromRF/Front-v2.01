@@ -26,6 +26,7 @@ export const submitForm = createAsyncThunk('form/submitForm', async (_, thunkAPI
 
 export const loadFormForEdit = createAsyncThunk('form/loadFormForEdit', async (id, thunkAPI) => {
   try {
+    thunkAPI.dispatch(setFormLoading(true))
     let form = {}
     
     let res = await axios.get(apiEndpoints.getBidCreate(id), { withCredentials: true, AccessControlAllowOrigin: true, })
@@ -40,7 +41,7 @@ export const loadFormForEdit = createAsyncThunk('form/loadFormForEdit', async (i
     res = await axios.get(apiEndpoints.getBidOther(id), { withCredentials: true, AccessControlAllowOrigin: true, })
     if (res.status == 200) form = {...form, ...res.data}
     // console.log(res);
-
+    thunkAPI.dispatch(setFormLoading(false))
     return form
   } catch(e) {
     console.error(e);
@@ -58,7 +59,7 @@ export const formSlice = createSlice({
       orderId: null,
       isFormLoading: false
     },
-    isFormFetchingSuccess: false,
+    isFormFetchingSuccess: null,
     formData: {},
     mediateData: {
       doc_urls: null,
@@ -90,6 +91,9 @@ export const formSlice = createSlice({
         else state.currentStage = newStage;
         
     },
+    setFormFetchingSuccess: (state, action) => {
+      state.isFormFetchingSuccess = action.payload
+    },
     setFormLoading: (state, action) => {
       state.editModeData.isFormLoading = action.payload
     },
@@ -113,7 +117,7 @@ export const formSlice = createSlice({
       state.formData = {}
       state.mediateData = {}
       state.currentStage = 1
-      state.isFormFetchingSuccess = false
+      state.isFormFetchingSuccess = null
     }
   },
   extraReducers: (builder) => {
@@ -123,8 +127,11 @@ export const formSlice = createSlice({
       if (isOk) {
         state.formData = {}
         state.mediateData = {}
-        state.currentStage = 6
+        state.isFormFetchingSuccess = true
+      } else {
+        state.isFormFetchingSuccess = false
       }
+      state.currentStage = 6
     })
       .addCase(loadFormForEdit.fulfilled, (state, action) => {
         state.formData = action.payload
