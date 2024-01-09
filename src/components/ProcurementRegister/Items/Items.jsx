@@ -21,8 +21,7 @@ function Items({ query, open }) {
 
   useEffect(() => {
     dispatch(getAllCards(query));
-    if (cards.length <= 40) dispatch(changePage(1));
-  }, [dispatch, query, cards.length]);
+  }, [dispatch, query, pageNumber]);
   const classOpen = classNames(styles.cards, styles.cards_open);
   return (
     <>
@@ -33,7 +32,7 @@ function Items({ query, open }) {
             <Item key={item.order_number} {...item} />
           ))}
       </div>
-      {!loading && cards.length > 40 && (
+      {!loading && (
         <PaginationCards ref={ref} items={cards.length} page={pageNumber} />
       )}
     </>

@@ -17,7 +17,7 @@ const GeoMapArea = () => {
             minZoom: 2,
             maxZoom: 22
         })
-        console.log('myMap', myMap);
+      //   console.log('myMap', myMap);
       }
       initMap()
    }, [])

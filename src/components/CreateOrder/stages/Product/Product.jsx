@@ -1,41 +1,42 @@
 import { Controller, useForm } from "react-hook-form";
-import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Select from "react-select";
 import getPropObject from "@/utils/services/createOrder/fetchOrderData.js";
-import Skeleton from "react-loading-skeleton";
 import NavigateButtons from "../../NavigateButtons";
-import styles from "../../CreateOrder.module.scss";
 import TextItem from "../../FormItems/TextItem";
 import SelectItem from "../../FormItems/SelectItem";
 import ImagesUpload from "./ImagesUpload";
-import { updateFormData } from "@store/orderForm/form.slice";
-import { getFormField } from "../../../../store/orderForm/form.slice";
-import RadioItem from "../../FormItems/RadioItem";
-import FileItem from "../../FormItems/FileItem";
+import { updateFormData } from "@store/orders/form.slice";
+
+import styles from "../../CreateOrder.module.scss";
+import { useNavigate } from "react-router-dom";
+import { loadFormForEdit, submitForm } from "../../../../store/orders/form.slice";
 
 const Product = ({ handleNextStage }) => {
+  const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
   const stage = useSelector((state) => state.form.currentStage);
+  const isEditMode = useSelector((state) => state.form.isEditMode);
+  
+
   const isHide = stage != 1;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const {
     control,
     handleSubmit,
     formState: { errors },
     getValues,
-    watch,
-    setValue,
+    reset
   } = useForm();
 
   const [formOptions, setFormOptions] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject("product");
+      if (!options) navigate('/404')
 
       const labels = {
         clothes_type: "Тип одежды",
@@ -57,7 +58,6 @@ const Product = ({ handleNextStage }) => {
         };
       });
       setFormOptions(updatedOptions);
-      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -71,6 +71,10 @@ const Product = ({ handleNextStage }) => {
     handleNextStage();
     dispatch(updateFormData(getValues()));
   };
+
+  useEffect(() => {
+    reset()
+  }, [isFormFetchingSuccess])
 
   return (
     <form
@@ -126,7 +130,6 @@ const Product = ({ handleNextStage }) => {
         </div>
         <div className={styles.form__row}>
           <div className={styles.form__items}>
-            {/* <div className={styles.form__title}>Основная информация</div> */}
             <SelectItem
               control={control}
               formOptions={formOptions ?? []}
@@ -154,7 +157,6 @@ const Product = ({ handleNextStage }) => {
         </div>
         <div className={styles.form__row}>
           <div className={styles.form__items}>
-            {/* <div className={styles.form__title}>Основная информация</div> */}
             <SelectItem
               control={control}
               formOptions={formOptions ?? []}
@@ -171,15 +173,15 @@ const Product = ({ handleNextStage }) => {
             />
           </div>
         </div>
-        <ImagesUpload />
+        {isEditMode ? '' : <ImagesUpload control={control} />}
       </div>
       {Object.keys(errors).length > 0 && (
-        <div>Не все обязательные поля заполнены!</div>
+        <p className={styles.form__errorMess}>
+          Не все обязательные поля заполнены!
+        </p>
       )}
       <NavigateButtons errors={errors} />
     </form>
   );
 };
 export default Product;
-
-//поля done кроме файлов
