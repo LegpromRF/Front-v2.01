@@ -4,14 +4,16 @@ import styles from "./HeaderApplication.module.scss";
 import PurchaseModal from "@/components/PurchaseModal/PurchaseModal";
 import { useState } from "react";
 import ButtonAction from "../../components/UI/ButtonAction/ButtonAction";
+import { useNavigate } from "react-router-dom";
 
 const HeaderApplication = () => {
   const [isPurchaseModalOpen, setPurchaseModalOpen] = useState(false);
-  const item = useSelector((state) => state.viewTz.item);
+  const { item } = useSelector((state) => state.viewTz);
 
   const openPurchaseModal = () => setPurchaseModalOpen(true);
   const closePurchaseModal = () => setPurchaseModalOpen(false);
   const { isAdmin } = useSelector((state) => state.admindata);
+  const navigate = useNavigate();
 
   return (
     <div className={styles.header}>
@@ -31,6 +33,9 @@ const HeaderApplication = () => {
                 height={10}
               />
             }
+            onClick={() => {
+              navigate(`/profile/order/edit/${item.order_number}`);
+            }}
           />
         )}
         <ButtonAction
