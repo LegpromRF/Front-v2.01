@@ -1,7 +1,8 @@
 import { Controller } from "react-hook-form";
 import styles from "../CreateOrder.module.scss";
-import { useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { getFormField } from "@store/orders/form.slice";
+import { requiredFields } from "../../../store/orders/utils";
 
 const TextItem = ({
   control,
@@ -12,21 +13,24 @@ const TextItem = ({
   type,
   step,
   isTextArea,
-  required,
 }) => {
-  
+  const isRequired = requiredFields.includes(propName);
 
   return (
     <div className={styles.form__item}>
       <h3 className={styles.form__itemLabel}>
         <span>{title}</span>
-        {required ? <span className={styles.form__itemLabel_star}>*</span> : ""}
+        {isRequired ? (
+          <span className={styles.form__itemLabel_star}>*</span>
+        ) : (
+          ""
+        )}
       </h3>
       <Controller
         name={propName}
         control={control}
         rules={{
-          required: required
+          required: isRequired
             ? {
                 value: true,
                 message: "Это поле обязательно",
@@ -36,9 +40,11 @@ const TextItem = ({
         }}
         render={({ field }) => {
           let initialValue = getFormField(propName);
-          if (type == 'date' && initialValue) initialValue = initialValue.split('T')[0]
-          if (field.value === undefined && initialValue)
-            field.onChange(initialValue);
+          if (initialValue && type == 'date') initialValue = initialValue.split('T')[0]
+          
+          if (field.value === undefined && initialValue) 
+            field.onChange(initialValue)
+
 
           return (
             <div className={styles.form__textField}>
@@ -50,6 +56,8 @@ const TextItem = ({
                   step={step ?? null}
                   {...field}
                   placeholder={placeholder ?? ""}
+                  value={field.value}
+                  // onChange={(e) => console.log(e)}
                 />
               )}
             </div>

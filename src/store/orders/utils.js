@@ -1,7 +1,8 @@
 export const transformDataToServer = (data) => {
   data.customer_tg = data.customer_tg ? data.customer_phone : null
   data.customer_whatsapp = data.customer_whatsapp ? data.customer_phone : null
-  data.doc_urls = null //TODO
+  if (!data.doc_urls) data.doc_urls = null
+  if (!data.photo_urls) data.photo_urls = null
 
   if (data.deadline && data.deadline.split('T').length != 2) data.deadline = convertInputDateToIso(data.deadline)
   if (data.start_date && data.start_date.split('T').length != 2) data.start_date = convertInputDateToIso(data.start_date)
@@ -58,3 +59,5 @@ export const convertIsoDateToInput = (dateStr) => {
   day = day < 10 ? '0'+day : day
   return `${year}-${month}-${day}`
 }
+
+export const requiredFields = ['order_name', 'customer_email']

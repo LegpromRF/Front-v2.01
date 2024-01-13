@@ -6,34 +6,35 @@ import NavigateButtons from "../../NavigateButtons";
 import TextItem from "../../FormItems/TextItem";
 import SelectItem from "../../FormItems/SelectItem";
 import RadioItem from "../../FormItems/RadioItem";
-import FileItem from "../../FormItems/FileItem";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFormData } from "@store/orders/form.slice";
 import { useNavigate } from "react-router-dom";
+import FilesUpload from "./FilesUpload";
+import { setStageFields } from "../../../../store/orders/form.slice";
 
-const Technology = ({ handlePrevStage, handleNextStage }) => {
-  const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
-  const stage = useSelector((state) => state.form.currentStage);
-  const isEditMode = useSelector((state) => state.form.isEditMode);
-  
+const Technology = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
+  const {currentStage: stage, isFormFetchingSuccess, isEditMode} = useSelector((state) => state.form);
+
   const isHide = stage != 3;
 
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const {
     control,
     handleSubmit,
     formState: { errors },
     getValues,
-    reset
+    reset,
+    watch
   } = useForm();
+
   const [formOptions, setFormOptions] = useState([]);
 
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject("technology");
-      if (!options) navigate('/404')
+      // if (!options) navigate("/404");
 
       const labels = {
         additional_services: "Дополнительные услуги",
@@ -64,22 +65,39 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
     loadOptions();
   }, []);
 
+  useEffect(() => {
+    if (!isEditMode) dispatch(updateFormData(getValues()));
+  }, [isEditMode])
+
+  useEffect(() => {
+    dispatch(setStageFields({ name: 'technology', fields: Object.keys(getValues())}))
+    
+    watch((formValues, changes) => {
+      if (changes.name) {
+        dispatch(updateFormData(({ [changes.name]: changes.values[changes.name] })));
+      }
+    })
+  }, [])
+
   const onSubmit = () => {
     handleNextStage();
     dispatch(updateFormData(getValues()));
   };
 
+  const formSubmit = handleSubmit(onSubmit)
+  formSubmitRef.current = formSubmit
+
   useEffect(() => {
-    reset()
-  }, [isFormFetchingSuccess])
+    // reset();
+  }, [isFormFetchingSuccess]);
 
   return (
     <form
       className={`${styles.form} ${isHide ? styles.form_hide : ""}`}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={formSubmit}
     >
       <div
-        className={`${styles.form__content} ${styles["form__content-blocks"]}`}
+        className={`${styles.form__content} ${styles["form__content-blocks"]} ${styles["form__content-technology"]}`}
       >
         <div
           className={`${styles.form__block} ${styles["form__block-multiblock"]} ${styles["form__block-border-right"]}`}
@@ -130,67 +148,71 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
           </div>
         </div>
         <div
-          className={`${styles.form__block} ${styles["form__block-border-right"]}`}
+          className={`${styles.form__block} ${styles["form__block-multiblock-technology"]}`}
         >
-          <div className={styles.form__title}>Образец</div>
-          <RadioItem
-            control={control}
-            title="Заказчик предоставляет образец"
-            propName="providing_a_sample"
-            options={[
-              { label: "Да", value: true },
-              { label: "Нет", value: false },
-            ]}
-          />
-          <SelectItem
-            control={control}
-            formOptions={formOptions ?? []}
-            title="Пошив образца"
-            propName="sewing_a_sample"
-          />
-          <SelectItem
-            control={control}
-            formOptions={formOptions ?? []}
-            title="Оплата пошива образца"
-            propName="payment_for_a_sample"
-          />
-          {isEditMode ? '' : <FileItem
-            control={control}
-            propName="doc_urls"
-            inputAccept=".docx"
-            inputAreaLabel="Текстовый документ"
-          />}
-        </div>
-        <div className={styles.form__block}>
-          <div className={styles.form__title}>Сырье</div>
-          <SelectItem
-            control={control}
-            formOptions={formOptions ?? []}
-            title="Вид ткани"
-            propName="material_type"
-            isMulti
-          />
-          <TextItem
-            control={control}
-            title="Структура ткани"
-            propName="material_structure"
-            type="text"
-            placeholder="Введите тип структуры"
-          />
-          <SelectItem
-            control={control}
-            formOptions={formOptions ?? []}
-            title="Сырье"
-            propName="raw_materials"
-            isMulti
-          />
-          <TextItem
-            control={control}
-            title="Плотность ткани"
-            propName="fabric_density"
-            type="text"
-            placeholder="Введите плотность ткани"
-          />
+          <div
+            className={`${styles.form__block} ${styles["form__block-border-right"]}`}
+          >
+            <div className={styles.form__title}>Образец</div>
+            <RadioItem
+              control={control}
+              title="Заказчик предоставляет образец"
+              propName="providing_a_sample"
+              options={[
+                { label: "Да", value: true },
+                { label: "Нет", value: false },
+              ]}
+            />
+            <SelectItem
+              control={control}
+              formOptions={formOptions ?? []}
+              title="Пошив образца"
+              propName="sewing_a_sample"
+            />
+            <SelectItem
+              control={control}
+              formOptions={formOptions ?? []}
+              title="Оплата пошива образца"
+              propName="payment_for_a_sample"
+            />
+          </div>
+          <div className={styles.form__block}>
+            <div className={styles.form__title}>Сырье</div>
+            <SelectItem
+              control={control}
+              formOptions={formOptions ?? []}
+              title="Вид ткани"
+              propName="material_type"
+              isMulti
+            />
+            <TextItem
+              control={control}
+              title="Структура ткани"
+              propName="material_structure"
+              type="text"
+              placeholder="Введите тип структуры"
+            />
+            <SelectItem
+              control={control}
+              formOptions={formOptions ?? []}
+              title="Сырье"
+              propName="raw_materials"
+              isMulti
+            />
+            <TextItem
+              control={control}
+              title="Плотность ткани"
+              propName="fabric_density"
+              type="text"
+              placeholder="Введите плотность ткани"
+            />
+          </div>
+          <div
+            className={`${styles.form__block} ${styles["form__block-files"]}`}
+          >
+            {/* {isEditMode ? "" : <FilesUpload control={control} />} */}
+            <FilesUpload control={control} />
+          </div>
         </div>
       </div>
       {Object.keys(errors).length > 0 && (

@@ -1,19 +1,23 @@
 import { Controller } from "react-hook-form";
-import styles from "../CreateOrder.module.scss";
 import { getFormField } from "@store/orders/form.slice";
+import { requiredFields } from "@store/orders/utils";
+import styles from "../CreateOrder.module.scss";
+import { useEffect } from "react";
 
-const RadioItem = ({ control, title, propName, options, required }) => {
+const RadioItem = ({ control, title, propName, options }) => {
+  const isRequired = requiredFields.includes(propName)
+
   return (
     <div className={styles.form__item}>
       <h3 className={styles.form__itemLabel}>
         <span>{title}</span>
-        {required ? <span className={styles.form__itemLabel_star}>*</span> : ""}
+        {isRequired ? <span className={styles.form__itemLabel_star}>*</span> : ""}
       </h3>
       <Controller
         name={propName}
         control={control}
         rules={{
-          required: required
+          required: isRequired
             ? {
                 value: true,
                 message: "Это поле обязательно",
@@ -22,8 +26,9 @@ const RadioItem = ({ control, title, propName, options, required }) => {
         }}
         render={({ field }) => {
           const initialValue = getFormField(propName);
+
           if (field.value === undefined && (initialValue === true || initialValue === false))
-            field.onChange(initialValue);
+            field.onChange(initialValue)
 
           return (
             <div className={styles.form__radioWrapper}>

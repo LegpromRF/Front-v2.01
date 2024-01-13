@@ -3,10 +3,11 @@ import { Controller } from "react-hook-form";
 
 import styles from "../CreateOrder.module.scss";
 import Skeleton from "react-loading-skeleton";
-import { getFormField } from "../../../store/orders/form.slice";
-import { useMemo, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { getFormField, updateFormData } from "../../../store/orders/form.slice";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { transformFieldToInput } from "./utils";
+import { requiredFields } from "../../../store/orders/utils";
 
 const SelectItem = ({
   control,
@@ -15,13 +16,13 @@ const SelectItem = ({
   propName,
   isMulti,
   extraClassName,
-  required,
 }) => {
+  const dispatch = useDispatch()
+  const isRequired = requiredFields.includes(propName)
+  
   const selectOptions = Object.entries(
     formOptions.find((opt) => opt.propName == propName)?.options ?? []
   ).map(([label, value]) => ({ label, value }));
-
-  
 
   return (
     <div
@@ -31,14 +32,14 @@ const SelectItem = ({
     >
       <h3 className={styles.form__itemLabel}>
         <span>{title}</span>
-        {required ? <span className={styles.form__itemLabel_star}>*</span> : ""}
+        {isRequired ? <span className={styles.form__itemLabel_star}>*</span> : ""}
       </h3>
 
       <Controller
         name={propName}
         control={control}
         rules={{
-          required: required
+          required: isRequired
             ? {
                 value: true,
                 message: "Это поле обязательно",
@@ -56,20 +57,18 @@ const SelectItem = ({
             isFieldTransformed.current = true
           }
 
-          if (field.value === undefined && initialValue) {
-            field.onChange(initialValue);
-          }
+          if (field.value === undefined && initialValue) 
+            field.onChange(initialValue)
             
 
           return (
             <Select
               {...field}
               isClearable={true}
-              required={required}
+              required={isRequired}
               isMulti={isMulti}
               closeMenuOnSelect={!isMulti}
               value={field.value}
-              // onChange={handleChange}
               options={selectOptions}
               styles={{
                 control: (provided) => ({

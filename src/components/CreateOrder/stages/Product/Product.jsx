@@ -10,14 +10,14 @@ import { updateFormData } from "@store/orders/form.slice";
 
 import styles from "../../CreateOrder.module.scss";
 import { useNavigate } from "react-router-dom";
-import { loadFormForEdit, submitForm } from "../../../../store/orders/form.slice";
+import { loadFormForEdit, setStageFields, submitForm } from "../../../../store/orders/form.slice";
+import FilesUpload from "../Technology/FilesUpload";
+import NameArea from "./NameArea";
+import StatusItem from "./StatusItem";
 
-const Product = ({ handleNextStage }) => {
-  const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
-  const stage = useSelector((state) => state.form.currentStage);
-  const isEditMode = useSelector((state) => state.form.isEditMode);
+const Product = ({ handleNextStage, formSubmitRef }) => {
+  const {currentStage: stage, isFormFetchingSuccess, isEditMode} = useSelector((state) => state.form);
   
-
   const isHide = stage != 1;
 
   const dispatch = useDispatch();
@@ -26,17 +26,21 @@ const Product = ({ handleNextStage }) => {
   const {
     control,
     handleSubmit,
+    formState,
     formState: { errors },
     getValues,
-    reset
+    setValue,
+    reset,
+    watch
   } = useForm();
+  console.log(getValues());
 
   const [formOptions, setFormOptions] = useState([]);
 
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject("product");
-      if (!options) navigate('/404')
+      // if (!options) navigate('/404')
 
       const labels = {
         clothes_type: "Тип одежды",
@@ -57,49 +61,61 @@ const Product = ({ handleNextStage }) => {
           options: options[propName],
         };
       });
+      
       setFormOptions(updatedOptions);
     } catch (error) {
       console.log(error);
     }
   }, []);
-
+  
   useEffect(() => {
     loadOptions();
   }, []);
 
+  useEffect(() => {
+    // console.log(isEditMode);
+    if (!isEditMode) dispatch(updateFormData(getValues()));
+  }, [isEditMode])
+
+  useEffect(() => {
+    dispatch(setStageFields({ name: 'product', fields: Object.keys(getValues())}))
+
+    watch((formValues, changes) => {
+      // console.log('changes:', changes, formValues);
+      if (changes.name) {
+        dispatch(updateFormData(({ [changes.name]: changes.values[changes.name] })));
+      }
+    //   if (Object.values(formValues).length > 0) dispatch(updateFormData(formValues));
+    })
+  }, [])
+  
   const onSubmit = () => {
     handleNextStage();
     dispatch(updateFormData(getValues()));
   };
 
-  useEffect(() => {
-    reset()
-  }, [isFormFetchingSuccess])
+  const formSubmit = handleSubmit(onSubmit)
+  formSubmitRef.current = formSubmit
 
+  useEffect(() => {
+    loadOptions();
+  }, []);
+
+  useEffect(() => {
+    // reset()
+  }, [isFormFetchingSuccess])
+  
   return (
     <form
       className={`${styles.form} ${isHide ? styles.form_hide : ""}`}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={formSubmit}
     >
       <div className={styles.form__content}>
         <div className={styles.form__row}>
           <div className={styles.form__items}>
-            <TextItem
-              control={control}
-              title="Название заказа"
-              propName="order_name"
-              type="text"
-              placeholder="Введите название заказа"
-              required
-            />
-            <SelectItem
-              control={control}
-              formOptions={formOptions ?? []}
-              title="Статус"
-              propName="status"
-              extraClassName="-status"
-              required
-            />
+            <NameArea control={control} setValue={setValue} />
+            <StatusItem control={control} formOptions={formOptions} />
+            <FilesUpload control={control} />
           </div>
         </div>
         <div className={styles.form__row}>
@@ -171,9 +187,10 @@ const Product = ({ handleNextStage }) => {
               propName="product_type"
               required
             />
+            {/* <FilesUpload watch={watch} control={control} /> */}
           </div>
         </div>
-        {isEditMode ? '' : <ImagesUpload control={control} />}
+        <ImagesUpload control={control} />
       </div>
       {Object.keys(errors).length > 0 && (
         <p className={styles.form__errorMess}>

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { clearQuery } from "../../utils/helpers/procurementRegister";
 import { QUERY_FILTERS } from "../../utils/constants/procurementRegister";
+import axios from "axios";
 
 export const getAllFilters = createAsyncThunk("users/getFilters", async () => {
   const response = await fetch("https://api.legpromrf.ru/filters");
@@ -10,21 +11,20 @@ export const getAllFilters = createAsyncThunk("users/getFilters", async () => {
 export const getAllCards = createAsyncThunk("users/getCards", async (query, thunkAPI) => {
   const size = 40
   const page = thunkAPI.getState().procRegister.pageNumber
-  const response = await fetch(`https://api.legpromrf.ru/order_cards?${query}&page=${page}&size=${size}`);
-  const data = (await response.json())
-
+  const response = await axios.get(`https://api.legpromrf.ru/order_cards?${query}&page=${page}&size=${size}`, { withCredentials: true });
   const stateData = {
-    pageNumber: data.page,
-    countPages: data.pages,
-    cards: data.items ?? []
+    pageNumber: response.data.page,
+    countPages: response.data.pages,
+    cards: response.data.items ?? []
   }
+  
   return stateData
 });
 
 export const getTotalCardsInfo = createAsyncThunk("users/getTotalCardsInfo", async (query, thunkAPI) => {
   const response = await fetch(`https://api.legpromrf.ru/order_cards/order_count`);
   const data = (await response.json())
-  console.log(data);
+  
   const stateData = {
     totalCards: data.order_count,
     totalSumCards: data.order_sum

@@ -8,41 +8,58 @@ import SelectItem from "../../FormItems/SelectItem";
 import TextItem from "../../FormItems/TextItem";
 
 import styles from "../../CreateOrder.module.scss";
-import { clearData, getFormField, submitForm, updateFormData } from "../../../../store/orders/form.slice";
+import { clearData, getFormField, setStageFields, submitForm, updateFormData } from "../../../../store/orders/form.slice";
 import PhoneArea from "./PhoneArea";
 import { useNavigate } from "react-router-dom";
 
-const Contacts = ({ handlePrevStage }) => {
-  const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
-  const stage = useSelector((state) => state.form.currentStage);
+const Contacts = ({ handlePrevStage, formSubmitRef, totalFormSubmitting }) => {
+  const {currentStage: stage, isFormFetchingSuccess, isEditMode} = useSelector((state) => state.form);
   const isHide = stage != 5;
-  const isPhotoUrlsExist = Boolean(getFormField("photo_urls")?.length);
+  // const isPhotoUrlsExist = Boolean(getFormField("photo_urls")?.length);
 
   const {
     control,
     handleSubmit,
     getValues,
     formState: { errors },
-    reset
+    reset,
+    watch
   } = useForm();
 
   const navigate = useNavigate()
   const dispatch = useDispatch();
 
-  const onSubmit = useCallback(() => {
-    if (!isPhotoUrlsExist) return;
+  useEffect(() => {
+    if (!isEditMode) dispatch(updateFormData(getValues()));
+  }, [isEditMode])
+  
+  useEffect(() => {
+    dispatch(setStageFields({ name: 'contacts', fields: Object.keys(getValues())}))
+    
+    watch((formValues, changes) => {
+      if (changes.name) {
+        dispatch(updateFormData(({ [changes.name]: changes.values[changes.name] })));
+      }
+    })
+  }, [])
+
+  const onSubmit = () => {
     dispatch(updateFormData(getValues()));
     dispatch(submitForm());
-  }, [isPhotoUrlsExist]);
+  }
+
+  const formSubmit = handleSubmit(onSubmit)
+  formSubmitRef.current = formSubmit
 
   useEffect(() => {
-    reset()
+    if (isFormFetchingSuccess === true || isFormFetchingSuccess === false) navigate('/profile/order/all')
+    // reset()
   }, [isFormFetchingSuccess])
   
   return (
     <form
       className={`${styles.form} ${isHide ? styles.form_hide : ""}`}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={formSubmit}
     >
       <div className={styles.form__content}>
         <div className={styles.form__row}>
@@ -66,11 +83,21 @@ const Contacts = ({ handlePrevStage }) => {
           <div className={styles.form__items}>
             <TextItem
               control={control}
+              title="Telegram"
+              propName="customer_tg"
+              type="text"
+              placeholder="Введите телеграм аккаунт"
+            />
+          </div>
+        </div>
+        <div className={styles.form__row}>
+          <div className={styles.form__items}>
+            <TextItem
+              control={control}
               title="Email"
               propName="customer_email"
               type="email"
               placeholder="Введите email"
-              required
             />
           </div>
         </div>
@@ -83,6 +110,7 @@ const Contacts = ({ handlePrevStage }) => {
       <NavigateButtons
         errors={errors}
         handlePrevStage={handlePrevStage}
+        formSubmitting={totalFormSubmitting}
         stage={5}
       />
     </form>

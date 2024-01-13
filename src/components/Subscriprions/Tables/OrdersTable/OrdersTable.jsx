@@ -30,11 +30,10 @@ const OrdersTable = ({ forAdmin }) => {
     { value: orderStatusTitles.pending, label: "Не оплаченные" },
     { value: orderStatusTitles.succeeded, label: "Оплаченные" },
   ];
-  // // ...selectOptions.map((item) => ({ value: item, label: item })),
+
   const [filters, setFilters] = useState(kindFilters[0].value);
   const [page, setPage] = useState(1);
 
-  // const dispatch = useDispatch();
   const adminOrders =
     useSelector((state) => state.admindata.currentUserOrders) || [];
   const userOrders = useSelector((state) => state.userdata.userOrders) || [];

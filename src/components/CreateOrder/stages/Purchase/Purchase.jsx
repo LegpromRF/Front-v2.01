@@ -7,13 +7,13 @@ import TextItem from "../../FormItems/TextItem";
 import TotalSum from "./TotalSum";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFormData } from "@store/orders/form.slice";
+import { useNavigate } from "react-router-dom";
+import { setStageFields } from "@store/orders/form.slice";
 
 import styles from "../../CreateOrder.module.scss";
-import { useNavigate } from "react-router-dom";
 
-const Purchase = ({ handlePrevStage, handleNextStage }) => {
-  const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
-  const stage = useSelector((state) => state.form.currentStage);
+const Purchase = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
+  const {currentStage: stage, isFormFetchingSuccess, isEditMode} = useSelector((state) => state.form);
   const isHide = stage != 2;
 
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
     try {
       const options = await getPropObject("purchase");
 
-      if (!options) navigate('/404')
+      // if (!options) navigate('/404')
       
       const labels = {
         purchase_type: "Вид закупки",
@@ -43,7 +43,7 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
         location: "Регион",
         supplier_regions: "Возможные регионы производства",
       };
-      // console.log(options);
+      
       const transformedSupplierRegions = {};
 
       Object.entries(options.supplier_regions).forEach(
@@ -80,6 +80,20 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
     loadOptions();
   }, []);
 
+  useEffect(() => {
+    if (!isEditMode) dispatch(updateFormData(getValues()));
+  }, [isEditMode])
+  
+  useEffect(() => {
+    dispatch(setStageFields({ name: 'purchase', fields: Object.keys(getValues())}))
+    
+    watch((formValues, changes) => {
+      if (changes.name) {
+        dispatch(updateFormData(({ [changes.name]: changes.values[changes.name] })));
+      }
+    })
+  }, [])
+
   const firstFieldValue = watch("count") || 0;
   const secondFieldValue = watch("price_per_unit") || 0;
   const sum = (
@@ -87,19 +101,25 @@ const Purchase = ({ handlePrevStage, handleNextStage }) => {
   ).toFixed(2);
 
   const onSubmit = useCallback(() => {
-    setValue("price_for_all", sum);
     handleNextStage();
     dispatch(updateFormData(getValues()));
   }, [sum]);
 
+  const formSubmit = handleSubmit(onSubmit)
+  formSubmitRef.current = formSubmit
+
   useEffect(() => {
-    reset()
+    // reset()
   }, [isFormFetchingSuccess])
+
+  useEffect(() => {
+    setValue("price_for_all", sum);
+  }, [sum])
 
   return (
     <form
       className={`${styles.form} ${isHide ? styles.form_hide : ""}`}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={formSubmit}
     >
       <div
         className={`${styles.form__content} ${styles["form__content-blocks"]}`}

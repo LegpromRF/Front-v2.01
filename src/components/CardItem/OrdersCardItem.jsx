@@ -18,7 +18,7 @@ const OrdersCardItem = ({
         <Link to={`/profile/order/edit/${id}`} className={styles.card__edit}>
           <svg
             viewBox="0 0 24 24"
-            fill="none"
+            // fill="#000000"
             width={18}
             xmlns="http://www.w3.org/2000/svg"
           >

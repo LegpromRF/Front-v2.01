@@ -13779,7 +13779,6 @@ const getAllCards = createAsyncThunk("users/getCards", async (query, thunkAPI) =
 const getTotalCardsInfo = createAsyncThunk("users/getTotalCardsInfo", async (query, thunkAPI) => {
   const response = await fetch(`https://api.legpromrf.ru/order_cards/order_count`);
   const data = await response.json();
-  console.log(data);
   const stateData = {
     totalCards: data.order_count,
     totalSumCards: data.order_sum
@@ -35713,7 +35712,6 @@ const Home = () => {
     setSearchParams(searchParams);
     setPurchaseModalOpen(false);
   };
-  console.log(cards2);
   const cardsToPreview = reactExports.useMemo(() => {
     const sortedCards = [...cards2];
     sortedCards.sort((a2, b2) => new Date(b2.created_at) - new Date(a2.created_at));
@@ -37236,6 +37234,7 @@ const formSlice = createSlice({
     },
     updateFormData: (state, action) => {
       state.formData = { ...state.formData, ...action.payload };
+      console.log(state.formData);
     },
     updateMediateData: (state, action) => {
       state.mediateData = { ...state.mediateData, ...action.payload };
@@ -49175,74 +49174,74 @@ const HeaderProfile$1 = ({ title: title2, stage, done, active }) => {
     )
   ] }) }) });
 };
-const createOrder__title = "_createOrder__title_1dltd_4";
-const createOrder__loader = "_createOrder__loader_1dltd_14";
-const createOrder__header = "_createOrder__header_1dltd_24";
-const createOrder__order = "_createOrder__order_1dltd_42";
-const createOrder__content = "_createOrder__content_1dltd_47";
-const createOrder__type = "_createOrder__type_1dltd_55";
-const createOrder__typeWarning = "_createOrder__typeWarning_1dltd_74";
-const createOrder__typeTitle = "_createOrder__typeTitle_1dltd_89";
-const createOrder__typeItem = "_createOrder__typeItem_1dltd_98";
-const createOrder__typeItem_active = "_createOrder__typeItem_active_1dltd_107";
-const createOrder__noTypeActive = "_createOrder__noTypeActive_1dltd_130";
-const createOrder__warningTitle = "_createOrder__warningTitle_1dltd_134";
-const createOrder__warningsubTitle = "_createOrder__warningsubTitle_1dltd_140";
-const form = "_form_1dltd_147";
-const form_hide = "_form_hide_1dltd_153";
-const form__skeleton = "_form__skeleton_1dltd_156";
-const form__errorMess = "_form__errorMess_1dltd_170";
-const form__sumWrapper = "_form__sumWrapper_1dltd_174";
-const form__radio = "_form__radio_1dltd_178";
-const form__radioWrapper = "_form__radioWrapper_1dltd_182";
-const form__sumTitle = "_form__sumTitle_1dltd_187";
-const form__sum = "_form__sum_1dltd_174";
-const form__content = "_form__content_1dltd_194";
-const form__row = "_form__row_1dltd_207";
-const form__block = "_form__block_1dltd_210";
-const form__title = "_form__title_1dltd_239";
-const form__items = "_form__items_1dltd_252";
-const form__item = "_form__item_1dltd_252";
-const form__itemLabel = "_form__itemLabel_1dltd_293";
-const form__itemLabel_star = "_form__itemLabel_star_1dltd_303";
-const form__itemCheckboxes = "_form__itemCheckboxes_1dltd_311";
-const form__control = "_form__control_1dltd_315";
-const form__controlActiveBlue = "_form__controlActiveBlue_1dltd_332";
-const form__controlActiveOrange = "_form__controlActiveOrange_1dltd_335";
-const form__list = "_form__list_1dltd_338";
-const form__list_active = "_form__list_active_1dltd_367";
-const form__listItem = "_form__listItem_1dltd_372";
-const form__button = "_form__button_1dltd_387";
-const form__buttonBack = "_form__buttonBack_1dltd_394";
-const form__buttonForward = "_form__buttonForward_1dltd_402";
-const form__buttonForwardActive = "_form__buttonForwardActive_1dltd_410";
-const form__textField = "_form__textField_1dltd_413";
-const form__checkField = "_form__checkField_1dltd_421";
-const form__imagesForm = "_form__imagesForm_1dltd_428";
-const form__addButton = "_form__addButton_1dltd_431";
-const form__prompt = "_form__prompt_1dltd_436";
-const form__promptTitle = "_form__promptTitle_1dltd_441";
-const form__size = "_form__size_1dltd_448";
-const form__inputImages = "_form__inputImages_1dltd_455";
-const form__imagesBlockPreview = "_form__imagesBlockPreview_1dltd_484";
-const form__imageItem = "_form__imageItem_1dltd_497";
-const form__deleteImage = "_form__deleteImage_1dltd_501";
-const form__deleteImageActive = "_form__deleteImageActive_1dltd_526";
-const form__imagePreview = "_form__imagePreview_1dltd_530";
-const form__modalTitle = "_form__modalTitle_1dltd_536";
-const form__modalSubTitle = "_form__modalSubTitle_1dltd_542";
-const form__inputModal = "_form__inputModal_1dltd_548";
-const form__inputActive = "_form__inputActive_1dltd_557";
-const form__buttonModal = "_form__buttonModal_1dltd_560";
-const form__buttonModalActive = "_form__buttonModalActive_1dltd_569";
-const form__modalProSpan = "_form__modalProSpan_1dltd_573";
-const form__buttomTarif = "_form__buttomTarif_1dltd_581";
-const form__buttonTarifItem = "_form__buttonTarifItem_1dltd_590";
-const form__tarifBody = "_form__tarifBody_1dltd_600";
-const form__buttonTarifItemPRO = "_form__buttonTarifItemPRO_1dltd_603";
-const form__tarifTitle = "_form__tarifTitle_1dltd_609";
-const form__tarifSubTitle = "_form__tarifSubTitle_1dltd_618";
-const form__modalFree = "_form__modalFree_1dltd_621";
+const createOrder__title = "_createOrder__title_16utc_4";
+const createOrder__loader = "_createOrder__loader_16utc_14";
+const createOrder__header = "_createOrder__header_16utc_24";
+const createOrder__order = "_createOrder__order_16utc_42";
+const createOrder__content = "_createOrder__content_16utc_47";
+const createOrder__type = "_createOrder__type_16utc_55";
+const createOrder__typeWarning = "_createOrder__typeWarning_16utc_74";
+const createOrder__typeTitle = "_createOrder__typeTitle_16utc_89";
+const createOrder__typeItem = "_createOrder__typeItem_16utc_98";
+const createOrder__typeItem_active = "_createOrder__typeItem_active_16utc_107";
+const createOrder__noTypeActive = "_createOrder__noTypeActive_16utc_130";
+const createOrder__warningTitle = "_createOrder__warningTitle_16utc_134";
+const createOrder__warningsubTitle = "_createOrder__warningsubTitle_16utc_140";
+const form = "_form_16utc_147";
+const form_hide = "_form_hide_16utc_153";
+const form__skeleton = "_form__skeleton_16utc_156";
+const form__errorMess = "_form__errorMess_16utc_170";
+const form__sumWrapper = "_form__sumWrapper_16utc_174";
+const form__radio = "_form__radio_16utc_178";
+const form__radioWrapper = "_form__radioWrapper_16utc_182";
+const form__sumTitle = "_form__sumTitle_16utc_187";
+const form__sum = "_form__sum_16utc_174";
+const form__content = "_form__content_16utc_194";
+const form__row = "_form__row_16utc_207";
+const form__block = "_form__block_16utc_210";
+const form__title = "_form__title_16utc_239";
+const form__items = "_form__items_16utc_252";
+const form__item = "_form__item_16utc_252";
+const form__itemLabel = "_form__itemLabel_16utc_293";
+const form__itemLabel_star = "_form__itemLabel_star_16utc_303";
+const form__itemCheckboxes = "_form__itemCheckboxes_16utc_311";
+const form__control = "_form__control_16utc_315";
+const form__controlActiveBlue = "_form__controlActiveBlue_16utc_332";
+const form__controlActiveOrange = "_form__controlActiveOrange_16utc_335";
+const form__list = "_form__list_16utc_338";
+const form__list_active = "_form__list_active_16utc_367";
+const form__listItem = "_form__listItem_16utc_372";
+const form__button = "_form__button_16utc_387";
+const form__buttonBack = "_form__buttonBack_16utc_394";
+const form__buttonForward = "_form__buttonForward_16utc_402";
+const form__buttonForwardActive = "_form__buttonForwardActive_16utc_410";
+const form__textField = "_form__textField_16utc_413";
+const form__checkField = "_form__checkField_16utc_421";
+const form__imagesForm = "_form__imagesForm_16utc_428";
+const form__addButton = "_form__addButton_16utc_432";
+const form__prompt = "_form__prompt_16utc_437";
+const form__promptTitle = "_form__promptTitle_16utc_442";
+const form__size = "_form__size_16utc_449";
+const form__inputImages = "_form__inputImages_16utc_456";
+const form__imagesBlockPreview = "_form__imagesBlockPreview_16utc_493";
+const form__imageItem = "_form__imageItem_16utc_506";
+const form__deleteImage = "_form__deleteImage_16utc_510";
+const form__deleteImageActive = "_form__deleteImageActive_16utc_535";
+const form__imagePreview = "_form__imagePreview_16utc_539";
+const form__modalTitle = "_form__modalTitle_16utc_574";
+const form__modalSubTitle = "_form__modalSubTitle_16utc_580";
+const form__inputModal = "_form__inputModal_16utc_586";
+const form__inputActive = "_form__inputActive_16utc_595";
+const form__buttonModal = "_form__buttonModal_16utc_598";
+const form__buttonModalActive = "_form__buttonModalActive_16utc_607";
+const form__modalProSpan = "_form__modalProSpan_16utc_611";
+const form__buttomTarif = "_form__buttomTarif_16utc_619";
+const form__buttonTarifItem = "_form__buttonTarifItem_16utc_628";
+const form__tarifBody = "_form__tarifBody_16utc_638";
+const form__buttonTarifItemPRO = "_form__buttonTarifItemPRO_16utc_641";
+const form__tarifTitle = "_form__tarifTitle_16utc_647";
+const form__tarifSubTitle = "_form__tarifSubTitle_16utc_656";
+const form__modalFree = "_form__modalFree_16utc_659";
 const styles$y = {
   createOrder__title,
   createOrder__loader,
@@ -49267,17 +49266,17 @@ const styles$y = {
   form__sumTitle,
   form__sum,
   form__content,
-  "form__content-blocks": "_form__content-blocks_1dltd_197",
+  "form__content-blocks": "_form__content-blocks_16utc_197",
   form__row,
   form__block,
-  "form__block-border-right": "_form__block-border-right_1dltd_218",
-  "form__block-border-top": "_form__block-border-top_1dltd_226",
+  "form__block-border-right": "_form__block-border-right_16utc_218",
+  "form__block-border-top": "_form__block-border-top_16utc_226",
   form__title,
   form__items,
   form__item,
-  "form__item-file-input": "_form__item-file-input_1dltd_271",
-  "form__item-status": "_form__item-status_1dltd_277",
-  "form__item-start-content": "_form__item-start-content_1dltd_280",
+  "form__item-file-input": "_form__item-file-input_16utc_271",
+  "form__item-status": "_form__item-status_16utc_277",
+  "form__item-start-content": "_form__item-start-content_16utc_280",
   form__itemLabel,
   form__itemLabel_star,
   form__itemCheckboxes,
@@ -49299,11 +49298,15 @@ const styles$y = {
   form__promptTitle,
   form__size,
   form__inputImages,
+  "form__inputImages-files": "_form__inputImages-files_16utc_474",
   form__imagesBlockPreview,
   form__imageItem,
   form__deleteImage,
   form__deleteImageActive,
   form__imagePreview,
+  "form__imagePreview-files": "_form__imagePreview-files_16utc_545",
+  "form__imagePreview-files_ext": "_form__imagePreview-files_ext_16utc_553",
+  "form__imagePreview-files_name": "_form__imagePreview-files_name_16utc_566",
   form__modalTitle,
   form__modalSubTitle,
   form__inputModal,
@@ -54673,14 +54676,17 @@ const ImagesUpload = ({ control }) => {
   const dispatch = useDispatch();
   const [visibleControlImage, setVisibleControlImage] = reactExports.useState(false);
   const [preview, setPreview] = reactExports.useState([]);
-  const initialData = getMediateField("photo_urls");
-  let fileobjRef = reactExports.useRef(initialData || []);
+  const initialSrcs = getFormField("photo_urls");
+  console.log(initialSrcs);
+  getMediateField("photo_urls");
+  let fileobjRef = reactExports.useRef([]);
   const fetchFileobj = async () => {
     try {
       const fileobj = fileobjRef.current;
       const formData = new FormData();
-      console.log(fileobj, "fileobj in fetch");
+      console.log(fileobj);
       fileobj.forEach((file) => formData.append("files", file));
+      console.log(fileobj);
       const res = await axios$1.post(apiEndpoints.photos, formData, {
         withCredentials: true
       });
@@ -54718,8 +54724,21 @@ const ImagesUpload = ({ control }) => {
     fetchFileobj();
   };
   reactExports.useEffect(() => {
-    loadImages();
-  }, []);
+    const fetchUrls = async () => {
+      const files = [];
+      for (const src of initialSrcs) {
+        const res = await fetch(src);
+        const blob = await res.blob();
+        const file = new File([blob], "image", blob);
+        files.push(file);
+      }
+      console.log(files);
+      fileobjRef.current = files;
+      loadImages();
+    };
+    if (initialSrcs && fileobjRef.current.length == 0)
+      fetchUrls();
+  }, [initialSrcs]);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$y.form__row, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$y.form__title, children: [
       "Фото изделия ",
@@ -54829,6 +54848,203 @@ const ImagesUpload = ({ control }) => {
     ] }) })
   ] });
 };
+const FilesUpload = ({ control }) => {
+  const dispatch = useDispatch();
+  const [visibleControlImage, setVisibleControlImage] = reactExports.useState(false);
+  const [preview, setPreview] = reactExports.useState([]);
+  let inputRef = reactExports.useRef(null);
+  let inputFieldRef = reactExports.useRef(null);
+  const initialValue = getMediateField("doc_urls");
+  const fetchDocs = async (formData) => {
+    const res = await axios$1.post(apiEndpoints.documents, formData, {
+      withCredentials: true
+    });
+    dispatch(updateFormData({ doc_urls: res.data.docs }));
+    dispatch(updateMediateData({ doc_urls: formData }));
+  };
+  const handleFile = async (field) => {
+    var _a2;
+    const fileList = (_a2 = inputRef.current) == null ? void 0 : _a2.files;
+    if (!fileList)
+      return;
+    const files = Array.from(fileList);
+    try {
+      const formData = new FormData();
+      files.forEach((file) => formData.append("files", file));
+      field.onChange(formData);
+      loadPreview();
+      await fetchDocs(formData);
+    } catch (error2) {
+      console.log(error2);
+    }
+  };
+  const loadPreview = () => {
+    var _a2;
+    const fileList = (_a2 = inputRef.current) == null ? void 0 : _a2.files;
+    if (!fileList)
+      return;
+    const filesToPreview = Array.from(fileList).map((file) => file.name);
+    console.log("files to preview", filesToPreview, fileList);
+    setPreview(filesToPreview);
+  };
+  const deleteFile = async (e2) => {
+    var _a2;
+    const index2 = e2.target.id;
+    const fileList = (_a2 = inputRef.current) == null ? void 0 : _a2.files;
+    if (!fileList)
+      return;
+    const newFiles = Array.from(fileList).filter((_2, ind) => ind != index2);
+    try {
+      const formData = new FormData();
+      newFiles.forEach((file) => formData.append("files", file));
+      inputFieldRef.current.onChange(formData);
+      let container2 = new DataTransfer();
+      newFiles.forEach((file) => container2.items.add(file));
+      inputRef.current.files = container2.files;
+      loadPreview();
+      await fetchDocs(formData);
+    } catch (error2) {
+      console.log(error2);
+    }
+  };
+  reactExports.useEffect(() => {
+    if (inputFieldRef.current && inputFieldRef.current.value === void 0 && initialValue) {
+      if (!inputRef.current)
+        return;
+      inputFieldRef.current.onChange(initialValue);
+      let container2 = new DataTransfer();
+      const fileList = initialValue.getAll("files");
+      if (fileList) {
+        Array.from(fileList).forEach(
+          (file) => container2.items.add(file)
+        );
+        inputRef.current.files = container2.files;
+      }
+      loadPreview();
+    }
+  }, []);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$y.form__row, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$y.form__title, children: "Техзадание (Описание)" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$y.form__imagesForm, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$y.form__imagesBlockPreview, children: [
+      (preview || []).map((fileName, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "div",
+        {
+          className: styles$y.form__imageItem,
+          onMouseEnter: () => setVisibleControlImage(true),
+          onMouseLeave: () => setVisibleControlImage(false),
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                className: [
+                  `${styles$y.form__imagePreview} ${styles$y["form__imagePreview-files"]}`
+                ],
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$y["form__imagePreview-files_ext"], children: fileName.split(".").slice(-1)[0] || "txt" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: styles$y["form__imagePreview-files_name"], children: fileName })
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "div",
+              {
+                id: index2,
+                onClick: deleteFile,
+                className: visibleControlImage ? [
+                  styles$y.form__deleteImage,
+                  styles$y.form__deleteImageActive
+                ].join(" ") : styles$y.form__deleteImage,
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "svg",
+                  {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    width: "10",
+                    height: "10",
+                    viewBox: "0 0 10 10",
+                    fill: "none",
+                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "path",
+                      {
+                        fillRule: "evenodd",
+                        clipRule: "evenodd",
+                        d: "M6.01007 5.00009L9.79072 1.21944C10.07 0.940162 10.07 0.488741 9.79072 0.209461C9.51144 -0.0698202 9.06002 -0.0698202 8.78074 0.209461L5.00009 3.99011L1.21944 0.209461C0.940162 -0.0698202 0.488741 -0.0698202 0.209461 0.209461C-0.0698202 0.488741 -0.0698202 0.940162 0.209461 1.21944L3.99011 5.00009L0.209461 8.78074C-0.0698202 9.06002 -0.0698202 9.51144 0.209461 9.79072C0.348744 9.93 0.531598 10 0.714452 10C0.897305 10 1.08016 9.93 1.21944 9.79072L5.00009 6.01007L8.78074 9.79072C8.92002 9.93 9.10287 10 9.28573 10C9.46858 10 9.65144 9.93 9.79072 9.79072C10.07 9.51144 10.07 9.06002 9.79072 8.78074L6.01007 5.00009Z",
+                        fill: "#FF0A00"
+                      }
+                    )
+                  }
+                )
+              }
+            )
+          ]
+        },
+        index2
+      )),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$y.form__addButton, children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: `${styles$y.form__inputImages} ${styles$y["form__inputImages-files"]}`,
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Controller,
+                {
+                  name: "file",
+                  control,
+                  render: ({ field }) => {
+                    inputFieldRef.current = field;
+                    return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "input",
+                      {
+                        type: "file",
+                        multiple: true,
+                        accept: ".docx",
+                        "aria-label": "Текстовый документ",
+                        onChange: () => {
+                          handleFile(field);
+                        },
+                        ref: inputRef
+                      }
+                    ) });
+                  }
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "svg",
+                {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  width: "50px",
+                  height: "50px",
+                  viewBox: "0 0 24 24",
+                  fill: "none",
+                  children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "path",
+                    {
+                      d: "M13 3L13.7071 2.29289C13.5196 2.10536 13.2652 2 13 2V3ZM19 9H20C20 8.73478 19.8946 8.48043 19.7071 8.29289L19 9ZM13.109 8.45399L14 8V8L13.109 8.45399ZM13.546 8.89101L14 8L13.546 8.89101ZM10 13C10 12.4477 9.55228 12 9 12C8.44772 12 8 12.4477 8 13H10ZM8 16C8 16.5523 8.44772 17 9 17C9.55228 17 10 16.5523 10 16H8ZM8.5 9C7.94772 9 7.5 9.44772 7.5 10C7.5 10.5523 7.94772 11 8.5 11V9ZM9.5 11C10.0523 11 10.5 10.5523 10.5 10C10.5 9.44772 10.0523 9 9.5 9V11ZM8.5 6C7.94772 6 7.5 6.44772 7.5 7C7.5 7.55228 7.94772 8 8.5 8V6ZM9.5 8C10.0523 8 10.5 7.55228 10.5 7C10.5 6.44772 10.0523 6 9.5 6V8ZM17.908 20.782L17.454 19.891L17.454 19.891L17.908 20.782ZM18.782 19.908L19.673 20.362L18.782 19.908ZM5.21799 19.908L4.32698 20.362H4.32698L5.21799 19.908ZM6.09202 20.782L6.54601 19.891L6.54601 19.891L6.09202 20.782ZM6.09202 3.21799L5.63803 2.32698L5.63803 2.32698L6.09202 3.21799ZM5.21799 4.09202L4.32698 3.63803L4.32698 3.63803L5.21799 4.09202ZM12 3V7.4H14V3H12ZM14.6 10H19V8H14.6V10ZM12 7.4C12 7.66353 11.9992 7.92131 12.0169 8.13823C12.0356 8.36682 12.0797 8.63656 12.218 8.90798L14 8C14.0293 8.05751 14.0189 8.08028 14.0103 7.97537C14.0008 7.85878 14 7.69653 14 7.4H12ZM14.6 8C14.3035 8 14.1412 7.99922 14.0246 7.9897C13.9197 7.98113 13.9425 7.9707 14 8L13.092 9.78201C13.3634 9.92031 13.6332 9.96438 13.8618 9.98305C14.0787 10.0008 14.3365 10 14.6 10V8ZM12.218 8.90798C12.4097 9.2843 12.7157 9.59027 13.092 9.78201L14 8V8L12.218 8.90798ZM8 13V16H10V13H8ZM8.5 11H9.5V9H8.5V11ZM8.5 8H9.5V6H8.5V8ZM13 2H8.2V4H13V2ZM4 6.2V17.8H6V6.2H4ZM8.2 22H15.8V20H8.2V22ZM20 17.8V9H18V17.8H20ZM19.7071 8.29289L13.7071 2.29289L12.2929 3.70711L18.2929 9.70711L19.7071 8.29289ZM15.8 22C16.3436 22 16.8114 22.0008 17.195 21.9694C17.5904 21.9371 17.9836 21.8658 18.362 21.673L17.454 19.891C17.4045 19.9162 17.3038 19.9539 17.0322 19.9761C16.7488 19.9992 16.3766 20 15.8 20V22ZM18 17.8C18 18.3766 17.9992 18.7488 17.9761 19.0322C17.9539 19.3038 17.9162 19.4045 17.891 19.454L19.673 20.362C19.8658 19.9836 19.9371 19.5904 19.9694 19.195C20.0008 18.8114 20 18.3436 20 17.8H18ZM18.362 21.673C18.9265 21.3854 19.3854 20.9265 19.673 20.362L17.891 19.454C17.7951 19.6422 17.6422 19.7951 17.454 19.891L18.362 21.673ZM4 17.8C4 18.3436 3.99922 18.8114 4.03057 19.195C4.06287 19.5904 4.13419 19.9836 4.32698 20.362L6.10899 19.454C6.0838 19.4045 6.04612 19.3038 6.02393 19.0322C6.00078 18.7488 6 18.3766 6 17.8H4ZM8.2 20C7.62345 20 7.25117 19.9992 6.96784 19.9761C6.69617 19.9539 6.59545 19.9162 6.54601 19.891L5.63803 21.673C6.01641 21.8658 6.40963 21.9371 6.80497 21.9694C7.18864 22.0008 7.65645 22 8.2 22V20ZM4.32698 20.362C4.6146 20.9265 5.07354 21.3854 5.63803 21.673L6.54601 19.891C6.35785 19.7951 6.20487 19.6422 6.10899 19.454L4.32698 20.362ZM8.2 2C7.65645 2 7.18864 1.99922 6.80497 2.03057C6.40963 2.06287 6.01641 2.13419 5.63803 2.32698L6.54601 4.10899C6.59545 4.0838 6.69617 4.04612 6.96784 4.02393C7.25117 4.00078 7.62345 4 8.2 4V2ZM6 6.2C6 5.62345 6.00078 5.25117 6.02393 4.96784C6.04612 4.69617 6.0838 4.59545 6.10899 4.54601L4.32698 3.63803C4.13419 4.01641 4.06287 4.40963 4.03057 4.80497C3.99922 5.18864 4 5.65645 4 6.2H6ZM5.63803 2.32698C5.07354 2.6146 4.6146 3.07354 4.32698 3.63803L6.10899 4.54601C6.20487 4.35785 6.35785 4.20487 6.54601 4.10899L5.63803 2.32698Z",
+                      fill: "#000000"
+                    }
+                  )
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
+                "нажмите для ",
+                /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+                " загрузки"
+              ] })
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$y.form__prompt, children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("h4", { className: styles$y.form__promptTitle, children: [
+            "Добавьте ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            " файлы"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: styles$y.form__size, children: "до 250 МБ" })
+        ] })
+      ] })
+    ] }) })
+  ] });
+};
 const Product = ({ handleNextStage }) => {
   const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
   const stage = useSelector((state) => state.form.currentStage);
@@ -54841,7 +55057,8 @@ const Product = ({ handleNextStage }) => {
     handleSubmit,
     formState: { errors },
     getValues,
-    reset
+    reset,
+    watch
   } = useForm();
   const [formOptions, setFormOptions] = reactExports.useState([]);
   const loadOptions = reactExports.useCallback(async () => {
@@ -54897,8 +55114,7 @@ const Product = ({ handleNextStage }) => {
                 title: "Название заказа",
                 propName: "order_name",
                 type: "text",
-                placeholder: "Введите название заказа",
-                required: true
+                placeholder: "Введите название заказа"
               }
             ),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -54908,8 +55124,7 @@ const Product = ({ handleNextStage }) => {
                 formOptions: formOptions ?? [],
                 title: "Статус",
                 propName: "status",
-                extraClassName: "-status",
-                required: true
+                extraClassName: "-status"
               }
             )
           ] }) }),
@@ -54922,8 +55137,7 @@ const Product = ({ handleNextStage }) => {
                   control,
                   formOptions: formOptions ?? [],
                   title: "Тип одежды",
-                  propName: "clothes_type",
-                  required: true
+                  propName: "clothes_type"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -54932,8 +55146,7 @@ const Product = ({ handleNextStage }) => {
                   control,
                   formOptions: formOptions ?? [],
                   title: "Назначение",
-                  propName: "purpose",
-                  required: true
+                  propName: "purpose"
                 }
               ),
               /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -54942,8 +55155,7 @@ const Product = ({ handleNextStage }) => {
                   control,
                   formOptions: formOptions ?? [],
                   title: "Вид изделия",
-                  propName: "clothes_name",
-                  required: true
+                  propName: "clothes_name"
                 }
               )
             ] })
@@ -54956,8 +55168,7 @@ const Product = ({ handleNextStage }) => {
                 formOptions: formOptions ?? [],
                 title: "Пол и возраст",
                 propName: "gender_and_age",
-                isMulti: true,
-                required: true
+                isMulti: true
               }
             ),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -54966,8 +55177,7 @@ const Product = ({ handleNextStage }) => {
                 control,
                 formOptions: formOptions ?? [],
                 title: "Сезон",
-                propName: "season",
-                required: true
+                propName: "season"
               }
             ),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -54977,8 +55187,7 @@ const Product = ({ handleNextStage }) => {
                 formOptions: formOptions ?? [],
                 title: "Ценовой сегмент",
                 propName: "price_segment",
-                isMulti: true,
-                required: true
+                isMulti: true
               }
             )
           ] }) }),
@@ -54989,8 +55198,7 @@ const Product = ({ handleNextStage }) => {
                 control,
                 formOptions: formOptions ?? [],
                 title: "Регулярность заказа",
-                propName: "regularity_of_order",
-                required: true
+                propName: "regularity_of_order"
               }
             ),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -54999,10 +55207,10 @@ const Product = ({ handleNextStage }) => {
                 control,
                 formOptions: formOptions ?? [],
                 title: "Вид продукции",
-                propName: "product_type",
-                required: true
+                propName: "product_type"
               }
-            )
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(FilesUpload, { watch, control })
           ] }) }),
           isEditMode ? "" : /* @__PURE__ */ jsxRuntimeExports.jsx(ImagesUpload, { control })
         ] }),
@@ -55302,76 +55510,12 @@ const RadioItem = ({ control, title: title2, propName, options: options2, requir
     )
   ] });
 };
-const FileItem = ({ control, inputAccept, inputAreaLabel, propName }) => {
-  const dispatch = useDispatch();
-  const fetchDocs = async (formData) => {
-    const res = await axios$1.post(apiEndpoints.documents, formData, {
-      withCredentials: true
-    });
-    dispatch(updateFormData({ [propName]: res.data.docs }));
-    //!только для docs - переделать!
-    dispatch(updateMediateData({ [propName]: formData }));
-  };
-  const handleTextFile = async (e2, field) => {
-    try {
-      const formData = new FormData();
-      for (let i = 0; i < e2.target.files.length; i++) {
-        formData.append("files", e2.target.files[i]);
-      }
-      field.onChange(formData);
-      await fetchDocs(formData);
-    } catch (error2) {
-      console.log(error2);
-    }
-  };
-  const inputRef = reactExports.useRef(null);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `${styles$y.form__item} ${styles$y["form__item-file-input"]}`, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: styles$y.form__itemLabel, children: "Техзадание (Описание)" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Controller,
-      {
-        name: "file",
-        control,
-        render: ({ field }) => {
-          const initialValue = getMediateField("doc_urls");
-          reactExports.useEffect(() => {
-            console.log(initialValue);
-            if (field.value === void 0 && initialValue) {
-              if (!inputRef.current)
-                return;
-              field.onChange(initialValue);
-              let container2 = new DataTransfer();
-              const fileList = initialValue.getAll("files");
-              if (fileList) {
-                Array.from(fileList).forEach(
-                  (file) => container2.items.add(file)
-                );
-                inputRef.current.files = container2.files;
-              }
-            }
-          }, []);
-          return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "input",
-            {
-              type: "file",
-              multiple: true,
-              accept: inputAccept,
-              "aria-label": inputAreaLabel,
-              onChange: (e2) => {
-                handleTextFile(e2, field);
-              },
-              ref: inputRef
-            }
-          ) });
-        }
-      }
-    )
-  ] });
-};
 const Technology = ({ handlePrevStage, handleNextStage }) => {
-  const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
+  const isFormFetchingSuccess = useSelector(
+    (state) => state.form.isFormFetchingSuccess
+  );
   const stage = useSelector((state) => state.form.currentStage);
-  const isEditMode = useSelector((state) => state.form.isEditMode);
+  useSelector((state) => state.form.isEditMode);
   const isHide = stage != 3;
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55536,15 +55680,6 @@ const Technology = ({ handlePrevStage, handleNextStage }) => {
                         formOptions: formOptions ?? [],
                         title: "Оплата пошива образца",
                         propName: "payment_for_a_sample"
-                      }
-                    ),
-                    isEditMode ? "" : /* @__PURE__ */ jsxRuntimeExports.jsx(
-                      FileItem,
-                      {
-                        control,
-                        propName: "doc_urls",
-                        inputAccept: ".docx",
-                        inputAreaLabel: "Текстовый документ"
                       }
                     )
                   ]
@@ -64798,7 +64933,7 @@ const CreateOrder = ({ editMode, orderId }) => {
   const isFormLoading = useSelector(
     (store2) => store2.form.editModeData.isFormLoading
   );
-  useSelector((state) => state.form.currentStage);
+  const stage = useSelector((state) => state.form.currentStage);
   const dispatch = useDispatch();
   useNavigate();
   const handleNextStage = () => {
@@ -64813,8 +64948,9 @@ const CreateOrder = ({ editMode, orderId }) => {
       dispatch(loadFormForEdit(orderId));
   }, [editMode, orderId]);
   reactExports.useEffect(() => {
-    dispatch(clearData());
-  }, []);
+    if (stage == 6 || editMode)
+      dispatch(clearData());
+  }, [editMode]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(Layout, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$y.createOrder, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: styles$y["createOrder__title"], children: editMode ? "Техническое задание: редактирование" : "Техническое задание" }),
     isFormLoading ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: styles$y.createOrder__loader, children: [
@@ -85812,6 +85948,7 @@ const EditOrder = ({ id: id2 }) => {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(CreateOrder, { editMode: true, orderId: id2 });
 };
 function EditOrderPage() {
+  useSelector((store2) => store2.admindata.isAdmin);
   const params = useParams();
   return /* @__PURE__ */ jsxRuntimeExports.jsx(EditOrder, { id: params.id });
 }

@@ -9,10 +9,10 @@ import { updateFormData } from "@store/orders/form.slice";
 
 import styles from "../../CreateOrder.module.scss";
 import { useNavigate } from "react-router-dom";
+import { setStageFields } from "../../../../store/orders/form.slice";
 
-const Conditions = ({ handleNextStage, handlePrevStage }) => {
-  const isFormFetchingSuccess = useSelector((state) => state.form.isFormFetchingSuccess);
-  const stage = useSelector((state) => state.form.currentStage);
+const Conditions = ({ handleNextStage, handlePrevStage, formSubmitRef }) => {
+  const {currentStage: stage, isFormFetchingSuccess, isEditMode} = useSelector((state) => state.form);
   const isHide = stage != 4;
 
   const dispatch = useDispatch();
@@ -23,15 +23,17 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
     handleSubmit,
     formState: { errors },
     getValues,
-    reset
+    reset,
+    watch
   } = useForm();
+
 
   const [formOptions, setFormOptions] = useState([]);
 
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject("conditions");
-      if (!options) navigate('/404')
+      // if (!options) navigate('/404')
 
       const labels = {
         OTC_access: "Доступ на производство для ОТК заказчика",
@@ -63,19 +65,36 @@ const Conditions = ({ handleNextStage, handlePrevStage }) => {
     loadOptions();
   }, []);
 
+  useEffect(() => {
+    if (!isEditMode) dispatch(updateFormData(getValues()));
+  }, [isEditMode])
+
+  useEffect(() => {
+    dispatch(setStageFields({ name: 'conditions', fields: Object.keys(getValues())}))
+    
+    watch((formValues, changes) => {
+      if (changes.name) {
+        dispatch(updateFormData(({ [changes.name]: changes.values[changes.name] })));
+      }
+    })
+  }, [])
+
   const onSubmit = () => {
     handleNextStage();
     dispatch(updateFormData(getValues()));
   };
 
+  const formSubmit = handleSubmit(onSubmit)
+  formSubmitRef.current = formSubmit
+
   useEffect(() => {
-    reset()
+    // reset()
   }, [isFormFetchingSuccess])
 
   return (
     <form
       className={`${styles.form} ${isHide ? styles.form_hide : ""}`}
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={formSubmit}
     >
       <div className={styles.form__content}>
         <div className={styles.form__row}>

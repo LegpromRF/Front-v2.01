@@ -1,25 +1,21 @@
 import { Controller } from "react-hook-form";
 import styles from "../../CreateOrder.module.scss";
 import { getFormField } from "../../../../store/orders/form.slice";
+import { useEffect } from "react";
 
 const PhoneArea = ({ control }) => {
+  
   return (
     <div className={styles.form__item}>
       <h3 className={styles.form__itemLabel}>
         <span>Введите телефон</span>
-        <span className={styles.form__itemLabel_star}>*</span>
       </h3>
       <Controller
         name={"customer_phone"}
         control={control}
-        rules={{
-          required: {
-            value: true,
-            message: "Это поле обязательно",
-          },
-        }}
         render={({ field }) => {
           const initialValue = getFormField("customer_phone");
+          
           if (field.value === undefined && initialValue)
             field.onChange(initialValue);
 
@@ -36,36 +32,14 @@ const PhoneArea = ({ control }) => {
       />
       <div className={styles.form__itemCheckboxes}>
         <Controller
-          name={"customer_tg"}
-          control={control}
-          render={({ field }) => {
-            const initialValue = getFormField("customer_tg");
-            if (field.value === undefined && initialValue)
-              field.onChange(Boolean(initialValue));
-
-            return (
-              <div className={styles.form__checkField}>
-                <label htmlFor="customer_tg">Telegram</label>
-                <input
-                  {...field}
-                  tabIndex={0}
-                  checked={Boolean(field.value)}
-                  onChange={e => field.onChange(!Boolean(field.value))}
-                  id="customer_tg"
-                  name="customer_tg"
-                  type={"checkbox"}
-                />
-              </div>
-            );
-          }}
-        />
-        <Controller
           name={"customer_whatsapp"}
           control={control}
           render={({ field }) => {
             const initialValue = getFormField("customer_whatsapp");
-            if (field.value === undefined && initialValue)
-              field.onChange(initialValue);
+            console.log(field.value, initialValue);
+            if (field.value === undefined && initialValue != undefined) {
+              field.onChange(Boolean(initialValue));
+            }
 
             return (
               <div className={styles.form__checkField}>
@@ -76,6 +50,7 @@ const PhoneArea = ({ control }) => {
                   id="customer_whatsapp"
                   name="customer_whatsapp"
                   type={"checkbox"}
+                  checked={field.value}
                 />
               </div>
             );

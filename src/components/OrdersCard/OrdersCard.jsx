@@ -2,225 +2,184 @@ import { Link } from "react-router-dom";
 import styles from "./OrdersCard.module.scss";
 import { useState } from "react";
 
-const id = 544 
+const id = 544;
 
-const OrdersCard = ({ title, number, status, href }) => {
-  const [activeMenu, setActiveMenu] = useState(false);
-
+const OrdersCard = ({
+  id,
+  name,
+  imagePreviewSrc,
+  status,
+  createdDate,
+  clothesType,
+  budget,
+  count,
+  isVerified,
+}) => {
   return (
     <div className={styles.card}>
+      <div className={styles.card__options}>
+        <span className={styles["card__options-edit"]}>
+          <Link to={`/profile/order/edit/${id}`}>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              width={20}
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M9.65661 17L6.99975 17L6.99975 14M6.10235 14.8974L17.4107 3.58902C18.1918 2.80797 19.4581 2.80797 20.2392 3.58902C21.0202 4.37007 21.0202 5.6364 20.2392 6.41745L8.764 17.8926C8.22794 18.4287 7.95992 18.6967 7.6632 18.9271C7.39965 19.1318 7.11947 19.3142 6.8256 19.4723C6.49475 19.6503 6.14115 19.7868 5.43395 20.0599L3 20.9998L3.78312 18.6501C4.05039 17.8483 4.18403 17.4473 4.3699 17.0729C4.53497 16.7404 4.73054 16.424 4.95409 16.1276C5.20582 15.7939 5.50466 15.4951 6.10235 14.8974Z"
+                  stroke="#000000"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></path>
+              </g>
+            </svg>
+          </Link>
+          <div className={styles["card__info-bubble"]}>Редактировать</div>
+        </span>
+        {isVerified ? (
+          <span>
+            <svg
+              fill="#0036FF"
+              viewBox="0 0 512 512"
+              id="_x30_1"
+              version="1.1"
+              width={18}
+              xmlSpace="preserve"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+            >
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path d="M434.068,46.758L314.607,9.034C295.648,3.047,275.883,0,256,0s-39.648,3.047-58.607,9.034L77.932,46.758 C52.97,54.641,36,77.796,36,103.973v207.39c0,38.129,18.12,73.989,48.816,96.607l117.032,86.234 C217.537,505.764,236.513,512,256,512s38.463-6.236,54.152-17.796l117.032-86.234C457.88,385.352,476,349.492,476,311.363v-207.39 C476,77.796,459.03,54.641,434.068,46.758z M347.924,227.716l-98.995,98.995c-11.716,11.716-30.711,11.716-42.426,0l-42.427-42.426 c-11.716-11.716-11.716-30.711,0-42.426l0,0c11.716-11.716,30.711-11.716,42.426,0l21.213,21.213l77.782-77.782 c11.716-11.716,30.711-11.716,42.426,0h0C359.64,197.005,359.64,216,347.924,227.716z"></path>
+              </g>
+            </svg>
+            <div className={styles["card__info-bubble"]}>
+              Проверено администартором
+            </div>
+          </span>
+        ) : (
+          ""
+        )}
+      </div>
       <div className={styles.card__body}>
-        <div className={styles.card__title}>
-          <h2>{title}</h2>
-        </div>
-        <div className={styles.card__number}>Брючная одежда </div>
-        <div className={styles.card__footer}>
-          <div className={styles.card__status}>
-            {status == "В работе" ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="44"
-                height="44"
-                viewBox="0 0 44 44"
-                fill="none"
-              >
-                <path
-                  d="M0 0H37C40.866 0 44 3.13401 44 7V44L0 0Z"
-                  fill="#0036FF"
-                />
-                <path
-                  d="M44 44H7C3.13401 44 0 40.866 0 37V0L44 44Z"
-                  fill="#002BCD"
-                />
-                <circle cx="21.5" cy="21.5" r="6.5" fill="white" />
-                <path
-                  d="M0 0H37C40.866 0 44 3.13401 44 7V44L0 0Z"
-                  fill="#0036FF"
-                />
-                <path
-                  d="M44 44H7C3.13401 44 0 40.866 0 37V0L44 44Z"
-                  fill="#002BCD"
-                />
-                <circle cx="21.5" cy="21.5" r="6.5" fill="white" />
-              </svg>
-            ) : status == "Закончен" ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="44"
-                height="44"
-                viewBox="0 0 44 44"
-                fill="none"
-              >
-                <path
-                  d="M0 0H37C40.866 0 44 3.13401 44 7V44L0 0Z"
-                  fill="#00B334"
-                />
-                <path
-                  d="M44 44H7C3.13401 44 0 40.866 0 37V0L44 44Z"
-                  fill="#00902A"
-                />
-                <circle cx="21.5" cy="21.5" r="6.5" fill="white" />
-                <path
-                  d="M0 0H37C40.866 0 44 3.13401 44 7V44L0 0Z"
-                  fill="#00B334"
-                />
-                <path
-                  d="M44 44H7C3.13401 44 0 40.866 0 37V0L44 44Z"
-                  fill="#00902A"
-                />
-                <circle cx="21.5" cy="21.5" r="6.5" fill="white" />
-              </svg>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="44"
-                height="44"
-                viewBox="0 0 44 44"
-                fill="none"
-              >
-                <path
-                  d="M0 0H37C40.866 0 44 3.13401 44 7V44L0 0Z"
-                  fill="#FF0A00"
-                />
-                <path
-                  d="M44 44H7C3.13401 44 0 40.866 0 37V0L44 44Z"
-                  fill="#CD0A02"
-                />
-                <circle cx="21.5" cy="21.5" r="6.5" fill="white" />
-                <path
-                  d="M0 0H37C40.866 0 44 3.13401 44 7V44L0 0Z"
-                  fill="#FF0A00"
-                />
-                <path
-                  d="M44 44H7C3.13401 44 0 40.866 0 37V0L44 44Z"
-                  fill="#CD0A02"
-                />
-                <circle cx="21.5" cy="21.5" r="6.5" fill="white" />
-              </svg>
-            )}
+        <h2 className={`${styles.card__title} ${styles["card__title_body"]}`}>
+          <Link to={`/profile/order/view_tz/${id}`}>{name}</Link>
+        </h2>
+        <div className={styles.card__content}>
+          <div className={styles.card__image}>
+            <img src={imagePreviewSrc} alt="" />
           </div>
-          <div className={styles.card__selection}>22.12.2024</div>
-          {activeMenu ? (
-            <div
-              onClick={() => setActiveMenu(!activeMenu)}
-              className={styles.card__additionally}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="17"
-                height="17"
-                viewBox="0 0 17 17"
-                fill="none"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M8.5 1C12.6416 1 16 4.35838 16 8.5C16 12.6416 12.6416 16 8.5 16C4.35757 16 1 12.6416 1 8.5C1 4.35838 4.35757 1 8.5 1Z"
-                  stroke="#0036FF"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M4.86784 9.47021C4.33189 9.47021 3.89648 9.03481 3.89648 8.49967C3.89648 7.96454 4.33189 7.52832 4.86784 7.52832C5.40378 7.52832 5.83919 7.96454 5.83919 8.49967C5.83919 9.03481 5.40378 9.47021 4.86784 9.47021Z"
-                  fill="#0036FF"
-                />
-                <path
-                  d="M8.4987 9.47021C7.96275 9.47021 7.52734 9.03481 7.52734 8.49967C7.52734 7.96454 7.96275 7.52832 8.4987 7.52832C9.03464 7.52832 9.47005 7.96454 9.47005 8.49967C9.47005 9.03481 9.03464 9.47021 8.4987 9.47021Z"
-                  fill="#0036FF"
-                />
-                <path
-                  d="M12.1315 9.47021C11.5956 9.47021 11.1602 9.03481 11.1602 8.49967C11.1602 7.96454 11.5956 7.52832 12.1315 7.52832C12.6675 7.52832 13.1029 7.96454 13.1029 8.49967C13.1029 9.03481 12.6675 9.47021 12.1315 9.47021Z"
-                  fill="#0036FF"
-                />
-              </svg>
-            </div>
-          ) : (
-            <div
-              onClick={() => setActiveMenu(!activeMenu)}
-              className={styles.card__additionally}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="17"
-                height="17"
-                viewBox="0 0 17 17"
-                fill="none"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M8.5 1C12.6416 1 16 4.35838 16 8.5C16 12.6416 12.6416 16 8.5 16C4.35757 16 1 12.6416 1 8.5C1 4.35838 4.35757 1 8.5 1Z"
-                  stroke="#242424"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M4.86784 9.47021C4.33189 9.47021 3.89648 9.03481 3.89648 8.49967C3.89648 7.96454 4.33189 7.52832 4.86784 7.52832C5.40378 7.52832 5.83919 7.96454 5.83919 8.49967C5.83919 9.03481 5.40378 9.47021 4.86784 9.47021Z"
-                  fill="#242424"
-                />
-                <path
-                  d="M8.4987 9.47021C7.96275 9.47021 7.52734 9.03481 7.52734 8.49967C7.52734 7.96454 7.96275 7.52832 8.4987 7.52832C9.03464 7.52832 9.47005 7.96454 9.47005 8.49967C9.47005 9.03481 9.03464 9.47021 8.4987 9.47021Z"
-                  fill="#242424"
-                />
-                <path
-                  d="M12.1315 9.47021C11.5956 9.47021 11.1602 9.03481 11.1602 8.49967C11.1602 7.96454 11.5956 7.52832 12.1315 7.52832C12.6675 7.52832 13.1029 7.96454 13.1029 8.49967C13.1029 9.03481 12.6675 9.47021 12.1315 9.47021Z"
-                  fill="#242424"
-                />
-              </svg>
-            </div>
-          )}
-          <div
-            onMouseEnter={() => setActiveMenu(true)}
-            className={
-              activeMenu
-                ? [styles.card__menu, styles.card__menuActive].join(" ")
-                : styles.card__menu
-            }
-          >
-            <div className={styles.card__wrapperMenu}>
-              <Link to={`/profile/order/edit/${id}`} className={styles.card__itemMenu}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="11"
-                  height="12"
-                  viewBox="0 0 11 12"
-                  fill="none"
+          <div>
+            <div className={styles.card__head}>
+              <div className={styles["card__title-area"]}>
+                <h2
+                  className={`${styles.card__title} ${styles["card__title_content"]}`}
                 >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M6.86131 0.727539H2.97776C1.77586 0.727539 0.739746 1.70178 0.739746 2.90426V9.15775C0.739746 10.4279 1.70815 11.4407 2.97776 11.4407H7.64117C8.84365 11.4407 9.81789 10.3608 9.81789 9.15775V3.80729L6.86131 0.727539Z"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M6.70959 0.719727V2.41779C6.70959 3.24669 7.3803 3.91914 8.20861 3.92089C8.97738 3.92265 9.76366 3.92323 9.81678 3.91973"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M6.59765 8.19616H3.44727"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M5.40626 5.30639H3.44727"
-                    stroke="#242424"
-                    strokeWidth="0.804"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span>Редактировать</span>
-              </Link>
+                  <Link to={`/profile/order/view_tz/${id}`}>{name}</Link>
+                </h2>
+                <span className={styles.card__date}>{status}</span>
+                <div className={styles['card__content-icons']}>
+                  <Link to={`/profile/order/edit/${id}`}>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      width={20}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                      <g
+                        id="SVGRepo_tracerCarrier"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      ></g>
+                      <g id="SVGRepo_iconCarrier">
+                        <path
+                          d="M9.65661 17L6.99975 17L6.99975 14M6.10235 14.8974L17.4107 3.58902C18.1918 2.80797 19.4581 2.80797 20.2392 3.58902C21.0202 4.37007 21.0202 5.6364 20.2392 6.41745L8.764 17.8926C8.22794 18.4287 7.95992 18.6967 7.6632 18.9271C7.39965 19.1318 7.11947 19.3142 6.8256 19.4723C6.49475 19.6503 6.14115 19.7868 5.43395 20.0599L3 20.9998L3.78312 18.6501C4.05039 17.8483 4.18403 17.4473 4.3699 17.0729C4.53497 16.7404 4.73054 16.424 4.95409 16.1276C5.20582 15.7939 5.50466 15.4951 6.10235 14.8974Z"
+                          stroke="#000000"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        ></path>
+                      </g>
+                    </svg>
+                  </Link>
+                  <svg
+                    fill="#0036FF"
+                    viewBox="0 0 512 512"
+                    id="_x30_1"
+                    version="1.1"
+                    width={18}
+                    xmlSpace="preserve"
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlnsXlink="http://www.w3.org/1999/xlink"
+                  >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                      id="SVGRepo_tracerCarrier"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path d="M434.068,46.758L314.607,9.034C295.648,3.047,275.883,0,256,0s-39.648,3.047-58.607,9.034L77.932,46.758 C52.97,54.641,36,77.796,36,103.973v207.39c0,38.129,18.12,73.989,48.816,96.607l117.032,86.234 C217.537,505.764,236.513,512,256,512s38.463-6.236,54.152-17.796l117.032-86.234C457.88,385.352,476,349.492,476,311.363v-207.39 C476,77.796,459.03,54.641,434.068,46.758z M347.924,227.716l-98.995,98.995c-11.716,11.716-30.711,11.716-42.426,0l-42.427-42.426 c-11.716-11.716-11.716-30.711,0-42.426l0,0c11.716-11.716,30.711-11.716,42.426,0l21.213,21.213l77.782-77.782 c11.716-11.716,30.711-11.716,42.426,0h0C359.64,197.005,359.64,216,347.924,227.716z"></path>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+              <span className={styles.card__number}>№ {id}</span>
+            </div>
+            <div className={styles["card__info-area"]}>
+              <div
+                className={`${styles.card__info} ${styles["card__info_clothes-type"]}`}
+              >
+                <div className={styles["card__info-name"]}>Тип одежды</div>
+                <div
+                  className={`${styles["card__info-value"]} ${
+                    clothesType ? "" : styles["card__info-value_empty"]
+                  }`}
+                >
+                  {clothesType || ""}
+                </div>
+              </div>
+              <div className={styles.card__info}>
+                <div className={styles["card__info-name"]}>Создана</div>
+                <div
+                  className={`${styles["card__info-value"]} ${
+                    createdDate ? "" : styles["card__info-value_empty"]
+                  }`}
+                >
+                  {createdDate || ""}
+                </div>
+              </div>
+              <div className={styles.card__info}>
+                <div className={styles["card__info-name"]}>Бюджет</div>
+                <div className={`${styles["card__info-value"]}`}>
+                  {Number(budget || 0).toLocaleString()} ₽
+                </div>
+              </div>
+              <div className={styles.card__info}>
+                <div className={styles["card__info-name"]}>Количество</div>
+                <div
+                  className={`${styles["card__info-value"]} ${
+                    count ? "" : styles["card__info-value_empty"]
+                  }`}
+                >
+                  {count}
+                </div>
+              </div>
             </div>
           </div>
         </div>

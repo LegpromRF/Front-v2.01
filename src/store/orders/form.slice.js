@@ -6,49 +6,44 @@ import { apiEndpoints } from "../../utils/constants/apiEndpoints";
 import axios from "axios";
 
 export const submitForm = createAsyncThunk('form/submitForm', async (_, thunkAPI) => {
-  thunkAPI.dispatch(setFormLoading(true))
   const state = thunkAPI.getState().form
   let formDataToSubmit = {...state.formData}
-  // console.log('submit: ', formDataToSubmit);
   transformDataToServer(formDataToSubmit) // !mutate formDataToSubmit
+  console.log('submit: ', formDataToSubmit);
   
   if (state.isEditMode) {
     formDataToSubmit.id = state.editModeData.orderId
     const res = await fetchEditForm(formDataToSubmit)
-    thunkAPI.dispatch(setFormLoading(false))
     return res.ok
   } else {
     const res = await fetchForm(formDataToSubmit)
-    thunkAPI.dispatch(setFormLoading(false))
     return res.ok
   }
 })
 
 export const loadFormForEdit = createAsyncThunk('form/loadFormForEdit', async (id, thunkAPI) => {
   try {
-    thunkAPI.dispatch(setFormLoading(true))
     let form = {}
     
     let res = await axios.get(apiEndpoints.getBidCreate(id), { withCredentials: true, AccessControlAllowOrigin: true, })
     if (res.status == 200) form = {...form, ...res.data}
-    // console.log(res);
+    console.log(res);
     res = await axios.get(apiEndpoints.getBidTechnology(id), { withCredentials: true, AccessControlAllowOrigin: true, })
     if (res.status == 200) form = {...form, ...res.data}
-    // console.log(res);
+    console.log(res);
     res = await axios.get(apiEndpoints.getBidRequirements(id), { withCredentials: true, AccessControlAllowOrigin: true, })
     if (res.status == 200) form = {...form, ...res.data}
-    // console.log(res);
+    console.log(res);
     res = await axios.get(apiEndpoints.getBidOther(id), { withCredentials: true, AccessControlAllowOrigin: true, })
     if (res.status == 200) form = {...form, ...res.data}
-    // console.log(res);
-    thunkAPI.dispatch(setFormLoading(false))
+    console.log(res);
     return form
   } catch(e) {
     console.error(e);
   }
 })
 
-export const stagesCount = 6
+export const stagesCount = 5
 
 export const formSlice = createSlice({
   name: "form",
@@ -62,14 +57,34 @@ export const formSlice = createSlice({
     isFormFetchingSuccess: null,
     formData: {},
     mediateData: {
-      doc_urls: null,
-      photo_urls: null
-    } //поля, которые помогают возвращать загруженные фото и файлы в форму, если пользователь ушел со страницы и вернулся 
+      doc_urls: null
+    }, //поля, которые помогают возвращать загруженные фото и файлы в форму, если пользователь ушел со страницы и вернулся 
+    stageFields: {
+      product: {
+        number: 1,
+        fields: []
+      },
+      purchase: {
+        number: 2,
+        fields: []
+      },
+      technology: {
+        number: 3,
+        fields: []
+      },
+      conditions: {
+        number: 4,
+        fields: []
+      },
+      contacts: {
+        number: 5,
+        fields: []
+      },
+    }
   },
   reducers: {
     setCurrentStage: (state, action) => {
       let newStage = action.payload;
-      if (newStage > state.currentStage) return 
 
       if (newStage >= stagesCount) newStage =  stagesCount;
       else if (newStage <= 1) newStage =  1;
@@ -111,7 +126,10 @@ export const formSlice = createSlice({
       state.currentStage = 1
       state.isEditMode = action.payload.isEditMode
       state.editModeData.orderId = action.payload.orderId || null
-      state.editModeData.isFormLoading = action.payload.orderId || null
+      state.editModeData.isFormLoading = action.payload.isEditMode || null
+    },
+    setStageFields: (state, action) => {
+      state.stageFields[action.payload.name].fields = action.payload.fields
     },
     clearData: (state) => {
       state.formData = {}
@@ -124,19 +142,34 @@ export const formSlice = createSlice({
     builder
     .addCase(submitForm.fulfilled, (state, action) => {
       const isOk = action.payload
+      console.log(isOk);
       if (isOk) {
-        state.formData = {}
-        state.mediateData = {}
         state.isFormFetchingSuccess = true
       } else {
         state.isFormFetchingSuccess = false
       }
-      state.currentStage = 6
+      state.formData = {}
+      state.mediateData = {}
+      state.currentStage = 1
+      state.editModeData.isFormLoading = false
     })
-      .addCase(loadFormForEdit.fulfilled, (state, action) => {
-        state.formData = action.payload
-        state.editModeData.isFormLoading = false
-      })
+    .addCase(submitForm.pending, (state) => {
+      state.editModeData.isFormLoading = true
+    })
+    .addCase(submitForm.rejected, (state) => {
+      state.editModeData.isFormLoading = false
+    })
+    .addCase(loadFormForEdit.fulfilled, (state, action) => {
+      console.log(action);
+      state.formData = action.payload
+      state.editModeData.isFormLoading = false
+    })
+    .addCase(loadFormForEdit.pending, (state) => {
+      state.editModeData.isFormLoading = true
+    })
+    .addCase(loadFormForEdit.rejected, (state, action) => {
+      // state.editModeData.isFormLoading = false
+    })
       
   },
 });
@@ -144,14 +177,19 @@ export const formSlice = createSlice({
 export const getFormField = (name) => useSelector(state => state?.form?.formData?.[name])
 export const getMediateField = (name) => useSelector(state => state?.form?.mediateData?.[name])
 
+
+export const getStageNumberByStageFields = (stageFields, field) => Object.values(stageFields).find((stageData) => stageData.fields.includes(field)).number
+
 export const {
   updateFormData,
   updateMediateData,
   setFormLoading,
+  setFormFetchingSuccess,
   setCurrentStage,
   setNextStage,
   setPrevStage,
   setEditModeData,
+  setStageFields,
   clearData
 } = formSlice.actions;
 

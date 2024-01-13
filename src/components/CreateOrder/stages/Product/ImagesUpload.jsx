@@ -17,18 +17,19 @@ const ImagesUpload = ({ control }) => {
   const [visibleControlImage, setVisibleControlImage] = useState(false);
   const [preview, setPreview] = useState([]);
 
-  // const initialSrcs = getFormField("photo_urls");
-  const initialData = getMediateField("photo_urls");
+  //TODO const initialSrcs = getFormField("photo_urls");
+  const initialSrcs = ["https://drive.google.com/uc?id=1z3SH4ZtTZElhBA54_0T4D9QfFFp8Ctc2", "https://drive.google.com/uc?id=19tOxsPSsW5DnWdshEdHAN_jRv5WV1xX6"]
 
-  let fileobjRef = useRef(initialData || [])
+  // let fileobjRef = useRef(initialData || [])
+  let fileobjRef = useRef([])
 
   const fetchFileobj = async () => {
     try {
       const fileobj = fileobjRef.current
       const formData = new FormData();
-      console.log(fileobj, "fileobj in fetch");
+      console.log(fileobj);
       fileobj.forEach((file) => formData.append("files", file));
-
+      console.log(fileobj);
       const res = await axios.post(apiEndpoints.photos, formData, {
         withCredentials: true,
       });
@@ -69,7 +70,31 @@ const ImagesUpload = ({ control }) => {
   }
 
   useEffect(() => {
-    loadImages()
+    
+    const fetchUrls = async () => {
+      console.log(initialSrcs);
+      const files = []
+      for (const src of initialSrcs) {
+        const res = await fetch(src, { mode: 'no-cors' })
+        console.log(res);
+        // const blob = await res.blob()
+        // const file = new File([blob], 'image', blob)
+        // files.push(file)
+      }
+      console.log(files);
+      fileobjRef.current = files
+      loadImages()
+    }
+
+    // if (initialSrcs && fileobjRef.current.length == 0) fetchUrls()
+  }, [initialSrcs])
+
+  useEffect(() => {
+    const test = async () => {
+      const res = await fetch("https://drive.google.com/uc?id=1z3SH4ZtTZElhBA54_0T4D9QfFFp8Ctc2", { mode: 'no-cors' })
+      console.log(res);
+    }
+    test()
   }, [])
 
   return (
