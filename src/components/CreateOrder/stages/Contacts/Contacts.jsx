@@ -13,6 +13,7 @@ import PhoneArea from "./PhoneArea";
 import { useNavigate } from "react-router-dom";
 
 const Contacts = ({ handlePrevStage, formSubmitRef, totalFormSubmitting }) => {
+  const { isAdmin } = useSelector((state) => state.admindata);
   const {currentStage: stage, isFormFetchingSuccess, isEditMode} = useSelector((state) => state.form);
   const isHide = stage != 5;
   // const isPhotoUrlsExist = Boolean(getFormField("photo_urls")?.length);
@@ -43,16 +44,22 @@ const Contacts = ({ handlePrevStage, formSubmitRef, totalFormSubmitting }) => {
     })
   }, [])
 
-  const onSubmit = () => {
-    dispatch(updateFormData(getValues()));
+  const onSubmit = useCallback(() => {
+    console.log('const onSubmit = useCallback');
+    if (!isAdmin) dispatch(updateFormData({ status: 1 })); // изменить статус на "Черновик"
     dispatch(submitForm());
-  }
+  }, [isAdmin])
 
   const formSubmit = handleSubmit(onSubmit)
   formSubmitRef.current = formSubmit
 
+  const handleRedirect = useCallback(() => {
+    if (isEditMode) navigate(-1)
+    else navigate('/profile/admin/order/all')
+  }, [isEditMode])
+  
   useEffect(() => {
-    if (isFormFetchingSuccess === true || isFormFetchingSuccess === false) navigate('/profile/order/all')
+    if (isFormFetchingSuccess === true || isFormFetchingSuccess === false) handleRedirect()
     // reset()
   }, [isFormFetchingSuccess])
   

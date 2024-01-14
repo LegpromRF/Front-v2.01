@@ -16,6 +16,8 @@ const SelectItem = ({
   propName,
   isMulti,
   extraClassName,
+  disabled,
+  isNotClearable
 }) => {
   const dispatch = useDispatch()
   const isRequired = requiredFields.includes(propName)
@@ -24,6 +26,8 @@ const SelectItem = ({
     formOptions.find((opt) => opt.propName == propName)?.options ?? []
   ).map(([label, value]) => ({ label, value }));
 
+  if (propName == 'equipment_requirements') console.log(formOptions, selectOptions);
+  
   return (
     <div
       className={`${styles.form__item} ${
@@ -38,6 +42,7 @@ const SelectItem = ({
       <Controller
         name={propName}
         control={control}
+        disabled={disabled}
         rules={{
           required: isRequired
             ? {
@@ -57,6 +62,7 @@ const SelectItem = ({
             isFieldTransformed.current = true
           }
 
+          
           if (field.value === undefined && initialValue) 
             field.onChange(initialValue)
             
@@ -64,12 +70,14 @@ const SelectItem = ({
           return (
             <Select
               {...field}
-              isClearable={true}
+              isClearable={!isNotClearable}
               required={isRequired}
               isMulti={isMulti}
               closeMenuOnSelect={!isMulti}
               value={field.value}
               options={selectOptions}
+              isDisabled={disabled}
+              
               styles={{
                 control: (provided) => ({
                   ...provided,

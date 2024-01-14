@@ -8,18 +8,22 @@ import OrdersCard from "@components/OrdersCard/OrdersCard";
 import HeaderProfile from "@components/HeaderProfile/HeaderProfile";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { getBids, handleBids } from "@store/orders/orders.slice";
+import { Link, useNavigate } from "react-router-dom";
+import { handleBids } from "@store/orders/orders.slice";
 import { useDispatch, useSelector } from "react-redux";
 import OrdersCardItem from "@components/CardItem/OrdersCardItem";
 import {
   convertInputDateToIso,
   convertIsoDateToInput,
 } from "../../../store/orders/utils";
-import { getCurrentBid, searchBid } from "@store/orders/orders.slice";
+import { searchBid } from "@store/orders/orders.slice";
 import { setFormFetchingSuccess } from "@store/orders/form.slice";
 import { Pagination, styled } from "@mui/material";
-import { changeOrdersPage } from "../../../store/orders/orders.slice";
+import {
+  changeAdminBidsPage,
+  changeBidsPage,
+  handleAdminBids,
+} from "../../../store/orders/orders.slice";
 import InfoMessage from "./InfoMessage";
 
 const MyPagination = styled(Pagination)({
@@ -28,19 +32,39 @@ const MyPagination = styled(Pagination)({
   marginTop: "10px",
 });
 
-const Orders = () => {
+const Orders = ({ forAdmin }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [isBtnAllUsersShow, setBtnAllUsersShow] = useState(false);
 
   const isAdmin = useSelector((state) => state.admindata.isAdmin);
   const { isFormFetchingSuccess } = useSelector((state) => state.form);
   const inputRef = useRef(null);
-  const ordersDivRef = useRef(null);
+  const searchAreaDivRef = useRef(null);
 
-  const currentBid = getCurrentBid();
-  const { bids, pageNumber, countPages } = useSelector((store) => store.orders);
-  const bidsView = currentBid ? [currentBid] : bids;
+  const {
+    currentBid,
+    bids,
+    bidsPageNumber,
+    bidsCountPages,
+    adminBids,
+    adminBidsPageNumber,
+    adminBidsCountPages,
+  } = useSelector((store) => store.orders);
+
+  const bidsView = currentBid
+    ? [currentBid]
+    : (isAdmin && forAdmin
+    ? adminBids
+    : bids);
+
+  const pageNumber = isAdmin && forAdmin ? adminBidsPageNumber : bidsPageNumber;
+  const countPages = isAdmin && forAdmin ? adminBidsCountPages : bidsCountPages;
+
+  useEffect(() => {
+    if (forAdmin && (isAdmin === false)) navigate("/profile/order/all");
+  }, [isAdmin, forAdmin]);
 
   const handleSearch = () => {
     const query = inputRef.current?.value;
@@ -49,13 +73,30 @@ const Orders = () => {
   };
 
   const showAllUsers = () => {
+    if (inputRef.current) inputRef.current.value = "";
     dispatch(searchBid(null));
     setBtnAllUsersShow(false);
   };
 
   useEffect(() => {
     dispatch(handleBids());
-  }, [bids.length, pageNumber]);
+  }, [
+    bids.length,
+    bidsCountPages,
+    bidsPageNumber,
+  ]);
+
+  useEffect(() => {
+    dispatch(handleAdminBids());
+  }, [
+    adminBids.length,
+    adminBidsCountPages,
+    adminBidsPageNumber,
+  ]);
+
+  useEffect(() => {
+    showAllUsers();
+  }, []);
 
   useEffect(() => {
     if (isFormFetchingSuccess === true || isFormFetchingSuccess === false) {
@@ -63,10 +104,11 @@ const Orders = () => {
     }
   }, [isFormFetchingSuccess]);
 
-  const handlePagination = (event, value) => {
-    ordersDivRef.current?.scrollIntoView({ behavior: "auto" });
-    dispatch(changeOrdersPage(value));
-  };
+  const handlePagination = useCallback((event, value) => {
+    searchAreaDivRef.current?.scrollIntoView({ behavior: "auto" });
+    (isAdmin && forAdmin) ?  dispatch(changeAdminBidsPage(value)) : dispatch(changeBidsPage(value))
+  }, [isAdmin, forAdmin])
+
 
   return (
     <>
@@ -79,8 +121,8 @@ const Orders = () => {
         </div>
         <InfoMessage />
 
-        {isAdmin && (
-          <div className={styles.orders__search}>
+        
+          <div className={styles.orders__search} ref={searchAreaDivRef}>
             <label className={styles["orders__input-area"]}>
               <h6>Какую заявку вы хотите найти?</h6>
               <div className={styles["orders__input-area-body"]}>
@@ -99,17 +141,12 @@ const Orders = () => {
               </div>
             </label>
           </div>
-        )}
-        <div className={styles.orders__cards} ref={ordersDivRef}>
-          {bidsView.map((bid, ind) => (
+        
+        <div className={styles.orders__cards}>
+          {currentBid === undefined ? <p className={styles['orders__search-mess']}>К сожалению заявка не найдена</p> : bidsView.map((bid, ind) => (
             <OrdersCard
               key={bid.id}
-              // imagePreviewSrc={bid.photo_urls?.[0] ?? ''}
-              imagePreviewSrc={
-                ind == 0
-                  ? "https://i.pinimg.com/564x/d1/db/7f/d1db7fba9d45c5831553dfa2ae6a5bc1.jpg"
-                  : ""
-              }
+              imagePreviewSrc={bid.photo_urls?.[0] ?? ""}
               name={bid.order_name}
               clothesType={bid.clothes_type}
               budget={bid.price_for_all}

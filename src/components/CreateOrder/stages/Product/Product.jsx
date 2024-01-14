@@ -14,9 +14,10 @@ import { loadFormForEdit, setStageFields, submitForm } from "../../../../store/o
 import FilesUpload from "../Technology/FilesUpload";
 import NameArea from "./NameArea";
 import StatusItem from "./StatusItem";
+import { requiredFields } from "../../../../store/orders/utils";
 
 const Product = ({ handleNextStage, formSubmitRef }) => {
-  const {currentStage: stage, isFormFetchingSuccess, isEditMode} = useSelector((state) => state.form);
+  const {currentStage: stage, isFormFetchingSuccess, isEditMode, formData} = useSelector((state) => state.form);
   
   const isHide = stage != 1;
 
@@ -33,9 +34,11 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
     reset,
     watch
   } = useForm();
-  console.log(getValues());
 
   const [formOptions, setFormOptions] = useState([]);
+  const [isPhotosWatch, setPhotosWatch] = useState(false);
+
+  const photoUrlsRef = useRef(null)
 
   const loadOptions = useCallback(async () => {
     try {
@@ -78,7 +81,7 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
   }, [isEditMode])
 
   useEffect(() => {
-    dispatch(setStageFields({ name: 'product', fields: Object.keys(getValues())}))
+    dispatch(setStageFields({ name: 'product', fields: [...Object.keys(getValues()), 'photo_urls']}))
 
     watch((formValues, changes) => {
       // console.log('changes:', changes, formValues);
@@ -90,9 +93,14 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
   }, [])
   
   const onSubmit = () => {
+    // console.log(photoUrlsRef.current);
+    if (requiredFields.includes('photo_urls') && !photoUrlsRef.current.length) {
+      setPhotosWatch(true)
+      return
+    }
     handleNextStage();
     dispatch(updateFormData(getValues()));
-  };
+  }
 
   const formSubmit = handleSubmit(onSubmit)
   formSubmitRef.current = formSubmit
@@ -102,8 +110,8 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
   }, []);
 
   useEffect(() => {
-    // reset()
-  }, [isFormFetchingSuccess])
+    // console.log('formData, getValues()', formData, getValues());
+  }, [])
   
   return (
     <form
@@ -115,7 +123,7 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
           <div className={styles.form__items}>
             <NameArea control={control} setValue={setValue} />
             <StatusItem control={control} formOptions={formOptions} />
-            <FilesUpload control={control} />
+            {/* <FilesUpload control={control} /> */}
           </div>
         </div>
         <div className={styles.form__row}>
@@ -190,9 +198,9 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
             {/* <FilesUpload watch={watch} control={control} /> */}
           </div>
         </div>
-        <ImagesUpload control={control} />
+        <ImagesUpload control={control} photoUrlsRef={photoUrlsRef} />
       </div>
-      {Object.keys(errors).length > 0 && (
+      {(Object.keys(errors).length > 0 || (isPhotosWatch && !photoUrlsRef.current.length)) && (
         <p className={styles.form__errorMess}>
           Не все обязательные поля заполнены!
         </p>

@@ -12,37 +12,40 @@ import styles from "../../CreateOrder.module.scss";
 import { useDispatch } from "react-redux";
 import { Controller } from "react-hook-form";
 
-const ImagesUpload = ({ control }) => {
+const ImagesUpload = ({ control, photoUrlsRef }) => {
   const dispatch = useDispatch();
   const [visibleControlImage, setVisibleControlImage] = useState(false);
   const [preview, setPreview] = useState([]);
 
-  //TODO const initialSrcs = getFormField("photo_urls");
-  const initialSrcs = ["https://drive.google.com/uc?id=1z3SH4ZtTZElhBA54_0T4D9QfFFp8Ctc2", "https://drive.google.com/uc?id=19tOxsPSsW5DnWdshEdHAN_jRv5WV1xX6"]
+  const initialSrcs = getFormField("photo_urls");
+  let fileobjRef = useRef([]);
+  photoUrlsRef.current = preview;
 
-  // let fileobjRef = useRef(initialData || [])
-  let fileobjRef = useRef([])
+  // useEffect(() => {
+  //   dispatch(updateFormData({ photo_urls: photoUrlsRef.current.length ? photoUrlsRef.current : null }))
+  // }, [photoUrlsRef.current.join('')])
 
   const fetchFileobj = async () => {
     try {
-      const fileobj = fileobjRef.current
+      const fileobj = fileobjRef.current;
       const formData = new FormData();
-      console.log(fileobj);
       fileobj.forEach((file) => formData.append("files", file));
-      console.log(fileobj);
-      const res = await axios.post(apiEndpoints.photos, formData, {
-        withCredentials: true,
-      });
-      console.log(res);
-      dispatch(updateFormData({ photo_urls: res.data.photos }));
-      dispatch(updateMediateData({ photo_urls: fileobj }));
+      if (!fileobj.length) {
+        dispatch(updateFormData({ photo_urls: null }));
+      } else {
+        const res = await axios.post(apiEndpoints.photos, formData, {
+          withCredentials: true,
+        });
+        console.log(res);
+        dispatch(updateFormData({ photo_urls: res.data.photos }));
+      }
     } catch (e) {
       console.error(e);
     }
-  }
+  };
 
   const loadImages = () => {
-    const fileobj = fileobjRef.current
+    const fileobj = fileobjRef.current;
     let reader;
     setPreview([]);
     for (let i = 0; i < fileobj.length; i++) {
@@ -52,50 +55,48 @@ const ImagesUpload = ({ control }) => {
         setPreview((prev) => [...prev, e.target.result]);
       };
     }
-  }
+  };
 
   const changedHandler = (e) => {
     let files = e.target.files;
-    fileobjRef.current = [];
+    // fileobjRef.current = [];
     Array.from(files).forEach((file) => fileobjRef.current.push(file));
     loadImages();
     fetchFileobj();
-  }
+  };
 
   const deleteImage = (e) => {
     const index = e.target.id;
-    fileobjRef.current = fileobjRef.current?.filter((_, ind) => ind != index)
+    fileobjRef.current = fileobjRef.current?.filter((_, ind) => ind != index);
     loadImages();
     fetchFileobj();
-  }
+  };
 
   useEffect(() => {
-    
     const fetchUrls = async () => {
-      console.log(initialSrcs);
-      const files = []
+      // console.log(initialSrcs);
+      const files = [];
       for (const src of initialSrcs) {
-        const res = await fetch(src, { mode: 'no-cors' })
-        console.log(res);
-        // const blob = await res.blob()
-        // const file = new File([blob], 'image', blob)
-        // files.push(file)
+        const res = await fetch(src);
+        const blob = await res.blob();
+        const file = new File([blob], "image", blob);
+        files.push(file);
       }
-      console.log(files);
-      fileobjRef.current = files
-      loadImages()
-    }
+      // console.log(files);
+      fileobjRef.current = files;
+      loadImages();
+    };
 
-    // if (initialSrcs && fileobjRef.current.length == 0) fetchUrls()
-  }, [initialSrcs])
+    if (initialSrcs && fileobjRef.current.length == 0) fetchUrls();
+  }, [initialSrcs]);
 
-  useEffect(() => {
-    const test = async () => {
-      const res = await fetch("https://drive.google.com/uc?id=1z3SH4ZtTZElhBA54_0T4D9QfFFp8Ctc2", { mode: 'no-cors' })
-      console.log(res);
-    }
-    test()
-  }, [])
+  // useEffect(() => {
+  //   const test = async () => {
+  //     const res = await fetch("https://drive.google.com/uc?id=1z3SH4ZtTZElhBA54_0T4D9QfFFp8Ctc2", { mode: 'no-cors' })
+  //     console.log(res);
+  //   }
+  //   test()
+  // }, [])
 
   return (
     <div className={styles.form__row}>

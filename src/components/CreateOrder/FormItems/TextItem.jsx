@@ -41,7 +41,6 @@ const TextItem = ({
         render={({ field }) => {
           let initialValue = getFormField(propName);
           if (initialValue && type == 'date') initialValue = initialValue.split('T')[0]
-          
           if (field.value === undefined && initialValue) 
             field.onChange(initialValue)
 
@@ -49,7 +48,7 @@ const TextItem = ({
           return (
             <div className={styles.form__textField}>
               {isTextArea ? (
-                <textarea cols="20" rows="10"></textarea>
+                <textarea {...field} value={field.value} cols="20" rows="10"></textarea>
               ) : (
                 <input
                   type={type}
@@ -57,7 +56,6 @@ const TextItem = ({
                   {...field}
                   placeholder={placeholder ?? ""}
                   value={field.value}
-                  // onChange={(e) => console.log(e)}
                 />
               )}
             </div>

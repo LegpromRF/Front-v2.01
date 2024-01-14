@@ -7,29 +7,35 @@ import Conditions from "./stages/Conditions/Conditions";
 import Contacts from "./stages/Contacts/Contacts";
 import { useDispatch, useSelector } from "react-redux";
 import { setNextStage, setPrevStage } from "@store/orders/form.slice";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import {
   clearData,
   getStageNumberByStageFields,
   loadFormForEdit,
   setCurrentStage,
   setEditModeData,
+  submitForm,
+  updateFormData,
 } from "../../store/orders/form.slice";
 import { CircularProgress } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { requiredFields } from "@store/orders/utils";
 
 import styles from "./CreateOrder.module.scss";
 
 const CreateOrder = ({ editMode, orderId }) => {
+  
   const {
     currentStage: stage,
     editModeData: { isFormLoading },
     formData,
     stageFields,
+    isEditMode
   } = useSelector((state) => state.form);
+  const { isAdmin } = useSelector((state) => state.admindata);
   // console.log(formData, isFormLoading);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   //функции для имитации отправки формы
   const productSubmitRef = useRef(null);
@@ -51,16 +57,20 @@ const CreateOrder = ({ editMode, orderId }) => {
     if (editMode) dispatch(loadFormForEdit(orderId));
   }, [editMode, orderId]);
 
+  // useEffect(() => {
+  //   dispatch(clearData());
+  // }, [window.location.href]);
   useEffect(() => {
     if (stage == 6 || editMode) dispatch(clearData());
   }, [editMode]);
-  //не добавлять stage, т.к clearData отправляется только в случае если пользователь ушел со страницы создания формы и вернулся
+    //не добавлять stage, т.к clearData отправляется только в случае если пользователь ушел со страницы создания формы и вернулся
 
-  const formSubmitting = () => {
+  const formSubmitting = useCallback(() => {
     for (const field of requiredFields) {
-      console.log('formData', formData);
+      console.log(formData);
       if (!formData[field]) {
         const number = getStageNumberByStageFields(stageFields, field);
+        if (!number) navigate('/404')
 
         //перебрасываю пользователя на ту стадию, на котрой находится первое незаполненное обязательное поле
         dispatch(setCurrentStage(number));
@@ -75,8 +85,13 @@ const CreateOrder = ({ editMode, orderId }) => {
         return;
       }
     }
-  };
-
+    
+    if (!isAdmin) dispatch(updateFormData({ status: 2 })); // изменить статус на "На модерации"
+    dispatch(submitForm());
+  }, [isAdmin, stageFields, formData])
+  
+  
+  
   return (
     <Layout>
       <div className={styles.createOrder}>

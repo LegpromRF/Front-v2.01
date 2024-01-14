@@ -1,8 +1,8 @@
 import Orders from "../../../screens/Profile/Orders/Orders"
 
-const OrdersPage = () => {
+const OrdersPage = ({ forAdmin }) => {
    return (
-      <Orders />
+      <Orders forAdmin={forAdmin} />
    )
 }
 export default OrdersPage

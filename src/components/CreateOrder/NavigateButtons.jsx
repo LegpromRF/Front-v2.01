@@ -8,7 +8,8 @@ const NavigateButtons = ({ errors, handlePrevStage, formSubmitting }) => {
   const isEditMode = useSelector((state) => state.form.isEditMode);
   const stage = useSelector((state) => state.form.currentStage);
 
-  const submitFormHandler = () => {
+  const submitFormHandler = (event) => {
+    event.preventDefault()
     formSubmitting()
   };
 
@@ -18,7 +19,7 @@ const NavigateButtons = ({ errors, handlePrevStage, formSubmitting }) => {
         {stage == stagesCount && (
           <div className={styles.form__buttonStartBLock}>
             <button type="submit" className={styles.form__buttonForward}>
-              Сохранить как черновик
+              Сохранить
             </button>
           </div>
         )}
@@ -41,7 +42,7 @@ const NavigateButtons = ({ errors, handlePrevStage, formSubmitting }) => {
                 : styles.form__buttonForward_disabled
             }
           >
-            {isEditMode ? "Сохранить" : "Создать"}
+            Опубликовать
           </button>
         ) : (
           <button

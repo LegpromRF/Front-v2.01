@@ -102,6 +102,14 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
   },
+  {
+    path: "/profile/admin/order/all",
+    element: (
+      <PrivateRoute page="auth">
+        <OrdersPage forAdmin={true} />
+      </PrivateRoute>
+    ),
+  },
   { path: "/profile/order/view_tz/:itemId", element: <ViewTzPage /> },
   {
     path: "/profile/selection",

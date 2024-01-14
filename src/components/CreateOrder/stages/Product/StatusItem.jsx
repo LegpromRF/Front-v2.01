@@ -18,25 +18,14 @@ const StatusItem = ({ control, formOptions }) => {
       ).find(([name, value]) => name == "Черновик")[1]
     : null;
 
-  const statusInitialValue = getFormField("status");
-
   useEffect(() => {
-    if (statusInitialValue && !isEditMode && !isAdmin)
-      dispatch(updateFormData({ status: statusInitialValue }));
-  }, [isEditMode, statusInitialValue, isAdmin]);
+    if (statusDefaultValue  && !isEditMode && !isAdmin) {
+      dispatch(updateFormData({ status: statusDefaultValue }));
+    }
+  }, [statusDefaultValue, isEditMode, isAdmin]);
 
-  if (!isAdmin)
-    return (
-      <div className={styles.form__item}>
-        <h3 className={styles.form__itemLabel}>
-          <span>Статус</span>
-        </h3>
-        <div className={styles.form__textField}>
-          <input type="text" disabled value={isEditMode ? statusInitialValue : "Черновик"} />
-        </div>
-      </div>
-    );
-
+  if (!isAdmin && !isEditMode) return ''
+  
   return (
     <SelectItem
       control={control}
@@ -44,6 +33,8 @@ const StatusItem = ({ control, formOptions }) => {
       title="Статус"
       propName="status"
       extraClassName="-status"
+      disabled={!isAdmin}
+      isNotClearable={true}
       required
     />
   );

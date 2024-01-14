@@ -22,25 +22,21 @@ export const submitForm = createAsyncThunk('form/submitForm', async (_, thunkAPI
 })
 
 export const loadFormForEdit = createAsyncThunk('form/loadFormForEdit', async (id, thunkAPI) => {
-  try {
-    let form = {}
+  let form = {}
     
-    let res = await axios.get(apiEndpoints.getBidCreate(id), { withCredentials: true, AccessControlAllowOrigin: true, })
-    if (res.status == 200) form = {...form, ...res.data}
-    console.log(res);
-    res = await axios.get(apiEndpoints.getBidTechnology(id), { withCredentials: true, AccessControlAllowOrigin: true, })
-    if (res.status == 200) form = {...form, ...res.data}
-    console.log(res);
-    res = await axios.get(apiEndpoints.getBidRequirements(id), { withCredentials: true, AccessControlAllowOrigin: true, })
-    if (res.status == 200) form = {...form, ...res.data}
-    console.log(res);
-    res = await axios.get(apiEndpoints.getBidOther(id), { withCredentials: true, AccessControlAllowOrigin: true, })
-    if (res.status == 200) form = {...form, ...res.data}
-    console.log(res);
-    return form
-  } catch(e) {
-    console.error(e);
-  }
+  let res = await axios.get(apiEndpoints.getBidCreate(id), { withCredentials: true, AccessControlAllowOrigin: true, })
+  if (res.status == 200) form = {...form, ...res.data}
+  console.log(res);
+  res = await axios.get(apiEndpoints.getBidTechnology(id), { withCredentials: true, AccessControlAllowOrigin: true, })
+  if (res.status == 200) form = {...form, ...res.data}
+  console.log(res);
+  res = await axios.get(apiEndpoints.getBidRequirements(id), { withCredentials: true, AccessControlAllowOrigin: true, })
+  if (res.status == 200) form = {...form, ...res.data}
+  console.log(res);
+  res = await axios.get(apiEndpoints.getBidOther(id), { withCredentials: true, AccessControlAllowOrigin: true, })
+  if (res.status == 200) form = {...form, ...res.data}
+  console.log(res);
+  return form
 })
 
 export const stagesCount = 5
@@ -160,7 +156,7 @@ export const formSlice = createSlice({
       state.editModeData.isFormLoading = false
     })
     .addCase(loadFormForEdit.fulfilled, (state, action) => {
-      console.log(action);
+      // console.log(action);
       state.formData = action.payload
       state.editModeData.isFormLoading = false
     })
@@ -178,7 +174,9 @@ export const getFormField = (name) => useSelector(state => state?.form?.formData
 export const getMediateField = (name) => useSelector(state => state?.form?.mediateData?.[name])
 
 
-export const getStageNumberByStageFields = (stageFields, field) => Object.values(stageFields).find((stageData) => stageData.fields.includes(field)).number
+export const getStageNumberByStageFields = (stageFields, field) => {
+  return Object.values(stageFields).find((stageData) => stageData.fields.includes(field))?.number
+}
 
 export const {
   updateFormData,

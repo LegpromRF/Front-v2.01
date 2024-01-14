@@ -36,7 +36,7 @@ const PhoneArea = ({ control }) => {
           control={control}
           render={({ field }) => {
             const initialValue = getFormField("customer_whatsapp");
-            console.log(field.value, initialValue);
+            
             if (field.value === undefined && initialValue != undefined) {
               field.onChange(Boolean(initialValue));
             }

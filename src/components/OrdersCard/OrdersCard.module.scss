@@ -101,10 +101,11 @@
 
   &__title {
     font-size: 20px;
-    max-width: 350px;
+    // width: 100%;
     margin-right: 8px;
     line-height: 1.75rem;
-    white-space: nowrap;
+    // width: 450px;
+    // white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
@@ -164,6 +165,10 @@
       font-size: 16px;
       text-align: center;
       color: #5c5c5c;
+      max-width: 300px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       &_empty::after {
         content: '';

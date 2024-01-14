@@ -44,7 +44,7 @@ const InfoMessage = () => {
   
    return (
     <div
-    className={`${styles["orders__info-mess"]} ${styles[`orders__info-mess_${infoMess == message.create.error || infoMess == message.edit.error ? 'success' : 'error'}`]}`}
+    className={`${styles["orders__info-mess"]} ${styles[`orders__info-mess_${infoMess == message.create.error || infoMess == message.edit.error ? 'error' : 'success'}`]}`}
   >
     <p>{infoMess}</p>
   </div>

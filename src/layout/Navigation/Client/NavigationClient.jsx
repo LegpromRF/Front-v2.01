@@ -93,28 +93,33 @@ const NavigationClient = () => {
                 title="Закупки"
                 href="/noladadaayout"
                 active={isNavOpen}
-                links={{
-                  // 'Каталог поставщиков': {
-                  //     link : '/nolayout',
-                  //     icon : null
-                  // },
-                  "Создать заявку": {
-                    link: "/profile/order/createorder",
-                    icon: null,
-                  },
-                  "Мои заявки": {
-                    link: "/profile/order/all",
-                    icon: null,
-                  },
-                  // 'Мои заказы': {
-                  //     link : '/nolayout',
-                  //     icon : null
-                  // },
-                  // 'Маркетплейс': {
-                  //     link : '/nolayout',
-                  //     icon : null
-                  // }
-                }}
+                links={
+                  isAdmin
+                    ? {
+                        "Создать заявку": {
+                          link: "/profile/order/createorder",
+                          icon: null,
+                        },
+                        "Мои заявки": {
+                          link: "/profile/order/all",
+                          icon: null,
+                        },
+                        "Все заявки": {
+                          link: "/profile/admin/order/all",
+                          icon: null,
+                        },
+                      }
+                    : {
+                        "Создать заявку": {
+                          link: "/profile/order/createorder",
+                          icon: null,
+                        },
+                        "Мои заявки": {
+                          link: "/profile/order/all",
+                          icon: null,
+                        },
+                      }
+                }
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -215,7 +220,6 @@ const NavigationClient = () => {
                       link: "/profile/admin/subscriptions/",
                       icon: null,
                     },
-            
                   }}
                 >
                   <svg

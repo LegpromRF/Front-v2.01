@@ -73,6 +73,7 @@ const Conditions = ({ handleNextStage, handlePrevStage, formSubmitRef }) => {
     dispatch(setStageFields({ name: 'conditions', fields: Object.keys(getValues())}))
     
     watch((formValues, changes) => {
+      // console.log(changes);
       if (changes.name) {
         dispatch(updateFormData(({ [changes.name]: changes.values[changes.name] })));
       }
