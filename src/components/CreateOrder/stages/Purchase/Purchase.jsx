@@ -17,7 +17,6 @@ const Purchase = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
   const isHide = stage != 2;
 
   const dispatch = useDispatch();
-  const navigate = useNavigate()
 
   const {
     control,
@@ -25,8 +24,7 @@ const Purchase = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
     formState: { errors },
     handleSubmit,
     getValues,
-    setValue,
-    reset
+    setValue
   } = useForm();
 
   const [formOptions, setFormOptions] = useState([]);

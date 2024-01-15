@@ -73,7 +73,7 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
 
   useEffect(() => {
     // console.log(isEditMode);
-    console.log('getValues()', getValues());
+    // console.log('getValues()', getValues());
     if (!isEditMode) dispatch(updateFormData(getValues()));
   }, [isEditMode])
 
@@ -81,7 +81,7 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
     dispatch(setStageFields({ name: 'product', fields: [...Object.keys(getValues()), 'photo_urls']}))
 
     watch((formValues, changes) => {
-      console.log('changes:', changes, formValues, formData);
+      // console.log('changes:', changes, formValues, formData);
       if (changes.name) {
         dispatch(updateFormData(({ [changes.name]: changes.values[changes.name] })));
       }

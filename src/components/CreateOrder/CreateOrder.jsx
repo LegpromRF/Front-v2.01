@@ -63,7 +63,7 @@ const CreateOrder = ({ editMode, orderId }) => {
   // useEffect(() => {
   // }, []);
   useMemo(() => {
-    console.log('clearData');
+    // console.log('clearData');
     dispatch(clearData());  
   }, [])
     //не добавлять stage, т.к clearData отправляется только в случае если пользователь ушел со страницы создания формы и вернулся
@@ -72,7 +72,7 @@ const CreateOrder = ({ editMode, orderId }) => {
     for (const field of requiredFields) {
       if (!formData[field]) {
         const number = getStageNumberByStageFields(stageFields, field);
-        console.log(number, formData);
+        // console.log(number, formData);
         if (!number) navigate('/404')
 
         //перебрасываю пользователя на ту стадию, на котрой находится первое незаполненное обязательное поле
