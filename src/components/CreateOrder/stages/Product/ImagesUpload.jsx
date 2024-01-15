@@ -3,8 +3,6 @@ import { apiEndpoints } from "@/utils/constants/apiEndpoints.js";
 import axios from "axios";
 import {
   updateFormData,
-  getMediateField,
-  updateMediateData,
   getFormField,
 } from "../../../../store/orders/form.slice";
 
@@ -15,88 +13,129 @@ import { Controller } from "react-hook-form";
 const ImagesUpload = ({ control, photoUrlsRef }) => {
   const dispatch = useDispatch();
   const [visibleControlImage, setVisibleControlImage] = useState(false);
-  const [preview, setPreview] = useState([]);
+  const initialUrls = getFormField('photo_urls') || []
+  const [preview, setPreview] = useState(initialUrls);
 
-  const initialSrcs = getFormField("photo_urls");
-  let fileobjRef = useRef([]);
-  photoUrlsRef.current = preview;
+  let inputRef = useRef(null);
 
-  // useEffect(() => {
-  //   dispatch(updateFormData({ photo_urls: photoUrlsRef.current.length ? photoUrlsRef.current : null }))
-  // }, [photoUrlsRef.current.join('')])
+  // const initialSrcs = getFormField("photo_urls");
+  // let fileobjRef = useRef([]);
+  // photoUrlsRef.current = preview;
+  // console.log(fileobjRef, preview);
 
-  const fetchFileobj = async () => {
+  // // useEffect(() => {
+  // //   dispatch(updateFormData({ photo_urls: photoUrlsRef.current.length ? photoUrlsRef.current : null }))
+  // // }, [photoUrlsRef.current.join('')])
+
+  const fetchImages = async (formData) => {
+    console.log(formData.getAll('files'));
+    const res = await axios.post(apiEndpoints.photos, formData, {
+      withCredentials: true,
+    });
+    console.log(res);
+    
+    setPreview((prev => {
+      const newPreview = [...prev, ...res.data.photos]
+      dispatch(updateFormData({ photo_urls: newPreview }));
+      return newPreview
+    }))
+  };
+
+  const handleFile = async () => {
+    const fileList = inputRef.current?.files;
+    if (!fileList) return;
+    const files = Array.from(fileList);
     try {
-      const fileobj = fileobjRef.current;
       const formData = new FormData();
-      fileobj.forEach((file) => formData.append("files", file));
-      if (!fileobj.length) {
-        dispatch(updateFormData({ photo_urls: null }));
+      files.forEach((file) => formData.append("files", file));
+      if (files.length) {
+        await fetchImages(formData);
       } else {
-        const res = await axios.post(apiEndpoints.photos, formData, {
-          withCredentials: true,
-        });
-        console.log(res);
-        dispatch(updateFormData({ photo_urls: res.data.photos }));
+        dispatch(updateFormData({ photo_urls: null }));
       }
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.log(error);
     }
   };
 
-  const loadImages = () => {
-    const fileobj = fileobjRef.current;
-    let reader;
-    setPreview([]);
-    for (let i = 0; i < fileobj.length; i++) {
-      reader = new FileReader();
-      reader.readAsDataURL(fileobj[i]);
-      reader.onload = (e) => {
-        setPreview((prev) => [...prev, e.target.result]);
-      };
-    }
-  };
-
-  const changedHandler = (e) => {
-    let files = e.target.files;
-    // fileobjRef.current = [];
-    Array.from(files).forEach((file) => fileobjRef.current.push(file));
-    loadImages();
-    fetchFileobj();
-  };
-
-  const deleteImage = (e) => {
+  const deleteImage = async (e) => {
     const index = e.target.id;
-    fileobjRef.current = fileobjRef.current?.filter((_, ind) => ind != index);
-    loadImages();
-    fetchFileobj();
-  };
+    setPreview((prev) => {
+      const newPreview = prev.filter((_, ind) => ind != index)
+      if (newPreview.length == 0) dispatch(updateFormData({ photo_urls: null }));
+      else dispatch(updateFormData({ photo_urls: newPreview }));
+      return newPreview
+    });
+  }
 
   useEffect(() => {
-    const fetchUrls = async () => {
-      // console.log(initialSrcs);
-      const files = [];
-      for (const src of initialSrcs) {
-        const res = await fetch(src);
-        const blob = await res.blob();
-        const file = new File([blob], "image", blob);
-        files.push(file);
-      }
-      // console.log(files);
-      fileobjRef.current = files;
-      loadImages();
-    };
+    if (initialUrls && !preview.length) setPreview(initialUrls)
+  }, [initialUrls.length, preview.length]);
 
-    if (initialSrcs && fileobjRef.current.length == 0) fetchUrls();
-  }, [initialSrcs]);
+  // const fetchFileobj = async () => {
+  //   try {
+  //     const fileobj = fileobjRef.current;
+  //     const formData = new FormData();
+  //     fileobj.forEach((file) => formData.append("files", file));
+  //     if (!fileobj.length) {
+  //       dispatch(updateFormData({ photo_urls: null }));
+  //     } else {
+  //       const res = await axios.post(apiEndpoints.photos, formData, {
+  //         withCredentials: true,
+  //       });
+  //       console.log(res);
+  //       dispatch(updateFormData({ photo_urls: res.data.photos }));
+  //     }
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
+
+  // const loadImages = () => {
+  //   const fileobj = fileobjRef.current;
+  //   let reader;
+  //   setPreview([]);
+  //   for (let i = 0; i < fileobj.length; i++) {
+  //     reader = new FileReader();
+  //     reader.readAsDataURL(fileobj[i]);
+  //     reader.onload = (e) => {
+  //       setPreview((prev) => [...prev, e.target.result]);
+  //     };
+  //   }
+  // };
+
+  // const changedHandler = (e) => {
+  //   let files = e.target.files;
+  //   // fileobjRef.current = [];
+  //   Array.from(files).forEach((file) => fileobjRef.current.push(file));
+  //   loadImages();
+  //   fetchFileobj();
+  // };
+
+  // const deleteImage = (e) => {
+  //   const index = e.target.id;
+  //   fileobjRef.current = fileobjRef.current?.filter((_, ind) => ind != index);
+  //   loadImages();
+  //   fetchFileobj();
+  // };
 
   // useEffect(() => {
-  //   const test = async () => {
-  //     const res = await fetch("https://drive.google.com/uc?id=1z3SH4ZtTZElhBA54_0T4D9QfFFp8Ctc2", { mode: 'no-cors' })
-  //     console.log(res);
-  //   }
-  //   test()
-  // }, [])
+  //   const fetchUrls = async () => {
+  //     // console.log(initialSrcs);
+  //     const files = [];
+  //     for (const src of initialSrcs) {
+  //       const res = await fetch(src);
+  //       const blob = await res.blob();
+  //       const file = new File([blob], "image", blob);
+  //       files.push(file);
+  //     }
+  //     // console.log(files);
+  //     fileobjRef.current = files;
+  //     loadImages();
+  //   };
+
+  //   if (initialSrcs && fileobjRef.current.length == 0) fetchUrls();
+  // }, [initialSrcs]);
 
   return (
     <div className={styles.form__row}>
@@ -145,19 +184,18 @@ const ImagesUpload = ({ control, photoUrlsRef }) => {
           <div className={styles.form__addButton}>
             <div className={styles.form__inputImages}>
               <Controller
-                name={"images"}
+                name="file-images"
                 control={control}
-                rules={{
-                  required: false,
-                }}
                 render={({ field }) => {
                   return (
                     <input
                       {...field}
                       type="file"
                       name="file"
+                      accept="image/*"
                       multiple
-                      onChange={changedHandler}
+                      onChange={handleFile}
+                      ref={inputRef}
                     />
                   );
                 }}

@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 const Contacts = ({ handlePrevStage, formSubmitRef, totalFormSubmitting }) => {
   const { isAdmin } = useSelector((state) => state.admindata);
-  const {currentStage: stage, isFormFetchingSuccess, isEditMode} = useSelector((state) => state.form);
+  const {currentStage: stage, isFormFetchingSuccess, isEditMode, formData} = useSelector((state) => state.form);
   const isHide = stage != 5;
   // const isPhotoUrlsExist = Boolean(getFormField("photo_urls")?.length);
 
@@ -22,6 +22,7 @@ const Contacts = ({ handlePrevStage, formSubmitRef, totalFormSubmitting }) => {
     control,
     handleSubmit,
     getValues,
+    setValue,
     formState: { errors },
     reset,
     watch
@@ -62,6 +63,14 @@ const Contacts = ({ handlePrevStage, formSubmitRef, totalFormSubmitting }) => {
     if (isFormFetchingSuccess === true || isFormFetchingSuccess === false) handleRedirect()
     // reset()
   }, [isFormFetchingSuccess])
+
+  useEffect(() => {
+    if (Object.keys(formData).length == 0) {
+      Object.keys(getValues()).forEach((key) => {
+        setValue(key, undefined)
+      })
+    }
+  }, [Object.keys(formData).length])
   
   return (
     <form

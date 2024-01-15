@@ -13,7 +13,7 @@ import { setStageFields } from "@store/orders/form.slice";
 import styles from "../../CreateOrder.module.scss";
 
 const Purchase = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
-  const {currentStage: stage, isFormFetchingSuccess, isEditMode} = useSelector((state) => state.form);
+  const {currentStage: stage, isFormFetchingSuccess, isEditMode, formData} = useSelector((state) => state.form);
   const isHide = stage != 2;
 
   const dispatch = useDispatch();
@@ -97,7 +97,7 @@ const Purchase = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
   const firstFieldValue = watch("count") || 0;
   const secondFieldValue = watch("price_per_unit") || 0;
   const sum = (
-    parseFloat(firstFieldValue) * parseFloat(secondFieldValue)
+    Math.abs(parseFloat(firstFieldValue)) * Math.abs(parseFloat(secondFieldValue))
   ).toFixed(2);
 
   const onSubmit = useCallback(() => {
@@ -115,6 +115,14 @@ const Purchase = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
   useEffect(() => {
     setValue("price_for_all", sum);
   }, [sum])
+
+  useEffect(() => {
+    if (Object.keys(formData).length == 0) {
+      Object.keys(getValues()).forEach((key) => {
+        setValue(key, undefined)
+      })
+    }
+  }, [Object.keys(formData).length])
 
   return (
     <form

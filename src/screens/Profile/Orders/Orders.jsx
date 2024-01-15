@@ -18,7 +18,7 @@ import {
 } from "../../../store/orders/utils";
 import { searchBid } from "@store/orders/orders.slice";
 import { setFormFetchingSuccess } from "@store/orders/form.slice";
-import { Pagination, styled } from "@mui/material";
+import { CircularProgress, Pagination, styled } from "@mui/material";
 import {
   changeAdminBidsPage,
   changeBidsPage,
@@ -48,22 +48,25 @@ const Orders = ({ forAdmin }) => {
     bids,
     bidsPageNumber,
     bidsCountPages,
+    isBidsLoading,
     adminBids,
     adminBidsPageNumber,
     adminBidsCountPages,
+    isAdminBidsLoading,
   } = useSelector((store) => store.orders);
 
   const bidsView = currentBid
     ? [currentBid]
-    : (isAdmin && forAdmin
+    : isAdmin && forAdmin
     ? adminBids
-    : bids);
+    : bids;
 
   const pageNumber = isAdmin && forAdmin ? adminBidsPageNumber : bidsPageNumber;
   const countPages = isAdmin && forAdmin ? adminBidsCountPages : bidsCountPages;
+  const isLoading = isAdmin && forAdmin ? isAdminBidsLoading : isBidsLoading;
 
   useEffect(() => {
-    if (forAdmin && (isAdmin === false)) navigate("/profile/order/all");
+    if (forAdmin && isAdmin === false) navigate("/profile/order/all");
   }, [isAdmin, forAdmin]);
 
   const handleSearch = () => {
@@ -80,19 +83,11 @@ const Orders = ({ forAdmin }) => {
 
   useEffect(() => {
     dispatch(handleBids());
-  }, [
-    bids.length,
-    bidsCountPages,
-    bidsPageNumber,
-  ]);
+  }, [bids.length, bidsCountPages, bidsPageNumber]);
 
   useEffect(() => {
     dispatch(handleAdminBids());
-  }, [
-    adminBids.length,
-    adminBidsCountPages,
-    adminBidsPageNumber,
-  ]);
+  }, [adminBids.length, adminBidsCountPages, adminBidsPageNumber]);
 
   useEffect(() => {
     showAllUsers();
@@ -104,11 +99,41 @@ const Orders = ({ forAdmin }) => {
     }
   }, [isFormFetchingSuccess]);
 
-  const handlePagination = useCallback((event, value) => {
-    searchAreaDivRef.current?.scrollIntoView({ behavior: "auto" });
-    (isAdmin && forAdmin) ?  dispatch(changeAdminBidsPage(value)) : dispatch(changeBidsPage(value))
-  }, [isAdmin, forAdmin])
+  const handlePagination = useCallback(
+    (event, value) => {
+      searchAreaDivRef.current?.scrollIntoView({ behavior: "auto" });
+      isAdmin && forAdmin
+        ? dispatch(changeAdminBidsPage(value))
+        : dispatch(changeBidsPage(value));
+    },
+    [isAdmin, forAdmin]
+  );
 
+  let OrderCardsContent;
+
+  if (isLoading) OrderCardsContent = () => <div className={styles.orders__loading}><CircularProgress size={50} /></div>
+  else
+    OrderCardsContent = () =>
+      currentBid === undefined ? (
+        <p className={styles["orders__search-mess"]}>
+          К сожалению заявка не найдена
+        </p>
+      ) : (
+        bidsView.map((bid, ind) => (
+          <OrdersCard
+            key={bid.id}
+            imagePreviewSrc={bid.photo_urls?.[0] ?? ""}
+            name={bid.order_name}
+            clothesType={bid.clothes_type}
+            budget={bid.price_for_all}
+            isVerified={bid.is_verified}
+            createDate={convertIsoDateToInput(bid.created_at)}
+            status={bid.status} //TODO статус цифрой
+            id={bid.id}
+            count={bid.count}
+          />
+        ))
+      );
 
   return (
     <>
@@ -121,79 +146,36 @@ const Orders = ({ forAdmin }) => {
         </div>
         <InfoMessage />
 
-        
-          <div className={styles.orders__search} ref={searchAreaDivRef}>
-            <label className={styles["orders__input-area"]}>
-              <h6>Какую заявку вы хотите найти?</h6>
-              <div className={styles["orders__input-area-body"]}>
-                <div className={styles["orders__input"]}>
-                  <input type="text" placeholder="id" ref={inputRef} />
-                  <button onClick={handleSearch}>Поиск</button>
-                </div>
-                {isBtnAllUsersShow && (
-                  <button
-                    className={styles["orders__show-all-btn"]}
-                    onClick={showAllUsers}
-                  >
-                    Показать все заявки
-                  </button>
-                )}
+        <div className={styles.orders__search} ref={searchAreaDivRef}>
+          <label className={styles["orders__input-area"]}>
+            <h6>Какую заявку вы хотите найти?</h6>
+            <div className={styles["orders__input-area-body"]}>
+              <div className={styles["orders__input"]}>
+                <input type="text" placeholder="id" ref={inputRef} />
+                <button onClick={handleSearch}>Поиск</button>
               </div>
-            </label>
-          </div>
-        
-        <div className={styles.orders__cards}>
-          {currentBid === undefined ? <p className={styles['orders__search-mess']}>К сожалению заявка не найдена</p> : bidsView.map((bid, ind) => (
-            <OrdersCard
-              key={bid.id}
-              imagePreviewSrc={bid.photo_urls?.[0] ?? ""}
-              name={bid.order_name}
-              clothesType={bid.clothes_type}
-              budget={bid.price_for_all}
-              isVerified={bid.is_verified}
-              createDate={convertIsoDateToInput(bid.created_at)}
-              status={bid.status} //TODO статус цифрой
-              id={bid.id}
-              count={bid.count}
-            />
-          ))}
-
-          {/* <OrdersCard 
-          title="Пошив платья для официантов" 
-          number="№24500968" 
-          
-          status="В работе"
-        />  
-        <OrdersCard 
-          title="Пошив платья для официантов" 
-          number="№24500968" 
-          
-          status="Закончен"
-        />  
-        <OrdersCard 
-          title="Пошив платья для официантов" 
-          number="№24500968" 
-          
-          status="В работе"
-        />  
-        <OrdersCard 
-          title="Пошив платья для официантов" 
-          number="№24500968" 
-          
-          status="Закончен"
-        />  */}
+              {isBtnAllUsersShow && (
+                <button
+                  className={styles["orders__show-all-btn"]}
+                  onClick={showAllUsers}
+                >
+                  Показать все заявки
+                </button>
+              )}
+            </div>
+          </label>
         </div>
-        {/* {countPages > 1 ? ( */}
-        <MyPagination
+
+        <div className={styles.orders__cards}>
+          <OrderCardsContent />
+        </div>
+        {(countPages > 1) && <MyPagination
           count={countPages}
           size="large"
           page={pageNumber}
           hidden={true}
           onChange={handlePagination}
-        />
-        {/* ) : (
-        ""
-      )} */}
+        />}
       </Layout>
     </>
   );

@@ -13,7 +13,7 @@ import FilesUpload from "./FilesUpload";
 import { setStageFields } from "../../../../store/orders/form.slice";
 
 const Technology = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
-  const {currentStage: stage, isFormFetchingSuccess, isEditMode} = useSelector((state) => state.form);
+  const {currentStage: stage, isFormFetchingSuccess, isEditMode, formData} = useSelector((state) => state.form);
 
   const isHide = stage != 3;
 
@@ -25,6 +25,7 @@ const Technology = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
     handleSubmit,
     formState: { errors },
     getValues,
+    setValue,
     reset,
     watch
   } = useForm();
@@ -90,6 +91,14 @@ const Technology = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
   useEffect(() => {
     // reset();
   }, [isFormFetchingSuccess]);
+
+  useEffect(() => {
+    if (Object.keys(formData).length == 0) {
+      Object.keys(getValues()).forEach((key) => {
+        setValue(key, undefined)
+      })
+    }
+  }, [Object.keys(formData).length])
 
   return (
     <form

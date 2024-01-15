@@ -61,6 +61,12 @@
     }
   }
 
+  &__loading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   &__search {
     margin: 20px 0;
     background-color: #fff;

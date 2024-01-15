@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { setStageFields } from "../../../../store/orders/form.slice";
 
 const Conditions = ({ handleNextStage, handlePrevStage, formSubmitRef }) => {
-  const {currentStage: stage, isFormFetchingSuccess, isEditMode} = useSelector((state) => state.form);
+  const {currentStage: stage, isFormFetchingSuccess, isEditMode, formData} = useSelector((state) => state.form);
   const isHide = stage != 4;
 
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ const Conditions = ({ handleNextStage, handlePrevStage, formSubmitRef }) => {
     handleSubmit,
     formState: { errors },
     getValues,
+    setValue,
     reset,
     watch
   } = useForm();
@@ -91,6 +92,14 @@ const Conditions = ({ handleNextStage, handlePrevStage, formSubmitRef }) => {
   useEffect(() => {
     // reset()
   }, [isFormFetchingSuccess])
+
+  useEffect(() => {
+    if (Object.keys(formData).length == 0) {
+      Object.keys(getValues()).forEach((key) => {
+        setValue(key, undefined)
+      })
+    }
+  }, [Object.keys(formData).length])
 
   return (
     <form

@@ -11,6 +11,11 @@ const NameArea = ({ control }) => {
   
   const isRequired = requiredFields.includes('order_name')
 
+  
+  // useEffect(() => {
+  //   inputRef.current.value = ''
+  // }, [])
+
   return (
     <div className={styles.form__item}>
       <h3 className={styles.form__itemLabel}>
@@ -28,9 +33,13 @@ const NameArea = ({ control }) => {
         }}
         render={({ field }) => {
           let initialValue = getFormField("order_name");
-
+          
+          
           if (field.value === undefined && initialValue) 
             field.onChange(initialValue)
+
+          if (initialValue === undefined && field.value) 
+            field.onChange(undefined)
 
           return (
             <div className={styles.form__textField}>

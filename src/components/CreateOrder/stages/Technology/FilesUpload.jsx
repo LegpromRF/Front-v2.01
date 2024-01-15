@@ -7,31 +7,35 @@ import { getFormField } from "@store/orders/form.slice";
 import styles from "../../CreateOrder.module.scss";
 import { useDispatch } from "react-redux";
 import {
-  updateFormData,
-  updateMediateData,
-  getMediateField,
+  updateFormData
 } from "@store/orders/form.slice";
+import { Link } from "react-router-dom";
 
 const FilesUpload = ({ control }) => {
   const dispatch = useDispatch();
   const [visibleControlImage, setVisibleControlImage] = useState(false);
-  const [preview, setPreview] = useState([]);
+  const initialUrls = getFormField("doc_urls") || [];
+  const [preview, setPreview] = useState(initialUrls);
 
   let inputRef = useRef(null);
-  let inputFieldRef = useRef(null);
 
-  const initialValue = getMediateField('doc_urls')
+  // const initialValue = getMediateField('doc_urls')
 
   const fetchDocs = async (formData) => {
     const res = await axios.post(apiEndpoints.documents, formData, {
       withCredentials: true,
     });
+    console.log(res);
 
-    dispatch(updateFormData({ doc_urls: res.data.docs }));
-    dispatch(updateMediateData({ doc_urls: formData }));
+    setPreview((prev => {
+      const newPreview = [...prev, ...res.data.docs]
+      dispatch(updateFormData({ doc_urls: newPreview }));
+      return newPreview
+    }))
+    // dispatch(updateMediateData({ doc_urls: formData }));
   };
 
-  const handleFile = async (field) => {
+  const handleFile = async () => {
     const fileList = inputRef.current?.files;
     if (!fileList) return;
     const files = Array.from(fileList);
@@ -39,43 +43,54 @@ const FilesUpload = ({ control }) => {
       const formData = new FormData();
       files.forEach((file) => formData.append("files", file));
 
-      field.onChange(formData);
-      loadPreview();
+      // field.onChange(formData);
+      // loadPreview();
       await fetchDocs(formData);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const loadPreview = () => {
-    const fileList = inputRef.current?.files;
-    if (!fileList) return;
-    const filesToPreview = Array.from(fileList).map((file) => file.name);
-    console.log("files to preview", filesToPreview, fileList);
-    setPreview(filesToPreview);
-  };
+  // const loadPreview = () => {
+  //   const fileList = inputRef.current?.files;
+  //   if (!fileList) return;
+  //   const filesToPreview = Array.from(fileList).map((file) => file.name);
+  //   console.log("files to preview", filesToPreview, fileList);
+  //   setPreview(filesToPreview);
+  // };
 
   const deleteFile = async (e) => {
+    // e.stopPropagation()
     const index = e.target.id;
-    const fileList = inputRef.current?.files;
-    if (!fileList) return;
-    const newFiles = Array.from(fileList).filter((_, ind) => ind != index);
-
-    try {
-      const formData = new FormData();
-      newFiles.forEach((file) => formData.append("files", file));
-
-      inputFieldRef.current.onChange(formData);
-      let container = new DataTransfer();
-      newFiles.forEach((file) => container.items.add(file));
-      inputRef.current.files = container.files;
-
-      loadPreview();
-      await fetchDocs(formData);
-    } catch (error) {
-      console.log(error);
-    }
+    setPreview((prev) => {
+      const newPreview = prev.filter((_, ind) => ind != index)
+      if (newPreview.length == 0) dispatch(updateFormData({ doc_urls: null }));
+      else dispatch(updateFormData({ doc_urls: newPreview }));
+      return newPreview
+    });
   };
+
+  // const deleteFile = async (e) => {
+  //   const index = e.target.id;
+  //   const fileList = inputRef.current?.files;
+  //   if (!fileList) return;
+  //   const newFiles = Array.from(fileList).filter((_, ind) => ind != index);
+
+  //   try {
+  //     const formData = new FormData();
+  //     newFiles.forEach((file) => formData.append("files", file));
+
+  //     inputFieldRef.current.onChange(formData);
+  //     let container = new DataTransfer();
+  //     newFiles.forEach((file) => container.items.add(file));
+  //     inputRef.current.files = container.files;
+
+  //     loadPreview();
+  //     await fetchDocs(formData);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // const urls = [
   //   "https://yadi.sk/i/mv-LKXLY3Gze7w",
@@ -83,52 +98,53 @@ const FilesUpload = ({ control }) => {
   // ];
 
   useEffect(() => {
-    if (inputFieldRef.current && inputFieldRef.current.value === undefined && initialValue) {
-      //возвращение значений у input, после редиректа
-      if (!inputRef.current) return;
-      inputFieldRef.current.onChange(initialValue);
-      let container = new DataTransfer();
-      const fileList = initialValue.getAll("files");
-      if (fileList) {
-        Array.from(fileList).forEach((file) =>
-          container.items.add(file)
-        );
-        inputRef.current.files = container.files;
-      }
+    if (initialUrls && !preview.length) setPreview(initialUrls);
+    // axios.get('https://disk.yandex.ru/i/BFRTDubkXQpKkw', { withCredentials: true, AccessControlAllowOrigin: true }).then(res => {
+    //   console.log(res);
+    // })
+    //   if (inputFieldRef.current && inputFieldRef.current.value === undefined && initialValue) {
+    //     //возвращение значений у input, после редиректа
+    //     if (!inputRef.current) return;
+    //     inputFieldRef.current.onChange(initialValue);
+    //     let container = new DataTransfer();
+    //     const fileList = initialValue.getAll("files");
+    //     if (fileList) {
+    //       Array.from(fileList).forEach((file) =>
+    //         container.items.add(file)
+    //       );
+    //       inputRef.current.files = container.files;
+    //     }
 
-      loadPreview()
-    }
-  }, []);
-
-  // let a = document.createElement("a"); 
-  //   a.href = urls[0]
-  //   a.download = "schet"; //Filename
-  //   a.click(); //Download
+    //     loadPreview()
+    //   }
+  }, [initialUrls.length, preview.length]);
 
   return (
     <div className={styles.form__row}>
       <div className={styles.form__title}>Техзадание (Описание)</div>
       <div className={styles.form__imagesForm}>
         <div className={styles.form__imagesBlockPreview}>
-          {(preview || []).map((fileName, index) => (
+          {(preview || []).map((url, index) => (
             <div
               className={styles.form__imageItem}
               key={index}
               onMouseEnter={() => setVisibleControlImage(true)}
               onMouseLeave={() => setVisibleControlImage(false)}
             >
-              <div
-                className={[
-                  `${styles.form__imagePreview} ${styles["form__imagePreview-files"]}`,
-                ]}
-              >
-                <span className={styles["form__imagePreview-files_ext"]}>
-                  {fileName.split(".").slice(-1)[0] || "txt"}
-                </span>
-                <span className={styles["form__imagePreview-files_name"]}>
+              <Link to={url}>
+                <div
+                  className={[
+                    `${styles.form__imagePreview} ${styles["form__imagePreview-files"]}`,
+                  ]}
+                >
+                  <span className={styles["form__imagePreview-files_ext"]}>
+                    {url.split("/").slice(-1)[0].slice(0, 7)}
+                  </span>
+                  {/* <span className={styles["form__imagePreview-files_name"]}>
                   {fileName}
-                </span>
-              </div>
+                </span> */}
+                </div>
+              </Link>
               <div
                 id={index}
                 onClick={deleteFile}
@@ -163,43 +179,21 @@ const FilesUpload = ({ control }) => {
               className={`${styles.form__inputImages} ${styles["form__inputImages-files"]}`}
             >
               <Controller
-                name={"file"}
+                name={"file-docs"}
                 control={control}
-                render={({ field }) => {
-                  inputFieldRef.current = field;
-                  // const initialValue = getMediateField("doc_urls");
-                  // useEffect(() => {
-                  //   console.log(initialValue);
-                  //   if (field.value === undefined && initialValue) {
-                  //     //возвращение значений у input, после редиректа
-                  //     if (!inputRef.current) return;
-                  //     field.onChange(initialValue);
-                  //     let container = new DataTransfer();
-                  //     const fileList = initialValue.getAll("files");
-                  //     if (fileList) {
-                  //       Array.from(fileList).forEach((file) =>
-                  //         container.items.add(file)
-                  //       );
-                  //       inputRef.current.files = container.files;
-                  //     }
-                  //   }
-                  // }, []);
-
-                  return (
-                    <div>
-                      <input
-                        type="file"
-                        multiple={true}
-                        accept=".docx"
-                        aria-label="Текстовый документ"
-                        onChange={() => {
-                          handleFile(field);
-                        }}
-                        ref={inputRef}
-                      />
-                    </div>
-                  );
-                }}
+                render={({ field }) => (
+                  <div>
+                    <input
+                      {...field}
+                      type="file"
+                      multiple={true}
+                      accept=".docx,.doc,application/pdf"
+                      aria-label="Текстовый документ"
+                      onChange={handleFile}
+                      ref={inputRef}
+                    />
+                  </div>
+                )}
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -240,7 +234,6 @@ export default FilesUpload;
 //     });
 
 //     dispatch(updateFormData({ doc_urls: res.data.docs })); //!только для docs - переделать!
-//     dispatch(updateMediateData({ doc_urls: formData }));
 //   };
 
 // const handleTextFile = async (e, field) => {

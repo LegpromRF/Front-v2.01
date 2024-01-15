@@ -52,9 +52,10 @@ const TextItem = ({
               ) : (
                 <input
                   type={type}
-                  step={step ?? null}
+                  step={step ?? undefined}
                   {...field}
                   placeholder={placeholder ?? ""}
+                  min={type == 'number' ? '0' : undefined}
                   value={field.value}
                 />
               )}

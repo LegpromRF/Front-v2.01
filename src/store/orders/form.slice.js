@@ -52,9 +52,6 @@ export const formSlice = createSlice({
     },
     isFormFetchingSuccess: null,
     formData: {},
-    mediateData: {
-      doc_urls: null
-    }, //поля, которые помогают возвращать загруженные фото и файлы в форму, если пользователь ушел со страницы и вернулся 
     stageFields: {
       product: {
         number: 1,
@@ -112,13 +109,9 @@ export const formSlice = createSlice({
       state.formData = { ...state.formData, ...action.payload };
       // console.log(state.formData);
     },
-    updateMediateData: (state, action) => {
-      state.mediateData = { ...state.mediateData, ...action.payload }
-    },
     setEditModeData: (state, action) => {
       if (state.isEditMode == action.payload.isEditMode) return
       state.formData = {}
-      state.mediateData = {}
       state.currentStage = 1
       state.isEditMode = action.payload.isEditMode
       state.editModeData.orderId = action.payload.orderId || null
@@ -129,7 +122,6 @@ export const formSlice = createSlice({
     },
     clearData: (state) => {
       state.formData = {}
-      state.mediateData = {}
       state.currentStage = 1
       state.isFormFetchingSuccess = null
     }
@@ -145,7 +137,6 @@ export const formSlice = createSlice({
         state.isFormFetchingSuccess = false
       }
       state.formData = {}
-      state.mediateData = {}
       state.currentStage = 1
       state.editModeData.isFormLoading = false
     })
@@ -171,7 +162,6 @@ export const formSlice = createSlice({
 });
 
 export const getFormField = (name) => useSelector(state => state?.form?.formData?.[name])
-export const getMediateField = (name) => useSelector(state => state?.form?.mediateData?.[name])
 
 
 export const getStageNumberByStageFields = (stageFields, field) => {
@@ -180,7 +170,6 @@ export const getStageNumberByStageFields = (stageFields, field) => {
 
 export const {
   updateFormData,
-  updateMediateData,
   setFormLoading,
   setFormFetchingSuccess,
   setCurrentStage,

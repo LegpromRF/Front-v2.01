@@ -60,10 +60,12 @@ export const ordersSlice = createSlice({
     bids: [],
     bidsCountPages: null,
     bidsPageNumber: 1,
+    isBidsLoading: false,
     
     adminBids: [],
     adminBidsCountPages: null,
     adminBidsPageNumber: 1,
+    isAdminBidsLoading: false,
   },
   reducers: {
     changeBidsPage: (state, action) => {
@@ -81,6 +83,10 @@ export const ordersSlice = createSlice({
         state.adminBids = adminBids;
         state.adminBidsCountPages = adminBidsCountPages;
         state.adminBidsPageNumber = adminBidsPageNumber;
+        state.isAdminBidsLoading = false
+      })
+      .addCase(handleAdminBids.pending, (state) => {
+        state.isAdminBidsLoading = true
       })
       .addCase(handleBids.fulfilled, (state, action) => {
         const { bids, bidsCountPages, bidsPageNumber } = action.payload
@@ -88,6 +94,10 @@ export const ordersSlice = createSlice({
         state.bids = bids;
         state.bidsPageNumber = bidsPageNumber;
         state.bidsCountPages = bidsCountPages;
+        state.isBidsLoading = false
+      })
+      .addCase(handleBids.pending, (state) => {
+        state.isBidsLoading = true
       })
       .addCase(searchBid.fulfilled, (state, action) => {
         state.currentBid = action.payload

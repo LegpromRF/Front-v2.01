@@ -7,7 +7,7 @@ import Conditions from "./stages/Conditions/Conditions";
 import Contacts from "./stages/Contacts/Contacts";
 import { useDispatch, useSelector } from "react-redux";
 import { setNextStage, setPrevStage } from "@store/orders/form.slice";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import {
   clearData,
   getStageNumberByStageFields,
@@ -29,13 +29,13 @@ const CreateOrder = ({ editMode, orderId }) => {
     currentStage: stage,
     editModeData: { isFormLoading },
     formData,
-    stageFields,
-    isEditMode
+    stageFields
   } = useSelector((state) => state.form);
   const { isAdmin } = useSelector((state) => state.admindata);
   // console.log(formData, isFormLoading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
 
   //функции для имитации отправки формы
   const productSubmitRef = useRef(null);
@@ -60,16 +60,19 @@ const CreateOrder = ({ editMode, orderId }) => {
   // useEffect(() => {
   //   dispatch(clearData());
   // }, [window.location.href]);
-  useEffect(() => {
-    if (stage == 6 || editMode) dispatch(clearData());
-  }, [editMode]);
+  // useEffect(() => {
+  // }, []);
+  useMemo(() => {
+    console.log('clearData');
+    dispatch(clearData());  
+  }, [])
     //не добавлять stage, т.к clearData отправляется только в случае если пользователь ушел со страницы создания формы и вернулся
 
   const formSubmitting = useCallback(() => {
     for (const field of requiredFields) {
-      console.log(formData);
       if (!formData[field]) {
         const number = getStageNumberByStageFields(stageFields, field);
+        console.log(number, formData);
         if (!number) navigate('/404')
 
         //перебрасываю пользователя на ту стадию, на котрой находится первое незаполненное обязательное поле

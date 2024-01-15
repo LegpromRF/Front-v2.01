@@ -70,13 +70,10 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
       console.log(error);
     }
   }, []);
-  
-  useEffect(() => {
-    loadOptions();
-  }, []);
 
   useEffect(() => {
     // console.log(isEditMode);
+    console.log('getValues()', getValues());
     if (!isEditMode) dispatch(updateFormData(getValues()));
   }, [isEditMode])
 
@@ -84,7 +81,7 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
     dispatch(setStageFields({ name: 'product', fields: [...Object.keys(getValues()), 'photo_urls']}))
 
     watch((formValues, changes) => {
-      // console.log('changes:', changes, formValues);
+      console.log('changes:', changes, formValues, formData);
       if (changes.name) {
         dispatch(updateFormData(({ [changes.name]: changes.values[changes.name] })));
       }
@@ -110,8 +107,13 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
   }, []);
 
   useEffect(() => {
-    // console.log('formData, getValues()', formData, getValues());
-  }, [])
+    if (Object.keys(formData).length == 0) {
+      Object.keys(getValues()).forEach((key) => {
+        setValue(key, undefined)
+      })
+    }
+  }, [Object.keys(formData).length])
+
   
   return (
     <form

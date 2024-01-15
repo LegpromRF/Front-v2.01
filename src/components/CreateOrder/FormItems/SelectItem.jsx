@@ -26,7 +26,6 @@ const SelectItem = ({
     formOptions.find((opt) => opt.propName == propName)?.options ?? []
   ).map(([label, value]) => ({ label, value }));
 
-  if (propName == 'equipment_requirements') console.log(formOptions, selectOptions);
   
   return (
     <div

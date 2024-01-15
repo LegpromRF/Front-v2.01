@@ -87,9 +87,8 @@ export const requiredFields = [
   "clothes_type",
   "purpose",
   "clothes_name",
+  "photo_urls",
+  "count",
   "price_per_unit",
   "price_for_all",
-  "photo_urls",
-  "customer_phone",
-  "customer_name",
 ];
