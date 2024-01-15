@@ -15,12 +15,12 @@ const ImagesUpload = ({ control, photoUrlsRef }) => {
   const [visibleControlImage, setVisibleControlImage] = useState(false);
   const initialUrls = getFormField('photo_urls') || []
   const [preview, setPreview] = useState(initialUrls);
+  photoUrlsRef.current = preview;
 
   let inputRef = useRef(null);
 
   // const initialSrcs = getFormField("photo_urls");
   // let fileobjRef = useRef([]);
-  // photoUrlsRef.current = preview;
   // console.log(fileobjRef, preview);
 
   // // useEffect(() => {
