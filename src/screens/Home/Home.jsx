@@ -165,9 +165,9 @@ const Home = () => {
                     : countOpenedCards % 10 == 1
                     ? " заявка "
                     : " заявки "}
-                  на сумму
+                  на сумму{" "}
                   <b>
-                    {sumOpenedCards}
+                    {sumOpenedCards?.toLocaleString() || 0}
                     {sumOpenedCards || sumOpenedCards === 0 ? "₽" : ""}
                   </b>
                 </span>
