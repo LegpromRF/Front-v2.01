@@ -10,7 +10,7 @@ const ApplicationStats = () => {
       <div className={styles.label}>
         <p>Количество</p>
 
-        <StatsItem title={`${item.count} шт.`} />
+        <StatsItem title={`${item.count || '-'} шт.`} />
       </div>
       <div className={styles.label}>
         <p>Цена за шт.</p>
@@ -26,7 +26,7 @@ const ApplicationStats = () => {
         <p>Срок поставки</p>
 
         <StatsItem
-          title={`до ${new Date(item.deadline).toLocaleDateString() || "-"}`}
+          title={`${item.deadline ? `до ${new Date(item.deadline).toLocaleDateString()}` : "-"}`}
         />
       </div>
       <div className={styles.label}>

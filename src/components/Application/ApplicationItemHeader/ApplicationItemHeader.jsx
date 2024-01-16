@@ -12,7 +12,7 @@ const ApplicationItemHeader = () => {
   return (
     <div className={styles.wrapper}>
       <p className={styles.text}>
-        Опубликовано: {formatDate(new Date(other.start_date)) || "-"}{" "}
+        Опубликовано: {other.start_date ? formatDate(new Date(other.start_date)) : "- "}
         {item.updated_at && (
           <span>(изменено {formatDate(new Date(item.updated_at))}.)</span>
         )}

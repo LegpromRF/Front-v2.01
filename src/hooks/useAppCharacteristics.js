@@ -72,7 +72,7 @@ export const useAppCharacteristics = () => {
     setThirdCharact([
       {
         parameter: "Взять в производство не позднее",
-        value: new Date(other.start_date).toLocaleDateString() || undefined,
+        value: other.start_date ? new Date(other.start_date).toLocaleDateString() : undefined,
       },
       {
         parameter: "Срок поставки не позднее",
