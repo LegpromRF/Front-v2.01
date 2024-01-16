@@ -9,8 +9,8 @@ const MainCharacteristics = () => {
 
   useEffect(() => {
     if (!item) return;
-
-    const regions = item.supplier_region?.split(",");
+    console.log('item', item);
+    const regions = item.supplier_regions?.split(",");
 
     setSupplierRegions(regions);
   }, [item]);

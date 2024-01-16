@@ -151,7 +151,7 @@ const Orders = ({ forAdmin }) => {
             <h6>Какую заявку вы хотите найти?</h6>
             <div className={styles["orders__input-area-body"]}>
               <div className={styles["orders__input"]}>
-                <input type="text" placeholder="id" ref={inputRef} />
+                <input type="number" placeholder="№" ref={inputRef} />
                 <button onClick={handleSearch}>Поиск</button>
               </div>
               {isBtnAllUsersShow && (

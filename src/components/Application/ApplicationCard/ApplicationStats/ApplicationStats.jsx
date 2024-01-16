@@ -4,7 +4,7 @@ import styles from "./ApplicationStats.module.scss";
 
 const ApplicationStats = () => {
   const item = useSelector((state) => state.viewTz.item);
-
+  console.log(item);
   return (
     <div className={styles.list}>
       <div className={styles.label}>

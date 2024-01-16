@@ -39,7 +39,7 @@ const Purchase = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
       const labels = {
         purchase_type: "Вид закупки",
         price_nds: "Цена",
-        location: "Регион",
+        location: "Регион поставки",
         supplier_regions: "Возможные регионы производства",
       };
       
@@ -224,7 +224,7 @@ const Purchase = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
           <SelectItem
             control={control}
             formOptions={formOptions ?? []}
-            title="Регион"
+            title="Регион поставки"
             propName="location"
             required
           />

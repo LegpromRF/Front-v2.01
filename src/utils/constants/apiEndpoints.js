@@ -23,6 +23,7 @@ export const apiEndpoints = {
     bidRequirements: apiHOST + 'bid/add/requirements',
     bidOther: apiHOST + 'bid/add/other',
     getOrderCard: (id) => apiHOST + `order_cards/${id}`,
+    getOrderCardSource: (id) => apiHOST + `order_cards/${id}/source`,
     orderCards: apiHOST + `order_cards/`,
     getBidCreate: (id) => apiHOST + `bid/${id}`,
     getBidTechnology: (id) => apiHOST + `bid/${id}/technology`,

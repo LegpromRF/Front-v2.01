@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import ButtonOutline from "../../UI/ButtonOutline/ButtonOutline";
 import styles from "./ApplicationItemHeader.module.scss";
 import formatDate from "../../../utils/helpers/formatDate";
+import { useEffect } from "react";
 
 const ApplicationItemHeader = () => {
   const { item, other, source, sourceError } = useSelector(
@@ -12,7 +13,7 @@ const ApplicationItemHeader = () => {
   return (
     <div className={styles.wrapper}>
       <p className={styles.text}>
-        Опубликовано: {other.start_date ? formatDate(new Date(other.start_date)) : "- "}
+        Опубликовано: {item.created_at ? formatDate(new Date(item.created_at)) : "- "}
         {item.updated_at && (
           <span>(изменено {formatDate(new Date(item.updated_at))}.)</span>
         )}
@@ -25,11 +26,11 @@ const ApplicationItemHeader = () => {
         </p>
       ) : (
         <p className={styles.status}>
-          Статус: <span>{item.status || "-"}</span>
+          Статус: <span className={item.status === "Черновик" ? styles.statusDraft : ''}>{item.status || "-"}</span>
         </p>
       )}
 
-      {isAdmin && (
+      {(isAdmin && source.source_url) && (
         <ButtonOutline
           title="Донор"
           onClick={() => {

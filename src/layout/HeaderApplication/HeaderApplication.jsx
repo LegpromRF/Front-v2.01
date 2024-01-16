@@ -38,7 +38,7 @@ const HeaderApplication = () => {
             }}
           />
         )}
-        <ButtonAction
+        {/* <ButtonAction
           title="Распечатать"
           icon={
             <img src="/icon/edit-icon.svg" alt="edit" width={11} height={10} />
@@ -54,7 +54,7 @@ const HeaderApplication = () => {
               height={12}
             />
           }
-        />
+        /> */}
       </div>
 
       <div className={styles.btnBuyWrapper}>

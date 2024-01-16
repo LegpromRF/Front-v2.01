@@ -225,6 +225,7 @@ export const viewTzSlice = createSlice({
     builder
       .addCase(getSource.fulfilled, (state, action) => {
         state.source = action.payload;
+        state.sourceError = false;
       })
       .addCase(getSource.rejected, (state) => {
         state.sourceError = true;
