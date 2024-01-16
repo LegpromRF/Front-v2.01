@@ -79,6 +79,9 @@
     max-width: 150px;
     max-height: 100px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: start;
     
     image {
       object-fit: cover;

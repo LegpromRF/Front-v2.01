@@ -142,7 +142,7 @@ const Orders = ({ forAdmin }) => {
       </h1>
       <Layout>
         <div className={styles.orders}>
-          <h1 className={styles.orders__title}>Ваши заявки</h1>
+          <h1 className={styles.orders__title}>{isAdmin && forAdmin ? 'Все заявки' : 'Ваши заявки'}</h1>
         </div>
         <InfoMessage />
 
