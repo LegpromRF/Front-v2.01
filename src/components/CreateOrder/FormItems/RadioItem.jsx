@@ -39,9 +39,10 @@ const RadioItem = ({ control, title, propName, options }) => {
                     type="radio"
                     {...field}
                     id={label}
+                    name={label}
                     value={value}
                     onChange={() => field.onChange(value)}
-                    tabIndex="0"
+                    tabIndex={0}
                     checked={Boolean(field.value) == Boolean(value)}
                   />
                 </div>
