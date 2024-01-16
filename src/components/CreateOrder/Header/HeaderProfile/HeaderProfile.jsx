@@ -28,7 +28,7 @@ const HeaderProfile = ({ title, stage, done, active }) => {
   return (
     <div className={styles.header}>
       <div className={headerItemClassName}>
-        <button onClick={handleClick}>
+        <button onClick={handleClick} tabIndex={0}>
           <span>{title}</span>
           <div
             className={

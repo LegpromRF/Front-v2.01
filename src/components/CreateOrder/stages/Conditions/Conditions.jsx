@@ -34,7 +34,7 @@ const Conditions = ({ handleNextStage, handlePrevStage, formSubmitRef }) => {
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject("conditions");
-      // if (!options) navigate('/404')
+      if (!options) navigate('/404')
 
       const labels = {
         OTC_access: "Доступ на производство для ОТК заказчика",
@@ -88,10 +88,6 @@ const Conditions = ({ handleNextStage, handlePrevStage, formSubmitRef }) => {
 
   const formSubmit = handleSubmit(onSubmit)
   formSubmitRef.current = formSubmit
-
-  useEffect(() => {
-    // reset()
-  }, [isFormFetchingSuccess])
 
   useEffect(() => {
     if (Object.keys(formData).length == 0) {

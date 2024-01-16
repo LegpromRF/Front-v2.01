@@ -28,6 +28,7 @@ const NavigateButtons = ({ errors, handlePrevStage, formSubmitting }) => {
             type="button"
             onClick={handlePrevStage}
             className={styles.form__buttonBack}
+            tabIndex={0}
           >
             Назад
           </button>

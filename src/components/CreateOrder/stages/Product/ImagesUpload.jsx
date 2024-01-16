@@ -16,24 +16,16 @@ const ImagesUpload = ({ control, photoUrlsRef }) => {
   const [visibleControlImage, setVisibleControlImage] = useState(false);
   const initialUrls = getFormField('photo_urls') || []
   const [preview, setPreview] = useState(initialUrls);
+  
   photoUrlsRef.current = preview;
-
   let inputRef = useRef(null);
 
-  // const initialSrcs = getFormField("photo_urls");
-  // let fileobjRef = useRef([]);
-  // console.log(fileobjRef, preview);
-
-  // // useEffect(() => {
-  // //   dispatch(updateFormData({ photo_urls: photoUrlsRef.current.length ? photoUrlsRef.current : null }))
-  // // }, [photoUrlsRef.current.join('')])
-
   const fetchImages = async (formData) => {
-    console.log(formData.getAll('files'));
+    // console.log(formData.getAll('files'));
     const res = await axios.post(apiEndpoints.photos, formData, {
       withCredentials: true,
     });
-    console.log(res);
+    // console.log(res);
     
     setPreview((prev => {
       const newPreview = [...prev, ...res.data.photos]
@@ -73,70 +65,11 @@ const ImagesUpload = ({ control, photoUrlsRef }) => {
     if (initialUrls && !preview.length) setPreview(initialUrls)
   }, [initialUrls.length, preview.length]);
 
-  // const fetchFileobj = async () => {
-  //   try {
-  //     const fileobj = fileobjRef.current;
-  //     const formData = new FormData();
-  //     fileobj.forEach((file) => formData.append("files", file));
-  //     if (!fileobj.length) {
-  //       dispatch(updateFormData({ photo_urls: null }));
-  //     } else {
-  //       const res = await axios.post(apiEndpoints.photos, formData, {
-  //         withCredentials: true,
-  //       });
-  //       console.log(res);
-  //       dispatch(updateFormData({ photo_urls: res.data.photos }));
-  //     }
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
-
-  // const loadImages = () => {
-  //   const fileobj = fileobjRef.current;
-  //   let reader;
-  //   setPreview([]);
-  //   for (let i = 0; i < fileobj.length; i++) {
-  //     reader = new FileReader();
-  //     reader.readAsDataURL(fileobj[i]);
-  //     reader.onload = (e) => {
-  //       setPreview((prev) => [...prev, e.target.result]);
-  //     };
-  //   }
-  // };
-
-  // const changedHandler = (e) => {
-  //   let files = e.target.files;
-  //   // fileobjRef.current = [];
-  //   Array.from(files).forEach((file) => fileobjRef.current.push(file));
-  //   loadImages();
-  //   fetchFileobj();
-  // };
-
-  // const deleteImage = (e) => {
-  //   const index = e.target.id;
-  //   fileobjRef.current = fileobjRef.current?.filter((_, ind) => ind != index);
-  //   loadImages();
-  //   fetchFileobj();
-  // };
-
-  // useEffect(() => {
-  //   const fetchUrls = async () => {
-  //     // console.log(initialSrcs);
-  //     const files = [];
-  //     for (const src of initialSrcs) {
-  //       const res = await fetch(src);
-  //       const blob = await res.blob();
-  //       const file = new File([blob], "image", blob);
-  //       files.push(file);
-  //     }
-  //     // console.log(files);
-  //     fileobjRef.current = files;
-  //     loadImages();
-  //   };
-
-  //   if (initialSrcs && fileobjRef.current.length == 0) fetchUrls();
-  // }, [initialSrcs]);
+  const inputAreaKeyDown = (event) => {
+    if (event.code == 'Space') {
+      inputRef.current.click()
+    }
+  }
 
   return (
     <div className={styles.form__row}>
@@ -153,9 +86,11 @@ const ImagesUpload = ({ control, photoUrlsRef }) => {
               onMouseLeave={() => setVisibleControlImage(false)}
             >
               <img src={url} alt="img" className={styles.form__imagePreview} />
-              <div
+              <button
+                type="button"
                 id={index}
                 onClick={deleteImage}
+                tabIndex={0}
                 className={
                   (isMobile || visibleControlImage ? [
                     styles.form__deleteImage,
@@ -178,10 +113,10 @@ const ImagesUpload = ({ control, photoUrlsRef }) => {
                     fill="#FF0A00"
                   />
                 </svg>
-              </div>
+              </button>
             </div>
           ))}
-          <div className={styles.form__addButton}>
+          <div className={styles.form__addButton} tabIndex={0} onKeyDown={inputAreaKeyDown}>
             <div className={styles.form__inputImages}>
               <Controller
                 name="file-images"

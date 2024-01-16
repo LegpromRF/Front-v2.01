@@ -43,7 +43,7 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject("product");
-      // if (!options) navigate('/404')
+      if (!options) navigate('/404')
 
       const labels = {
         clothes_type: "Тип одежды",
@@ -72,8 +72,6 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
   }, []);
 
   useEffect(() => {
-    // console.log(isEditMode);
-    // console.log('getValues()', getValues());
     if (!isEditMode) dispatch(updateFormData(getValues()));
   }, [isEditMode])
 
@@ -197,7 +195,6 @@ const Product = ({ handleNextStage, formSubmitRef }) => {
               propName="product_type"
               required
             />
-            {/* <FilesUpload watch={watch} control={control} /> */}
           </div>
         </div>
         <ImagesUpload control={control} photoUrlsRef={photoUrlsRef} />

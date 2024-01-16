@@ -19,20 +19,18 @@ const FilesUpload = ({ control }) => {
 
   let inputRef = useRef(null);
 
-  // const initialValue = getMediateField('doc_urls')
 
   const fetchDocs = async (formData) => {
     const res = await axios.post(apiEndpoints.documents, formData, {
       withCredentials: true,
     });
-    console.log(res);
+    // console.log(res);
 
     setPreview((prev => {
       const newPreview = [...prev, ...res.data.docs]
       dispatch(updateFormData({ doc_urls: newPreview }));
       return newPreview
     }))
-    // dispatch(updateMediateData({ doc_urls: formData }));
   };
 
   const handleFile = async () => {
@@ -43,21 +41,11 @@ const FilesUpload = ({ control }) => {
       const formData = new FormData();
       files.forEach((file) => formData.append("files", file));
 
-      // field.onChange(formData);
-      // loadPreview();
       await fetchDocs(formData);
     } catch (error) {
       console.log(error);
     }
   };
-
-  // const loadPreview = () => {
-  //   const fileList = inputRef.current?.files;
-  //   if (!fileList) return;
-  //   const filesToPreview = Array.from(fileList).map((file) => file.name);
-  //   console.log("files to preview", filesToPreview, fileList);
-  //   setPreview(filesToPreview);
-  // };
 
   const deleteFile = async (e) => {
     // e.stopPropagation()
@@ -70,54 +58,15 @@ const FilesUpload = ({ control }) => {
     });
   };
 
-  // const deleteFile = async (e) => {
-  //   const index = e.target.id;
-  //   const fileList = inputRef.current?.files;
-  //   if (!fileList) return;
-  //   const newFiles = Array.from(fileList).filter((_, ind) => ind != index);
-
-  //   try {
-  //     const formData = new FormData();
-  //     newFiles.forEach((file) => formData.append("files", file));
-
-  //     inputFieldRef.current.onChange(formData);
-  //     let container = new DataTransfer();
-  //     newFiles.forEach((file) => container.items.add(file));
-  //     inputRef.current.files = container.files;
-
-  //     loadPreview();
-  //     await fetchDocs(formData);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const urls = [
-  //   "https://yadi.sk/i/mv-LKXLY3Gze7w",
-  //   "https://yadi.sk/d/sOvi1qogBEYMyg",
-  // ];
-
   useEffect(() => {
     if (initialUrls && !preview.length) setPreview(initialUrls);
-    // axios.get('https://disk.yandex.ru/i/BFRTDubkXQpKkw', { withCredentials: true, AccessControlAllowOrigin: true }).then(res => {
-    //   console.log(res);
-    // })
-    //   if (inputFieldRef.current && inputFieldRef.current.value === undefined && initialValue) {
-    //     //возвращение значений у input, после редиректа
-    //     if (!inputRef.current) return;
-    //     inputFieldRef.current.onChange(initialValue);
-    //     let container = new DataTransfer();
-    //     const fileList = initialValue.getAll("files");
-    //     if (fileList) {
-    //       Array.from(fileList).forEach((file) =>
-    //         container.items.add(file)
-    //       );
-    //       inputRef.current.files = container.files;
-    //     }
-
-    //     loadPreview()
-    //   }
   }, [initialUrls.length, preview.length]);
+
+  const inputAreaKeyDown = (event) => {
+    if (event.code == 'Space') {
+      inputRef.current.click()
+    }
+  }
 
   return (
     <div className={styles.form__row}>
@@ -145,9 +94,11 @@ const FilesUpload = ({ control }) => {
                 </span> */}
                 </div>
               </Link>
-              <div
+              <button
                 id={index}
                 onClick={deleteFile}
+                type="button"
+                tabIndex={0}
                 className={
                   [
                     styles.form__deleteImage,
@@ -169,10 +120,10 @@ const FilesUpload = ({ control }) => {
                     fill="#FF0A00"
                   />
                 </svg>
-              </div>
+              </button>
             </div>
           ))}
-          <div className={styles.form__addButton}>
+          <div className={styles.form__addButton} tabIndex={0} onKeyDown={inputAreaKeyDown}>
             <div
               className={`${styles.form__inputImages} ${styles["form__inputImages-files"]}`}
             >
@@ -222,84 +173,3 @@ const FilesUpload = ({ control }) => {
   );
 };
 export default FilesUpload;
-
-// const FilesUpload = ({ control, watch }) => {
-//   const dispatch = useDispatch();
-
-//   const fetchDocs = async (formData) => {
-//     const res = await axios.post(apiEndpoints.documents, formData, {
-//       withCredentials: true,
-//     });
-
-//     dispatch(updateFormData({ doc_urls: res.data.docs })); //!только для docs - переделать!
-//   };
-
-// const handleTextFile = async (e, field) => {
-//   try {
-//     const formData = new FormData();
-//     for (let i = 0; i < e.target.files.length; i++) {
-//       formData.append("files", e.target.files[i]);
-//     }
-
-//     field.onChange(formData);
-//     await fetchDocs(formData);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-//   const inputRef = useRef(null);
-
-//   return (
-//     <div className={`${styles.form__item} ${styles["form__item-file-input"]}`}>
-//       <h3 className={styles.form__itemLabel}>Техзадание (Описание)</h3>
-// <Controller
-//   name={"file"}
-//   control={control}
-//   render={({ field }) => {
-//     const initialValue = getMediateField("doc_urls");
-//     useEffect(() => {
-//       console.log(initialValue);
-//       if (field.value === undefined && initialValue) {
-//         //возвращение значений у input, после редиректа
-//         if (!inputRef.current) return;
-//         field.onChange(initialValue);
-//         let container = new DataTransfer();
-//         const fileList = initialValue.getAll("files");
-//         if (fileList) {
-//           Array.from(fileList).forEach((file) =>
-//             container.items.add(file)
-//           );
-//           inputRef.current.files = container.files;
-//         }
-//       }
-//     }, []);
-
-//     return (
-//       <div>
-//         <input
-//           type="file"
-//           multiple={true}
-//           accept=".docx"
-//           aria-label="Текстовый документ"
-//           onChange={(e) => {
-//             handleTextFile(e, field);
-//           }}
-//           ref={inputRef}
-//         />
-//         {watch("file") && field.value && (
-//           <p>
-//             Выбран файл:{" "}
-//             {field.value.getAll("files").map((file, ind) => (
-//               <span key={ind}>{file.name}</span>
-//             ))}
-//           </p>
-//         )}
-//       </div>
-//     );
-//   }}
-// />
-//     </div>
-//   );
-// };
-// export default FilesUpload;

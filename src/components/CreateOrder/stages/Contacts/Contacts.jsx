@@ -16,7 +16,6 @@ const Contacts = ({ handlePrevStage, formSubmitRef, totalFormSubmitting }) => {
   const { isAdmin } = useSelector((state) => state.admindata);
   const {currentStage: stage, isFormFetchingSuccess, isEditMode, formData} = useSelector((state) => state.form);
   const isHide = stage != 5;
-  // const isPhotoUrlsExist = Boolean(getFormField("photo_urls")?.length);
 
   const {
     control,
@@ -60,7 +59,6 @@ const Contacts = ({ handlePrevStage, formSubmitRef, totalFormSubmitting }) => {
   
   useEffect(() => {
     if (isFormFetchingSuccess === true || isFormFetchingSuccess === false) handleRedirect()
-    // reset()
   }, [isFormFetchingSuccess])
 
   useEffect(() => {

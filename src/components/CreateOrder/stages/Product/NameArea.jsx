@@ -11,11 +11,6 @@ const NameArea = ({ control }) => {
   
   const isRequired = requiredFields.includes('order_name')
 
-  
-  // useEffect(() => {
-  //   inputRef.current.value = ''
-  // }, [])
-
   return (
     <div className={styles.form__item}>
       <h3 className={styles.form__itemLabel}>

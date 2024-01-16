@@ -9,7 +9,7 @@ export const submitForm = createAsyncThunk('form/submitForm', async (_, thunkAPI
   const state = thunkAPI.getState().form
   let formDataToSubmit = {...state.formData}
   transformDataToServer(formDataToSubmit) // !mutate formDataToSubmit
-  console.log('submit: ', formDataToSubmit);
+  // console.log('submit: ', formDataToSubmit);
   
   if (state.isEditMode) {
     formDataToSubmit.id = state.editModeData.orderId
@@ -26,16 +26,16 @@ export const loadFormForEdit = createAsyncThunk('form/loadFormForEdit', async (i
     
   let res = await axios.get(apiEndpoints.getBidCreate(id), { withCredentials: true, AccessControlAllowOrigin: true, })
   if (res.status == 200) form = {...form, ...res.data}
-  console.log(res);
+  // console.log(res);
   res = await axios.get(apiEndpoints.getBidTechnology(id), { withCredentials: true, AccessControlAllowOrigin: true, })
   if (res.status == 200) form = {...form, ...res.data}
-  console.log(res);
+  // console.log(res);
   res = await axios.get(apiEndpoints.getBidRequirements(id), { withCredentials: true, AccessControlAllowOrigin: true, })
   if (res.status == 200) form = {...form, ...res.data}
-  console.log(res);
+  // console.log(res);
   res = await axios.get(apiEndpoints.getBidOther(id), { withCredentials: true, AccessControlAllowOrigin: true, })
   if (res.status == 200) form = {...form, ...res.data}
-  console.log(res);
+  // console.log(res);
   return form
 })
 
@@ -130,7 +130,6 @@ export const formSlice = createSlice({
     builder
     .addCase(submitForm.fulfilled, (state, action) => {
       const isOk = action.payload
-      console.log(isOk);
       if (isOk) {
         state.isFormFetchingSuccess = true
       } else {

@@ -13,7 +13,7 @@ import FilesUpload from "./FilesUpload";
 import { setStageFields } from "../../../../store/orders/form.slice";
 
 const Technology = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
-  const {currentStage: stage, isFormFetchingSuccess, isEditMode, formData} = useSelector((state) => state.form);
+  const {currentStage: stage, isEditMode, formData} = useSelector((state) => state.form);
 
   const isHide = stage != 3;
 
@@ -35,7 +35,7 @@ const Technology = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
   const loadOptions = useCallback(async () => {
     try {
       const options = await getPropObject("technology");
-      // if (!options) navigate("/404");
+      if (!options) navigate("/404");
 
       const labels = {
         additional_services: "Дополнительные услуги",
@@ -87,10 +87,6 @@ const Technology = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
 
   const formSubmit = handleSubmit(onSubmit)
   formSubmitRef.current = formSubmit
-
-  useEffect(() => {
-    // reset();
-  }, [isFormFetchingSuccess]);
 
   useEffect(() => {
     if (Object.keys(formData).length == 0) {
@@ -219,7 +215,6 @@ const Technology = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
           <div
             className={`${styles.form__block} ${styles["form__block-files"]}`}
           >
-            {/* {isEditMode ? "" : <FilesUpload control={control} />} */}
             <FilesUpload control={control} />
           </div>
         </div>

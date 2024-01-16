@@ -17,6 +17,7 @@ const Purchase = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
   const isHide = stage != 2;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const {
     control,
@@ -33,7 +34,7 @@ const Purchase = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
     try {
       const options = await getPropObject("purchase");
 
-      // if (!options) navigate('/404')
+      if (!options) navigate('/404')
       
       const labels = {
         purchase_type: "Вид закупки",

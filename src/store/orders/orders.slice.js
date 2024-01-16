@@ -8,7 +8,7 @@ export const handleAdminBids = createAsyncThunk("orders/handleAdminBids", async 
   const page = thunkAPI.getState().orders.adminBidsPageNumber
   // console.log(`${apiEndpoints.bidAll}/?page=${page}&size=${size}`);
   const res = await axios.get(`${apiEndpoints.orderCards}?page=${page}&size=${size}`, { withCredentials: true, AccessControlAllowOrigin: true, })
-  console.log(res);
+  // console.log(res);
   // try {
   //   console.log('res', res.data.items.map(item => ({...item, id: item.order_number, photo_urls: item.photo_urls?.split(',') || null})));
   // } catch (e) {

@@ -20,6 +20,10 @@
       color: #D8D8D8;
       transition: all .4s ease-in-out;
 
+      &:focus-visible {
+        outline: 2px solid blue;
+      }
+
       span {
         flex: 1 1 100%;
       }
