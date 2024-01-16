@@ -131,7 +131,7 @@ const FilesUpload = ({ control }) => {
               onMouseEnter={() => setVisibleControlImage(true)}
               onMouseLeave={() => setVisibleControlImage(false)}
             >
-              <Link to={url}>
+              <Link to={url} target="_blank">
                 <div
                   className={[
                     `${styles.form__imagePreview} ${styles["form__imagePreview-files"]}`,
@@ -149,12 +149,10 @@ const FilesUpload = ({ control }) => {
                 id={index}
                 onClick={deleteFile}
                 className={
-                  visibleControlImage
-                    ? [
-                        styles.form__deleteImage,
-                        styles.form__deleteImageActive,
-                      ].join(" ")
-                    : styles.form__deleteImage
+                  [
+                    styles.form__deleteImage,
+                    styles.form__deleteImageActive,
+                  ].join(" ")
                 }
               >
                 <svg
@@ -187,7 +185,7 @@ const FilesUpload = ({ control }) => {
                       {...field}
                       type="file"
                       multiple={true}
-                      accept=".docx,.doc,application/pdf"
+                      accept=".docx,.doc"
                       aria-label="Текстовый документ"
                       onChange={handleFile}
                       ref={inputRef}

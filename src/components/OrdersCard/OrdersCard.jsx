@@ -172,7 +172,7 @@ const OrdersCard = ({
                 <div className={styles["card__info-name"]}>Количество</div>
                 <div
                   className={`${styles["card__info-value"]} ${
-                    count ? "" : styles["card__info-value_empty"]
+                    !isNaN(count) ? "" : styles["card__info-value_empty"]
                   }`}
                 >
                   {count}

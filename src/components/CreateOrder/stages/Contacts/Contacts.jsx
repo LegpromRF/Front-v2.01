@@ -46,7 +46,6 @@ const Contacts = ({ handlePrevStage, formSubmitRef, totalFormSubmitting }) => {
   }, [])
 
   const onSubmit = useCallback(() => {
-    console.log('const onSubmit = useCallback');
     if (!isAdmin) dispatch(updateFormData({ status: 1 })); // изменить статус на "Черновик"
     dispatch(submitForm());
   }, [isAdmin])

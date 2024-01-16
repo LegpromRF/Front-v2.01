@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { isMobile } from "react-device-detect";
 import { apiEndpoints } from "@/utils/constants/apiEndpoints.js";
 import axios from "axios";
 import {
@@ -156,12 +157,11 @@ const ImagesUpload = ({ control, photoUrlsRef }) => {
                 id={index}
                 onClick={deleteImage}
                 className={
-                  visibleControlImage
-                    ? [
-                        styles.form__deleteImage,
-                        styles.form__deleteImageActive,
-                      ].join(" ")
-                    : styles.form__deleteImage
+                  (isMobile || visibleControlImage ? [
+                    styles.form__deleteImage,
+                    styles.form__deleteImageActive,
+                  ].join(" ")
+                : styles.form__deleteImage)
                 }
               >
                 <svg

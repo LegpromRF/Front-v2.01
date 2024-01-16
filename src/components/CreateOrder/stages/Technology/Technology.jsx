@@ -219,8 +219,8 @@ const Technology = ({ handlePrevStage, handleNextStage, formSubmitRef }) => {
           <div
             className={`${styles.form__block} ${styles["form__block-files"]}`}
           >
-            {isEditMode ? "" : <FilesUpload control={control} />}
-            {/* <FilesUpload control={control} /> */}
+            {/* {isEditMode ? "" : <FilesUpload control={control} />} */}
+            <FilesUpload control={control} />
           </div>
         </div>
       </div>
