@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames/bind";
 import Item from "../Item/Item";
@@ -18,7 +18,7 @@ function Items({ query, open }) {
   const cards = useSelector((state) => state.procRegister.cards);
   const loading = useSelector((state) => state.procRegister.loading);
   const pageNumber = useSelector((state) => state.procRegister.pageNumber);
-
+  
   useEffect(() => {
     dispatch(getAllCards(query));
   }, [dispatch, query, pageNumber]);
@@ -28,7 +28,7 @@ function Items({ query, open }) {
       {loading && <Loading />}
       <div ref={ref} className={open ? classOpen : styles.cards}>
         {!loading &&
-          getCardsByPage(cards, pageNumber).map((item) => (
+          cards.map((item) => (
             <Item key={item.order_number} {...item} />
           ))}
       </div>

@@ -9,7 +9,6 @@ const MainCharacteristics = () => {
 
   useEffect(() => {
     if (!item) return;
-    console.log('item', item);
     const regions = item.supplier_regions?.split(",");
 
     setSupplierRegions(regions);

@@ -3,6 +3,7 @@ import ApplicationContacts from "../ApplicationContacts/ApplicationContacts";
 import ApplicationStats from "../ApplicationStats/ApplicationStats";
 import MainCharacteristics from "../MainCharacteristics/MainCharacteristics";
 import UnavailableСontacts from "../UnavailableСontacts/UnavailableСontacts";
+import { useRef } from "react";
 
 const ApplicationMainContent = () => {
   const { customerError } = useSelector((state) => state.viewTz);

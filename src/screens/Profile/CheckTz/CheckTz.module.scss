@@ -1,5 +1,9 @@
 @import "@/styles/_variables.scss";
 
+* {
+  overflow: visible;
+}
+
 .checktz {
   &__loading {
     margin-top: 25%;

@@ -9,6 +9,7 @@ import "./SelectItem.scss";
 
 function SelectItem({ filters, name, open, index, query }) {
   const dispatch = useDispatch();
+  
   const options = [
     { value: "", label: "Не выбрано" },
     ...filters.map((item) => ({ value: item, label: item })),

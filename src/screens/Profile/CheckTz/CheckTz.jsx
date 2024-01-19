@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
   getCard,
   getOther,
@@ -23,10 +23,13 @@ import Layout from "../../../layout/Layout";
 const CheckTz = () => {
   const params = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { item, itemError } = useSelector((state) => state.viewTz);
   const loading = useSelector((state) => state.viewTz.loading);
   const { isAdmin } = useSelector((state) => state.admindata);
-  const navigate = useNavigate();
+  
+  const printContentRef = useRef(null)
 
   useEffect(() => {
     dispatch(getCard(params.itemId));
@@ -58,8 +61,8 @@ const CheckTz = () => {
           </div>
         )}
         {!loading && (
-          <div className="page application application__container">
-            <HeaderApplication />
+          <div className="page application application__container" ref={printContentRef}>
+            <HeaderApplication printContentRef={printContentRef} />
 
             <ApplicationItemHeader />
 
