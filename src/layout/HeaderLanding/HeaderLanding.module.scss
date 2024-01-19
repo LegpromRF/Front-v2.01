@@ -28,6 +28,8 @@
   }
 
   &__content {
+    z-index: 1000;
+    
     @media (min-width: 800px) {
       display: flex;
       align-items: center;
