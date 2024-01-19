@@ -121,7 +121,7 @@ const Home = () => {
                     aria-expanded={isPurchaseModalOpen}
                   >
                     Купить подписку
-                    <span>2 900 ₽/мес</span>
+                    <span>4 800 ₽/мес</span>
                   </button>
                 </div>
                 <div className={styles.landing__text}>

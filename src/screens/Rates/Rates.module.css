@@ -1,0 +1,49 @@
+.container {}
+
+.title {
+  font-size: 24px;
+}
+
+.infoBlock {
+  margin-top: 30px;
+  width: fit-content;
+  padding: 18px;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.subtitle {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.subtitle__main {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.buyBtn {
+  margin-top: 30px;
+  background-color: #0036ff;
+  color: #fff;
+  padding: 5px 0;
+  border-radius: 4px;
+}
+
+.comment {
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.comment a {
+  color: blue;
+}
+
+.comment a {
+  color: purple;
+}
+
+button:focus-visible {
+  outline: 2px solid #000;
+}

@@ -78,10 +78,10 @@ const OrdersCard = ({
           <Link to={`/profile/order/view_tz/${id}`}>{name}</Link>
         </h2>
         <div className={styles.card__content}>
-          <div className={styles.card__image}>
+          {imagePreviewSrc && <div className={styles.card__image}>
             <img src={imagePreviewSrc} alt="" />
-          </div>
-          <div>
+          </div>}
+          <div className={styles.card__content_body}>
             <div className={styles.card__head}>
               <div className={styles["card__title-area"]}>
                 <h2

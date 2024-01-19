@@ -21,6 +21,7 @@ import SuppliersPage from "./pages/suppliers.jsx";
 import OrdersPage from "./pages/profile/order/orders.jsx";
 import EditOrderPage from "./pages/profile/order/edit/id.jsx";
 import Error404 from "./pages/404.jsx";
+import RatesPage from "./pages/rates.jsx";
 
 
 const router = createBrowserRouter([
@@ -130,6 +131,10 @@ const router = createBrowserRouter([
   {
     path: "/applicationpage",
     element: <ApplicationPage />,
+  },
+  {
+    path: "/rates",
+    element: <RatesPage />,
   },
   {
     path: "/not-found",

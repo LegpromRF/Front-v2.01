@@ -6,7 +6,7 @@ export const links = [
 
     {
       nameViews: 'Тарифы',
-      href: '/nolayout',
+      href: '/rates',
     },
    
   ];

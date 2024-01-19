@@ -6,9 +6,9 @@ import axios from "axios";
 export const handleAdminBids = createAsyncThunk("orders/handleAdminBids", async (_, thunkAPI) => {
   const size = 40
   const page = thunkAPI.getState().orders.adminBidsPageNumber
+  const query = Object.entries(thunkAPI.getState().orders.query).filter(([name, value]) => value).map(([name, value]) => `${name}=${value}` ).join('&')
   // console.log(`${apiEndpoints.bidAll}/?page=${page}&size=${size}`);
-  const res = await axios.get(`${apiEndpoints.orderCards}?page=${page}&size=${size}`, { withCredentials: true, AccessControlAllowOrigin: true, })
-  // console.log(res);
+  const res = await axios.get(`${apiEndpoints.orderCards}?${query}&page=${page}&size=${size}`, { withCredentials: true, AccessControlAllowOrigin: true, })
   // try {
   //   console.log('res', res.data.items.map(item => ({...item, id: item.order_number, photo_urls: item.photo_urls?.split(',') || null})));
   // } catch (e) {
@@ -25,8 +25,9 @@ export const handleAdminBids = createAsyncThunk("orders/handleAdminBids", async 
 export const handleBids = createAsyncThunk("orders/handleBids", async (_, thunkAPI) => {
   const size = 40
   const page = thunkAPI.getState().orders.bidsPageNumber
+  const query = Object.entries(thunkAPI.getState().orders.query).filter(([name, value]) => !value).map(([name, value]) => `${name}=${value}`).join('&')
   // console.log(`${apiEndpoints.bidAll}/?page=${page}&size=${size}`);
-  const res = await axios.get(`${apiEndpoints.bidAll}?page=${page}&size=${size}`, { withCredentials: true })
+  const res = await axios.get(`${apiEndpoints.bidAll}?${query}&page=${page}&size=${size}`, { withCredentials: true })
   const stateData = {
     bidsPageNumber: res.data.page,
     bidsCountPages: res.data.pages,
@@ -66,6 +67,10 @@ export const ordersSlice = createSlice({
     adminBidsCountPages: null,
     adminBidsPageNumber: 1,
     isAdminBidsLoading: false,
+
+    query: {
+      status__name__in: ''
+    }
   },
   reducers: {
     changeBidsPage: (state, action) => {
@@ -73,6 +78,9 @@ export const ordersSlice = createSlice({
     },
     changeAdminBidsPage: (state, action) => {
       state.adminBidsPageNumber = action.payload;
+    },
+    changeStatus: (state, action) => {
+      state.query.status__name__in = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -109,6 +117,6 @@ export const ordersSlice = createSlice({
 });
 
 
-export const { changeAdminBidsPage, changeBidsPage } = ordersSlice.actions
+export const { changeAdminBidsPage, changeBidsPage, changeStatus } = ordersSlice.actions
 
 export default ordersSlice.reducer;

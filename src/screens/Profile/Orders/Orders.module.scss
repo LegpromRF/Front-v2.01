@@ -72,10 +72,21 @@
     background-color: #fff;
     border-radius: 6px;
     padding: 18px;    
+    display: flex;
+    justify-content: space-between;
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+      gap: 20px;
+    }
   }
 
   &__search-mess {
     font-size: 20px;
+  }
+
+  &__select {
+    width: 150px;
   }
 
   &__show-all-btn {
@@ -135,11 +146,16 @@
   
   &__cards {
     display: flex;
-    // justify-items: center;
     flex-direction: column;
+    // justify-items: center;
     // align-items: center;
 
     gap: 12px;
+
+    >div {
+      // border: 5px solid #9f4545;
+      // flex: 1 1 0;
+    }
     // grid-gap: 30px;
   }
 

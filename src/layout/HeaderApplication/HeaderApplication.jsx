@@ -107,7 +107,7 @@ const HeaderApplication = ({ printContentRef }) => {
       </div>
 
       <div className={styles.btnBuyWrapper}>
-        <ButtonBuySubscription price={2900} onClick={openPurchaseModal} />
+        <ButtonBuySubscription price={4800} onClick={openPurchaseModal} />
       </div>
 
       <PurchaseModal isOpen={isPurchaseModalOpen} close={closePurchaseModal} />

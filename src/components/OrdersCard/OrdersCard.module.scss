@@ -1,5 +1,6 @@
 .card {
   display: flex;
+  
 
   &__options {
     min-width: 30px;
@@ -49,6 +50,7 @@
   }
   
   &__body {
+    width: 100%;
     display: flex;
     background-color: #fff;
     padding: 12px;
@@ -70,6 +72,11 @@
       @media (min-width: 900px) {
         display: none;
       }
+    }
+
+    &_body {
+      width: 100%;
+      // border: 5px solid #9f4545;
     }
   }
 
@@ -142,6 +149,9 @@
   &__info-area {
     margin-top: 10px;
     min-width: 160px;
+    width: 100%;
+    // justify-content: space-around;
+    
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
