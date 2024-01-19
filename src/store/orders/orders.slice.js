@@ -6,9 +6,9 @@ import axios from "axios";
 export const handleAdminBids = createAsyncThunk("orders/handleAdminBids", async (_, thunkAPI) => {
   const size = 40
   const page = thunkAPI.getState().orders.adminBidsPageNumber
-  const query = Object.entries(thunkAPI.getState().orders.query).filter(([name, value]) => value).map(([name, value]) => `${name}=${value}` ).join('&')
+  const query = Object.entries(thunkAPI.getState().orders.query).filter(([name, value]) => value).map(([name, value]) => `${name}=${value}&` ).join('')
   // console.log(`${apiEndpoints.bidAll}/?page=${page}&size=${size}`);
-  const res = await axios.get(`${apiEndpoints.orderCards}?${query}&page=${page}&size=${size}`, { withCredentials: true, AccessControlAllowOrigin: true, })
+  const res = await axios.get(`${apiEndpoints.orderCards}?${query}page=${page}&size=${size}`, { withCredentials: true, AccessControlAllowOrigin: true, })
   // try {
   //   console.log('res', res.data.items.map(item => ({...item, id: item.order_number, photo_urls: item.photo_urls?.split(',') || null})));
   // } catch (e) {
@@ -25,7 +25,7 @@ export const handleAdminBids = createAsyncThunk("orders/handleAdminBids", async 
 export const handleBids = createAsyncThunk("orders/handleBids", async (_, thunkAPI) => {
   const size = 40
   const page = thunkAPI.getState().orders.bidsPageNumber
-  const query = Object.entries(thunkAPI.getState().orders.query).filter(([name, value]) => !value).map(([name, value]) => `${name}=${value}`).join('&')
+  const query = Object.entries(thunkAPI.getState().orders.query).filter(([name, value]) => !value).map(([name, value]) => `${name}=${value}&`).join('')
   // console.log(`${apiEndpoints.bidAll}/?page=${page}&size=${size}`);
   const res = await axios.get(`${apiEndpoints.bidAll}?${query}&page=${page}&size=${size}`, { withCredentials: true })
   const stateData = {
