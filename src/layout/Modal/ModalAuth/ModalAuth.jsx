@@ -91,6 +91,10 @@ const ModalAuth = () => {
         }
       })
       .catch((error) => {
+        setVeriIssue({
+          status: 'error',
+          details: error.response?.data?.detail,
+        });
         console.log("Error:", error);
       })
       .finally(() => setLoader(false));
@@ -99,6 +103,7 @@ const ModalAuth = () => {
   const processLogin = useCallback(async (data, authMethod) => {
     setLoader(true);
     const result = await handleLogin(data, authMethod);
+    
     if (result === true) {
       dispatch(loginSuccess());
       setLoader(false);
@@ -112,6 +117,7 @@ const ModalAuth = () => {
   const handleGetExist = async () => {
     setLoader(true);
     const info = await handleVerification(authMethod, getValues());
+    
     setLoader(false);
     setRegIssue({ status: info.status, details: info.details });
     if (info.status !== "error") {

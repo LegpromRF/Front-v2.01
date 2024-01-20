@@ -17,7 +17,8 @@ export default async function handleLogin(data, authMethod) {
     password: data.password,
   };
 
-  return axios
+  try {
+    const result = await axios
     .post(apiURL, params, {
       withCredentials: true,
     })
@@ -28,7 +29,12 @@ export default async function handleLogin(data, authMethod) {
         });
         return true;
       } else {
-        return response.data.details;
+        // return response.data.details;
+        return response.detail;
       }
     });
+    return result
+  } catch (error) {
+    return error.response?.data?.detail
+  }
 }

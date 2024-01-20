@@ -18,6 +18,7 @@ export default async function handleVerification(authMethod, data) {
     const response = await axios.get(apiURL, { params });
     return await response.data;
   } catch (error) {
-    console.log("Error:", error);
+    console.log(error.response?.data?.detail);
+    return { status: 'error', details: error.response?.data?.detail}
   }
 }
