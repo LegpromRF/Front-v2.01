@@ -45,6 +45,7 @@ const Orders = ({ forAdmin }) => {
   const inputRef = useRef(null);
   const searchAreaDivRef = useRef(null);
 
+  
   const {
     currentBid,
     bids,
@@ -124,6 +125,10 @@ const Orders = ({ forAdmin }) => {
     dispatch(changeStatus(event.value))
     // setFilters(event.value);
   };
+
+  useEffect(() => {
+    dispatch(changeStatus(''))
+  }, [forAdmin])
 
   let OrderCardsContent;
 

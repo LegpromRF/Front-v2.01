@@ -52,7 +52,7 @@ const ModalAuth = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = useCallback(async () => {
+  const onSubmit = async () => {
     setLoader(true);
     const data = getValues();
     let login = "";
@@ -98,9 +98,9 @@ const ModalAuth = () => {
         console.log("Error:", error);
       })
       .finally(() => setLoader(false));
-  }, [redirectHref, authMethod])
+  }
 
-  const processLogin = useCallback(async (data, authMethod) => {
+  const processLogin = async (data, authMethod) => {
     setLoader(true);
     const result = await handleLogin(data, authMethod);
     
@@ -113,7 +113,7 @@ const ModalAuth = () => {
       setLoader(false);
       setLoginIssue(result);
     }
-  }, [redirectHref])
+  }
   const handleGetExist = async () => {
     setLoader(true);
     const info = await handleVerification(authMethod, getValues());

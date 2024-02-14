@@ -8,30 +8,42 @@ export const getAllFilters = createAsyncThunk("users/getFilters", async () => {
   return await response.json();
 });
 
-export const getAllCards = createAsyncThunk("users/getCards", async (query, thunkAPI) => {
-  const size = 40
-  const page = thunkAPI.getState().procRegister.pageNumber
-  const response = await axios.get(`https://api.legpromrf.ru/order_cards?${query}&page=${page}&size=${size}`, { withCredentials: true });
-  const stateData = {
-    pageNumber: response.data.page,
-    countPages: response.data.pages,
-    cards: response.data.items ?? []
-  }
-  
-  return stateData
-});
+export const getAllCards = createAsyncThunk(
+  "users/getCards",
+  async (query, thunkAPI) => {
+    const size = 40;
+    const page = thunkAPI.getState().procRegister.pageNumber;
+    const response = await axios.get(
+      `https://api.legpromrf.ru/order_cards?${
+        query ? query + "&" : ""
+      }page=${page}&size=${size}`,
+      { withCredentials: true }
+    );
+    const stateData = {
+      pageNumber: response.data.page,
+      countPages: response.data.pages,
+      cards: response.data.items ?? [],
+    };
 
-export const getTotalCardsInfo = createAsyncThunk("users/getTotalCardsInfo", async (query, thunkAPI) => {
-  const response = await fetch(`https://api.legpromrf.ru/order_cards/order_count`);
-  const data = (await response.json())
-  
-  const stateData = {
-    totalCards: data.order_count,
-    totalSumCards: data.order_sum
+    return stateData;
   }
-  return stateData
-})
+);
 
+export const getTotalCardsInfo = createAsyncThunk(
+  "users/getTotalCardsInfo",
+  async (query, thunkAPI) => {
+    const response = await fetch(
+      `https://api.legpromrf.ru/order_cards/order_count`
+    );
+    const data = await response.json();
+
+    const stateData = {
+      totalCards: data.order_count,
+      totalSumCards: data.order_sum,
+    };
+    return stateData;
+  }
+);
 
 export const procRegisterSlice = createSlice({
   name: "procRegister",
@@ -107,15 +119,21 @@ export const procRegisterSlice = createSlice({
         state.loading = true;
       })
       .addCase(getAllCards.fulfilled, (state, action) => {
-        const { pageNumber, countPages, cards } = action.payload
+        const { pageNumber, countPages, cards } = action.payload;
 
+        cards.sort(
+          (cardA, cardB) =>
+            -new Date(cardA.created_at).getTime() +
+            new Date(cardB.created_at).getTime()
+        );
+        console.log(cards);
         state.cards = cards;
         state.pageNumber = pageNumber;
         state.countPages = countPages;
         state.loading = false;
       })
       .addCase(getTotalCardsInfo.fulfilled, (state, action) => {
-        const { totalCards, totalSumCards } = action.payload
+        const { totalCards, totalSumCards } = action.payload;
         state.totalCards = totalCards;
         state.totalSumCards = totalSumCards;
       });
